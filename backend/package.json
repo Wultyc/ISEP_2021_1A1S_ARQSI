@@ -12,5 +12,8 @@
   },
   "author": "Jorge Azevedo (1160929)",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/1160929/arqsi_2021#readme"
+  "homepage": "https://bitbucket.org/1160929/arqsi_2021#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
