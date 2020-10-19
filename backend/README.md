@@ -12,6 +12,7 @@ This project is related to the backend web services available for the project
     ├───loaders		    -> components that loads with the application 
     ├───models		    -> application models
     ├───node_modules	-> node modules
+    ├───routers     	-> HTTP routs
     └───services	    -> business logic implementation 
 ```
 This structure is based on the article [Bulletproof node.js project architecture](https://dev.to/santypk4/bulletproof-node-js-project-architecture-4epf)
