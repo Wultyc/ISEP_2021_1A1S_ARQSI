@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const Node = require('../../models/node.model');
 const ServiceNode = require('../../services/node.service');
 
