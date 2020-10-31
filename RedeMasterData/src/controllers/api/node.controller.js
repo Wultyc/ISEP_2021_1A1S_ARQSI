@@ -8,13 +8,13 @@ const service = new ServiceNode();
 const dto = require('../../dto/node.dto');
 var transform = new dto();
 
-exports.node_create = function (req, res) {
+exports.nodeCreate = function (req, res) {
     let node = transform.ToInsert(req);
     let message = this.validateNode(node);
     if (!_.isEmpty(message)) {
         res.send(message);
     } else {
-        service.NodeCreate(node, function (err, params) {
+        service.nodeCreate(node, function (err, params) {
             if (err) {
                 return res.send(err);
             }

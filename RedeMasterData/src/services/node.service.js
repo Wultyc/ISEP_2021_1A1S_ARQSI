@@ -6,7 +6,7 @@ var repo = new NodeRepository();
 class NodeService {
     constructor() {}
 
-    NodeCreate(node, callback) {
+    nodeCreate(node, callback) {
         repo.save(node, callback)
     };
 }

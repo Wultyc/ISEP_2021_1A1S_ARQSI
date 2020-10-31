@@ -6,7 +6,7 @@ class NodeRepository {
     constructor() { }
 
     save(node, callback) {
-        console.log('saving node in the repository" ' + node);
+        console.log('Saving node in the repository.." ' + node);
         node.save(callback);
     };
 
