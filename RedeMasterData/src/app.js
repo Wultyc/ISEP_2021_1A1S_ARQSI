@@ -33,7 +33,7 @@ mongoose.connect(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use('/nodes', node);
+app.use('/node', node);
 
 const port = process.env.APP_PORT || 3000;
 app.listen(port, () => {
