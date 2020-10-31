@@ -9,6 +9,7 @@ const cors = require('cors');
 
 // Imports routes
 const node = require('./routes/node.route');
+const line = require('./routes/line.route');
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use('/node', node);
+app.use('/line', line);
 
 const port = process.env.APP_PORT || 3000;
 app.listen(port, () => {

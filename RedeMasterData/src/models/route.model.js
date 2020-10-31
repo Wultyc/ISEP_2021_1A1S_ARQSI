@@ -8,13 +8,9 @@ var Route = new Schema({
     distance: {
         type: Number
     },
-
-    // Nodes
-    BeginNode: {
-        type: Schema.Types.ObjectId, ref: 'Node',
-    },
-    FinalNode: {
-        type: Schema.Types.ObjectId, ref: 'Node',
+    orientation: {
+        type: String,
+        required: [true, 'Insert a orientation.'],
     },
 
     // Lista de segmentos
