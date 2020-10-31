@@ -9,7 +9,7 @@ class NodeDTO {
             shortName: req.body.shortName,
             longitude: req.body.longitude,
             latitude: req.body.latitude,
-            collectionNode: req.body.surrenderNode,
+            collectionNode: req.body.collectionNode,
             surrenderNode: req.body.surrenderNode
         });
         return node;
