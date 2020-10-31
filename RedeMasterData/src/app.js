@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.use('/nodes', node);
 
-let port = 3000;
+const port = process.env.APP_PORT || 3000;
 app.listen(port, () => {
     console.log('Server is up and running on port ' + port);
 });
