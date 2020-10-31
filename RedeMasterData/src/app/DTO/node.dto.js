@@ -23,7 +23,7 @@ class NodeDTO {
                 latitude: req.latitude
             }
         );
-     return node;
+        return node;
     };
     
 }

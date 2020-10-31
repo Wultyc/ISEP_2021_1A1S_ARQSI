@@ -16,7 +16,7 @@ var corsOptions = {
 app.use(cors(corsOptions))
 
 mongoose.connect('mongodb+srv://arqsi:arqsi@cluster0.mywjf.mongodb.net/test', {
-    useNewUrlParser : true  
+    useNewUrlParser : true
 }); 
 mongoose.Promise = global.Promise;
 // 'mongodb+srv://arqsi:arqsi@cluster0.mywjf.mongodb.net/test',
