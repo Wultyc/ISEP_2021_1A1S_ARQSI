@@ -5,7 +5,7 @@ const ServiceNode = require('../../services/node.service');
 const service = new ServiceNode();
 
 // DTO
-const dto = require('../../DTO/node.dto');
+const dto = require('../../dto/node.dto');
 var transform = new dto();
 
 exports.node_create = function (req, res) {
