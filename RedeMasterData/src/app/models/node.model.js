@@ -13,7 +13,17 @@ var Node = new Schema({
     latitude: {
         type: Number,
         required: [true, 'Insert a latitude.'],
-    },      
+    },
+    // estações de recolha de autocarros
+    collectionNode: {
+        type: Boolean,
+        required: [true, 'Insert if it is a Collection Node.'],
+    },
+    // estações de troca de condutores
+    surrenderNode: {
+        type: Boolean,
+        required: [true, 'Insert if it is a Surrender Node.'],
+    }
 });
 
 

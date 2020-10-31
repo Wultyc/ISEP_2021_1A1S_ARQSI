@@ -8,7 +8,9 @@ class NodeDTO {
         let node = new Node({
             shortName: req.body.shortName,
             longitude: req.body.longitude,
-            latitude: req.body.latitude
+            latitude: req.body.latitude,
+            collectionNode: req.body.surrenderNode,
+            surrenderNode: req.body.surrenderNode
         });
         return node;
     };
@@ -20,7 +22,9 @@ class NodeDTO {
                 id: req.nodeId,
                 shortName: req.shortName,
                 longitude: req.longitude,
-                latitude: req.latitude
+                latitude: req.latitude,
+                collectionNode: req.collectionNode,
+                surrenderNode: req.surrenderNode
             }
         );
         return node;
