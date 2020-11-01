@@ -6,14 +6,14 @@ const dto = require('../../dto/tripulantType.dto');
 const service = new TripulantTypeService();
 var transform = new dto();
 
-exports.tripulantType_create = function (req, res) {
+exports.tripulantTypeCreate = function (req, res) {
 
-    let TripulantType = transform.ToInsert(req);
+    let tripulantType = transform.ToInsert(req);
 //  if(!service.Validate(Type)) {
 //      // implementar erro de retorno aqui
 //  }
 //  else {
-     service.TripulantTypeCreate(TripulantType, function (err, params){
+     service.TripulantTypeCreate(tripulantType, function (err, params){
         if (err) {
             return res.send(err);
                     }
