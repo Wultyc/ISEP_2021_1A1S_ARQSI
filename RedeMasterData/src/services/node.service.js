@@ -8,10 +8,14 @@ var repo = new NodeRepository();
 class NodeService {
     constructor() {}
 
+    nodeGetById(id, callback) {
+        repo.getById(id, callback);
+    };
+
     nodeCreate(node, callback) {
         let message = validateNode(node);
         if (!_.isEmpty(message)) {
-            callback(message); //we dont want to kill the Application
+            callback(message);
             return;
         } else {
             repo.save(node, callback)
@@ -21,11 +25,8 @@ class NodeService {
 
 // Business Logic
 validateNode = function(node) {
-    let message = '';
-    if (!node.collectionNode && node.surrenderNode) {
-        message = 'A Surrender Node must always be a Collection Node.';
-    }
-    return message;
+    return !node.collectionNode && node.surrenderNode ? 
+        'A Surrender Node must always be a Collection Node.' : '' ;
 };
 
 module.exports = NodeService;    

@@ -11,23 +11,22 @@ var Line = new Schema({
         type: String,
         required: [true, 'Insert a name.']
     },
-
-    // Lista de Percursos
-    routes: [{
-        type: Schema.Types.ObjectId, ref: 'Route',
-    }],
     
     // Nodes
     beginNode: {
-        type: Schema.Types.ObjectId, ref: 'Node',
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'node', 
+        required: [true, 'Insert the begin Node id.']
     },
     finalNode: {
-        type: Schema.Types.ObjectId, ref: 'Node',
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'node', 
+        required: [true, 'Insert the final Node id.']
     },
 
     // TODO: Restrições tipo de tripulante
     // TODO: Restrições tipo de viatura
 });
 
-// Export the model
+// Export the models
 module.exports = mongoose.model('Line', Line);
