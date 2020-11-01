@@ -5,9 +5,9 @@ var ObjectID = require('mongodb').ObjectID;
 class TripulantTypeRepository {
     constructor() { }
 
-    saveTrip(TripulantType, callback) {
-        console.log('saving tripulant type in the repository ' + TripulantType);
-        TripulantType.save();
+    save(tripulantType, callback) {
+        console.log('saving tripulant type in the repository ' + tripulantType);
+        tripulantType.save();
     };
 
 }
