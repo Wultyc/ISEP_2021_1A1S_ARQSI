@@ -9,7 +9,7 @@ const cors = require('cors');
 
 // Imports routes
 const node = require('./routes/node.route');
-
+const triptype = require('./routes/TripulantType.route')
 const app = express();
 
 var corsOptions = {
@@ -34,6 +34,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use('/nodes', node);
+// app.use('/api', triptype);
 
 const port = process.env.APP_PORT || 3000;
 app.listen(port, () => {
