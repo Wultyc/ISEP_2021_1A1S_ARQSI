@@ -1,4 +1,3 @@
-const TripulantType = require('../../models/tripulantType.model');
 const TripulantTypeService = require('../../services/tripulantType.service');
 const dto = require('../../dto/tripulantType.dto');
 
@@ -9,18 +8,16 @@ exports.tripulantTypeCreate = function (req, res) {
 
     let tripulantType = transform.ToInsert(req);
 
-     service.TripulantTypeCreate(tripulantType, function (err, params){
-        if (err) {
-            return res.send(err);
-                    }
+    service.TripulantTypeCreate(tripulantType, function (err, params) {
+
+        if (err) return res.status(400).json(err);
+
         res.json(transform.ToDTO(params));
-
     })
-        res.status(200);
-        res.send("Inserted with success");
-    
 
-    
+
+
+
 };
 
 
