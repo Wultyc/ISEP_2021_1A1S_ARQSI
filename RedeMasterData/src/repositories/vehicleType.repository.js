@@ -7,7 +7,7 @@ class VehicleTypeRepository {
     constructor() { }
 
     save(vehicleType, callback) {
-        console.log('saving vehicle type in the repository ' + TripulantType);
+        console.log('saving vehicle type in the repository ' + vehicleType);
         vehicleType.save();
     };
 
