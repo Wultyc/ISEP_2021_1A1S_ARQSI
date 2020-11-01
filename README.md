@@ -9,5 +9,5 @@ Project carried out during the 1st semester in the Systems Architecture class at
 
 ## Components
 This project is composed of some sub projects to handle different parts of the system:
-- backend   -> backend web service
+- RedeMasterData   -> Rede Master Data web service
 
