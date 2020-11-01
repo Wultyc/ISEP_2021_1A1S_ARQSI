@@ -1,5 +1,4 @@
-const _ = require('lodash');
-const Type = require('../../models/tripulantType.model');
+const TripulantType = require('../../models/tripulantType.model');
 const TripulantTypeService = require('../../services/tripulantType.service');
 const dto = require('../../dto/tripulantType.dto');
 
