@@ -17,16 +17,14 @@ class LineDTO {
     
     ToDTO(req){
         if(req == null) return 'Line does not exist.';
-        let line = new Line(
-            {
-                id: req.nodeId,
-                code: req.shortName,
-                name: req.name,
-                routes: req.routes,
-                beginNode: req.beginNode,
-                finalNode: req.finalNode
-            }
-        );
+        let line = new Line({
+            id: req.nodeId,
+            code: req.shortName,
+            name: req.name,
+            routes: req.routes,
+            beginNode: req.beginNode,
+            finalNode: req.finalNode
+        });
         return line;
     };
     

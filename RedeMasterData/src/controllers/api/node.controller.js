@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const Node = require('../../models/node.model');
 const ServiceNode = require('../../services/node.service');
 
@@ -10,23 +9,10 @@ var transform = new dto();
 
 exports.nodeCreate = function (req, res) {
     let node = transform.ToInsert(req);
-    let message = this.validateNode(node);
-    if (!_.isEmpty(message)) {
-        res.send(message);
-    } else {
-        service.nodeCreate(node, function (err, params) {
-            if (err) {
-                return res.send(err);
-            }
-            res.json(transform.ToDTO(params));
-        })
-    }
-};
-
-validateNode = function(node) {
-    let message = '';
-    if (!node.collectionNode && node.surrenderNode) {
-        message = 'A Surrender Node must always be a Collection Node.';
-    }
-    return message;
+    service.nodeCreate(node, function (err, params) {
+        if (err) {
+            return res.send(err);
+        }
+        res.json(transform.ToDTO(params));
+    })
 };
