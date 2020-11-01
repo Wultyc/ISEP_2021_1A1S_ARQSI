@@ -1,25 +1,25 @@
-const TripType = require('../models/tripulantType.model');
+const TripulantType = require('../models/tripulantType.model');
 
 class TripulantTypeDTO {
 
     constructor() {}
 
     ToInsert (req) {
-        let tripType = new TripType({
+        let tripulantType = new TripulantType({
             description : req.body.description
         });
-        return tripType;
+        return tripulantType;
     };
     
     ToDTO(req){
-        if(req == null) return 'TripulantType does not exist.';
-        let TripeType = new TripType(
+        if(req == null) return 'Tripulant type does not exist.';
+        let tripulantType = new TripulantType(
             {
                 id: req.TripulantTypeid,
                 description : req.description
             }
         );
-        return node;
+        return tripulantType;
     };
     
 }

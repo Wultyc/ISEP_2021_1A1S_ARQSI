@@ -6,8 +6,8 @@ var repo = new TripulantTypeRepository();
 class TripulantTypeService {
     constructor() {}
 
-    TripulantTypeCreate(tripType, callback) {
-        repo.saveTrip(tripType, callback)
+    TripulantTypeCreate(tripulantType, callback) {
+        repo.saveTrip(tripulantType, callback)
     };
 
     validate(TripulantType) {
