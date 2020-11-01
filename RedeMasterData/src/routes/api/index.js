@@ -7,7 +7,7 @@ const vehicleType = require('./tripulantType.route')
 
 router.use('/lines', line)
 router.use('/nodes', node)
-router.use('/tipulant-types', tripulantType)
+router.use('/tripulant-types', tripulantType)
 router.use('/vehicle-types', vehicleType)
 
 module.exports = router
