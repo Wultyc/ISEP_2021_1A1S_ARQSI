@@ -8,10 +8,7 @@ var transform = new dto();
 exports.tripulantTypeCreate = function (req, res) {
 
     let tripulantType = transform.ToInsert(req);
-//  if(!service.Validate(Type)) {
-//      // implementar erro de retorno aqui
-//  }
-//  else {
+
      service.TripulantTypeCreate(tripulantType, function (err, params){
         if (err) {
             return res.send(err);
