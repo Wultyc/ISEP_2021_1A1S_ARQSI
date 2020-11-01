@@ -10,14 +10,16 @@ class TripulantTypeService {
         repo.saveTrip(tripType, callback)
     };
 
-    // Validate(TripulantType) {
-    //     if (!TripulantType.description == null){
-    //         return true;
-    //     }
-    //     else{
-    //       //return error message
-    //     }
-    // };
+    validate(TripulantType) {
+    if (TripulantType.description =! null){
+            return true;
+        }
+
+        else{
+
+         return false;
+        }
+    };
 }
 
 module.exports = TripulantTypeService;    

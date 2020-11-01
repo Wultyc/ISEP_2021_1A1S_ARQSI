@@ -12,7 +12,7 @@ class TripulantTypeDTO {
     };
     
     ToDTO(req){
-        if(req == null) return 'Node does not exist.';
+        if(req == null) return 'TripulantType does not exist.';
         let TripeType = new TripType(
             {
                 id: req.TripulantTypeid,
