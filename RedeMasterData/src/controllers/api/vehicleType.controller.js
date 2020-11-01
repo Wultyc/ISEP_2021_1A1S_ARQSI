@@ -14,5 +14,3 @@ exports.vehicleTypeCreate = function (req, res) {
         res.json(transform.ToDTO(params));
      })
 };
-
-

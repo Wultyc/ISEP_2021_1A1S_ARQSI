@@ -3,7 +3,7 @@ const router = express.Router()
 const line = require('./line.route')
 const node = require('./node.route')
 const tripulantType = require('./tripulantType.route')
-const vehicleType = require('./tripulantType.route')
+const vehicleType = require('./vehicleType.route')
 
 router.use('/lines', line)
 router.use('/nodes', node)

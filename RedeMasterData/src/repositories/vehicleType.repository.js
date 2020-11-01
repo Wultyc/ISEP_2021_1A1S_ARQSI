@@ -8,7 +8,7 @@ class VehicleTypeRepository {
 
     save(vehicleType, callback) {
         console.log('saving vehicle type in the repository ' + vehicleType);
-        vehicleType.save();
+        vehicleType.save(callback);
     };
 
 }
