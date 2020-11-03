@@ -18,19 +18,14 @@ class LineService {
 
     async lineCreate(line, callback) {
         var validationMessage = [];
-        console.log('beginNode getNodePromise');
         await getNodePromise(line.beginNode, validationMessage);
-        console.log('finalNode getNodePromise');
         await getNodePromise(line.finalNode, validationMessage);
         for (let i = 0; i < line.tripulantType.length; i++) {
-            console.log('getTripulantTypePromise');
             await getTripulantTypePromise(line.tripulantType[i], validationMessage);
         }
         for (let i = 0; i < line.vehicleType.length; i++) {
-            console.log('getVehicleTypePromise');
             await getVehicleTypePromise(line.vehicleType[i], validationMessage);
         }
-        console.log('saveee');
         if (validationMessage.length == 0) {
             return repo.save(line, callback);
         } else {
@@ -44,7 +39,6 @@ class LineService {
 getNodePromise = function (nodeId, validationMessage) {
     return new Promise((resolve, reject) => {
         serviceNode.nodeGetById(nodeId, (err, res) => {
-            console.log('callback getNodePromise');
             if (err) {
                 reject(err);
             }
@@ -59,7 +53,6 @@ getNodePromise = function (nodeId, validationMessage) {
 getTripulantTypePromise = function (tripulantTypeId, validationMessage) {
     return new Promise((resolve, reject) => {       
         serviceTripulantType.TripulantTypeGetById(tripulantTypeId, (err, res) => {
-            console.log('callback getTripulantTypePromise');
             if (err) {
                 reject(err);
             }
@@ -74,7 +67,6 @@ getTripulantTypePromise = function (tripulantTypeId, validationMessage) {
 getVehicleTypePromise = function (vehicleTypeId, validationMessage) {
     return new Promise((resolve, reject) => {
         serviceVehicleType.VehicleTypeGetById(vehicleTypeId, (err, res) => {
-            console.log('callback getVehicleTypePromise');
             if (err) {
                 reject(err);
             }
