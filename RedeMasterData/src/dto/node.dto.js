@@ -19,7 +19,6 @@ class NodeDTO {
         if(req == null) return 'Node does not exist.';
         let node = new Node(
             {
-                id: req.nodeId,
                 shortName: req.shortName,
                 longitude: req.longitude,
                 latitude: req.latitude,

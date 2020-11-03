@@ -14,7 +14,6 @@ class VehicleTypeDTO {
     ToDTO(req){
         if(req == null) return 'Vehicle type does not exist.';
         let vehicleType = new VehicleType({
-            id: req.vehicleTypeid,
             description : req.description
         });
         return vehicleType;

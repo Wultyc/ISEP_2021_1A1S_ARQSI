@@ -19,7 +19,6 @@ class LineDTO {
     ToDTO(req){
         if(req == null) return 'Line does not exist.';
         let line = new Line({
-            id: req.lineId,
             code: req.code,
             name: req.name,
             beginNode: req.beginNode,

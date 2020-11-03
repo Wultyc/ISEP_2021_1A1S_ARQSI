@@ -14,7 +14,6 @@ class TripulantTypeDTO {
     ToDTO(req){
         if(req == null) return 'Tripulant type does not exist.';
         let tripulantType = new TripulantType({
-            id: req.tripulantTypeid,
             description : req.description
         });
         return tripulantType;
