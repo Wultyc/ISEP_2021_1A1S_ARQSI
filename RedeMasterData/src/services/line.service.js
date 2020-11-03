@@ -16,20 +16,27 @@ var repo = new LineRepository();
 class LineService {
     constructor() {}
 
-    lineCreate(line, callback) {
+    async lineCreate(line, callback) {
         var validationMessage = [];
-        getNodePromise(line.beginNode, validationMessage)
-        .then(getNodePromise(line.finalNode, validationMessage))
-        .then(getTripulantTypePromise(line.tripulantType, validationMessage))
-        .then(getVehicleTypePromise(line.vehicleType, validationMessage))
-        .then(function (result) {
-            if (validationMessage.length == 0) {
-                return repo.save(line, callback);
-            } else {
-                callback(validationMessage);
-                return;
-            }
-        });
+        console.log('beginNode getNodePromise');
+        await getNodePromise(line.beginNode, validationMessage);
+        console.log('finalNode getNodePromise');
+        await getNodePromise(line.finalNode, validationMessage);
+        for (let i = 0; i < line.tripulantType.length; i++) {
+            console.log('getTripulantTypePromise');
+            await getTripulantTypePromise(line.tripulantType[i], validationMessage);
+        }
+        for (let i = 0; i < line.vehicleType.length; i++) {
+            console.log('getVehicleTypePromise');
+            await getVehicleTypePromise(line.vehicleType[i], validationMessage);
+        }
+        console.log('saveee');
+        if (validationMessage.length == 0) {
+            return repo.save(line, callback);
+        } else {
+            callback(validationMessage);
+            return;
+        }
     }
 }
 
@@ -37,8 +44,9 @@ class LineService {
 getNodePromise = function (nodeId, validationMessage) {
     return new Promise((resolve, reject) => {
         serviceNode.nodeGetById(nodeId, (err, res) => {
+            console.log('callback getNodePromise');
             if (err) {
-                return reject(err);
+                reject(err);
             }
             var node = validateGetNode(res, nodeId);
             if (!_.isEmpty(node)) {
@@ -48,35 +56,33 @@ getNodePromise = function (nodeId, validationMessage) {
         });
     });
 }
-getTripulantTypePromise = function (tripulantTypeIds, validationMessage) {
-    _.forEach(tripulantTypeIds, function(tripulantTypeId) {          
-        return new Promise((resolve, reject) => {
-            serviceTripulantType.TripulantTypeGetById(tripulantTypeId, (err, res) => {
-                if (err) {
-                    return reject(err);
-                }
-                var tripulantType = validateGetTripulantType(res, tripulantTypeId);
-                if (!_.isEmpty(tripulantType)) {
-                    validationMessage.push(tripulantType);
-                }
-                resolve(res);
-            });
+getTripulantTypePromise = function (tripulantTypeId, validationMessage) {
+    return new Promise((resolve, reject) => {       
+        serviceTripulantType.TripulantTypeGetById(tripulantTypeId, (err, res) => {
+            console.log('callback getTripulantTypePromise');
+            if (err) {
+                reject(err);
+            }
+            var tripulantType = validateGetTripulantType(res, tripulantTypeId);
+            if (!_.isEmpty(tripulantType)) {
+                validationMessage.push(tripulantType);
+            }
+            resolve(res);
         });
     });
 }
-getVehicleTypePromise = function (vehicleTypeIds, validationMessage) {
-    _.forEach(vehicleTypeIds, function(vehicleTypeId) {  
-        return new Promise((resolve, reject) => {
-            serviceVehicleType.VehicleTypeGetById(vehicleTypeId, (err, res) => {
-                if (err) {
-                    return reject(err);
-                }
-                var vehicleType = validateGetVehicleType(res, vehicleTypeId);
-                if (!_.isEmpty(vehicleType)) {
-                    validationMessage.push(vehicleType);
-                }
-                resolve(res);
-            });
+getVehicleTypePromise = function (vehicleTypeId, validationMessage) {
+    return new Promise((resolve, reject) => {
+        serviceVehicleType.VehicleTypeGetById(vehicleTypeId, (err, res) => {
+            console.log('callback getVehicleTypePromise');
+            if (err) {
+                reject(err);
+            }
+            var vehicleType = validateGetVehicleType(res, vehicleTypeId);
+            if (!_.isEmpty(vehicleType)) {
+                validationMessage.push(vehicleType);
+            }
+            resolve(res);
         });
     });
 }
