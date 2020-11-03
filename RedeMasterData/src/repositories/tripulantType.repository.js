@@ -5,8 +5,12 @@ var ObjectID = require('mongodb').ObjectID;
 class TripulantTypeRepository {
     constructor() { }
 
+    getById(id, callback){
+        mongoose.model('TripulantType').findOne({"_id": id}, callback);
+    };
+
     saveTrip(tripulantType, callback) {
-        console.log('saving tripulant type in the repository ' + tripulantType);
+        console.log('Saving tripulant type in the repository.. ' + tripulantType);
         tripulantType.save(callback);
     };
 

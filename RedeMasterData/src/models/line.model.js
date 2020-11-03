@@ -24,8 +24,18 @@ var Line = new Schema({
         required: [true, 'Insert the final Node id.']
     },
 
-    // TODO: Restrições tipo de tripulante
-    // TODO: Restrições tipo de viatura
+    // Restriciton Tripulant Type
+    tripulantType: [{
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'tripulantType'
+    }],
+
+    // Restriciton Vehicle Type
+    vehicleType: [{
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'vehicleType'
+    }]
+
 });
 
 // Export the models

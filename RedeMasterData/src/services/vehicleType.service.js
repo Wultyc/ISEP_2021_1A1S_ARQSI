@@ -7,6 +7,10 @@ class VehicleTypeService {
     
     constructor() {}
 
+    VehicleTypeGetById(id, callback) {
+        repo.getById(id, callback);
+    };
+
     VehicleTypeCreate(vehicleType, callback) {
         repo.save(vehicleType, callback)
     };

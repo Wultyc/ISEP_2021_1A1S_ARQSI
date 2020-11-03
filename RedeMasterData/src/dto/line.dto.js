@@ -9,7 +9,9 @@ class LineDTO {
             code: req.body.code,
             name: req.body.name,
             beginNode: req.body.beginNode,
-            finalNode: req.body.finalNode
+            finalNode: req.body.finalNode,
+            tripulantType: req.body.tripulantType,
+            vehicleType: req.body.vehicleType
         });
         return line;
     };
@@ -21,7 +23,9 @@ class LineDTO {
             code: req.code,
             name: req.name,
             beginNode: req.beginNode,
-            finalNode: req.finalNode
+            finalNode: req.finalNode,
+            tripulantType: req.tripulantType,
+            vehicleType: req.vehicleType
         });
         return line;
     };

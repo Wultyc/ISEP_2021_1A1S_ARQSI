@@ -6,6 +6,10 @@ var repo = new TripulantTypeRepository();
 class TripulantTypeService {
     constructor() { }
 
+    TripulantTypeGetById(id, callback) {
+        repo.getById(id, callback);
+    };
+
     TripulantTypeCreate(tripulantType, callback) {
         repo.save(tripulantType, callback)
     };
