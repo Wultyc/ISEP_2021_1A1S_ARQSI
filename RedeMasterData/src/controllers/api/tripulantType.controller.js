@@ -5,19 +5,13 @@ const service = new TripulantTypeService();
 var transform = new dto();
 
 exports.tripulantTypeCreate = function (req, res) {
-
     let tripulantType = transform.ToInsert(req);
-
     service.TripulantTypeCreate(tripulantType, function (err, params) {
-
-        if (err) return res.status(400).json(err);
-
+        if (err) {
+            return res.send(err);
+        }
         res.json(transform.ToDTO(params));
     })
-
-
-
-
 };
 
 

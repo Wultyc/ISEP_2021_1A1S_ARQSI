@@ -42,9 +42,9 @@ getNodePromise = function (nodeId, validationMessage) {
             if (err) {
                 reject(err);
             }
-            var node = validateGetNode(res, nodeId);
-            if (!_.isEmpty(node)) {
-                validationMessage.push(node);
+            var nodeValidationMessage = validateGetNode(res, nodeId);
+            if (!_.isEmpty(nodeValidationMessage)) {
+                validationMessage.push(nodeValidationMessage);
             }
             resolve(res);
         });
@@ -56,9 +56,9 @@ getTripulantTypePromise = function (tripulantTypeId, validationMessage) {
             if (err) {
                 reject(err);
             }
-            var tripulantType = validateGetTripulantType(res, tripulantTypeId);
-            if (!_.isEmpty(tripulantType)) {
-                validationMessage.push(tripulantType);
+            var tripulantTypeValidationMessage = validateGetTripulantType(res, tripulantTypeId);
+            if (!_.isEmpty(tripulantTypeValidationMessage)) {
+                validationMessage.push(tripulantTypeValidationMessage);
             }
             resolve(res);
         });
@@ -70,9 +70,9 @@ getVehicleTypePromise = function (vehicleTypeId, validationMessage) {
             if (err) {
                 reject(err);
             }
-            var vehicleType = validateGetVehicleType(res, vehicleTypeId);
-            if (!_.isEmpty(vehicleType)) {
-                validationMessage.push(vehicleType);
+            var vehicleTypeValidationMessage = validateGetVehicleType(res, vehicleTypeId);
+            if (!_.isEmpty(vehicleTypeValidationMessage)) {
+                validationMessage.push(vehicleTypeValidationMessage);
             }
             resolve(res);
         });

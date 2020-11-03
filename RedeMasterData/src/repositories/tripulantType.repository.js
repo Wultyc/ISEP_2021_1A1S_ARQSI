@@ -9,7 +9,7 @@ class TripulantTypeRepository {
         mongoose.model('TripulantType').findOne({"_id": id}, callback);
     };
 
-    saveTrip(tripulantType, callback) {
+    save(tripulantType, callback) {
         console.log('Saving tripulant type in the repository.. ' + tripulantType);
         tripulantType.save(callback);
     };
