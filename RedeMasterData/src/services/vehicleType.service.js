@@ -1,5 +1,10 @@
+const _ = require('lodash');
+
 const VehicleTypeRepository = require('../repositories/vehicleType.repository');
 const VehicleType = require('../models/vehicleType.model');
+
+const ServiceFuelType = require('../services/fuelType.service');
+const serviceFuelType = new ServiceFuelType();
 
 var repo = new VehicleTypeRepository();
 
@@ -11,10 +16,37 @@ class VehicleTypeService {
         repo.getById(id, callback);
     };
 
-    VehicleTypeCreate(vehicleType, callback) {
-        repo.save(vehicleType, callback)
+    async VehicleTypeCreate(vehicleType, callback) {
+        var validationMessage = [];
+        await getFuelTypePromise(vehicleType.fuelType, validationMessage);
+        if (validationMessage.length == 0) {
+            return repo.save(vehicleType, callback);
+        } else {
+            callback(validationMessage);
+            return;
+        }
     };
-
 }
+
+// Promises
+getFuelTypePromise = function (fuelTypeId, validationMessage) {
+    return new Promise((resolve, reject) => {
+        serviceFuelType.FuelTypeGetById(fuelTypeId, (err, res) => {
+            if (err) {
+                reject(err);
+            }
+            var fuelTypeValidationMessage = validateGetFuelType(res, fuelTypeId);
+            if (!_.isEmpty(fuelTypeValidationMessage)) {
+                validationMessage.push(fuelTypeValidationMessage);
+            }
+            resolve(res);
+        });
+    });
+}
+
+// Business Logic
+validateGetFuelType = function(res, id) {
+    return _.isEmpty(res) ? 'Fuel Type with id ' + id + ' does not exist.' : '';
+};
 
 module.exports = VehicleTypeService;    

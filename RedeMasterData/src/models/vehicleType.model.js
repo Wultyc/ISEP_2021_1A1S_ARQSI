@@ -5,7 +5,30 @@ var VehicleType = new  Schema({
     description: {
         type: String,
         required: [true, 'Insert a description.'],
-    }
+    },
+    autonomy: {
+        type: Number,
+        required: [true, 'Insert the autonomy.']
+    },
+    costPerKilometer: {
+        type: Number,
+        required: [true, 'Insert the cost per kilometer.']
+    },
+    avarageCost: {
+        type: Number,
+        required: [true, 'Insert the average cost.']
+    },
+    averageSpeed: {
+        type: Number,
+        required: [true, 'Insert a average speed.']
+    },
+
+    // Fuel type
+    fuelType: {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'FuelType', 
+        required: [true, 'Insert the fuel type id.']
+    },
 });
 
 

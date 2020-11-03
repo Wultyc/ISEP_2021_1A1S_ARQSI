@@ -15,25 +15,25 @@ var Line = new Schema({
     // Nodes
     beginNode: {
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'node', 
+        ref: 'Node', 
         required: [true, 'Insert the begin Node id.']
     },
     finalNode: {
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'node', 
+        ref: 'Node', 
         required: [true, 'Insert the final Node id.']
     },
 
     // Restriciton Tripulant Type
     tripulantType: [{
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'tripulantType'
+        ref: 'TripulantType'
     }],
 
     // Restriciton Vehicle Type
     vehicleType: [{
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'vehicleType'
+        ref: 'VehicleType'
     }]
 
 });
