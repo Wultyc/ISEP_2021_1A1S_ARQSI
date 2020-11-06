@@ -52,7 +52,7 @@ getNodePromise = function (nodeId, validationMessage) {
 }
 getTripulantTypePromise = function (tripulantTypeId, validationMessage) {
     return new Promise((resolve, reject) => {       
-        serviceTripulantType.TripulantTypeGetById(tripulantTypeId, (err, res) => {
+        serviceTripulantType.tripulantTypeGetById(tripulantTypeId, (err, res) => {
             if (err) {
                 reject(err);
             }
@@ -66,7 +66,7 @@ getTripulantTypePromise = function (tripulantTypeId, validationMessage) {
 }
 getVehicleTypePromise = function (vehicleTypeId, validationMessage) {
     return new Promise((resolve, reject) => {
-        serviceVehicleType.VehicleTypeGetById(vehicleTypeId, (err, res) => {
+        serviceVehicleType.vehicleTypeGetById(vehicleTypeId, (err, res) => {
             if (err) {
                 reject(err);
             }

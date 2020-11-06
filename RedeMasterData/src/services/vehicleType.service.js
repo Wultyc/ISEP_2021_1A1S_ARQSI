@@ -11,11 +11,11 @@ class VehicleTypeService {
     
     constructor() {}
 
-    VehicleTypeGetById(id, callback) {
+    vehicleTypeGetById(id, callback) {
         repo.getById(id, callback);
     };
 
-    async VehicleTypeCreate(vehicleType, callback) {
+    async vehicleTypeCreate(vehicleType, callback) {
         var validationMessage = [];
         await getFuelTypePromise(vehicleType.fuelType, validationMessage);
         if (validationMessage.length == 0) {

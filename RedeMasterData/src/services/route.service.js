@@ -1,0 +1,48 @@
+const _ = require('lodash');
+
+const Route = require('../models/route.model');
+const RouteRepository = require('../repositories/route.repository');
+const ServiceSegment = require('./segment.service');
+
+const serviceSegment = new ServiceSegment();
+const repo = new RouteRepository();
+
+class RouteService {
+    constructor() {}
+
+    async routeCreate(route, callback) {
+        var validationMessage = [];
+        for (let i = 0; i < route.segment.length; i++) {
+            await getSegmentPromise(route.segment[i], validationMessage);
+        }
+        if (validationMessage.length == 0) {
+            return repo.save(route, callback);
+        } else {
+            callback(validationMessage);
+            return;
+        }
+    }
+}
+
+// Promises
+getSegmentPromise = function (segmentId, validationMessage) {
+    return new Promise((resolve, reject) => {       
+        serviceSegment.segmentGetById(segmentId, (err, res) => {
+            if (err) {
+                reject(err);
+            }
+            var segmentValidationMessage = validateGetSegment(res, segmentId);
+            if (!_.isEmpty(segmentValidationMessage)) {
+                validationMessage.push(segmentValidationMessage);
+            }
+            resolve(res);
+        });
+    });
+}
+
+// Business Logic
+validateGetSegment = function(res, id) {
+    return _.isEmpty(res) ? 'Segment with id ' + id + ' does not exist.' : '';
+};
+
+module.exports = RouteService;

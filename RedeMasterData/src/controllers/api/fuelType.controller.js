@@ -6,7 +6,7 @@ var transform = new dto();
 
 exports.fuelTypeCreate = function (req, res) {
     let fuelType = transform.ToInsert(req);
-    service.FuelTypeCreate(fuelType, function (err, params) {
+    service.fuelTypeCreate(fuelType, function (err, params) {
         if (err) {
             return res.send(err);
         }

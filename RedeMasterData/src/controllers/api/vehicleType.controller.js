@@ -7,7 +7,7 @@ var transform = new dto();
 
 exports.vehicleTypeCreate = function (req, res) {
     let vehicleType = transform.ToInsert(req);
-     service.VehicleTypeCreate(vehicleType, function (err, params){
+     service.vehicleTypeCreate(vehicleType, function (err, params){
         if (err) {
             return res.send(err);
         }

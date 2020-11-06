@@ -10,6 +10,10 @@ const repo = new SegmentRepository();
 class SegmentService {
     constructor() {}
 
+    segmentGetById(id, callback) {
+        repo.getById(id, callback);
+    };
+
     async segmentCreate(segment, callback) {
         var validationMessage = [];
         await getNodePromise(segment.beginNode, validationMessage);

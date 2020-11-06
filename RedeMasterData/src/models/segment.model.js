@@ -21,7 +21,5 @@ var Segment = new Schema({
     }
 });
 
-Segment.index({ beginNode: 1, finalNode: 1 }, { unique: true });
-
 // Export the model
 module.exports = mongoose.model('Segment', Segment);

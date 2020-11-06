@@ -1,16 +1,16 @@
 const TripulantTypeRepository = require('../repositories/tripulantType.repository');
 const TripulantType = require('../models/tripulantType.model');
 
-var repo = new TripulantTypeRepository();
+const repo = new TripulantTypeRepository();
 
 class TripulantTypeService {
     constructor() { }
 
-    TripulantTypeGetById(id, callback) {
+    tripulantTypeGetById(id, callback) {
         repo.getById(id, callback);
     };
 
-    TripulantTypeCreate(tripulantType, callback) {
+    tripulantTypeCreate(tripulantType, callback) {
         repo.save(tripulantType, callback)
     };
 

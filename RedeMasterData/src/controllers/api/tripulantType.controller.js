@@ -6,7 +6,7 @@ var transform = new dto();
 
 exports.tripulantTypeCreate = function (req, res) {
     let tripulantType = transform.ToInsert(req);
-    service.TripulantTypeCreate(tripulantType, function (err, params) {
+    service.tripulantTypeCreate(tripulantType, function (err, params) {
         if (err) {
             return res.send(err);
         }
