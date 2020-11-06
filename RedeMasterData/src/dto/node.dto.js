@@ -17,15 +17,13 @@ class NodeDTO {
     
     ToDTO(req){
         if(req == null) return 'Node does not exist.';
-        let node = new Node(
-            {
-                shortName: req.shortName,
-                longitude: req.longitude,
-                latitude: req.latitude,
-                collectionNode: req.collectionNode,
-                surrenderNode: req.surrenderNode
-            }
-        );
+        let node = new Node({
+            shortName: req.shortName,
+            longitude: req.longitude,
+            latitude: req.latitude,
+            collectionNode: req.collectionNode,
+            surrenderNode: req.surrenderNode
+        });
         return node;
     };
     

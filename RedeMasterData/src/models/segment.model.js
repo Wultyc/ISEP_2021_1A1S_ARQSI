@@ -2,30 +2,26 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 var Segment = new Schema({
-    duration: {
-        type: Number,
-        required: [true, 'Insert a duration.'],
-    },
     distance: {
         type: Number,
-        required: [true, 'Insert a distance.'],
+        required: [true, 'Insert a distance in kilometers.'],
     },
-
-    // Não sei o que simboliza.....
-    sequence: {
-        type: String,
-        required: [true, 'Insert a sequence.'],
+    duration: {
+        type: Number,
+        required: [true, 'Insert a duration in minutes.'],
     },
-
     // Nodes
-    BeginNode: {
+    beginNode: {
         type: Schema.Types.ObjectId, ref: 'Node',
+        required: [true, 'Insert the routes begin Node id.']
     },
-    FinalNode: {
+    finalNode: {
         type: Schema.Types.ObjectId, ref: 'Node',
+        required: [true, 'Insert the routes begin Node id.']
     }
 });
 
+Segment.index({ beginNode: 1, finalNode: 1 }, { unique: true });
 
 // Export the model
 module.exports = mongoose.model('Segment', Segment);

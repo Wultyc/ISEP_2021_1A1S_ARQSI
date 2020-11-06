@@ -1,12 +1,11 @@
 const _ = require('lodash');
 
 const VehicleTypeRepository = require('../repositories/vehicleType.repository');
+const ServiceFuelType = require('../services/fuelType.service');
 const VehicleType = require('../models/vehicleType.model');
 
-const ServiceFuelType = require('../services/fuelType.service');
 const serviceFuelType = new ServiceFuelType();
-
-var repo = new VehicleTypeRepository();
+const repo = new VehicleTypeRepository();
 
 class VehicleTypeService {
     

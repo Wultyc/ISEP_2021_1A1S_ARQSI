@@ -5,6 +5,7 @@ var FuelType = new  Schema({
     type: {
         type: String,
         required: [true, 'Insert a type.'],
+        unique: true
     }
 });
 

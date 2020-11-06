@@ -5,6 +5,7 @@ var VehicleType = new  Schema({
     description: {
         type: String,
         required: [true, 'Insert a description.'],
+        unique: true
     },
     autonomy: {
         type: Number,

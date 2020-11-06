@@ -16,12 +16,12 @@ var Line = new Schema({
     beginNode: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Node', 
-        required: [true, 'Insert the begin Node id.']
+        required: [true, 'Insert the lines begin Node id.']
     },
     finalNode: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Node', 
-        required: [true, 'Insert the final Node id.']
+        required: [true, 'Insert the lines final Node id.']
     },
 
     // Restriciton Tripulant Type
