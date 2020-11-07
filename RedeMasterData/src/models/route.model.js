@@ -14,13 +14,12 @@ var Route = new Schema({
         type: String,
         enum: ['GoingRoute', 'ComingRoute'],
         required: [true, 'Insert a orientation.'],
-        index: true
     },
 
     // Lista de segmentos
     segment: [{
         type: Schema.Types.ObjectId, ref: 'Segment',
-        index: true
+        required: [true, 'Insert at least one segment.'],
     }]
 });
 
