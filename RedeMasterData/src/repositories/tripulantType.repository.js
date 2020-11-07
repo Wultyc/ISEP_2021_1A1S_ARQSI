@@ -18,6 +18,10 @@ class TripulantTypeRepository {
         tripulantType.save(callback);
     };
 
+    delete(id, callback) {
+        mongoose.model('TripulantType').findByIdAndRemove(id, callback) 
+    };
+
 }
 
 module.exports = TripulantTypeRepository;
