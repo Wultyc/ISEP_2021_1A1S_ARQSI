@@ -18,6 +18,10 @@ class LineRepository {
         line.save(callback);
     };
 
+    delete(id, callback) {
+        mongoose.model('Line').findByIdAndRemove(id, callback) 
+    };
+
 }
 
 module.exports = LineRepository;
