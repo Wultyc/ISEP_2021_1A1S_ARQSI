@@ -27,6 +27,7 @@ var Node = new Schema({
     }
 });
 
+Node.index({ longitude: 1, latitude: 1 }, { unique: true });
 
 // Export the model
 module.exports = mongoose.model('Node', Node);
