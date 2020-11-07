@@ -14,6 +14,10 @@ class RouteService {
         repo.getById(id, callback);
     };
 
+    routeGetAll(callback) {
+        repo.getAll(callback);
+    };
+
     async routeCreate(route, callback) {
         var validationMessage = [];
         routeCreatePreValidations(route, validationMessage);
@@ -31,6 +35,10 @@ class RouteService {
             return;
         }
     }
+
+    routeDelete(id) {
+        repo.delete(id, callback);
+    };
 }
 
 // Promises

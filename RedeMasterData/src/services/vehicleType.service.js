@@ -10,9 +10,13 @@ const repo = new VehicleTypeRepository();
 class VehicleTypeService {
     
     constructor() {}
-
+    
     vehicleTypeGetById(id, callback) {
         repo.getById(id, callback);
+    };
+
+    vehicleTypeGetAll(callback) {
+        repo.getAll(callback);
     };
 
     async vehicleTypeCreate(vehicleType, callback) {
@@ -24,6 +28,10 @@ class VehicleTypeService {
             callback(validationMessage);
             return;
         }
+    };
+
+    vehicleTypeDelete(id) {
+        repo.delete(id, callback);
     };
 }
 

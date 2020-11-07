@@ -12,6 +12,10 @@ class NodeService {
         repo.getById(id, callback);
     };
 
+    nodeGetAll(callback) {
+        repo.getAll(callback);
+    };
+
     nodeCreate(node, callback) {
         let message = validateNode(node);
         if (!_.isEmpty(message)) {
@@ -21,6 +25,11 @@ class NodeService {
             repo.save(node, callback)
         }
     };
+
+    nodeDelete(id) {
+        repo.delete(id, callback);
+    };
+
 }
 
 // Business Logic

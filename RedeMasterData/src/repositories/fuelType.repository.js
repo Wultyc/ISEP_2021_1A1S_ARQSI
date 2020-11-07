@@ -6,11 +6,11 @@ class FuelTypeRepository {
     constructor() { }
 
     getById(id, callback){
-        mongoose.model('FuelType').findOne({"_id": id}, callback);
+        FuelTypeModel.findOne({"_id": id}, callback);
     };
 
     getAll(callback) {
-        mongoose.model('FuelType').find(callback); 
+        FuelTypeModel.find(callback); 
     };
 
     save(fuelType, callback) {
@@ -19,7 +19,7 @@ class FuelTypeRepository {
     };
 
     delete(id, callback) {
-        mongoose.model('FuelType').findByIdAndRemove(id, callback) 
+        FuelTypeModel.findByIdAndRemove(id, callback) 
     };
 
 }

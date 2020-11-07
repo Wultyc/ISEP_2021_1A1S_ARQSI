@@ -6,11 +6,11 @@ class TripulantTypeRepository {
     constructor() { }
 
     getById(id, callback){
-        mongoose.model('TripulantType').findOne({"_id": id}, callback);
+        TripulantTypeModel.findOne({"_id": id}, callback);
     };
 
     getAll(callback) {
-        mongoose.model('TripulantType').find(callback); 
+        TripulantTypeModel.find(callback); 
     };
 
     save(tripulantType, callback) {
@@ -19,7 +19,7 @@ class TripulantTypeRepository {
     };
 
     delete(id, callback) {
-        mongoose.model('TripulantType').findByIdAndRemove(id, callback) 
+        TripulantTypeModel.findByIdAndRemove(id, callback) 
     };
 
 }

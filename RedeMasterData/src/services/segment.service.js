@@ -14,6 +14,10 @@ class SegmentService {
         repo.getById(id, callback);
     };
 
+    segmentGetAll(callback) {
+        repo.getAll(callback);
+    };
+
     async segmentCreate(segment, callback) {
         var validationMessage = [];
         await getNodePromise(segment.beginNode, validationMessage);
@@ -25,6 +29,10 @@ class SegmentService {
             return;
         }
     }
+
+    segmentDelete(id) {
+        repo.delete(id, callback);
+    };
 }
 
 // Promises

@@ -6,11 +6,11 @@ class VehicleTypeRepository {
     constructor() { }
 
     getById(id, callback){
-        mongoose.model('VehicleType').findOne({"_id": id}, callback);
+        VehicleTypeModel.findOne({"_id": id}, callback);
     };
 
     getAll(callback) {
-        mongoose.model('VehicleType').find(callback); 
+        VehicleTypeModel.find(callback); 
     };
 
     save(vehicleType, callback) {
@@ -19,7 +19,7 @@ class VehicleTypeRepository {
     };
 
     delete(id, callback) {
-        mongoose.model('VehicleType').findByIdAndRemove(id, callback) 
+        VehicleTypeModel.findByIdAndRemove(id, callback) 
     };
 
 }

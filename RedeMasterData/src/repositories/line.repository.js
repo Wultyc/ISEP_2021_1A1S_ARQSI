@@ -6,11 +6,11 @@ class LineRepository {
     constructor() { }
 
     getById(id, callback){
-        mongoose.model('Line').findOne({"_id": id}, callback);
+        Line.findOne({"_id": id}, callback);
     };
 
     getAll(callback) {
-        mongoose.model('Line').find(callback); 
+        Line.find(callback); 
     };
 
     save(line, callback) {
@@ -19,7 +19,7 @@ class LineRepository {
     };
 
     delete(id, callback) {
-        mongoose.model('Line').findByIdAndRemove(id, callback) 
+        Line.findByIdAndRemove(id, callback) 
     };
 
 }

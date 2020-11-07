@@ -10,8 +10,16 @@ class TripulantTypeService {
         repo.getById(id, callback);
     };
 
+    tripulantTypeGetAll(callback) {
+        repo.getAll(callback);
+    };
+
     tripulantTypeCreate(tripulantType, callback) {
         repo.save(tripulantType, callback)
+    };
+
+    tripulantTypeDelete(id) {
+        repo.delete(id, callback);
     };
 
 }

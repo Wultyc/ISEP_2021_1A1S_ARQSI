@@ -11,8 +11,16 @@ class FuelTypeService {
         repo.getById(id, callback);
     };
 
-    fuelTypeCreate(vehicleType, callback) {
-        repo.save(vehicleType, callback)
+    fuelTypeGetAll(callback) {
+        repo.getAll(callback);
+    };
+
+    fuelTypeCreate(fuelType, callback) {
+        repo.save(fuelType, callback)
+    };
+
+    fuelTypeDelete(id) {
+        repo.delete(id, callback);
     };
 
 }

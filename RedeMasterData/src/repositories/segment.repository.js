@@ -6,11 +6,11 @@ class SegmentRepository {
     constructor() { }
 
     getById(id, callback){
-        mongoose.model('Segment').findOne({"_id": id}, callback);
+        Segment.findOne({"_id": id}, callback);
     };
 
     getAll(callback) {
-        mongoose.model('Segment').find(callback); 
+        Segment.find(callback); 
     };
 
     save(segment, callback) {
@@ -19,7 +19,7 @@ class SegmentRepository {
     };
 
     delete(id, callback) {
-        mongoose.model('Segment').findByIdAndRemove(id, callback) 
+        Segment.findByIdAndRemove(id, callback) 
     };
 
 }

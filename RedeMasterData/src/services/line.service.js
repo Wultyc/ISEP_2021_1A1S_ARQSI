@@ -18,6 +18,14 @@ var repo = new LineRepository();
 class LineService {
     constructor() {}
 
+    lineGetById(id, callback) {
+        repo.getById(id, callback);
+    };
+
+    lineGetAll(callback) {
+        repo.getAll(callback);
+    };
+
     async lineCreate(line, callback) {
         var validationMessage = [];
         lineCreatePreValidations(line, validationMessage);
@@ -43,6 +51,11 @@ class LineService {
             return;
         }
     }
+
+    lineDelete(id) {
+        repo.delete(id, callback);
+    };
+
 }
 
 // Promises

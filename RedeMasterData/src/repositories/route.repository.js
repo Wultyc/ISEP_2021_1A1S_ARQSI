@@ -6,11 +6,11 @@ class RouteRepository {
     constructor() { }
 
     getById(id, callback){
-        mongoose.model('Route').findOne({"_id": id}, callback);
+        Route.findOne({"_id": id}, callback);
     };
 
     getAll(callback) {
-        mongoose.model('Route').find(callback); 
+        Route.find(callback); 
     };
 
     save(route, callback) {
@@ -19,7 +19,7 @@ class RouteRepository {
     };
 
     delete(id, callback) {
-        mongoose.model('Route').findByIdAndRemove(id, callback) 
+        Route.findByIdAndRemove(id, callback) 
     };
 
 }

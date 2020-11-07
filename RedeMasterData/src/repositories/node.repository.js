@@ -6,11 +6,11 @@ class NodeRepository {
     constructor() { }
 
     getById(id, callback){
-        mongoose.model('Node').findOne({"_id": id}, callback);
+        Node.findOne({"_id": id}, callback);
     };
 
     getAll(callback) {
-        mongoose.model('Node').find(callback); 
+        Node.find(callback); 
     };
 
     save(node, callback) {
@@ -19,7 +19,7 @@ class NodeRepository {
     };
 
     delete(id, callback) {
-        mongoose.model('Node').findByIdAndRemove(id, callback) 
+        Node.findByIdAndRemove(id, callback) 
     };
 
 }
