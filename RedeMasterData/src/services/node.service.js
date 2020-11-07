@@ -1,7 +1,6 @@
-const _ = require('lodash');
-
 const NodeRepository = require('../repositories/node.repository');
 const Node = require('../models/node.model');
+const queryfilter = require('../libs/queryfilter');
 
 var repo = new NodeRepository();
 
@@ -12,8 +11,10 @@ class NodeService {
         repo.getById(id, callback);
     };
 
-    nodeGetAll(callback) {
-        repo.getAll(callback);
+    nodeGetAll(query,callback) {
+        const sortString = queryfilter.sortString(query)
+        query = queryfilter.queryCleaner(query);
+        repo.getAll(query, sortString, callback);
     };
 
     nodeCreate(node, callback) {

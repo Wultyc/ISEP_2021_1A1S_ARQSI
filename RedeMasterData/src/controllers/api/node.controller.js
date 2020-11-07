@@ -17,7 +17,8 @@ exports.nodeGetById = function (req, res) {
 };
 
 exports.nodeGetAll = function (req, res) {
-    service.nodeGetAll(function(err, params) {
+    console.log('cheguei ao controller')
+    service.nodeGetAll(req.query,function(err, params) {
         if(err){
             return res.send(err);
         }
