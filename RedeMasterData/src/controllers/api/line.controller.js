@@ -9,7 +9,7 @@ const dto = require('../../dto/line.dto');
 var transform = new dto();
 
 exports.lineGetById = function (req, res) {
-    service.fuelTypeGetById(req.params.lineId, function(err, params) {
+    service.lineGetById(req.params.lineId, function(err, params) {
         if(err){
             return res.send(err);
         }
@@ -18,7 +18,7 @@ exports.lineGetById = function (req, res) {
 };
 
 exports.lineGetAll = function (req, res) {
-    service.fuelTypeGetAll(function(err, params) {
+    service.lineGetAll(function(err, params) {
         if(err){
             return res.send(err);
         }
@@ -37,7 +37,7 @@ exports.lineCreate = function (req, res) {
 };
 
 exports.lineDelete = function (req, res) {
-    service.fuelTypeDelete(req.params.lineId, function (err, params) {
+    service.lineDelete(req.params.lineId, function (err, params) {
         if (err) {
             return res.send(err);
         }
