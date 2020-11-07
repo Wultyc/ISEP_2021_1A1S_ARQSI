@@ -8,6 +8,6 @@ router.get('/:tripluantTypeId', tripulantType_controller.tripulantTypeGetById);
 
 router.post('/create', tripulantType_controller.tripulantTypeCreate);
 
-router.delete('/:tripluantTypeId/delete', tripluantType_controller.tripulantTypeDelete);
+router.delete('/:tripluantTypeId/delete', tripulantType_controller.tripulantTypeDelete);
 
 module.exports = router;
