@@ -12,6 +12,11 @@ class RouteService {
 
     async routeCreate(route, callback) {
         var validationMessage = [];
+        routeCreatePreValidations(route, validationMessage);
+        if (validationMessage.length != 0) {
+            callback(validationMessage);
+            return;
+        }
         for (let i = 0; i < route.segment.length; i++) {
             await getSegmentPromise(route.segment[i], validationMessage);
         }
@@ -41,6 +46,12 @@ getSegmentPromise = function (segmentId, validationMessage) {
 }
 
 // Business Logic
+routeCreatePreValidations = function (route, validationMessage) {
+    if (route.segment.length == 0) {
+        validationMessage.push('Route must have at least one segment.');
+    }
+    return;
+};
 validateGetSegment = function(res, id) {
     return _.isEmpty(res) ? 'Segment with id ' + id + ' does not exist.' : '';
 };
