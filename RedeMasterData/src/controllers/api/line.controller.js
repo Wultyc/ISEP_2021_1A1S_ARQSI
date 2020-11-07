@@ -17,7 +17,7 @@ exports.lineGetById = function (req, res) {
     });
 };
 
-exports.lineGetAll = function (req, res) {
+exports.lineGetByFilter = function (req, res) {
     service.lineGetByFilter(req.query, function (err, params) {
         if (err) {
             return res.send(err)
