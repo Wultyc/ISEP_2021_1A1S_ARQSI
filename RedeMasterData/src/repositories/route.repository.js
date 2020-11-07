@@ -9,9 +9,17 @@ class RouteRepository {
         mongoose.model('Route').findOne({"_id": id}, callback);
     };
 
+    getAll(callback) {
+        mongoose.model('Route').find(callback); 
+    };
+
     save(route, callback) {
         console.log('Saving route in the repository.." ' + route);
         route.save(callback);
+    };
+
+    delete(id, callback) {
+        mongoose.model('Route').findByIdAndRemove(id, callback) 
     };
 
 }

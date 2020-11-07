@@ -5,6 +5,14 @@ const Line = require('../models/line.model');
 class LineRepository {
     constructor() { }
 
+    getById(id, callback){
+        mongoose.model('Line').findOne({"_id": id}, callback);
+    };
+
+    getAll(callback) {
+        mongoose.model('Line').find(callback); 
+    };
+
     save(line, callback) {
         console.log('Saving line in the repository.." ' + line);
         line.save(callback);

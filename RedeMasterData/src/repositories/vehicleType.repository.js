@@ -9,9 +9,17 @@ class VehicleTypeRepository {
         mongoose.model('VehicleType').findOne({"_id": id}, callback);
     };
 
+    getAll(callback) {
+        mongoose.model('VehicleType').find(callback); 
+    };
+
     save(vehicleType, callback) {
         console.log('saving vehicle type in the repository ' + vehicleType);
         vehicleType.save(callback);
+    };
+
+    delete(id, callback) {
+        mongoose.model('VehicleType').findByIdAndRemove(id, callback) 
     };
 
 }

@@ -9,9 +9,17 @@ class SegmentRepository {
         mongoose.model('Segment').findOne({"_id": id}, callback);
     };
 
+    getAll(callback) {
+        mongoose.model('Segment').find(callback); 
+    };
+
     save(segment, callback) {
         console.log('Saving segment in the repository.." ' + segment);
         segment.save(callback);
+    };
+
+    delete(id, callback) {
+        mongoose.model('Segment').findByIdAndRemove(id, callback) 
     };
 
 }

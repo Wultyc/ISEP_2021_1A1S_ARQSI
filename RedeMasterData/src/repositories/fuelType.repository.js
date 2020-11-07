@@ -9,9 +9,17 @@ class FuelTypeRepository {
         mongoose.model('FuelType').findOne({"_id": id}, callback);
     };
 
+    getAll(callback) {
+        mongoose.model('FuelType').find(callback); 
+    };
+
     save(fuelType, callback) {
         console.log('Saving fuel type in the repository.. ' + fuelType);
         fuelType.save(callback);
+    };
+
+    delete(id, callback) {
+        mongoose.model('FuelType').findByIdAndRemove(id, callback) 
     };
 
 }
