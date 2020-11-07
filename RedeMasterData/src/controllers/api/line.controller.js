@@ -8,6 +8,24 @@ const service = new ServiceLine();
 const dto = require('../../dto/line.dto');
 var transform = new dto();
 
+exports.lineGetById = function (req, res) {
+    service.fuelTypeGetById(req.params.lineId, function(err, params) {
+        if(err){
+            return res.send(err);
+        }
+        res.json(transform.ToDTO(params));
+    });
+};
+
+exports.lineGetAll = function (req, res) {
+    service.fuelTypeGetAll(function(err, params) {
+        if(err){
+            return res.send(err);
+        }
+        res.json(params);
+    })
+};
+
 exports.lineCreate = function (req, res) {
     let line = transform.ToInsert(req);
     service.lineCreate(line, function (err, params) {
@@ -16,4 +34,13 @@ exports.lineCreate = function (req, res) {
         }
         res.json(transform.ToDTO(params));
     })
+};
+
+exports.lineDelete = function (req, res) {
+    service.fuelTypeDelete(req.params.lineId, function (err, params) {
+        if (err) {
+            return res.send(err);
+        }
+        res.send('Line deleted.');
+    });
 };
