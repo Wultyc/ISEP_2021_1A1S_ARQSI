@@ -41,4 +41,8 @@ var Line = new Schema({
 });
 
 // Export the models
-module.exports = mongoose.model('Line', Line);
+module.exports = mongoose.model('Line', Line, 'lines');
+
+
+
+

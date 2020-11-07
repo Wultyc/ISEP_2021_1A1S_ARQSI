@@ -18,22 +18,13 @@ exports.lineGetById = function (req, res) {
 };
 
 exports.lineGetAll = function (req, res) {
-    if (req.query.name) {
-        service.lineGetByName(req.query.name, function (err, params) {
-            if (err) {
-                return res.status(404).send(err)
-            }
-            res.json(transform.ToDTO(params))
-        })
-    }
-    else {
-        service.lineGetAll(function (err, params) {
-            if (err) {
-                return res.status(404).send(err);
-            }
-            res.json(params);
-        })
-    }
+    service.lineGetByFilter(req.query, function (err, params) {
+        if (err) {
+            return res.send(err)
+        }
+        res.json(params)
+    })
+
 };
 
 exports.lineCreate = function (req, res) {

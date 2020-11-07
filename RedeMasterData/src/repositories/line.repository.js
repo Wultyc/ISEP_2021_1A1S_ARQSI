@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const _ = require('lodash');
+mongoose.set('debug', true);
 var ObjectID = require('mongodb').ObjectID;
 const Line = require('../models/line.model');
 
@@ -9,12 +11,8 @@ class LineRepository {
         Line.findOne({"_id": id}, callback);
     };
 
-    getAll(callback) {
-        Line.find(callback); 
-    };
-
-    getByName(name, callback){       
-        Line.find({"name": name}, callback);
+    getByFilter(query, sortString, callback){
+        Line.find(query, callback).sort(sortString);
     };
     
     save(line, callback) {

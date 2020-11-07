@@ -26,8 +26,10 @@ class LineService {
         repo.getAll(callback);
     };
 
-    lineGetByName(name, callback){
-        repo.getByName(name, callback)
+    lineGetByFilter(query, callback){
+        const sortString = `{${query.sort}:${query.sortmode}}`
+        query = _.omit(query,'sort','sortmode')
+        repo.getByFilter(query, sortString, callback)
     };
 
     async lineCreate(line, callback) {
