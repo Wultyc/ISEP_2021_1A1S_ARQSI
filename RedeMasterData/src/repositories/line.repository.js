@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const _ = require('lodash');
-mongoose.set('debug', true);
 var ObjectID = require('mongodb').ObjectID;
 const Line = require('../models/line.model');
 

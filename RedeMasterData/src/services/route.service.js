@@ -25,11 +25,17 @@ class RouteService {
             callback(validationMessage);
             return;
         }
+        var nodeValidatior = null;
         var segmentDistances = 0, segmentDurantions = 0;
         for (let i = 0; i < route.segment.length; i++) {
-            var segmentI = await getSegmentPromise(route.segment[i], validationMessage);
-            segmentDistances += segmentI.distance;
-            segmentDurantions += segmentI.duration;
+            var segmentI = await getSegmentPromise(route.segment[i], nodeValidatior, validationMessage);
+            if (!_.isEmpty(segmentI)) {
+                nodeValidatior = segmentI.finalNode;
+                segmentDistances += segmentI.distance;
+                segmentDurantions += segmentI.duration;
+            } else {
+                nodeValidatior = null;
+            }
         }
         route.distance = segmentDistances;
         route.duration = segmentDurantions;
@@ -48,13 +54,13 @@ class RouteService {
 }
 
 // Promises
-getSegmentPromise = function (segmentId, validationMessage) {
+getSegmentPromise = function (segmentId, nodeValidatior, validationMessage) {
     return new Promise((resolve, reject) => {       
         serviceSegment.segmentGetById(segmentId, (err, res) => {
             if (err) {
                 reject(err);
             }
-            var segmentValidationMessage = validateGetSegment(res, segmentId);
+            var segmentValidationMessage = validateGetSegment(res, nodeValidatior, segmentId);
             if (!_.isEmpty(segmentValidationMessage)) {
                 validationMessage.push(segmentValidationMessage);
             }
@@ -70,8 +76,14 @@ routeCreatePreValidations = function (route, validationMessage) {
     }
     return;
 };
-validateGetSegment = function(res, id) {
-    return _.isEmpty(res) ? 'Segment with id ' + id + ' does not exist.' : '';
+validateGetSegment = function(res, nodeValidatior, id) {
+    if (_.isEmpty(res)) {
+        return 'Segment with id ' + id + ' does not exist.';
+    }
+    if (!_.isEmpty(nodeValidatior) && !_.isEmpty(res.beginNode) && res.beginNode.toString() != nodeValidatior.toString()) {
+        return 'The begin node of the segment with id ' + id + ' is not compatible with the final node of the last segment.'
+    }
+    return '';
 };
 
 module.exports = RouteService;
