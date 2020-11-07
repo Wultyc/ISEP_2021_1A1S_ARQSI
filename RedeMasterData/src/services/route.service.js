@@ -25,9 +25,15 @@ class RouteService {
             callback(validationMessage);
             return;
         }
+        var segmentDistances = 0, segmentDurantions = 0;
         for (let i = 0; i < route.segment.length; i++) {
-            await getSegmentPromise(route.segment[i], validationMessage);
+            var segmentI = await getSegmentPromise(route.segment[i], validationMessage);
+            segmentDistances += segmentI.distance;
+            segmentDurantions += segmentI.duration;
         }
+        route.distance = segmentDistances;
+        route.duration = segmentDurantions;
+        route.endTime = route.startTime + route.duration;
         if (validationMessage.length == 0) {
             return repo.save(route, callback);
         } else {

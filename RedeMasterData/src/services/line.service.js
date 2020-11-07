@@ -39,8 +39,17 @@ class LineService {
         }
         await getNodePromise(line.beginNode, validationMessage);
         await getNodePromise(line.finalNode, validationMessage);
+        var hasGoingRoute = false, hasComingRoute = false;
         for (let i = 0; i < line.route.length; i++) {
-            await getRoutePromise(line.route[i], validationMessage);
+            var routeI = await getRoutePromise(line.route[i], validationMessage);
+            if (_.isEqual(routeI.orientation, 'GoingRoute')) {
+                hasGoingRoute = true;
+            } else if (_.isEqual(routeI.orientation, 'ComingRoute')) {
+                hasComingRoute = true;
+            }
+        }
+        if (!hasGoingRoute || !hasComingRoute) {
+            validationMessage.push('A line must have at least 1 going route and 1 coming route.');
         }
         for (let i = 0; i < line.tripulantType.length; i++) {
             await getTripulantTypePromise(line.tripulantType[i], validationMessage);
@@ -122,8 +131,8 @@ getVehicleTypePromise = function (vehicleTypeId, validationMessage) {
 
 // Business Logic
 lineCreatePreValidations = function (line, validationMessage) {
-    if (line.route.length != 2) {
-        validationMessage.push('A line must have exactly 2 routes.');
+    if (line.route.length < 2) {
+        validationMessage.push('A line must have at least 1 going route and 1 coming route.');
     }
     return;
 };

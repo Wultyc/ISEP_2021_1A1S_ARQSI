@@ -8,7 +8,11 @@ class RouteDTO {
         let route = new Route({
             distance: req.body.distance,
             duration: req.body.duration,
+            startTime: req.body.startTime,
+            endTime: req.body.endTime,
             orientation: req.body.orientation,
+            isReinforcementRoute: req.body.isReinforcementRoute,
+            isEmptyRoute: req.body.isEmptyRoute,
             segment: req.body.segment
         });
         return route;
@@ -19,7 +23,11 @@ class RouteDTO {
         let route = new Route({
             distance: req.distance,
             duration: req.duration,
+            startTime: req.startTime,
+            endTime: req.endTime,
             orientation: req.orientation,
+            isReinforcementRoute: req.isReinforcementRoute,
+            isEmptyRoute: req.isEmptyRoute,
             segment: req.segment
         });
         return route;

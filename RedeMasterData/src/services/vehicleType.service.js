@@ -38,7 +38,7 @@ class VehicleTypeService {
 // Promises
 getFuelTypePromise = function (fuelTypeId, validationMessage) {
     return new Promise((resolve, reject) => {
-        serviceFuelType.FuelTypeGetById(fuelTypeId, (err, res) => {
+        serviceFuelType.fuelTypeGetById(fuelTypeId, (err, res) => {
             if (err) {
                 reject(err);
             }
