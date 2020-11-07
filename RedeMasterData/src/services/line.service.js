@@ -26,6 +26,10 @@ class LineService {
         repo.getAll(callback);
     };
 
+    lineGetByName(name, callback){
+        repo.getByName(name, callback)
+    }
+
     async lineCreate(line, callback) {
         var validationMessage = [];
         lineCreatePreValidations(line, validationMessage);

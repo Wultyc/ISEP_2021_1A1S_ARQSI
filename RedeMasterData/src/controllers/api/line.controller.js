@@ -9,8 +9,8 @@ const dto = require('../../dto/line.dto');
 var transform = new dto();
 
 exports.lineGetById = function (req, res) {
-    service.lineGetById(req.params.lineId, function(err, params) {
-        if(err){
+    service.lineGetById(req.params.lineId, function (err, params) {
+        if (err) {
             return res.send(err);
         }
         res.json(transform.ToDTO(params));
@@ -18,12 +18,21 @@ exports.lineGetById = function (req, res) {
 };
 
 exports.lineGetAll = function (req, res) {
-    service.lineGetAll(function(err, params) {
-        if(err){
-            return res.send(err);
-        }
-        res.json(params);
-    })
+    if (req.query.name) {
+        service.lineGetByName(req.query.name, function (err, params) {
+            if (err) {
+                return res.send(err);
+            }
+        }) 
+    }
+    else {
+        service.lineGetAll(function (err, params) {
+            if (err) {
+                return res.send(err);
+            }
+            res.json(params);
+        })
+    }
 };
 
 exports.lineCreate = function (req, res) {

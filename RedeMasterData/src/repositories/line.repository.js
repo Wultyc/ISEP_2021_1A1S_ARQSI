@@ -13,6 +13,10 @@ class LineRepository {
         Line.find(callback); 
     };
 
+    getByName(name, callback){       
+        Line.find({"name": name}, callback);
+    };
+    
     save(line, callback) {
         console.log('Saving line in the repository.." ' + line);
         line.save(callback);
