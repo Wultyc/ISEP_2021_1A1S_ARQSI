@@ -39,5 +39,7 @@ var Route = new Schema({
     }]
 });
 
+Route.index({ orientation: 1, segment: 1 }, { unique: true });
+
 // Export the model
 module.exports = mongoose.model('Route', Route);
