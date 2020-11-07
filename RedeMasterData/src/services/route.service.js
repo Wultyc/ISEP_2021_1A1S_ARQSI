@@ -10,6 +10,10 @@ const repo = new RouteRepository();
 class RouteService {
     constructor() {}
 
+    routeGetById(id, callback) {
+        repo.getById(id, callback);
+    };
+
     async routeCreate(route, callback) {
         var validationMessage = [];
         routeCreatePreValidations(route, validationMessage);

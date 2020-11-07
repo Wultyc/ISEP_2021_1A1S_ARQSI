@@ -14,26 +14,28 @@ var Line = new Schema({
     
     // Nodes
     beginNode: {
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Node', 
+        type: mongoose.Schema.Types.ObjectId, ref: 'Node', 
         required: [true, 'Insert the lines begin Node id.']
     },
     finalNode: {
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Node', 
+        type: mongoose.Schema.Types.ObjectId, ref: 'Node', 
         required: [true, 'Insert the lines final Node id.']
     },
 
+    // Routes
+    route: [{
+        type: mongoose.Schema.Types.ObjectId, ref: 'Route',
+        required: [true, 'A line must have exactly 2 routes.'],
+    }],
+
     // Restriciton Tripulant Type
     tripulantType: [{
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'TripulantType'
+        type: mongoose.Schema.Types.ObjectId, ref: 'TripulantType'
     }],
 
     // Restriciton Vehicle Type
     vehicleType: [{
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'VehicleType'
+        type: mongoose.Schema.Types.ObjectId, ref: 'VehicleType'
     }]
 
 });
