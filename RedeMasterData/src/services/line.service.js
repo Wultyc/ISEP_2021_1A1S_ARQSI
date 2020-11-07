@@ -28,7 +28,7 @@ class LineService {
 
     lineGetByName(name, callback){
         repo.getByName(name, callback)
-    }
+    };
 
     async lineCreate(line, callback) {
         var validationMessage = [];
