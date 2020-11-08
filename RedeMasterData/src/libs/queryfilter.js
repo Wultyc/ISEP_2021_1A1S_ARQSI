@@ -4,7 +4,13 @@ const _ = require('lodash');
 module.exports.queryCleaner = function (query) {
     const cleanQuery = _.omit(query, 'sort', 'sortmode')
 
-    return cleanQuery
+    let rgxQuery = null
+
+    for (let key in cleanQuery) {
+        rgxQuery = {rgxQuery, [key]: { $regex: cleanQuery[key], $options: "i" }}
+    }
+
+    return rgxQuery
 }
 
 module.exports.sortString = function (query) {
@@ -15,5 +21,5 @@ module.exports.sortString = function (query) {
     } else {
         sortMode = ""
     }
-    return {[field2Sort]:sortMode}
+    return { [field2Sort]: sortMode }
 }
