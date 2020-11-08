@@ -5,9 +5,11 @@ const mongooseConnection = async function() {
         process.env.DB_CONNECT,
         {
             useNewUrlParser: true,
-            useUnifiedTopology: true
+            useUnifiedTopology: true,
+            useCreateIndex: true
         },
-        () => console.log('Connected with database')
+        () => console.log('Connected with database'),
+        err => console.log(`Error during MongoDB connection: ${err}`)
     );
     return connection;
 }
