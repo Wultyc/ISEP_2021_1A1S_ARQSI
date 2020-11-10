@@ -81,7 +81,8 @@ validateGetSegment = function(res, nodeValidatior, id) {
         return 'Segment with id ' + id + ' does not exist.';
     }
     if (!_.isEmpty(nodeValidatior) && !_.isEmpty(res.beginNode) && res.beginNode.toString() != nodeValidatior.toString()) {
-        return 'The begin node of the segment with id ' + id + ' is not compatible with the final node of the last segment.'
+        return 'Node mismatch: The begin node of the segment with id ' + id 
+            + ' is not compatible with the final node of the last segment.'
     }
     return '';
 };
