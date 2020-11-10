@@ -23,13 +23,10 @@ var VehicleType = new  Schema({
         type: Number,
         required: [true, 'Insert a average speed.']
     },
-
-    // Fuel type
     fuelType: {
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'FuelType', 
-        required: [true, 'Insert the fuel type id.']
-    },
+        type: String,
+        required: [true, 'Insert the fuel type.']
+    }
 });
 
 

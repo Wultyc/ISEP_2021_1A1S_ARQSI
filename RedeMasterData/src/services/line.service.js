@@ -7,6 +7,7 @@ const ServiceNode = require('../services/node.service');
 const ServiceRoute = require('../services/route.service');
 const ServiceTripulantType = require('../services/tripulantType.service');
 const ServiceVehicleType = require('../services/vehicleType.service');
+const { function } = require('joi');
 
 const serviceNode = new ServiceNode();
 const serviceRoute = new ServiceRoute();
@@ -44,10 +45,13 @@ class LineService {
         var hasGoingRoute = false, hasComingRoute = false;
         for (let i = 0; i < line.route.length; i++) {
             var routeI = await getRoutePromise(line.route[i], validationMessage);
-            if (_.isEqual(routeI.orientation, 'GoingRoute')) {
-                hasGoingRoute = true;
-            } else if (_.isEqual(routeI.orientation, 'ComingRoute')) {
-                hasComingRoute = true;
+            if (!_.isEmpty(routeI)) {
+                if (_.isEqual(routeI.orientation, 'GoingRoute')) {
+                    hasGoingRoute = true;
+                } else if (_.isEqual(routeI.orientation, 'ComingRoute')) {
+                    hasComingRoute = true;
+                }
+                validateBeginAndLastNode(line.beginNode, line.finalNode, line.route[i], validationMessage);
             }
         }
         if (!hasGoingRoute || !hasComingRoute) {
@@ -149,6 +153,9 @@ validateGetTripulantType = function(res, id) {
 };
 validateGetVehicleType = function(res, id) {
     return _.isEmpty(res) ? 'Vehicle Type with id ' + id + ' does not exist.' : '';
+};
+validateBeginAndLastNode = function(beginNode, finalNode, route, validationMessage) {
+    return null;
 };
 
 module.exports = LineService;
