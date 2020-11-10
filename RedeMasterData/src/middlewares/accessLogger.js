@@ -5,10 +5,15 @@ const fs = require('fs');
 
 const accessLogger = (req, res, next) => {
     const log = `\n${req.ip} [${moment().format()}] ${req.method} ${req.originalUrl} ${req.protocol}`
-    fs.appendFileSync(path.join(__dirname, "..", "logs", "requests.log"), log, function (err) {
-        if (err) return console.log(err);
-    });
-    console.log(log);
+
+    if (config.get('logs.access.enableFileLog') == true)
+        fs.appendFileSync(path.join(__dirname, "..", config.get('logs.folder'), config.get('logs.access.logfile')), log, function (err) {
+            if (err) return console.log(err);
+        });
+
+    if (config.get('logs.access.enableConsoleLog') == true)
+        console.log(log);
+
     next();
 }
 

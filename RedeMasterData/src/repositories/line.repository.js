@@ -7,11 +7,11 @@ class LineRepository {
     constructor() { }
 
     getById(id, callback){
-        Line.findOne({"_id": id}, callback);
+        Line.findOne({"_id": id}, callback).populate(['route','beginNode','finalNode']);
     };
 
     getByFilter(query, sortString, callback){
-        Line.find(query, callback).sort(sortString);
+        Line.find(query, callback).populate(['route','beginNode','finalNode']).sort(sortString);
     };
     
     save(line, callback) {

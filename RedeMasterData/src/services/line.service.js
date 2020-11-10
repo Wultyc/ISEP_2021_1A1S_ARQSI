@@ -1,4 +1,4 @@
-const _ = require('lodash');
+const queryfilter = require('../libs/queryfilter');
 
 const LineRepository = require('../repositories/line.repository');
 const Line = require('../models/line.model');
@@ -28,8 +28,8 @@ class LineService {
     };
 
     lineGetByFilter(query, callback){
-        const sortString = `{${query.sort}:${query.sortmode}}`
-        query = _.omit(query,'sort','sortmode')
+        const sortString = queryfilter.sortString(query)
+        query = queryfilter.queryCleaner(query);
         repo.getByFilter(query, sortString, callback)
     };
 

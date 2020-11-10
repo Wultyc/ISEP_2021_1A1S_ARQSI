@@ -5,12 +5,12 @@ const Node = require('../models/node.model');
 class NodeRepository {
     constructor() { }
 
-    getById(id, callback){
-        Node.findOne({"_id": id}, callback);
+    getById(id, callback) {
+        Node.findOne({ "_id": id }, callback);
     };
 
-    getAll(callback) {
-        Node.find(callback); 
+    getAll(query, sortString, callback) {
+        Node.find(query, callback).sort(sortString);
     };
 
     save(node, callback) {
@@ -19,7 +19,7 @@ class NodeRepository {
     };
 
     delete(id, callback) {
-        Node.findByIdAndRemove(id, callback) 
+        Node.findByIdAndRemove(id, callback)
     };
 
 }
