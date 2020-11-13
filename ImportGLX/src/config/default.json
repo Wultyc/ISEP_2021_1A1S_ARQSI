@@ -9,5 +9,8 @@
         "mongoose":{
             "debug": false
         }
+    },
+    "glx-files":{
+        "upload-dir":"file_archive"
     }
 }
