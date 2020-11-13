@@ -1,0 +1,13 @@
+{
+    "logs":{
+        "folder":"logs",
+        "access":{
+            "enableConsoleLog":true,
+            "enableFileLog":true,
+            "logfile":"requests.log"
+        },
+        "mongoose":{
+            "debug": false
+        }
+    }
+}
