@@ -25,6 +25,12 @@
                 "status":"500",
                 "message":"An error occoured when storing the file"
             }
+        },
+        "import":{
+            "error-on-upload":{
+                "status":"500",
+                "message":"An error occoured when importing data"
+            }
         }
     }
 }
