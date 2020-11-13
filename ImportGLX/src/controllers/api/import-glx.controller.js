@@ -1,5 +1,7 @@
 const config = require('config')
 const moment = require('moment')
+const uploadRede = require('./upload-rede.controller')
+const uploadViagem = require('./upload-viagem.controller')
 
 exports.importfile = function (req, res) {
 
@@ -12,11 +14,19 @@ exports.importfile = function (req, res) {
 
     try {
         glxFile.mv(`${config.get('glx-files.upload-dir')}/${filename}.glx.xml`)
-    } catch(e){
+    } catch (e) {
         console.log(e);
         return res.status(config.get('errors.file-system.file-not-saved.status')).json(config.get('errors.file-system.file-not-saved.message'))
     }
 
-    res.send("ok")
+    try {
+        uploadRede.start(filename)
+        uploadViagem.start(filename)
+    } catch (e) {
+        console.log(e);
+        return res.status(config.get('errors.import.error-on-upload.status')).json(config.get('errors.import.error-on-upload.message'))
+    }
+
+    res.send("Data imported successfully")
 
 }
