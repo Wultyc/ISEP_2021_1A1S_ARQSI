@@ -5,14 +5,12 @@ const LineRepository = require('../repositories/line.repository');
 const Line = require('../models/line.model');
 
 const ServiceNode = require('../services/node.service');
-const ServiceSegment = require('../services/segment.service');
 const ServiceRoute = require('../services/route.service');
 const ServiceTripulantType = require('../services/tripulantType.service');
 const ServiceVehicleType = require('../services/vehicleType.service');
 const { function } = require('joi');
 
 const serviceNode = new ServiceNode();
-const serviceSegment = new ServiceSegment();
 const serviceRoute = new ServiceRoute();
 const serviceTripulantType = new ServiceTripulantType();
 const serviceVehicleType = new ServiceVehicleType();
@@ -88,24 +86,24 @@ lineCreatePreValidations = function (line, validationMessage) {
     return;
 };
 validateBeginAndLastNode = async function(beginNode, finalNode, route, validationMessage) {
-    var beginSegment = await getSegmentPromise(route.segment[0]);
-    var finalSegment = await getSegmentPromise(route.segment[route.segment.length - 1]);
+    var routeBeginNode = route.routeNodes[0].nodeId;
+    var routeFinalNode = route.routeNodes[route.routeNodes.length - 1][0].nodeId;
     if (_.isEqual(route.orientation, "GoingRoute")) {
-        if (!_.isEqual(beginSegment.beginNode.toString(), beginNode.toString())) {
+        if (!_.isEqual(routeBeginNode.toString(), beginNode.toString())) {
             validationMessage.push("Node mismatch: The first node of the route " + route._id 
                 + " is diferent from the line's begin node.");
         }
-        if (!_.isEqual(finalSegment.finalNode.toString(), finalNode.toString())) {
+        if (!_.isEqual(routeFinalNode.toString(), finalNode.toString())) {
             validationMessage.push("Node mismatch: The last node of the route " + route._id 
                 + " is diferent from the line's final node.");
         }
     }
     if (_.isEqual(route.orientation, "ComingRoute")) {
-        if (!_.isEqual(beginSegment.beginNode.toString(), finalNode.toString())) {
+        if (!_.isEqual(routeBeginNode.toString(), finalNode.toString())) {
             validationMessage.push("Node mismatch: The first node of the route " + route._id 
                 + " is diferent from the line's final node.");
         }
-        if (!_.isEqual(finalSegment.finalNode.toString(), beginNode.toString())) {
+        if (!_.isEqual(routeFinalNode.toString(), beginNode.toString())) {
             validationMessage.push("Node mismatch: The last node of the route " + route._id 
                 + " is diferent from the line's begin node.");
         }
@@ -134,16 +132,6 @@ getNodePromise = function (nodeId, validationMessage) {
             var nodeValidationMessage = validateGetNode(res, nodeId);
             if (!_.isEmpty(nodeValidationMessage)) {
                 validationMessage.push(nodeValidationMessage);
-            }
-            resolve(res);
-        });
-    });
-}
-getSegmentPromise = function (segmentId) {
-    return new Promise((resolve, reject) => {
-        serviceSegment.segmentGetById(segmentId, (err, res) => {
-            if (err) {
-                reject(err);
             }
             resolve(res);
         });

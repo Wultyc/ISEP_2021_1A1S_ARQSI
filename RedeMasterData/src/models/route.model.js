@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const RouteNodes = new Schema({
+    nodeId: { type: Schema.Types.ObjectId, ref: 'Node', required: [true, 'Insert at least one segment.'] },
+    distance: { type: Number, required: [true, 'Insert the nodes distance.'] },
+    duration: { type: Number, required: [true, 'Insert the nodes duration.'] }
+});
+
 var Route = new Schema({
     distance: {
         type: Number,
@@ -9,14 +15,6 @@ var Route = new Schema({
     duration: {
         type: Number
         // determined by summing up the durantion of its segments
-    },
-    startTime: {
-        type: Number,
-        required: [true, 'Insert the routes start time in minutes.']
-    },
-    endTime: {
-        type: Number
-        // determined with startTime + duration
     },
     orientation: {
         type: String,
@@ -33,13 +31,8 @@ var Route = new Schema({
     },
 
     // Lista de segmentos
-    segment: [{
-        type: Schema.Types.ObjectId, ref: 'Segment',
-        required: [true, 'Insert at least one segment.'],
-    }]
+    routeNodes: [RouteNodes]
 });
-
-Route.index({ orientation: 1, startTime: 1 }, { unique: true });
 
 // Export the model
 module.exports = mongoose.model('Route', Route);
