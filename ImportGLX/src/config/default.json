@@ -12,5 +12,19 @@
     },
     "glx-files":{
         "upload-dir":"file_archive"
+    },
+    "errors":{
+        "http":{
+            "file-not-valid":{
+                "status":"400",
+                "message":"A valid .glx file is required"
+            }
+        },
+        "file-system":{
+            "file-not-saved":{
+                "status":"500",
+                "message":"An error occoured when storing the file"
+            }
+        }
     }
 }
