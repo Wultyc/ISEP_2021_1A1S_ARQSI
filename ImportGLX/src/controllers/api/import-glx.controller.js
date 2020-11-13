@@ -7,10 +7,11 @@ exports.importfile = function (req, res) {
         return res.status(config.get('errors.http.file-not-valid.status')).json(config.get('errors.http.file-not-valid.message'))
     }
 
-    const glxFile = req.files.glx;
+    const glxFile = req.files.glx
+    const filename = moment().format('YYYYMMDD_hhmmss')
 
     try {
-        glxFile.mv(`${config.get('glx-files.upload-dir')}/${moment().format('YYYYMMDD_hhmmss')}.glx.xml`)
+        glxFile.mv(`${config.get('glx-files.upload-dir')}/${filename}.glx.xml`)
     } catch(e){
         console.log(e);
         return res.status(config.get('errors.file-system.file-not-saved.status')).json(config.get('errors.file-system.file-not-saved.message'))
