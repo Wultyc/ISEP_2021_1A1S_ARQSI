@@ -11,7 +11,8 @@
         }
     },
     "glx-files":{
-        "upload-dir":"file_archive"
+        "upload-dir":"file_archive",
+        "fileExtension": "glx.xml"
     },
     "errors":{
         "http":{

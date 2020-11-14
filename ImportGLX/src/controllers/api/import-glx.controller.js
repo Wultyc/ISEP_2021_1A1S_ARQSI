@@ -10,10 +10,11 @@ exports.importfile = function (req, res) {
     }
 
     const glxFile = req.files.glx
-    const filename = moment().format('YYYYMMDD_hhmmss')
+    const fileDir = config.get('glx-files.upload-dir')
+    const filename = moment().format('YYYYMMDD_hhmmss') + "." + config.get('glx-files.fileExtension')
 
     try {
-        glxFile.mv(`${config.get('glx-files.upload-dir')}/${filename}.glx.xml`)
+        glxFile.mv(`${fileDir}/${filename}`)
     } catch (e) {
         console.log(e);
         return res.status(config.get('errors.file-system.file-not-saved.status')).json(config.get('errors.file-system.file-not-saved.message'))
