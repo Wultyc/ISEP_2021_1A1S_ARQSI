@@ -1,6 +1,6 @@
 module.exports = {
     testMatch: [
-        '<rootDir>/src/test/unit/unit.js'
+        '<rootDir>/src/test/unit/dto.unit.js'
     ],
     testEnvironment: 'node',
 };
