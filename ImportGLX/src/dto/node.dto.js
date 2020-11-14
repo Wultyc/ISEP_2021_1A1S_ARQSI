@@ -1,23 +1,18 @@
-class NodeDTO {
-
-    constructor() { }
-
-    ToInsert(req) {
-        let node = new Node({
-            system_id: "",
-            glx_id: "",
-            data: {
-                shortName: req.body.shortName,
-                longitude: req.body.longitude,
-                latitude: req.body.latitude,
-                collectionNode: req.body.collectionNode,
-                surrenderNode: req.body.surrenderNode
-            },
-            status: ""
-        });
-        return node;
+NodeDTO = function (glx_entry) {
+    let node = {
+        system_id: "",
+        glx_id: glx_entry.key,
+        data: {
+            shortName: glx_entry.ShortName,
+            name: glx_entry.Name,
+            longitude: glx_entry.Longitude,
+            latitude: glx_entry.Latitude,
+            collectionNode: glx_entry.IsDepot,
+            surrenderNode: glx_entry.IsReliefPoint
+        },
+        status: "Not Processed"
     };
-
+    return node;
 }
 
 module.exports = NodeDTO;

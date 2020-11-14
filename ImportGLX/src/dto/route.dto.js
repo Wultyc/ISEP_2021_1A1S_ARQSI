@@ -1,25 +1,19 @@
-class RouteDTO {
+RouteDTO = function (glx_entry, nodeList) {
+    let route = {
+        system_id: "",
+        glx_id: glx_entry.$.key,
+        data: {
+            //distance: "",
+            //duration: "",
+            orientation: "",
+            isReinforcementRoute: "False",
+            isEmptyRoute: glx_entry.$.IsEmpty,
+            routeNodes: glx_entry.PathNodes[0].PathNode.map(v => ({nodeId: nodeList.find((node) => node.glx_id == v.$.Node).system_id, distance: v.$.Distance || "0", duration: v.$.Duration || "0"}))
+        },
+        status: ""
+    }
 
-    constructor() { }
-
-    ToInsert(req) {
-        let route = new Route({
-            system_id: "",
-            glx_id: "",
-            data: {
-                distance: req.body.distance,
-                duration: req.body.duration,
-                startTime: req.body.startTime,
-                endTime: req.body.endTime,
-                orientation: req.body.orientation,
-                isReinforcementRoute: req.body.isReinforcementRoute,
-                isEmptyRoute: req.body.isEmptyRoute,
-                segment: req.body.segment
-            },
-            status: ""
-        });
-        return route;
-    };
+    return route;
 }
 
 module.exports = RouteDTO;
