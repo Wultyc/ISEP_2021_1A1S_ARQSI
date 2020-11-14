@@ -8,7 +8,6 @@ const ServiceRoute = require('../services/route.service');
 const ServiceTripulantType = require('../services/tripulantType.service');
 const ServiceVehicleType = require('../services/vehicleType.service');
 
-
 const serviceNode = new ServiceNode();
 const serviceRoute = new ServiceRoute();
 const serviceTripulantType = new ServiceTripulantType();
