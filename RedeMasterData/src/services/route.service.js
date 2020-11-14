@@ -68,7 +68,7 @@ getNodePromiseForRoute = function (nodeId, nodeValidatior, validationMessage) {
 
 // Business Logic
 routeCreatePreValidations = function (route, validationMessage) {
-    if (route.routeNodes < 2) {
+    if (route.routeNodes != null && route.routeNodes < 2) {
         validationMessage.push('Route must have at least 2 nodes.');
     }
     return;
@@ -77,7 +77,7 @@ validateGetNodeForRoute = function(res, nodeValidatior, id) {
     if (_.isEmpty(res)) {
         return 'Node with id ' + id + ' does not exist.';
     }
-    if (!_.isEmpty(nodeValidatior) && !_.isEmpty(res._id) && res._id.toString() != nodeValidatior.toString()) {
+    if (!_.isEmpty(nodeValidatior) && !_.isEmpty(id) && _.isEqual(id.toString(), nodeValidatior.toString())) {
         return 'Node mismatch: There are two or more sequential nodes with the same id = ' + id;
     }
     return '';

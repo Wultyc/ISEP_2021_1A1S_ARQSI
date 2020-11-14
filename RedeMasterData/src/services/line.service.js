@@ -52,7 +52,7 @@ class LineService {
                 } else if (_.isEqual(routeI.orientation, 'ComingRoute')) {
                     hasComingRoute = true;
                 }
-                validateBeginAndLastNode(line.beginNode, line.finalNode, line.route[i], validationMessage);
+                validateBeginAndLastNode(line.beginNode, line.finalNode, routeI, validationMessage);
             }
         }
         if (!hasGoingRoute || !hasComingRoute) {
@@ -87,7 +87,7 @@ lineCreatePreValidations = function (line, validationMessage) {
 };
 validateBeginAndLastNode = async function(beginNode, finalNode, route, validationMessage) {
     var routeBeginNode = route.routeNodes[0].nodeId;
-    var routeFinalNode = route.routeNodes[route.routeNodes.length - 1][0].nodeId;
+    var routeFinalNode = route.routeNodes[route.routeNodes.length - 1].nodeId;
     if (_.isEqual(route.orientation, "GoingRoute")) {
         if (!_.isEqual(routeBeginNode.toString(), beginNode.toString())) {
             validationMessage.push("Node mismatch: The first node of the route " + route._id 

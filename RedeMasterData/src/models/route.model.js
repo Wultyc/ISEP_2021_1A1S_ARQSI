@@ -5,7 +5,7 @@ const RouteNodes = new Schema({
     nodeId: { type: Schema.Types.ObjectId, ref: 'Node', required: [true, 'Insert at least one segment.'] },
     distance: { type: Number, required: [true, 'Insert the nodes distance.'] },
     duration: { type: Number, required: [true, 'Insert the nodes duration.'] }
-},{ _id : false });
+},{ _id: false });
 
 var Route = new Schema({
     distance: {
@@ -33,6 +33,8 @@ var Route = new Schema({
     // Lista de segmentos
     routeNodes: [RouteNodes]
 });
+
+// TODO: make routeNodes and orientation unique when combined
 
 // Export the model
 module.exports = mongoose.model('Route', Route);
