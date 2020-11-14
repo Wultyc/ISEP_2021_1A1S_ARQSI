@@ -10,7 +10,7 @@ class RouteDTO {
             isReinforcementRoute: req.body.isReinforcementRoute,
             isEmptyRoute: req.body.isEmptyRoute,
             routeNodes: req.body.routeNodes
-        });
+        };
         return route;
     };
     
