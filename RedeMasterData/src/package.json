@@ -4,9 +4,10 @@
   "description": "Project carried out during the 1st semester in the Systems Architecture class at ISEP",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node app",
-    "dev": "nodemon app"
+    "dev": "nodemon app",
+    "integrationTest": "mocha  \"test/**/*.test.js\" --timeout 10000"
   },
   "repository": {
     "type": "git",
@@ -16,6 +17,7 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/1160929/arqsi_2021#readme",
   "dependencies": {
+    "chai-json": "^1.0.0",
     "config": "^3.3.2",
     "core-util-is": "^1.0.2",
     "cors": "^2.8.5",
@@ -28,6 +30,10 @@
     "mongoose": "^5.10.9"
   },
   "devDependencies": {
+    "axios": "^0.21.0",
+    "chai": "^4.2.0",
+    "get-port": "^5.1.1",
+    "mocha": "^8.2.1",
     "nodemon": "^2.0.5"
   }
 }
