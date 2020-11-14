@@ -2,7 +2,9 @@ const _ = require('lodash');
 
 const Route = require('../models/route.model');
 const RouteRepository = require('../repositories/route.repository');
+const ServiceNode = require('./node.service');
 
+const serviceNode = new ServiceNode();
 const repo = new RouteRepository();
 
 class RouteService {
@@ -26,8 +28,8 @@ class RouteService {
         var nodeValidatior = null;
         var routeNodesDistances = 0, routeNodesDurantions = 0;
         for (let i = 0; i < route.routeNodes.length; i++) {
-            var nodeI = await getNodePromise(route.routeNodes[i].nodeId, nodeValidatior, validationMessage);
-            if (!_.isEmpty(nodeI)) { break; }
+            var nodeI = await getNodePromiseForRoute(route.routeNodes[i].nodeId, nodeValidatior, validationMessage);
+            if (!validationMessage.length == 0) { break; }
             nodeValidatior = nodeI;
             if (i == 0) { continue; }
             routeNodesDistances += route.routeNodes[i].distance;
@@ -49,13 +51,13 @@ class RouteService {
 }
 
 // Promises
-getNodePromise = function (nodeId, validationMessage) {
+getNodePromiseForRoute = function (nodeId, nodeValidatior, validationMessage) {
     return new Promise((resolve, reject) => {
         serviceNode.nodeGetById(nodeId, (err, res) => {
             if (err) {
                 reject(err);
             }
-            var nodeValidationMessage = validateGetNode(res, nodeId);
+            var nodeValidationMessage = validateGetNodeForRoute(res, nodeValidatior, nodeId);
             if (!_.isEmpty(nodeValidationMessage)) {
                 validationMessage.push(nodeValidationMessage);
             }
@@ -71,12 +73,12 @@ routeCreatePreValidations = function (route, validationMessage) {
     }
     return;
 };
-validateGetNode = function(res, nodeValidatior, id) {
+validateGetNodeForRoute = function(res, nodeValidatior, id) {
     if (_.isEmpty(res)) {
         return 'Node with id ' + id + ' does not exist.';
     }
     if (!_.isEmpty(nodeValidatior) && !_.isEmpty(res._id) && res._id.toString() != nodeValidatior.toString()) {
-        return 'Node mismatch: There are two sequent nodes with the same id = ' + id;
+        return 'Node mismatch: There are two or more sequential nodes with the same id = ' + id;
     }
     return '';
 };

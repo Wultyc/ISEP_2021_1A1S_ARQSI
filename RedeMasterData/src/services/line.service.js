@@ -41,11 +41,11 @@ class LineService {
             callback(validationMessage);
             return;
         }
-        await getNodePromise(line.beginNode, validationMessage);
-        await getNodePromise(line.finalNode, validationMessage);
+        await getNodePromiseForLine(line.beginNode, validationMessage);
+        await getNodePromiseForLine(line.finalNode, validationMessage);
         var hasGoingRoute = false, hasComingRoute = false;
         for (let i = 0; i < line.route.length; i++) {
-            var routeI = await getRoutePromise(line.route[i], validationMessage);
+            var routeI = await getRoutePromiseForLine(line.route[i], validationMessage);
             if (!_.isEmpty(routeI)) {
                 if (_.isEqual(routeI.orientation, 'GoingRoute')) {
                     hasGoingRoute = true;
@@ -59,10 +59,10 @@ class LineService {
             validationMessage.push('A line must have at least 1 going route and 1 coming route.');
         }
         for (let i = 0; i < line.tripulantType.length; i++) {
-            await getTripulantTypePromise(line.tripulantType[i], validationMessage);
+            await getTripulantTypePromiseForLine(line.tripulantType[i], validationMessage);
         }
         for (let i = 0; i < line.vehicleType.length; i++) {
-            await getVehicleTypePromise(line.vehicleType[i], validationMessage);
+            await getVehicleTypePromiseForLine(line.vehicleType[i], validationMessage);
         }
         if (validationMessage.length == 0) {
             return repo.save(line, callback);
@@ -109,27 +109,27 @@ validateBeginAndLastNode = async function(beginNode, finalNode, route, validatio
         }
     }
 };
-validateGetNode = function(res, id) {
+validateGetNodeForLine = function(res, id) {
     return _.isEmpty(res) ? 'Node with id ' + id + ' does not exist.' : '';
 };
-validateGetRoute = function(res, id) {
+validateGetRouteForLine = function(res, id) {
     return _.isEmpty(res) ? 'Route with id ' + id + ' does not exist.' : '';
 };
-validateGetTripulantType = function(res, id) {
+validateGetTripulantTypeForLine = function(res, id) {
     return _.isEmpty(res) ? 'Tripulant Type with id ' + id + ' does not exist.' : '';
 };
-validateGetVehicleType = function(res, id) {
+validateGetVehicleTypeForLine = function(res, id) {
     return _.isEmpty(res) ? 'Vehicle Type with id ' + id + ' does not exist.' : '';
 };
 
 // Promises
-getNodePromise = function (nodeId, validationMessage) {
+getNodePromiseForLine = function (nodeId, validationMessage) {
     return new Promise((resolve, reject) => {
         serviceNode.nodeGetById(nodeId, (err, res) => {
             if (err) {
                 reject(err);
             }
-            var nodeValidationMessage = validateGetNode(res, nodeId);
+            var nodeValidationMessage = validateGetNodeForLine(res, nodeId);
             if (!_.isEmpty(nodeValidationMessage)) {
                 validationMessage.push(nodeValidationMessage);
             }
@@ -137,13 +137,13 @@ getNodePromise = function (nodeId, validationMessage) {
         });
     });
 }
-getRoutePromise = function (routeId, validationMessage) {
+getRoutePromiseForLine = function (routeId, validationMessage) {
     return new Promise((resolve, reject) => {       
         serviceRoute.routeGetById(routeId, (err, res) => {
             if (err) {
                 reject(err);
             }
-            var routeValidationMessage = validateGetRoute(res, routeId);
+            var routeValidationMessage = validateGetRouteForLine(res, routeId);
             if (!_.isEmpty(routeValidationMessage)) {
                 validationMessage.push(routeValidationMessage);
             }
@@ -151,13 +151,13 @@ getRoutePromise = function (routeId, validationMessage) {
         });
     });
 }
-getTripulantTypePromise = function (tripulantTypeId, validationMessage) {
+getTripulantTypePromiseForLine = function (tripulantTypeId, validationMessage) {
     return new Promise((resolve, reject) => {       
         serviceTripulantType.tripulantTypeGetById(tripulantTypeId, (err, res) => {
             if (err) {
                 reject(err);
             }
-            var tripulantTypeValidationMessage = validateGetTripulantType(res, tripulantTypeId);
+            var tripulantTypeValidationMessage = validateGetTripulantTypeForLine(res, tripulantTypeId);
             if (!_.isEmpty(tripulantTypeValidationMessage)) {
                 validationMessage.push(tripulantTypeValidationMessage);
             }
@@ -165,13 +165,13 @@ getTripulantTypePromise = function (tripulantTypeId, validationMessage) {
         });
     });
 }
-getVehicleTypePromise = function (vehicleTypeId, validationMessage) {
+getVehicleTypePromiseForLine = function (vehicleTypeId, validationMessage) {
     return new Promise((resolve, reject) => {
         serviceVehicleType.vehicleTypeGetById(vehicleTypeId, (err, res) => {
             if (err) {
                 reject(err);
             }
-            var vehicleTypeValidationMessage = validateGetVehicleType(res, vehicleTypeId);
+            var vehicleTypeValidationMessage = validateGetVehicleTypeForLine(res, vehicleTypeId);
             if (!_.isEmpty(vehicleTypeValidationMessage)) {
                 validationMessage.push(vehicleTypeValidationMessage);
             }
