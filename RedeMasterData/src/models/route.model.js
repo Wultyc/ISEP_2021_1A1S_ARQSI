@@ -5,7 +5,7 @@ const RouteNodes = new Schema({
     nodeId: { type: Schema.Types.ObjectId, ref: 'Node', required: [true, 'Insert at least one segment.'] },
     distance: { type: Number, required: [true, 'Insert the nodes distance.'] },
     duration: { type: Number, required: [true, 'Insert the nodes duration.'] }
-});
+},{ _id : false });
 
 var Route = new Schema({
     distance: {
