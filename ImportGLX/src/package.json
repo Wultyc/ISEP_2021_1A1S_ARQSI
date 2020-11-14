@@ -16,6 +16,7 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/1160929/arqsi_2021#readme",
   "dependencies": {
+    "axios": "^0.21.0",
     "config": "^3.3.2",
     "core-util-is": "^1.0.2",
     "cors": "^2.8.5",
