@@ -31,7 +31,11 @@ class RouteService {
             var nodeI = await getNodePromiseForRoute(route.routeNodes[i].nodeId, nodeValidatior, validationMessage);
             if (!validationMessage.length == 0) { break; }
             nodeValidatior = nodeI;
-            if (i == 0) { continue; }
+            if (i == 0) { 
+                route.routeNodes[i].distance = 0;
+                route.routeNodes[i].duration = 0;
+                continue; 
+            }
             routeNodesDistances += route.routeNodes[i].distance;
             routeNodesDurantions += route.routeNodes[i].duration;
         }

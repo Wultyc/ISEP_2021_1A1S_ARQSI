@@ -1,11 +1,9 @@
-const Line = require('../models/line.model');
-
 class LineDTO {
 
     constructor() {}
 
     ToInsert (req) {
-        let line = new Line({
+        let line = {
             code: req.body.code,
             name: req.body.name,
             beginNode: req.body.beginNode,
@@ -13,13 +11,14 @@ class LineDTO {
             route: req.body.route,
             tripulantType: req.body.tripulantType,
             vehicleType: req.body.vehicleType
-        });
+        };
         return line;
     };
     
     ToDTO(req){
         if(req == null) return 'Line does not exist.';
-        let line = new Line({
+        let line = {
+            id: req.id,
             code: req.code,
             name: req.name,
             beginNode: req.beginNode,
@@ -27,7 +26,7 @@ class LineDTO {
             route: req.route,
             tripulantType: req.tripulantType,
             vehicleType: req.vehicleType
-        });
+        };
         return line;
     };
     

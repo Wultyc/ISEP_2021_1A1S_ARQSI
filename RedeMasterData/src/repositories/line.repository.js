@@ -16,7 +16,8 @@ class LineRepository {
     
     save(line, callback) {
         console.log('Saving line in the repository.." ' + line);
-        line.save(callback);
+        const lineModel = new Line(line);
+        lineModel.save(callback);
     };
 
     delete(id, callback) {
