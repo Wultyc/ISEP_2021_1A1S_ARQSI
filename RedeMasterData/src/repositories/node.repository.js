@@ -15,7 +15,8 @@ class NodeRepository {
 
     save(node, callback) {
         console.log('Saving node in the repository.." ' + node);
-        node.save(callback);
+        const nodeModel = new Node(node);
+        nodeModel.save(callback);
     };
 
     delete(id, callback) {

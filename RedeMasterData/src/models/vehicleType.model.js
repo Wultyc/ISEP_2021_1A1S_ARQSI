@@ -25,7 +25,7 @@ var VehicleType = new  Schema({
     },
     fuelType: {
         type: String,
-        enum: ['Gasoleo', 'GPL', 'Hidrogénio', 'Eletrico', 'Gasolina'],
+        enum: ['Gasoleo', 'GPL', 'Hidrogenio', 'Eletrico', 'Gasolina'],
         required: [true, 'Insert the fuel type.']
     }
 });

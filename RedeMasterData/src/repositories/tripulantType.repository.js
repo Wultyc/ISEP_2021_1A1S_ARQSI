@@ -15,7 +15,8 @@ class TripulantTypeRepository {
 
     save(tripulantType, callback) {
         console.log('Saving tripulant type in the repository.. ' + tripulantType);
-        tripulantType.save(callback);
+        const tripulantTypeModel = new TripulantTypeModel(tripulantType);
+        tripulantTypeModel.save(callback);
     };
 
     delete(id, callback) {

@@ -2,13 +2,11 @@ const queryfilter = require('../libs/queryfilter');
 const _ = require('lodash');
 
 const LineRepository = require('../repositories/line.repository');
-const Line = require('../models/line.model');
 
 const ServiceNode = require('../services/node.service');
 const ServiceRoute = require('../services/route.service');
 const ServiceTripulantType = require('../services/tripulantType.service');
 const ServiceVehicleType = require('../services/vehicleType.service');
-const { function } = require('joi');
 
 const serviceNode = new ServiceNode();
 const serviceRoute = new ServiceRoute();

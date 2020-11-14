@@ -15,7 +15,8 @@ class VehicleTypeRepository {
 
     save(vehicleType, callback) {
         console.log('saving vehicle type in the repository ' + vehicleType);
-        vehicleType.save(callback);
+        const vehicleTypeModel = new VehicleTypeModel(vehicleType);
+        vehicleTypeModel.save(callback);
     };
 
     delete(id, callback) {

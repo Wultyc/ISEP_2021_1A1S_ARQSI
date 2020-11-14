@@ -15,7 +15,8 @@ class RouteRepository {
 
     save(route, callback) {
         console.log('Saving route in the repository.." ' + route);
-        route.save(callback);
+        const routeModel = new Route(route);
+        routeModel.save(callback);
     };
 
     delete(id, callback) {
