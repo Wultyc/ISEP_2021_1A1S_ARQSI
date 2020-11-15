@@ -1,0 +1,1550 @@
+{
+  vehicleTypes: {
+    data: [
+      {
+        system_id: '',
+        glx_id: 'VehicleType: 1',
+        data: {
+          description: 'Autocarro',
+          autonomy: '500000',
+          costPerKilometer: '10',
+          averageCost: '30',
+          averageSpeed: '30',
+          fuelType: 'Gasoleo'
+        },
+        status: 'Not Processed'
+      },
+      {
+        system_id: '',
+        glx_id: 'VehicleType: 2',
+        data: {
+          description: 'MiniAutocarro',
+          autonomy: '600000',
+          costPerKilometer: '5',
+          averageCost: '18',
+          averageSpeed: '32',
+          fuelType: 'Gasoleo'
+        },
+        status: 'Not Processed'
+      }
+    ],
+    processed: true
+  },
+  nodes: {
+    data: [
+      {
+        system_id: '',
+        glx_id: 'Node: 1',
+        data: {
+          shortName: 'AGUIA',
+          name: 'Aguiar de Sousa',
+          longitude: '-8.4464785432391',
+          latitude: '41.1293363229325',
+          collectionNode: 'False',
+          surrenderNode: 'False'
+        },
+        status: 'Not Processed'
+      },
+      {
+        system_id: '',
+        glx_id: 'Node: 2',
+        data: {
+          shortName: 'BALTR',
+          name: 'Baltar',
+          longitude: '-8.38716802227697',
+          latitude: '41.1937898023744',
+          collectionNode: 'False',
+          surrenderNode: 'False'
+        },
+        status: 'Not Processed'
+      },
+      {
+        system_id: '',
+        glx_id: 'Node: 3',
+        data: {
+          shortName: 'BESTR',
+          name: 'Besteiros',
+          longitude: '-8.34043029659082',
+          latitude: '41.217018845589',
+          collectionNode: 'False',
+          surrenderNode: 'False'
+        },
+        status: 'Not Processed'
+      },
+      {
+        system_id: '',
+        glx_id: 'Node: 4',
+        data: {
+          shortName: 'CETE',
+          name: 'Cete',
+          longitude: '-8.35164059584564',
+          latitude: '41.183243425797',
+          collectionNode: 'False',
+          surrenderNode: 'False'
+        },
+        status: 'Not Processed'
+      },
+      {
+        system_id: '',
+        glx_id: 'Node: 5',
+        data: {
+          shortName: 'CRIST',
+          name: 'Cristelo',
+          longitude: '-8.34639896125324',
+          latitude: '41.2207801252676',
+          collectionNode: 'False',
+          surrenderNode: 'True'
+        },
+        status: 'Not Processed'
+      },
+      {
+        system_id: '',
+        glx_id: 'Node: 6',
+        data: {
+          shortName: 'DIGRJ',
+          name: 'Duas Igrejas',
+          longitude: '-8.35481024956726',
+          latitude: '41.2278665802794',
+          collectionNode: 'False',
+          surrenderNode: 'False'
+        },
+        status: 'Not Processed'
+      },
+      {
+        system_id: '',
+        glx_id: 'Node: 7',
+        data: {
+          shortName: 'ESTLO',
+          name: 'Estação (Lordelo)',
+          longitude: '-8.4227924957086',
+          latitude: '41.2521157104055',
+          collectionNode: 'True',
+          surrenderNode: 'False'
+        },
+        status: 'Not Processed'
+      },
+      {
+        system_id: '',
+        glx_id: 'Node: 9',
+        data: {
+          shortName: 'ESTPA',
+          name: 'Estação (Paredes)',
+          longitude: '-8.33448520831829',
+          latitude: '41.2082119860192',
+          collectionNode: 'True',
+          surrenderNode: 'False'
+        },
+        status: 'Not Processed'
+      },
+      {
+        system_id: '',
+        glx_id: 'Node: 10',
+        data: {
+          shortName: 'GAND',
+          name: 'Gandra',
+          longitude: '-8.43958765792976',
+          latitude: '41.1956579348384',
+          collectionNode: 'False',
+          surrenderNode: 'False'
+        },
+        status: 'Not Processed'
+      },
+      {
+        system_id: '',
+        glx_id: 'Node: 11',
+        data: {
+          shortName: 'LORDL',
+          name: 'Lordelo',
+          longitude: '-8.42293614720057',
+          latitude: '41.2452627470645',
+          collectionNode: 'False',
+          surrenderNode: 'True'
+        },
+        status: 'Not Processed'
+      },
+      {
+        system_id: '',
+        glx_id: 'Node: 12',
+        data: {
+          shortName: 'MOURZ',
+          name: 'Mouriz',
+          longitude: '-8.36577272258403',
+          latitude: '41.1983610215263',
+          collectionNode: 'False',
+          surrenderNode: 'False'
+        },
+        status: 'Not Processed'
+      },
+      {
+        system_id: '',
+        glx_id: 'Node: 13',
+        data: {
+          shortName: 'PARAD',
+          name: 'Parada de Todeia',
+          longitude: '-8.37023578802149',
+          latitude: '41.1765780321068',
+          collectionNode: 'False',
+          surrenderNode: 'False'
+        },
+        status: 'Not Processed'
+      },
+      {
+        system_id: '',
+        glx_id: 'Node: 14',
+        data: {
+          shortName: 'PARED',
+          name: 'Paredes',
+          longitude: '-8.33566951069481',
+          latitude: '41.2062947118362',
+          collectionNode: 'False',
+          surrenderNode: 'True'
+        },
+        status: 'Not Processed'
+      },
+      {
+        system_id: '',
+        glx_id: 'Node: 15',
+        data: {
+          shortName: 'RECAR',
+          name: 'Recarei',
+          longitude: '-8.42215867462191',
+          latitude: '41.1599363478137',
+          collectionNode: 'False',
+          surrenderNode: 'False'
+        },
+        status: 'Not Processed'
+      },
+      {
+        system_id: '',
+        glx_id: 'Node: 16',
+        data: {
+          shortName: 'SOBRO',
+          name: 'Sobrosa',
+          longitude: '-8.38118071581788',
+          latitude: '41.2557331783506',
+          collectionNode: 'False',
+          surrenderNode: 'True'
+        },
+        status: 'Not Processed'
+      },
+      {
+        system_id: '',
+        glx_id: 'Node: 18',
+        data: {
+          shortName: 'VANDO',
+          name: 'Vandoma',
+          longitude: '-8.34160692293342',
+          latitude: '41.2328015719913',
+          collectionNode: 'False',
+          surrenderNode: 'False'
+        },
+        status: 'Not Processed'
+      },
+      {
+        system_id: '',
+        glx_id: 'Node: 20',
+        data: {
+          shortName: 'VCCAR',
+          name: 'Vila Cova de Carros',
+          longitude: '-8.35109395257277',
+          latitude: '41.2090666564063',
+          collectionNode: 'False',
+          surrenderNode: 'False'
+        },
+        status: 'Not Processed'
+      }
+    ],
+    processed: false
+  },
+  routes: {
+    data: [
+      {
+        system_id: '',
+        glx_id: 'Path: 1',
+        data: {
+          isReinforcementRoute: 'False',
+          isEmptyRoute: 'False',
+          routeNodes: [
+            { nodeId: '', distance: '0', duration: '0'
+            },
+            { nodeId: '', distance: '5000', duration: '600'
+            },
+            { nodeId: '', distance: '3200', duration: '360'
+            },
+            { nodeId: '', distance: '3000', duration: '360'
+            },
+            { nodeId: '', distance: '4500', duration: '540'
+            }
+          ]
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Path: 3',
+        data: {
+          isReinforcementRoute: 'False',
+          isEmptyRoute: 'False',
+          routeNodes: [
+            { nodeId: '', distance: '0', duration: '0'
+            },
+            { nodeId: '', distance: '4500', duration: '540'
+            },
+            { nodeId: '', distance: '3000', duration: '360'
+            },
+            { nodeId: '', distance: '3200', duration: '360'
+            },
+            { nodeId: '', distance: '5000', duration: '600'
+            }
+          ]
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Path: 37',
+        data: {
+          isReinforcementRoute: 'False',
+          isEmptyRoute: 'True',
+          routeNodes: [
+            { nodeId: '', distance: '0', duration: '0'
+            },
+            { nodeId: '', distance: '1800', duration: '300'
+            }
+          ]
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Path: 5',
+        data: {
+          isReinforcementRoute: 'False',
+          isEmptyRoute: 'False',
+          routeNodes: [
+            { nodeId: '', distance: '0', duration: '0'
+            },
+            { nodeId: '', distance: '5000', duration: '600'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '4000', duration: '480'
+            }
+          ]
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Path: 8',
+        data: {
+          isReinforcementRoute: 'False',
+          isEmptyRoute: 'False',
+          routeNodes: [
+            { nodeId: '', distance: '0', duration: '0'
+            },
+            { nodeId: '', distance: '4000', duration: '480'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '5000', duration: '600'
+            }
+          ]
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Path: 9',
+        data: {
+          isReinforcementRoute: 'False',
+          isEmptyRoute: 'False',
+          routeNodes: [
+            { nodeId: '', distance: '0', duration: '0'
+            },
+            { nodeId: '', distance: '6300', duration: '780'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '4000', duration: '480'
+            }
+          ]
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Path: 11',
+        data: {
+          isReinforcementRoute: 'False',
+          isEmptyRoute: 'False',
+          routeNodes: [
+            { nodeId: '', distance: '0', duration: '0'
+            },
+            { nodeId: '', distance: '4000', duration: '480'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '6300', duration: '780'
+            }
+          ]
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Path: 13',
+        data: {
+          isReinforcementRoute: 'False',
+          isEmptyRoute: 'False',
+          routeNodes: [
+            { nodeId: '', distance: '0', duration: '0'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            }
+          ]
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Path: 18',
+        data: {
+          isReinforcementRoute: 'False',
+          isEmptyRoute: 'False',
+          routeNodes: [
+            { nodeId: '', distance: '0', duration: '0'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            }
+          ]
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Path: 20',
+        data: {
+          isReinforcementRoute: 'False',
+          isEmptyRoute: 'False',
+          routeNodes: [
+            { nodeId: '', distance: '0', duration: '0'
+            },
+            { nodeId: '', distance: '2500', duration: '300'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '3000', duration: '360'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            }
+          ]
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Path: 36',
+        data: {
+          isReinforcementRoute: 'False',
+          isEmptyRoute: 'True',
+          routeNodes: [
+            { nodeId: '', distance: '0', duration: '0'
+            },
+            { nodeId: '', distance: '1500', duration: '300'
+            }
+          ]
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Path: 22',
+        data: {
+          isReinforcementRoute: 'False',
+          isEmptyRoute: 'False',
+          routeNodes: [
+            { nodeId: '', distance: '0', duration: '0'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '3000', duration: '360'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '2500', duration: '300'
+            }
+          ]
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Path: 24',
+        data: {
+          isReinforcementRoute: 'False',
+          isEmptyRoute: 'False',
+          routeNodes: [
+            { nodeId: '', distance: '0', duration: '0'
+            },
+            { nodeId: '', distance: '2500', duration: '300'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '2500', duration: '300'
+            }
+          ]
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Path: 26',
+        data: {
+          isReinforcementRoute: 'False',
+          isEmptyRoute: 'False',
+          routeNodes: [
+            { nodeId: '', distance: '0', duration: '0'
+            },
+            { nodeId: '', distance: '2500', duration: '300'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '2000', duration: '240'
+            },
+            { nodeId: '', distance: '2500', duration: '300'
+            }
+          ]
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Path: 38',
+        data: {
+          isReinforcementRoute: 'False',
+          isEmptyRoute: 'True',
+          routeNodes: [
+            { nodeId: '', distance: '0', duration: '0'
+            },
+            { nodeId: '', distance: '1500', duration: '120'
+            }
+          ]
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Path: 39',
+        data: {
+          isReinforcementRoute: 'False',
+          isEmptyRoute: 'True',
+          routeNodes: [
+            { nodeId: '', distance: '0', duration: '0'
+            },
+            { nodeId: '', distance: '1500', duration: '120'
+            }
+          ]
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Path: 34',
+        data: {
+          isReinforcementRoute: 'False',
+          isEmptyRoute: 'True',
+          routeNodes: [
+            { nodeId: '', distance: '0', duration: '0'
+            },
+            { nodeId: '', distance: '1500', duration: '120'
+            }
+          ]
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Path: 35',
+        data: {
+          isReinforcementRoute: 'False',
+          isEmptyRoute: 'True',
+          routeNodes: [
+            { nodeId: '', distance: '0', duration: '0'
+            },
+            { nodeId: '', distance: '1500', duration: '120'
+            }
+          ]
+        },
+        status: ''
+      }
+    ],
+    processed: false
+  },
+  lines: {
+    data: [
+      {
+        system_id: '',
+        glx_id: 'Line: 1',
+        data: {
+          code: '',
+          name: 'Paredes_Aguiar',
+          color: 'RGB(38,
+          91,
+          11)',
+          beginNode: '',
+          finalNode: '',
+          route: [
+            { routeId: '', orientation: 'Return'
+            },
+            { routeId: '', orientation: 'Go'
+            }
+          ],
+          tripulantType: '',
+          vehicleType: ''
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Line: 2',
+        data: {
+          code: '',
+          name: 'Paredes_Gandra',
+          color: 'RGB(49,
+          23,
+          59)',
+          beginNode: '',
+          finalNode: '',
+          route: [
+            { routeId: '', orientation: 'Return'
+            },
+            { routeId: '', orientation: 'Go'
+            }
+          ],
+          tripulantType: '',
+          vehicleType: ''
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Line: 3',
+        data: {
+          code: '',
+          name: 'Paredes_Lordelo',
+          color: 'RGB(4,
+          204,
+          225)',
+          beginNode: '',
+          finalNode: '',
+          route: [
+            { routeId: '', orientation: 'Return'
+            },
+            { routeId: '', orientation: 'Go'
+            }
+          ],
+          tripulantType: '',
+          vehicleType: ''
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Line: 4',
+        data: {
+          code: '',
+          name: 'Lordelo_Parada',
+          color: 'RGB(183,
+          248,
+          71)',
+          beginNode: '',
+          finalNode: '',
+          route: [
+            { routeId: '', orientation: 'Go'
+            },
+            { routeId: '', orientation: 'Return'
+            },
+            { routeId: '', orientation: 'Go'
+            },
+            { routeId: '', orientation: 'Return'
+            }
+          ],
+          tripulantType: '',
+          vehicleType: ''
+        },
+        status: ''
+      },
+      {
+        system_id: '',
+        glx_id: 'Line: 5',
+        data: {
+          code: '',
+          name: 'Sobrosa_Cete',
+          color: 'RGB(152,
+          16,
+          147)',
+          beginNode: '',
+          finalNode: '',
+          route: [
+            { routeId: '', orientation: 'Go'
+            },
+            { routeId: '', orientation: 'Return'
+            }
+          ],
+          tripulantType: '',
+          vehicleType: ''
+        },
+        status: ''
+      }
+    ],
+    processed: false
+  },
+  errors: Error: connect ECONNREFUSED 127.0.0.1: 3005
+      at TCPConnectWrap.afterConnect [as oncomplete
+    ] (net.js: 1141: 16) {
+    errno: 'ECONNREFUSED',
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '127.0.0.1',
+    port: 3005,
+    config: {
+      url: 'http: //localhost:3005/api/vehicle-types/create',
+      method: 'post',
+      data: '{
+          "description": "Autocarro",
+          "autonomy": "500000",
+          "costPerKilometer": "10",
+          "averageCost": "30",
+          "averageSpeed": "30",
+          "fuelType": "Gasoleo"
+        }',
+      headers: {
+        Accept: 'application/json, text/plain, * /*',
+        'Content-Type': 'application/json;charset=utf-8',
+        'User-Agent': 'axios/0.21.0',
+        'Content-Length': 131
+      },
+      transformRequest: [ [Function: transformRequest] ],
+      transformResponse: [ [Function: transformResponse] ],
+      timeout: 0,
+      adapter: [Function: httpAdapter],
+      xsrfCookieName: 'XSRF-TOKEN',
+      xsrfHeaderName: 'X-XSRF-TOKEN',
+      maxContentLength: -1,
+      maxBodyLength: -1,
+      validateStatus: [Function: validateStatus]
+    },
+    request: Writable {
+      _writableState: WritableState {
+        objectMode: false,
+        highWaterMark: 16384,
+        finalCalled: false,
+        needDrain: false,
+        ending: false,
+        ended: false,
+        finished: false,
+        destroyed: false,
+        decodeStrings: true,
+        defaultEncoding: 'utf8',
+        length: 0,
+        writing: false,
+        corked: 0,
+        sync: true,
+        bufferProcessing: false,
+        onwrite: [Function: bound onwrite],
+        writecb: null,
+        writelen: 0,
+        afterWriteTickInfo: null,
+        bufferedRequest: null,
+        lastBufferedRequest: null,
+        pendingcb: 0,
+        prefinished: false,
+        errorEmitted: false,
+        emitClose: true,
+        autoDestroy: false,
+        bufferedRequestCount: 0,
+        corkedRequestsFree: {
+          next: null,
+          entry: null,
+          finish: [Function: bound onCorkedFinish]
+        }
+      },
+      writable: true,
+      _events: [Object: null prototype] {
+        response: [Function: handleResponse],
+        error: [Function: handleRequestError]
+      },
+      _eventsCount: 2,
+      _maxListeners: undefined,
+      _options: {
+        maxRedirects: 21,
+        maxBodyLength: 10485760,
+        protocol: 'http:',
+        path: '/api/vehicle-types/create',
+        method: 'POST',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json;charset=utf-8',
+          'User-Agent': 'axios/0.21.0',
+          'Content-Length': 131
+        },
+        agent: undefined,
+        agents: { http: undefined, https: undefined
+        },
+        auth: undefined,
+        hostname: 'localhost',
+        port: '3005',
+        nativeProtocols: {
+          'http:': {
+            _connectionListener: [Function: connectionListener
+            ],
+            METHODS: [
+              'ACL',         'BIND',       'CHECKOUT',
+              'CONNECT',     'COPY',       'DELETE',
+              'GET',         'HEAD',       'LINK',
+              'LOCK',        'M-SEARCH',   'MERGE',
+              'MKACTIVITY',  'MKCALENDAR', 'MKCOL',
+              'MOVE',        'NOTIFY',     'OPTIONS',
+              'PATCH',       'POST',       'PROPFIND',
+              'PROPPATCH',   'PURGE',      'PUT',
+              'REBIND',      'REPORT',     'SEARCH',
+              'SOURCE',      'SUBSCRIBE',  'TRACE',
+              'UNBIND',      'UNLINK',     'UNLOCK',
+              'UNSUBSCRIBE'
+            ],
+            STATUS_CODES: {
+              '100': 'Continue',
+              '101': 'Switching Protocols',
+              '102': 'Processing',
+              '103': 'Early Hints',
+              '200': 'OK',
+              '201': 'Created',
+              '202': 'Accepted',
+              '203': 'Non-Authoritative Information',
+              '204': 'No Content',
+              '205': 'Reset Content',
+              '206': 'Partial Content',
+              '207': 'Multi-Status',
+              '208': 'Already Reported',
+              '226': 'IM Used',
+              '300': 'Multiple Choices',
+              '301': 'Moved Permanently',
+              '302': 'Found',
+              '303': 'See Other',
+              '304': 'Not Modified',
+              '305': 'Use Proxy',
+              '307': 'Temporary Redirect',
+              '308': 'Permanent Redirect',
+              '400': 'Bad Request',
+              '401': 'Unauthorized',
+              '402': 'Payment Required',
+              '403': 'Forbidden',
+              '404': 'Not Found',
+              '405': 'Method Not Allowed',
+              '406': 'Not Acceptable',
+              '407': 'Proxy Authentication Required',
+              '408': 'Request Timeout',
+              '409': 'Conflict',
+              '410': 'Gone',
+              '411': 'Length Required',
+              '412': 'Precondition Failed',
+              '413': 'Payload Too Large',
+              '414': 'URI Too Long',
+              '415': 'Unsupported Media Type',
+              '416': 'Range Not Satisfiable',
+              '417': 'Expectation Failed',
+              '418': "I'm a Teapot",
+              '421': 'Misdirected Request',
+              '422': 'Unprocessable Entity',
+              '423': 'Locked',
+              '424': 'Failed Dependency',
+              '425': 'Unordered Collection',
+              '426': 'Upgrade Required',
+              '428': 'Precondition Required',
+              '429': 'Too Many Requests',
+              '431': 'Request Header Fields Too Large',
+              '451': 'Unavailable For Legal Reasons',
+              '500': 'Internal Server Error',
+              '501': 'Not Implemented',
+              '502': 'Bad Gateway',
+              '503': 'Service Unavailable',
+              '504': 'Gateway Timeout',
+              '505': 'HTTP Version Not Supported',
+              '506': 'Variant Also Negotiates',
+              '507': 'Insufficient Storage',
+              '508': 'Loop Detected',
+              '509': 'Bandwidth Limit Exceeded',
+              '510': 'Not Extended',
+              '511': 'Network Authentication Required'
+            },
+            Agent: [Function: Agent
+            ] { defaultMaxSockets: Infinity
+            },
+            ClientRequest: [Function: ClientRequest
+            ],
+            IncomingMessage: [Function: IncomingMessage
+            ],
+            OutgoingMessage: [Function: OutgoingMessage
+            ],
+            Server: [Function: Server
+            ],
+            ServerResponse: [Function: ServerResponse
+            ],
+            createServer: [Function: createServer
+            ],
+            get: [Function: get
+            ],
+            request: [Function: request
+            ],
+            maxHeaderSize: [Getter
+            ],
+            globalAgent: [Getter/Setter
+            ]
+          },
+          'https:': {
+            Agent: [Function: Agent
+            ],
+            globalAgent: Agent {
+              _events: [Object: null prototype
+              ] {
+                free: [Function
+                ],
+                newListener: [Function: maybeEnableKeylog
+                ]
+              },
+              _eventsCount: 2,
+              _maxListeners: undefined,
+              defaultPort: 443,
+              protocol: 'https:',
+              options: { path: null
+              },
+              requests: {},
+              sockets: {},
+              freeSockets: {},
+              keepAliveMsecs: 1000,
+              keepAlive: false,
+              maxSockets: Infinity,
+              maxFreeSockets: 256,
+              maxCachedSessions: 100,
+              _sessionCache: { map: {}, list: []
+              },
+              [Symbol(kCapture)
+              ]: false
+            },
+            Server: [Function: Server
+            ],
+            createServer: [Function: createServer
+            ],
+            get: [Function: get
+            ],
+            request: [Function: request
+            ]
+          }
+        },
+        pathname: '/api/vehicle-types/create'
+      },
+      _ended: false,
+      _ending: true,
+      _redirectCount: 0,
+      _redirects: [],
+      _requestBodyLength: 131,
+      _requestBodyBuffers: [
+        {
+          data: <Buffer 7b 22 64 65 73 63 72 69 70 74 69 6f 6e 22 3a 22 41 75 74 6f 63 61 72 72 6f 22 2c 22 61 75 74 6f 6e 6f 6d 79 22 3a 22 35 30 30 30 30 30 22 2c 22 63 6f ... 81 more bytes>,
+          encoding: undefined
+        }
+      ],
+      _onNativeResponse: [Function
+      ],
+      _currentRequest: ClientRequest {
+        _events: [Object: null prototype
+        ] {
+          response: [Function: bound onceWrapper
+          ] { listener: [Function
+            ]
+          },
+          socket: [Function
+          ],
+          abort: [Function
+          ],
+          aborted: [Function
+          ],
+          connect: [Function
+          ],
+          error: [Function
+          ],
+          timeout: [Function
+          ]
+        },
+        _eventsCount: 7,
+        _maxListeners: undefined,
+        outputData: [],
+        outputSize: 0,
+        writable: true,
+        _last: true,
+        chunkedEncoding: false,
+        shouldKeepAlive: false,
+        useChunkedEncodingByDefault: true,
+        sendDate: false,
+        _removedConnection: false,
+        _removedContLen: false,
+        _removedTE: false,
+        _contentLength: null,
+        _hasBody: true,
+        _trailer: '',
+        finished: false,
+        _headerSent: true,
+        socket: Socket {
+          connecting: false,
+          _hadError: true,
+          _parent: null,
+          _host: 'localhost',
+          _readableState: ReadableState {
+            objectMode: false,
+            highWaterMark: 16384,
+            buffer: BufferList { head: null, tail: null, length: 0
+            },
+            length: 0,
+            pipes: null,
+            pipesCount: 0,
+            flowing: true,
+            ended: false,
+            endEmitted: false,
+            reading: true,
+            sync: false,
+            needReadable: true,
+            emittedReadable: false,
+            readableListening: false,
+            resumeScheduled: false,
+            emitClose: false,
+            autoDestroy: false,
+            destroyed: true,
+            defaultEncoding: 'utf8',
+            awaitDrainWriters: null,
+            multiAwaitDrain: false,
+            readingMore: false,
+            decoder: null,
+            encoding: null,
+            [Symbol(kPaused)
+            ]: false
+          },
+          readable: false,
+          _events: [Object: null prototype
+          ] {
+            end: [Function: onReadableStreamEnd
+            ],
+            connect: [
+              [Function: bound onceWrapper
+              ] {
+                listener: [Function: oncreate
+                ]
+              },
+              [Function: bound onceWrapper
+              ] {
+                listener: [Function: connect
+                ]
+              },
+              [Function: bound onceWrapper
+              ] { listener: [Function
+                ]
+              }
+            ],
+            free: [Function: onFree
+            ],
+            close: [
+              [Function: onClose
+              ],
+              [Function: socketCloseListener
+              ]
+            ],
+            timeout: [Function: onTimeout
+            ],
+            agentRemove: [Function: onRemove
+            ],
+            error: [Function: socketErrorListener
+            ],
+            drain: [Function: ondrain
+            ]
+          },
+          _eventsCount: 8,
+          _maxListeners: undefined,
+          _writableState: WritableState {
+            objectMode: false,
+            highWaterMark: 16384,
+            finalCalled: false,
+            needDrain: false,
+            ending: false,
+            ended: false,
+            finished: false,
+            destroyed: true,
+            decodeStrings: false,
+            defaultEncoding: 'utf8',
+            length: 351,
+            writing: true,
+            corked: 0,
+            sync: false,
+            bufferProcessing: false,
+            onwrite: [Function: bound onwrite
+            ],
+            writecb: [Function: bound onCorkedFinish
+            ],
+            writelen: 351,
+            afterWriteTickInfo: null,
+            bufferedRequest: null,
+            lastBufferedRequest: null,
+            pendingcb: 3,
+            prefinished: false,
+            errorEmitted: true,
+            emitClose: false,
+            autoDestroy: false,
+            bufferedRequestCount: 0,
+            corkedRequestsFree: {
+              next: null,
+              entry: null,
+              finish: [Function: bound onCorkedFinish
+              ]
+            }
+          },
+          writable: false,
+          allowHalfOpen: false,
+          _sockname: null,
+          _pendingData: [
+            {
+              chunk: 'POST /api/vehicle-types/create HTTP/1.1\r\n' +
+                'Accept: application/json, text/plain, * /*\r\n' +
+                'Content-Type: application/json;charset=utf-8\r\n' +
+                'User-Agent: axios/0.21.0\r\n' +
+                'Content-Length: 131\r\n' +
+                'Host: localhost:3005\r\n' +
+                'Connection: close\r\n' +
+                '\r\n',
+              encoding: 'latin1',
+              callback: [Function: nop],
+              next: {
+                chunk: <Buffer 7b 22 64 65 73 63 72 69 70 74 69 6f 6e 22 3a 22 41 75 74 6f 63 61 72 72 6f 22 2c 22 61 75 74 6f 6e 6f 6d 79 22 3a 22 35 30 30 30 30 30 22 2c 22 63 6f ... 81 more bytes>,
+                encoding: 'buffer',
+                callback: [Function],
+                next: null
+              }
+            },
+            {
+              chunk: <Buffer 7b 22 64 65 73 63 72 69 70 74 69 6f 6e 22 3a 22 41 75 74 6f 63 61 72 72 6f 22 2c 22 61 75 74 6f 6e 6f 6d 79 22 3a 22 35 30 30 30 30 30 22 2c 22 63 6f ... 81 more bytes>,
+              encoding: 'buffer',
+              callback: [Function],
+              next: null
+            },
+            allBuffers: false
+          ],
+          _pendingEncoding: '',
+          server: null,
+          _server: null,
+          parser: null,
+          _httpMessage: [Circular],
+          [Symbol(asyncId)]: 183,
+          [Symbol(kHandle)]: null,
+          [Symbol(kSetNoDelay)]: false,
+          [Symbol(lastWriteQueueSize)]: 0,
+          [Symbol(timeout)]: null,
+          [Symbol(kBuffer)]: null,
+          [Symbol(kBufferCb)]: null,
+          [Symbol(kBufferGen)]: null,
+          [Symbol(kCapture)]: false,
+          [Symbol(kBytesRead)]: 0,
+          [Symbol(kBytesWritten)]: 0
+        },
+        connection: Socket {
+          connecting: false,
+          _hadError: true,
+          _parent: null,
+          _host: 'localhost',
+          _readableState: ReadableState {
+            objectMode: false,
+            highWaterMark: 16384,
+            buffer: BufferList { head: null, tail: null, length: 0 },
+            length: 0,
+            pipes: null,
+            pipesCount: 0,
+            flowing: true,
+            ended: false,
+            endEmitted: false,
+            reading: true,
+            sync: false,
+            needReadable: true,
+            emittedReadable: false,
+            readableListening: false,
+            resumeScheduled: false,
+            emitClose: false,
+            autoDestroy: false,
+            destroyed: true,
+            defaultEncoding: 'utf8',
+            awaitDrainWriters: null,
+            multiAwaitDrain: false,
+            readingMore: false,
+            decoder: null,
+            encoding: null,
+            [Symbol(kPaused)]: false
+          },
+          readable: false,
+          _events: [Object: null prototype] {
+            end: [Function: onReadableStreamEnd],
+            connect: [
+              [Function: bound onceWrapper] {
+                listener: [Function: oncreate]
+              },
+              [Function: bound onceWrapper] {
+                listener: [Function: connect]
+              },
+              [Function: bound onceWrapper] { listener: [Function] }
+            ],
+            free: [Function: onFree],
+            close: [ [Function: onClose], [Function: socketCloseListener] ],
+            timeout: [Function: onTimeout],
+            agentRemove: [Function: onRemove],
+            error: [Function: socketErrorListener],
+            drain: [Function: ondrain]
+          },
+          _eventsCount: 8,
+          _maxListeners: undefined,
+          _writableState: WritableState {
+            objectMode: false,
+            highWaterMark: 16384,
+            finalCalled: false,
+            needDrain: false,
+            ending: false,
+            ended: false,
+            finished: false,
+            destroyed: true,
+            decodeStrings: false,
+            defaultEncoding: 'utf8',
+            length: 351,
+            writing: true,
+            corked: 0,
+            sync: false,
+            bufferProcessing: false,
+            onwrite: [Function: bound onwrite],
+            writecb: [Function: bound onCorkedFinish],
+            writelen: 351,
+            afterWriteTickInfo: null,
+            bufferedRequest: null,
+            lastBufferedRequest: null,
+            pendingcb: 3,
+            prefinished: false,
+            errorEmitted: true,
+            emitClose: false,
+            autoDestroy: false,
+            bufferedRequestCount: 0,
+            corkedRequestsFree: {
+              next: null,
+              entry: null,
+              finish: [Function: bound onCorkedFinish]
+            }
+          },
+          writable: false,
+          allowHalfOpen: false,
+          _sockname: null,
+          _pendingData: [
+            {
+              chunk: 'POST /api/vehicle-types/create HTTP/1.1\r\n' +
+                'Accept: application/json, text/plain, */*\r\n' +
+                'Content-Type: application/json;charset=utf-8\r\n' +
+                'User-Agent: axios/0.21.0\r\n' +
+                'Content-Length: 131\r\n' +
+                'Host: localhost: 3005\r\n' +
+                'Connection: close\r\n' +
+                '\r\n',
+              encoding: 'latin1',
+              callback: [Function: nop
+              ],
+              next: {
+                chunk: <Buffer 7b 22 64 65 73 63 72 69 70 74 69 6f 6e 22 3a 22 41 75 74 6f 63 61 72 72 6f 22 2c 22 61 75 74 6f 6e 6f 6d 79 22 3a 22 35 30 30 30 30 30 22 2c 22 63 6f ... 81 more bytes>,
+                encoding: 'buffer',
+                callback: [Function
+                ],
+                next: null
+              }
+            },
+            {
+              chunk: <Buffer 7b 22 64 65 73 63 72 69 70 74 69 6f 6e 22 3a 22 41 75 74 6f 63 61 72 72 6f 22 2c 22 61 75 74 6f 6e 6f 6d 79 22 3a 22 35 30 30 30 30 30 22 2c 22 63 6f ... 81 more bytes>,
+              encoding: 'buffer',
+              callback: [Function
+              ],
+              next: null
+            },
+            allBuffers: false
+          ],
+          _pendingEncoding: '',
+          server: null,
+          _server: null,
+          parser: null,
+          _httpMessage: [Circular
+          ],
+          [Symbol(asyncId)
+          ]: 183,
+          [Symbol(kHandle)
+          ]: null,
+          [Symbol(kSetNoDelay)
+          ]: false,
+          [Symbol(lastWriteQueueSize)
+          ]: 0,
+          [Symbol(timeout)
+          ]: null,
+          [Symbol(kBuffer)
+          ]: null,
+          [Symbol(kBufferCb)
+          ]: null,
+          [Symbol(kBufferGen)
+          ]: null,
+          [Symbol(kCapture)
+          ]: false,
+          [Symbol(kBytesRead)
+          ]: 0,
+          [Symbol(kBytesWritten)
+          ]: 0
+        },
+        _header: 'POST /api/vehicle-types/create HTTP/1.1\r\n' +
+          'Accept: application/json, text/plain, * /*\r\n' +
+          'Content-Type: application/json;charset=utf-8\r\n' +
+          'User-Agent: axios/0.21.0\r\n' +
+          'Content-Length: 131\r\n' +
+          'Host: localhost:3005\r\n' +
+          'Connection: close\r\n' +
+          '\r\n',
+        _onPendingData: [Function: noopPendingOutput],
+        agent: Agent {
+          _events: [Object: null prototype] {
+            free: [Function],
+            newListener: [Function: maybeEnableKeylog]
+          },
+          _eventsCount: 2,
+          _maxListeners: undefined,
+          defaultPort: 80,
+          protocol: 'http:',
+          options: { path: null },
+          requests: {},
+          sockets: {
+            'localhost:3005:': [
+              Socket {
+                connecting: false,
+                _hadError: true,
+                _parent: null,
+                _host: 'localhost',
+                _readableState: ReadableState {
+                  objectMode: false,
+                  highWaterMark: 16384,
+                  buffer: BufferList { head: null, tail: null, length: 0 },
+                  length: 0,
+                  pipes: null,
+                  pipesCount: 0,
+                  flowing: true,
+                  ended: false,
+                  endEmitted: false,
+                  reading: true,
+                  sync: false,
+                  needReadable: true,
+                  emittedReadable: false,
+                  readableListening: false,
+                  resumeScheduled: false,
+                  emitClose: false,
+                  autoDestroy: false,
+                  destroyed: true,
+                  defaultEncoding: 'utf8',
+                  awaitDrainWriters: null,
+                  multiAwaitDrain: false,
+                  readingMore: false,
+                  decoder: null,
+                  encoding: null,
+                  [Symbol(kPaused)]: false
+                },
+                readable: false,
+                _events: [Object: null prototype] {
+                  end: [Function: onReadableStreamEnd],
+                  connect: [
+                    [Function: bound onceWrapper] {
+                      listener: [Function: oncreate]
+                    },
+                    [Function: bound onceWrapper] {
+                      listener: [Function: connect]
+                    },
+                    [Function: bound onceWrapper] {
+                      listener: [Function]
+                    }
+                  ],
+                  free: [Function: onFree],
+                  close: [
+                    [Function: onClose],
+                    [Function: socketCloseListener]
+                  ],
+                  timeout: [Function: onTimeout],
+                  agentRemove: [Function: onRemove],
+                  error: [Function: socketErrorListener],
+                  drain: [Function: ondrain]
+                },
+                _eventsCount: 8,
+                _maxListeners: undefined,
+                _writableState: WritableState {
+                  objectMode: false,
+                  highWaterMark: 16384,
+                  finalCalled: false,
+                  needDrain: false,
+                  ending: false,
+                  ended: false,
+                  finished: false,
+                  destroyed: true,
+                  decodeStrings: false,
+                  defaultEncoding: 'utf8',
+                  length: 351,
+                  writing: true,
+                  corked: 0,
+                  sync: false,
+                  bufferProcessing: false,
+                  onwrite: [Function: bound onwrite],
+                  writecb: [Function: bound onCorkedFinish],
+                  writelen: 351,
+                  afterWriteTickInfo: null,
+                  bufferedRequest: null,
+                  lastBufferedRequest: null,
+                  pendingcb: 3,
+                  prefinished: false,
+                  errorEmitted: true,
+                  emitClose: false,
+                  autoDestroy: false,
+                  bufferedRequestCount: 0,
+                  corkedRequestsFree: {
+                    next: null,
+                    entry: null,
+                    finish: [Function: bound onCorkedFinish]
+                  }
+                },
+                writable: false,
+                allowHalfOpen: false,
+                _sockname: null,
+                _pendingData: [
+                  {
+                    chunk: 'POST /api/vehicle-types/create HTTP/1.1\r\n' +
+                      'Accept: application/json, text/plain, */*\r\n' +
+                      'Content-Type: application/json;charset=utf-8\r\n' +
+                      'User-Agent: axios/0.21.0\r\n' +
+                      'Content-Length: 131\r\n' +
+                      'Host: localhost: 3005\r\n' +
+                      'Connection: close\r\n' +
+                      '\r\n',
+                    encoding: 'latin1',
+                    callback: [Function: nop
+        ],
+                    next: {
+                      chunk: <Buffer 7b 22 64 65 73 63 72 69 70 74 69 6f 6e 22 3a 22 41 75 74 6f 63 61 72 72 6f 22 2c 22 61 75 74 6f 6e 6f 6d 79 22 3a 22 35 30 30 30 30 30 22 2c 22 63 6f ... 81 more bytes>,
+                      encoding: 'buffer',
+                      callback: [Function
+          ],
+                      next: null
+        }
+      },
+      {
+                    chunk: <Buffer 7b 22 64 65 73 63 72 69 70 74 69 6f 6e 22 3a 22 41 75 74 6f 63 61 72 72 6f 22 2c 22 61 75 74 6f 6e 6f 6d 79 22 3a 22 35 30 30 30 30 30 22 2c 22 63 6f ... 81 more bytes>,
+                    encoding: 'buffer',
+                    callback: [Function
+        ],
+                    next: null
+      },
+                  allBuffers: false
+    ],
+                _pendingEncoding: '',
+                server: null,
+                _server: null,
+                parser: null,
+                _httpMessage: [Circular
+    ],
+    [Symbol(asyncId)
+    ]: 183,
+    [Symbol(kHandle)
+    ]: null,
+    [Symbol(kSetNoDelay)
+    ]: false,
+    [Symbol(lastWriteQueueSize)
+    ]: 0,
+    [Symbol(timeout)
+    ]: null,
+    [Symbol(kBuffer)
+    ]: null,
+    [Symbol(kBufferCb)
+    ]: null,
+    [Symbol(kBufferGen)
+    ]: null,
+    [Symbol(kCapture)
+    ]: false,
+    [Symbol(kBytesRead)
+    ]: 0,
+    [Symbol(kBytesWritten)
+    ]: 0
+  }
+]
+},
+          freeSockets: {},
+          keepAliveMsecs: 1000,
+          keepAlive: false,
+          maxSockets: Infinity,
+          maxFreeSockets: 256,
+[Symbol(kCapture)
+]: false
+},
+        socketPath: undefined,
+        method: 'POST',
+        insecureHTTPParser: undefined,
+        path: '/api/vehicle-types/create',
+        _ended: false,
+        res: null,
+        aborted: false,
+        timeoutCb: null,
+        upgradeOrConnect: false,
+        parser: null,
+        maxHeadersCount: null,
+        reusedSocket: false,
+        _redirectable: [Circular
+],
+[Symbol(kCapture)
+]: false,
+[Symbol(kNeedDrain)
+]: false,
+[Symbol(corked)
+]: 0,
+[Symbol(kOutHeaders)
+]: [Object: null prototype
+] {
+          accept: [ 'Accept', 'application/json, text/plain, */*' ],
+          'content-type': [ 'Content-Type', 'application/json;charset=utf-8' ],
+          'user-agent': [ 'User-Agent', 'axios/0.21.0' ],
+          'content-length': [ 'Content-Length', 131 ],
+          host: [ 'Host', 'localhost:3005' ]
+        }
+      },
+      _currentUrl: 'http://localhost:3005/api/vehicle-types/create',
+      [Symbol(kCapture)]: false
+    },
+    response: undefined,
+    isAxiosError: true,
+    toJSON: [Function: toJSON]
+  }
+}
