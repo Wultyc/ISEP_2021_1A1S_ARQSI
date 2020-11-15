@@ -8,8 +8,9 @@ Projeto desenvolvido na UC Arquitetura de Sistemas (ARQSI) durante o primeiro se
 - Filipe Sousa (1150470)
 
 ## Componentes
-Este sistema é composto por vários componentes 
-- RedeMasterData -> Web service responsável por manter a informação de Rede
+Este sistema é composto por vários componentes
+
+- RedeMasterData -> Web service responsável por manter a informação de Rede  
 - ImportGLX -> Web service responsável por inserir a informação de ficheiros GLX no MasterData que correspondem
 
 # Documentação

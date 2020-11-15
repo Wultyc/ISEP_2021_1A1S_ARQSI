@@ -1,9 +1,9 @@
-# ImportGLX project
-Este projeto é relativo ao serviço ImportGLX 
+# Projeto RedeMasterData
+Este projeto é relativo ao serviço RedeMasterData 
 
-## File structure
+## Estrutura de ficheiros e pastas
 ```
-ImportGLX
+RedeMasterData
     ├───config              -> Ficheiro de configuração
     ├───controllers	        -> Controllers da aplicação
     │   └───api             -> Controllers da API

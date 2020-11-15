@@ -1,7 +1,7 @@
-# ImportGLX project
+# Projeto ImportGLX
 Este projeto é relativo ao serviço ImportGLX 
 
-## File structure
+## Estrutura de ficheiros e pastas
 ```
 ImportGLX
     ├───config              -> Ficheiro de configuração
