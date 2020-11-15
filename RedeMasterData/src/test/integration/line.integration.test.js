@@ -71,7 +71,7 @@ describe('GET /lines and GET lines/id', function () {
 
 
 
-        api.post('/lines', {
+        await api.post('/lines', {
             code: 'Par_Ag', name: 'Paredes_Aguiar', color: 'RGB(38,91,11)', beginNode: node1, finalNode: node3, lineRoutes: [
 
                 {
@@ -83,7 +83,18 @@ describe('GET /lines and GET lines/id', function () {
                     orientation: "Go"
                 }
 
+            ],
+            tripulantType: [
+                {
+                    
+                }
+            ],
+            vehicleType: [
+                {
+
+                }
             ]
+
         })
 
         const response_get = await api.get('/lines')
