@@ -7,8 +7,8 @@ router.get('/', route_controller.routeGetAll);
 
 router.get('/:routeId', route_controller.routeGetById);
 
-router.post('/create', route_controller.routeCreate);
+router.post('/', route_controller.routeCreate);
 
-router.delete('/:routeId/delete', route_controller.routeDelete);
+router.delete('/:routeId', route_controller.routeDelete);
 
 module.exports = router;

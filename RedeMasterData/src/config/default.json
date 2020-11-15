@@ -1,13 +1,41 @@
 {
-    "logs":{
-        "folder":"logs",
-        "access":{
-            "enableConsoleLog":true,
-            "enableFileLog":true,
-            "logfile":"requests.log"
+    "logs": {
+        "folder": "logs",
+        "access": {
+            "enableConsoleLog": true,
+            "enableFileLog": true,
+            "logfile": "requests.log"
         },
-        "mongoose":{
+        "mongoose": {
             "debug": false
+        }
+    },
+    "errors": {
+        "http": {
+            "post_error": {
+                "status": "400",
+                "message": "Bad Request"
+            },
+            "not_found": {
+                "status": "404",
+                "message": "Not Found"
+            }
+        }
+    },
+    "success_message" :{
+        "http": {
+            "success": {
+                "status": "200",
+                "message": ""
+            },
+            "created": {
+                "status":"201",
+                "message": ""
+            },
+            "deleted": {
+                "status":"204",
+                "message": "Object deleted"
+            }
         }
     }
 }

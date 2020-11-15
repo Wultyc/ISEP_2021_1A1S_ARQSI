@@ -1,27 +1,29 @@
 const Node = require('../../models/node.model');
 const ServiceNode = require('../../services/node.service');
+const config = require('config')
 
 const service = new ServiceNode();
 
 // DTO
 const dto = require('../../dto/node.dto');
+// const { config } = require('dotenv/types');
 var transform = new dto();
 
 exports.nodeGetById = function (req, res) {
     service.nodeGetById(req.params.nodeId, function(err, params) {
         if(err){
-            return res.send(err);
+            return res.status(404).send(err);
         }
-        res.json(transform.ToDTO(params));
+        res.status(200).json(transform.ToDTO(params))
     });
 };
 
 exports.nodeGetAll = function (req, res) {
     service.nodeGetAll(req.query,function(err, params) {
         if(err){
-            return res.send(err);
+            return res.status(404).send(err);
         }
-        res.json(params);
+        res.status(200).json(params)
     })
 };
 
@@ -38,8 +40,8 @@ exports.nodeCreate = function (req, res) {
 exports.nodeDelete = function (req, res) {
     service.nodeDelete(req.params.nodeId, function (err, params) {
         if (err) {
-            return res.send(err);
+            return res.status(404).send(err);
         }
-        res.send('Node deleted.');
+        res.status(204).send('Node deleted.');
     });
 };

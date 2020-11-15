@@ -11,18 +11,18 @@ var transform = new dto();
 exports.routeGetById = function (req, res) {
     service.routeGetById(req.params.routeId, function(err, params) {
         if(err){
-            return res.send(err);
+            return res.status(404).send(err);
         }
-        res.json(transform.ToDTO(params));
+        res.status(200).json(transform.ToDTO(params))
     });
 };
 
 exports.routeGetAll = function (req, res) {
     service.routeGetAll(function(err, params) {
         if(err){
-            return res.send(err);
+            return res.status(404).send(err);
         }
-        res.json(params);
+        res.status(200).json(params)
     })
 };
 
@@ -30,17 +30,17 @@ exports.routeCreate = function (req, res) {
     let route = transform.ToInsert(req);
     service.routeCreate(route, function (err, params) {
         if (err) {
-            return res.send(err);
+            return res.status(400).send(err);
         }
-        res.json(transform.ToDTO(params));
+        res.status(201).json(transform.ToDTO(params))
     })
 };
 
 exports.routeDelete = function (req, res) {
     service.routeDelete(req.params.routeId, function (err, params) {
         if (err) {
-            return res.send(err);
+            return res.status(404).send(err);
         }
-        res.send('Route deleted.');
+        res.status(204).send('Route deleted.');
     });
 };

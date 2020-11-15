@@ -8,9 +8,9 @@ var transform = new dto();
 exports.vehicleTypeGetById = function (req, res) {
     service.vehicleTypeGetById(req.params.vehicleTypeId, function(err, params) {
         if(err){
-            return res.send(err);
+            return res.status(404).send(err);
         }
-        res.json(transform.ToDTO(params));
+        res.status(200).json(transform.ToDTO(params));
     });
 };
 
@@ -19,7 +19,7 @@ exports.vehicleTypeGetAll = function (req, res) {
         if(err){
             return res.send(err);
         }
-        res.json(params);
+        res.status(200).json(params);
     })
 };
 
@@ -36,8 +36,8 @@ exports.vehicleTypeCreate = function (req, res) {
 exports.vehicleTypeDelete = function (req, res) {
     service.vehicleTypeDelete(req.params.vehicleTypeId, function (err, params) {
         if (err) {
-            return res.send(err);
+            return res.status(404).send(err);
         }
-        res.send('Vehicle Type deleted.');
+        res.status(204).send('Vehicle Type deleted.');
     });
 };
