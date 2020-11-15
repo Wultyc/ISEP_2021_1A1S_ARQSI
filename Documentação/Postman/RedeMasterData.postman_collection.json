@@ -23,7 +23,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/lines?code=1",
+					"raw": "http://localhost:3000/api/lines",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -45,9 +45,44 @@
 							"disabled": true
 						},
 						{
-							"key": "code",
-							"value": "1"
+							"key": "lineRoutes",
+							"value": "",
+							"disabled": true
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Line Routes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"1\",\r\n    \"name\": \"1\",\r\n    \"beginNode\": \"5faf17060d9ee23ac45f25ef\",\r\n    \"finalNode\": \"5faf17190d9ee23ac45f25f3\",\r\n    \"route\": [\"5faf1dc0094b213d082587f7\", \"5faf2053094b213d082587f9\"],\r\n    \"tripulantType\": [\"5f9f245103edb708e4ba0a9a\"],\r\n    \"vehicleType\": [\"5fa1e1537187174c70ef67b7\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/lines/123/routes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"lines",
+						"123",
+						"routes"
 					]
 				}
 			},

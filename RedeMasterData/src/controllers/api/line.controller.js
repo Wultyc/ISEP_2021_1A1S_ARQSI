@@ -18,6 +18,17 @@ exports.lineGetById = function (req, res) {
     });
 };
 
+
+exports.lineGetRoutesById = function (req, res) {
+    service.lineGetRoutesById(req.params.lineId, function (err, params) {
+        if (err) {
+            return res.status(404).send(err);
+        }
+        const response = transform.ToDTO(params).lineRoutes;
+        res.status((!response.id) ? 404 : 200).send(response)
+    });
+};
+
 exports.lineGetByFilter = function (req, res) {
     service.lineGetByFilter(req.query, function (err, params) {
         if (err) {

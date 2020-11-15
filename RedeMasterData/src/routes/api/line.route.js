@@ -7,6 +7,8 @@ router.get('/', line_controller.lineGetByFilter);
 
 router.get('/:lineId', line_controller.lineGetById);
 
+router.get('/:lineId/routes', line_controller.lineGetRoutesById);
+
 router.post('/', line_controller.lineCreate);
 
 router.delete('/:lineId', line_controller.lineDelete);
