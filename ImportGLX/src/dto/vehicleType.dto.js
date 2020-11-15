@@ -6,7 +6,7 @@ VehicleTypeDTO = function (glx_entry) {
             description: glx_entry.Name,
             autonomy: glx_entry.Autonomy,
             costPerKilometer: glx_entry.Cost,
-            avarageCost: glx_entry.Consumption,
+            averageCost: glx_entry.Consumption,
             averageSpeed: glx_entry.AverageSpeed,
             fuelType: fuelTypeMap[glx_entry.EnergySource]
         },
