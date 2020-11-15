@@ -6,7 +6,6 @@ class RouteDTO {
         let route = {
             distance: req.body.distance,
             duration: req.body.duration,
-            orientation: req.body.orientation,
             isReinforcementRoute: req.body.isReinforcementRoute,
             isEmptyRoute: req.body.isEmptyRoute,
             routeNodes: req.body.routeNodes
@@ -17,9 +16,9 @@ class RouteDTO {
     ToDTO(req){
         if(req == null) return 'Route does not exist.';
         let route = {
+            id: req.id,
             distance: req.distance,
             duration: req.duration,
-            orientation: req.orientation,
             isReinforcementRoute: req.isReinforcementRoute,
             isEmptyRoute: req.isEmptyRoute,
             routeNodes: req.routeNodes
