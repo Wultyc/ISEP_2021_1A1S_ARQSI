@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "9bf94b26-403b-4fbc-9e9d-6a48e88540c2",
+		"name": "ImportGLX",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Upload GLX file",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "glx",
+							"type": "file",
+							"src": "/C:/Users/jorge/isep-workspace/ARQSI/arqsi_2021/Documentação/Exemplos/demo-lapr5.glx.xml"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3002/api/import-glx/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"api",
+						"import-glx",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
