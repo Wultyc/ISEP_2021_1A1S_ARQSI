@@ -2,6 +2,8 @@ const config = require('config')
 const xml2js = require('xml2js')
 const fs = require('fs')
 const axios = require('axios');
+const util = require('util')
+const fs2 = require('fs')
 
 const vehicleTypeDTO = require('../../dto/vehicleType.dto')
 const NodeDTO = require('../../dto/node.dto')
@@ -30,18 +32,41 @@ exports.start = async function (fileName) {
 
 processGLX = async function (data) {
     const networks = data.GlDocumentInfo.world[0].GlDocument[0].GlDocumentNetwork[0].Network
+    const processedData = {
+        vehicleTypes: {data: undefined, processed: false},
+        nodes: {data: undefined, processed: false},
+        routes: {data: undefined, processed: false},
+        lines: {data: undefined, processed: false},
+        errors: null
+    }
 
-    var vehicleTypes = networks[0].VehicleTypes[0].VehicleType.map(v => vehicleTypeDTO(v.$))
-    vehicleTypes = await sendAllEntities(config.get("endpoints.redeMasterData.vehicleType"), vehicleTypes)
+    try {
+        processedData.vehicleTypes.data = networks[0].VehicleTypes[0].VehicleType.map(v => vehicleTypeDTO(v.$))
+        processedData.vehicleTypes.processed = true
+        processedData.vehicleTypes.data = await sendAllEntities(config.get("endpoints.redeMasterData.vehicleType"), processedData.vehicleTypes.data)
 
-    var nodes = networks[0].Nodes[0].Node.map(v => NodeDTO(v.$))
-    nodes = await sendAllEntities(config.get("endpoints.redeMasterData.node"), nodes)
+        processedData.nodes.data = networks[0].Nodes[0].Node.map(v => NodeDTO(v.$))
+        processedData.nodes.processed = true
+        processedData.nodes.data = await sendAllEntities(config.get("endpoints.redeMasterData.node"), processedData.nodes.data)
 
-    var routes = networks[0].Paths[0].Path.map(v => RouteDTO(v, nodes))
-    routes = await sendAllEntities(config.get("endpoints.redeMasterData.route"), routes)
+        processedData.routes.data = networks[0].Paths[0].Path.map(v => RouteDTO(v, processedData.nodes.data))
+        processedData.routes.processed = true
+        processedData.routes.data = await sendAllEntities(config.get("endpoints.redeMasterData.route"), processedData.routes.data)
 
-    var lines = networks[0].Lines[0].Line.map(v => LineDTO(v, routes))
-    lines = await sendAllEntities(config.get("endpoints.redeMasterData.line"), lines)
+        processedData.lines.data = networks[0].Lines[0].Line.map(v => LineDTO(v, processedData.routes.data))
+        processedData.lines.processed = true
+        processedData.lines.data = await sendAllEntities(config.get("endpoints.redeMasterData.line"), processedData.lines.data)
+    }
+    catch (e) {
+        console.log(e)
+        processedData.errors = e
+        if(!processedData.vehicleTypes.processed) processedData.vehicleTypes.data = networks[0].VehicleTypes[0].VehicleType.map(v => vehicleTypeDTO(v.$))
+        if(!processedData.nodes.processed) processedData.nodes.data = networks[0].Nodes[0].Node.map(v => NodeDTO(v.$))
+        if(!processedData.routes.processed) processedData.routes.data = networks[0].Paths[0].Path.map(v => RouteDTO(v, processedData.nodes.data))
+        if(!processedData.lines.processed) processedData.lines.data = networks[0].Lines[0].Line.map(v => LineDTO(v, processedData.routes.data))
+    }
+
+    
 }
 
 sendAllEntities = async function (endpoint, entityList) {
