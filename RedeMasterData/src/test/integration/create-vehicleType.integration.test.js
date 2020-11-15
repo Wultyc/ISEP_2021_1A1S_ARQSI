@@ -23,17 +23,7 @@ describe('POST /vehicle-types', function() {
         expect(errors.fuelType).to.have.property('message').to.deep.equals('Insert the fuel type.')
 
     })
-
-    // it('surrender Node must always be a collection Node', async function() {
-    //     const api = this.api
-    //     const response = await expect(api.post('/nodes/create', {shortName: 'Node 10',longitude: '40' , latitude: '20', collectionNode: false, surrenderNode: true })).to.eventually.be.rejected
-        
-    //     expect(response.response).to.have.property('status', 400)        
-    //     expect(response.response.data).to.deep.equals('A Surrender Node must always be a Collection Node.')
-
-
-    // })
-
+    
     it('verifies correct create', async function() {
         const api = this.api
         const response = (await api.post('/vehicle-types/create', { description: 'Vehicle Type eletrico', autonomy: 100 , costPerKilometer: 2, averageCost: 12, averageSpeed: 60, fuelType: 'Eletrico' }))

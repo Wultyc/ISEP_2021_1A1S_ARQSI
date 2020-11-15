@@ -1,4 +1,3 @@
-/* eslint-env mocha */
 const dotEnvLoader = require ('../../loaders/dotenv')
 dotEnvLoader();
 

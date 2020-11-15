@@ -29,8 +29,6 @@ describe('POST /nodes', function() {
         
         expect(response.response).to.have.property('status', 400)        
         expect(response.response.data).to.deep.equals('A Surrender Node must always be a Collection Node.')
-
-
     })
 
     it('verifies correct create', async function() {
