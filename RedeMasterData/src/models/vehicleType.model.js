@@ -15,7 +15,7 @@ var VehicleType = new  Schema({
         type: Number,
         required: [true, 'Insert the cost per kilometer.']
     },
-    avarageCost: {
+    averageCost: {
         type: Number,
         required: [true, 'Insert the average cost.']
     },

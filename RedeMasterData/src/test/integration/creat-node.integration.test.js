@@ -4,7 +4,7 @@ const util = require('util')
 
 const testServer = require('../test-helpers/test-server')
 const testDb = require('../test-helpers/test-db')
-describe('POST /todos', function() {
+describe('POST /nodes', function() {
     testServer.useInTest()
     testDb.useInTest()
 
