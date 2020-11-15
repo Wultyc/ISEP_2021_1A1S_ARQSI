@@ -11,11 +11,11 @@ describe('GET /vehicleTypes and GET /vehicle-types/id', function() {
         const api = this.api
         
         // Create three todos
-        await api.post('/vehicle-types/create', { description: 'Vehicle Type eletrico', autonomy: 100 , costPerKilometer: 2, averageCost: 12, averageSpeed: 60, fuelType: 'Eletrico' })
-        await api.post('/vehicle-types/create', { description: 'Vehicle Type gasoleo', autonomy: 60 , costPerKilometer: 20, averageCost: 40, averageSpeed: 60, fuelType: 'Gasoleo' })
-        await api.post('/vehicle-types/create', { description: 'Vehicle Type gasolina', autonomy: 50 , costPerKilometer: 30, averageCost: 60, averageSpeed: 60, fuelType: 'Gasolina' })
+        await api.post('/vehicle-types/', { description: 'Vehicle Type eletrico', autonomy: 100 , costPerKilometer: 2, averageCost: 12, averageSpeed: 60, fuelType: 'Eletrico' })
+        await api.post('/vehicle-types/', { description: 'Vehicle Type gasoleo', autonomy: 60 , costPerKilometer: 20, averageCost: 40, averageSpeed: 60, fuelType: 'Gasoleo' })
+        await api.post('/vehicle-types/', { description: 'Vehicle Type gasolina', autonomy: 50 , costPerKilometer: 30, averageCost: 60, averageSpeed: 60, fuelType: 'Gasolina' })
 
-        // Make the actual request to GET /todos
+        // Make the actual request to GET /vehicle-types
         const response = await api.get('/vehicle-types')
         
        

@@ -30,7 +30,7 @@ function spawnServer(env) {
 // waitForURLReachable is a utility function that tries to GET a URL until it
 // succeeds. It will throw an error if it cannot reach the URL within the
 // provided `opts.timeout` (default: 1000ms)
-async function waitForURLReachable(url, { timeout = 10000 } = {}) {
+async function waitForURLReachable(url, { timeout = 100000 } = {}) {
     const timeoutThreshold = Date.now() + timeout
     while (true) {
         try {    
