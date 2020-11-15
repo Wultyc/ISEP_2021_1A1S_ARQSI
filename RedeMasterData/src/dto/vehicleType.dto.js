@@ -7,7 +7,7 @@ class VehicleTypeDTO {
             description : req.body.description,
             autonomy : req.body.autonomy,
             costPerKilometer : req.body.costPerKilometer,
-            avarageCost : req.body.avarageCost,
+            averageCost : req.body.averageCost,
             averageSpeed : req.body.averageSpeed,
             fuelType : req.body.fuelType
         };
@@ -21,7 +21,7 @@ class VehicleTypeDTO {
             description : req.description,
             autonomy : req.autonomy,
             costPerKilometer : req.costPerKilometer,
-            avarageCost : req.avarageCost,
+            averageCost : req.averageCost,
             averageSpeed : req.averageSpeed,
             fuelType : req.fuelType
         };

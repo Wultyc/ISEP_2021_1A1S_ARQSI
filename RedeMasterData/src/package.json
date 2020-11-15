@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "node app",
-    "dev": "nodemon app"
+    "dev": "nodemon app",
+    "integrationTest": "mocha  \"test/**/*.test.js\" --timeout 10000"
   },
   "repository": {
     "type": "git",
@@ -25,9 +26,16 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
-    "mongoose": "^5.10.9"
+    "mongoose": "^5.10.9",
+    "save-dev": "0.0.1-security"
   },
   "devDependencies": {
+    "chai-as-promised": "^7.1.1",
+    "chai-json": "^1.0.0",
+    "axios": "^0.21.0",
+    "chai": "^4.2.0",
+    "get-port": "^5.1.1",
+    "mocha": "^8.2.1",
     "nodemon": "^2.0.5"
   }
 }

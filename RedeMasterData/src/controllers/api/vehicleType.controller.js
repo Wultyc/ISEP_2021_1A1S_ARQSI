@@ -27,9 +27,9 @@ exports.vehicleTypeCreate = function (req, res) {
     let vehicleType = transform.ToInsert(req);
      service.vehicleTypeCreate(vehicleType, function (err, params){
         if (err) {
-            return res.send(err);
+            return res.status(400).send(err);
         }
-        res.json(transform.ToDTO(params));
+        res.status(201).json(transform.ToDTO(params));
      })
 };
 
