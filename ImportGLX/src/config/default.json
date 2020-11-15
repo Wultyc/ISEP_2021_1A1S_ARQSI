@@ -16,10 +16,10 @@
     },
     "endpoints":{
         "redeMasterData":{
-            "vehicleType":"http://localhost:3005/api/vehicle-types",
-            "node":"http://localhost:3005/api/nodes",
-            "route":"http://localhost:3005/api/routes",
-            "line":"http://localhost:3005/api/lines"
+            "vehicleType":"http://localhost:3003/api/vehicle-types",
+            "node":"http://localhost:3003/api/nodes",
+            "route":"http://localhost:3003/api/routes",
+            "line":"http://localhost:3003/api/lines"
         }
     },
     "errors":{
