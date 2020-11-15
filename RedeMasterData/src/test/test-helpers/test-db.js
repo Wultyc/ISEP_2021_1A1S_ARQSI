@@ -9,7 +9,7 @@ exports.useInTest = function() {
            {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
-                // useCreateIndex: true
+                
             },
         )
         const db = mongoClient.db('redes-test')

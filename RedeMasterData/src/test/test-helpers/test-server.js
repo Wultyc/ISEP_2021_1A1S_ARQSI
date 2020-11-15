@@ -4,7 +4,7 @@ const getPort = require('get-port')
 const dotEnvLoader = require ('../../loaders/dotenv')
 dotEnvLoader();
 
-// TEST_ENV contains the environment variables for our test server
+// TEST_ENV for test server
 const TEST_ENV = {
     PORT: process.env.APP_PORT, 
     MONGODB_URI: process.env.DB_CONNECT
@@ -60,7 +60,7 @@ exports.useInTest = function() {
         const testServer = await spawnServer(env)
         // Create an axios instance that is configured to use the test server as its
         // base URL and expose it as `this.api`. This allows us to easily make
-        // requests like `this.api.get('/todos')` from within our test files
+        // requests like `this.api.get('/nodes')` from within our test files
         const api = axios.create({ baseURL: `http://localhost:${env.PORT}/api` })
         this.testServer = testServer
         this.api = api
