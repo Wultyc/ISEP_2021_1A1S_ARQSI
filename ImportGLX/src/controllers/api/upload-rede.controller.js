@@ -72,7 +72,7 @@ sendAllEntities = async function (endpoint, entityList) {
     for (let index = 0; index < entityList.length; index++) {
         const entity = entityList[index]
         const entityResponse = await axios.post(endpoint, entity.data)
-        entityList[index].system_id = entityResponse.data._id
+        entityList[index].system_id = entityResponse.data.id
         entityList[index].status = "OK"
     }
 
