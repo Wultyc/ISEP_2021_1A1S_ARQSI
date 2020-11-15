@@ -30,15 +30,18 @@ exports.start = async function (fileName) {
 
 processGLX = async function (data) {
     const networks = data.GlDocumentInfo.world[0].GlDocument[0].GlDocumentNetwork[0].Network
+
     var vehicleTypes = networks[0].VehicleTypes[0].VehicleType.map(v => vehicleTypeDTO(v.$))
-    var nodes = networks[0].Nodes[0].Node.map(v => NodeDTO(v.$))
-    var routes = networks[0].Paths[0].Path.map(v => RouteDTO(v, nodes))
-    var lines = networks[0].Lines[0].Line.map(v => LineDTO(v, routes))
-
     vehicleTypes = await sendAllEntities(config.get("endpoints.redeMasterData.vehicleType"), vehicleTypes)
-    console.log(vehicleTypes)
-    //await sendAllEntities('http://localhost:3005/api/nodes/create', nodes)
 
+    var nodes = networks[0].Nodes[0].Node.map(v => NodeDTO(v.$))
+    nodes = await sendAllEntities(config.get("endpoints.redeMasterData.node"), nodes)
+
+    var routes = networks[0].Paths[0].Path.map(v => RouteDTO(v, nodes))
+    routes = await sendAllEntities(config.get("endpoints.redeMasterData.route"), routes)
+
+    var lines = networks[0].Lines[0].Line.map(v => LineDTO(v, routes))
+    lines = await sendAllEntities(config.get("endpoints.redeMasterData.line"), lines)
 }
 
 sendAllEntities = async function (endpoint, entityList) {
@@ -47,6 +50,7 @@ sendAllEntities = async function (endpoint, entityList) {
         const entity = entityList[index]
         const entityResponse = await axios.post(endpoint, entity.data)
         entityList[index].system_id = entityResponse.data._id
+        entityList[index].status = "OK"
     }
 
     return entityList
