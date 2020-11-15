@@ -2,8 +2,6 @@ const config = require('config')
 const xml2js = require('xml2js')
 const fs = require('fs')
 const axios = require('axios');
-const util = require('util')
-const fs2 = require('fs')
 
 const vehicleTypeDTO = require('../../dto/vehicleType.dto')
 const NodeDTO = require('../../dto/node.dto')
