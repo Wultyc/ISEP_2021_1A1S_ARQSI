@@ -11,7 +11,7 @@ describe('POST /vehicle-types', function() {
 
     it('responds with 400 ValidationError if fields are missing', async function() {
         const api = this.api
-        const response = await expect(api.post('/vehicle-types/create', { })).to.eventually.be.rejected        
+        const response = await expect(api.post('/vehicle-types/', { })).to.eventually.be.rejected        
         expect(response.response).to.have.property('status', 400)
         const errors = response.response.data.errors
 
@@ -26,7 +26,7 @@ describe('POST /vehicle-types', function() {
     
     it('verifies correct create', async function() {
         const api = this.api
-        const response = (await api.post('/vehicle-types/create', { description: 'Vehicle Type eletrico', autonomy: 100 , costPerKilometer: 2, averageCost: 12, averageSpeed: 60, fuelType: 'Eletrico' }))
+        const response = (await api.post('/vehicle-types/', { description: 'Vehicle Type eletrico', autonomy: 100 , costPerKilometer: 2, averageCost: 12, averageSpeed: 60, fuelType: 'Eletrico' }))
         expect(response).to.have.property('status', 201)
         expect(response.data).to.have.property('description', 'Vehicle Type eletrico')
         expect(response.data).to.have.property('autonomy', 100) 

@@ -10,7 +10,7 @@ describe('POST /nodes', function() {
 
     it('responds with 400 ValidationError if fields are missing', async function() {
         const api = this.api
-        const response = await expect(api.post('/nodes/create', { })).to.eventually.be.rejected
+        const response = await expect(api.post('/nodes/', { })).to.eventually.be.rejected
         
         expect(response.response).to.have.property('status', 400)
         const errors = response.response.data.errors
@@ -25,7 +25,7 @@ describe('POST /nodes', function() {
 
     it('surrender Node must always be a collection Node', async function() {
         const api = this.api
-        const response = await expect(api.post('/nodes/create', {shortName: 'Node 10',longitude: '40' , latitude: '20', collectionNode: false, surrenderNode: true })).to.eventually.be.rejected
+        const response = await expect(api.post('/nodes/', {shortName: 'Node 10',longitude: '40' , latitude: '20', collectionNode: false, surrenderNode: true })).to.eventually.be.rejected
         
         expect(response.response).to.have.property('status', 400)        
         expect(response.response.data).to.deep.equals('A Surrender Node must always be a Collection Node.')
@@ -33,7 +33,7 @@ describe('POST /nodes', function() {
 
     it('verifies correct create', async function() {
         const api = this.api
-        const response = await api.post('/nodes/create', { shortName: 'Node 10',longitude: '40' , latitude: '20', collectionNode: false, surrenderNode: false })
+        const response = await api.post('/nodes/', { shortName: 'Node 10',longitude: '40' , latitude: '20', collectionNode: false, surrenderNode: false })
         expect(response).to.have.property('status', 201)
         expect(response.data).to.have.property('shortName', 'Node 10')
         expect(response.data).to.have.property('longitude', 40) 
@@ -41,7 +41,4 @@ describe('POST /nodes', function() {
         expect(response.data).to.have.property('collectionNode', false)
         expect(response.data).to.have.property('surrenderNode', false)
     })
-
-    
-
 })

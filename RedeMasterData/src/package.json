@@ -7,7 +7,7 @@
     "test": "jest",
     "start": "node app",
     "dev": "nodemon app",
-    "integrationTest": "mocha  \"test/**/*.test.js\" --timeout 10000"
+    "integrationTest": "mocha  \"test/**/*.test.js\" --timeout 100000"
   },
   "repository": {
     "type": "git",
