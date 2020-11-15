@@ -3,7 +3,7 @@ const moment = require('moment')
 const uploadRede = require('./upload-rede.controller')
 const uploadViagem = require('./upload-viagem.controller')
 
-exports.importfile = function (req, res) {
+exports.importfile = async function (req, res) {
 
     if (!req.files || !req.files.glx || req.files.glx.mimetype != "application/xml") {
         return res.status(config.get('errors.http.file-not-valid.status')).json(config.get('errors.http.file-not-valid.message'))
@@ -21,8 +21,8 @@ exports.importfile = function (req, res) {
     }
 
     try {
-        uploadRede.start(filename)
-        uploadViagem.start(filename)
+        await uploadRede.start(filename)
+        await uploadViagem.start(filename)
     } catch (e) {
         console.log(e);
         return res.status(config.get('errors.import.error-on-upload.status')).json(config.get('errors.import.error-on-upload.message'))
