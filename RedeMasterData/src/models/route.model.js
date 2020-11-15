@@ -16,11 +16,6 @@ var Route = new Schema({
         type: Number
         // determined by summing up the durantion of its segments
     },
-    orientation: {
-        type: String,
-        enum: ['GoingRoute', 'ComingRoute'],
-        required: [true, 'Insert a orientation.'],
-    },
     isReinforcementRoute: {
         type: Boolean,
         required: [true, 'Insert if it is a reinforcement route.'],
@@ -34,7 +29,7 @@ var Route = new Schema({
     routeNodes: [RouteNodes]
 });
 
-// TODO: make routeNodes and orientation unique when combined
+// TODO: make routeNodes unique
 
 // Export the model
 module.exports = mongoose.model('Route', Route);

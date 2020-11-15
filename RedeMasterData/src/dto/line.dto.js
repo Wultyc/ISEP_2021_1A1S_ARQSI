@@ -8,7 +8,7 @@ class LineDTO {
             name: req.body.name,
             beginNode: req.body.beginNode,
             finalNode: req.body.finalNode,
-            route: req.body.route,
+            lineRoutes: req.body.lineRoutes,
             tripulantType: req.body.tripulantType,
             vehicleType: req.body.vehicleType
         };
@@ -23,7 +23,7 @@ class LineDTO {
             name: req.name,
             beginNode: req.beginNode,
             finalNode: req.finalNode,
-            route: req.route,
+            lineRoutes: req.lineRoutes,
             tripulantType: req.tripulantType,
             vehicleType: req.vehicleType
         };

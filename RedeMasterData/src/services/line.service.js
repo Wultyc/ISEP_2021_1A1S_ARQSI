@@ -41,20 +41,24 @@ class LineService {
         }
         await getNodePromiseForLine(line.beginNode, validationMessage);
         await getNodePromiseForLine(line.finalNode, validationMessage);
-        var hasGoingRoute = false, hasComingRoute = false;
-        for (let i = 0; i < line.route.length; i++) {
-            var routeI = await getRoutePromiseForLine(line.route[i], validationMessage);
+        var hasGoRoute = false, hasReturnRoute = false;
+        for (let i = 0; i < line.lineRoutes.length; i++) {
+            var routeI = await getRoutePromiseForLine(line.lineRoutes[i].routeId, validationMessage);
             if (!_.isEmpty(routeI)) {
-                if (_.isEqual(routeI.orientation, 'GoingRoute')) {
-                    hasGoingRoute = true;
-                } else if (_.isEqual(routeI.orientation, 'ComingRoute')) {
-                    hasComingRoute = true;
+                var orientationI = line.lineRoutes[i].orientation;
+                if (_.isEqual(orientationI, 'Go')) {
+                    hasGoRoute = true;
+                } else if (_.isEqual(orientationI, 'Return')) {
+                    hasReturnRoute = true;
+                } else {
+                    validationMessage.push('A route must have an orientation associated (Go or Return).');
+                    break;
                 }
-                validateBeginAndLastNode(line.beginNode, line.finalNode, routeI, validationMessage);
-            }
+                validateBeginAndLastNode(line.beginNode, line.finalNode, routeI, orientationI, validationMessage);
+            } else { break; }
         }
-        if (!hasGoingRoute || !hasComingRoute) {
-            validationMessage.push('A line must have at least 1 going route and 1 coming route.');
+        if (!hasGoRoute || !hasReturnRoute) {
+            validationMessage.push('A line must have at least 1 go route and 1 return route.');
         }
         for (let i = 0; i < line.tripulantType.length; i++) {
             await getTripulantTypePromiseForLine(line.tripulantType[i], validationMessage);
@@ -78,15 +82,15 @@ class LineService {
 
 // Business Logic
 lineCreatePreValidations = function (line, validationMessage) {
-    if (line.route.length < 2) {
+    if (line.lineRoutes.length < 2) {
         validationMessage.push('A line must have at least 1 going route and 1 coming route.');
     }
     return;
 };
-validateBeginAndLastNode = async function(beginNode, finalNode, route, validationMessage) {
+validateBeginAndLastNode = async function(beginNode, finalNode, route, orientation, validationMessage) {
     var routeBeginNode = route.routeNodes[0].nodeId;
     var routeFinalNode = route.routeNodes[route.routeNodes.length - 1].nodeId;
-    if (_.isEqual(route.orientation, "GoingRoute")) {
+    if (_.isEqual(orientation, "Go")) {
         if (!_.isEqual(routeBeginNode.toString(), beginNode.toString())) {
             validationMessage.push("Node mismatch: The first node of the route " + route._id 
                 + " is diferent from the line's begin node.");
@@ -96,7 +100,7 @@ validateBeginAndLastNode = async function(beginNode, finalNode, route, validatio
                 + " is diferent from the line's final node.");
         }
     }
-    if (_.isEqual(route.orientation, "ComingRoute")) {
+    if (_.isEqual(orientation, "Return")) {
         if (!_.isEqual(routeBeginNode.toString(), finalNode.toString())) {
             validationMessage.push("Node mismatch: The first node of the route " + route._id 
                 + " is diferent from the line's final node.");

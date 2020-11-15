@@ -34,7 +34,6 @@ describe('Convert Request Json body to Object', () => {
             body: {
                 distance: 10,
                 duration: 15,
-                orientation: "GoingRoute",
                 isReinforcementRoute: false,
                 isEmptyRoute: false,
                 routeNodes: [
@@ -62,7 +61,16 @@ describe('Convert Request Json body to Object', () => {
                 name: "lineName",
                 beginNode: "1",
                 finalNode: "2",
-                route: ["1", "2"],
+                lineRoutes: [
+                    {
+                        routeId: "1",
+                        orientation: "Go"
+                    },
+                    {
+                        routeId: "2",
+                        orientation: "Return"
+                    }
+                ],
                 tripulantType: "10",
                 vehicleType: "20"
             }
@@ -111,7 +119,6 @@ const wantedRoute = jest.fn(function () {
     return {
         distance: 10,
         duration: 15,
-        orientation: "GoingRoute",
         isReinforcementRoute: false,
         isEmptyRoute: false,
         routeNodes: [
@@ -135,7 +142,16 @@ const wantedLine = jest.fn(function () {
         name: "lineName",
         beginNode: "1",
         finalNode: "2",
-        route: ["1", "2"],
+        lineRoutes: [
+            {
+                routeId: "1",
+                orientation: "Go"
+            },
+            {
+                routeId: "2",
+                orientation: "Return"
+            }
+        ],
         tripulantType: "10",
         vehicleType: "20"
     };
