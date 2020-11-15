@@ -22,6 +22,10 @@ class LineService {
         repo.getById(id, callback);
     };
 
+    lineGetRoutesById(id, callback) {
+        repo.getRouteById(id, callback);
+    };
+
     lineGetAll(callback) {
         repo.getAll(callback);
     };
