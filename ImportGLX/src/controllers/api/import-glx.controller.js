@@ -28,6 +28,6 @@ exports.importfile = async function (req, res) {
         return res.status(config.get('errors.import.error-on-upload.status')).json(config.get('errors.import.error-on-upload.message'))
     }
 
-    res.send("Data imported successfully")
+    res.send("Import started successfully")
 
 }
