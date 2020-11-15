@@ -8,7 +8,7 @@ NodeDTO = function (glx_entry) {
             longitude: glx_entry.Longitude,
             latitude: glx_entry.Latitude,
             collectionNode: glx_entry.IsDepot.toLowerCase(),
-            surrenderNode: glx_entry.IsReliefPoint.toLowerCase()
+            surrenderNode: (glx_entry.IsDepot.toLowerCase() == "True") ? true : glx_entry.IsReliefPoint.toLowerCase()
         },
         status: "Not Processed"
     };
