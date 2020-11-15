@@ -49,20 +49,17 @@ describe('POST /routes', function() {
 
     it('responds with 400 ValidationError if fields are missing', async function() {
         const api = this.api
-        const response = await expect(api.post('/routes', { routeNodes: [ ]})).to.eventually.be.rejected        
+        const response = await expect(api.post('/routes', { })).to.eventually.be.rejected        
         expect(response.response).to.have.property('status', 400)
-        const errors = response.response.data.errors
-
-        // expect(errors.description).to.have.property('message').to.deep.equals('Insert a description.')
-        // expect(errors.autonomy).to.have.property('message').to.deep.equals('Insert the autonomy.')
-        // expect(errors.costPerKilometer).to.have.property('message').to.deep.equals('Insert the cost per kilometer.')
-        // expect(errors.averageCost).to.have.property('message').to.deep.equals('Insert the average cost.')
-        // expect(errors.averageSpeed).to.have.property('message').to.deep.equals('Insert a average speed.')
-        // expect(errors.fuelType).to.have.property('message').to.deep.equals('Insert the fuel type.')
+        
+        const errors = response.response
+        // console.log(util.inspect(errors, {showHidden: false, depth: null}))
+        
+        expect(errors.data).to.deep.equals(['Route must have at least 2 nodes.'])
     })
 
-    it('surrender Node must always be a collection Node', async function() {
-    })
+    // it('surrender Node must always be a collection Node', async function() {
+    // })
 
 
 })
