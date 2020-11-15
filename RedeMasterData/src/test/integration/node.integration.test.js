@@ -2,7 +2,8 @@ const {expect} = require('chai')
 const {expect_json} = require('chai-json')
 const testServer = require('../test-helpers/test-server')
 const testDb = require('../test-helpers/test-db')
-describe('GET /nodes', function() {
+
+describe('GET /nodes and GET /nodes/id', function() {
     testServer.useInTest()
     testDb.useInTest()
     
@@ -14,7 +15,6 @@ describe('GET /nodes', function() {
         await api.post('/nodes/create', { shortName: 'Node 2',longitude: '90' , latitude: '30', collectionNode: false, surrenderNode: false  })
         await api.post('/nodes/create', { shortName: 'Node 3',longitude: '140' , latitude: '60', collectionNode: false, surrenderNode: false })
 
-        console.log('Im here')
         // Make the actual request to GET /todos
         const response = await api.get('/nodes')
         
@@ -49,7 +49,9 @@ describe('GET /nodes', function() {
             'Node 2',
             'Node 3'
         ])
-            
-       
+        
+        const id = response.data[0]._id
+        const response_id = await api.get(`/nodes/${id}`)
+        expect(response_id.data.shortName).to.deep.equals('Node 1')
     })
 })
