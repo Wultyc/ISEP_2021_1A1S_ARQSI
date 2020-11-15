@@ -39,7 +39,9 @@ class LineService {
             callback(validationMessage);
             return;
         }
+        var isLineComingFromGlx = false;
         if (line.beginNode == null && line.finalNode == null) {
+            isLineComingFromGlx = true;
             var firstLineRoute = await getRoutePromiseForLine(line.lineRoutes[0].routeId, validationMessage);
             var firstOrientation = line.lineRoutes[0].orientation;
             if (_.isEqual(firstOrientation, "Go")) {
@@ -66,7 +68,9 @@ class LineService {
                     validationMessage.push('A route must have an orientation associated (Go or Return).');
                     break;
                 }
-                validateBeginAndLastNode(line.beginNode, line.finalNode, routeI, orientationI, validationMessage);
+                if (!isLineComingFromGlx) {
+                    validateBeginAndLastNode(line.beginNode, line.finalNode, routeI, orientationI, validationMessage);
+                }
             } else { break; }
         }
         if (!hasGoRoute || !hasReturnRoute) {
