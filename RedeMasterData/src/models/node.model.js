@@ -7,6 +7,10 @@ var Node = new Schema({
         required: [true, 'Insert a shortName.'],
         unique: true
     },
+    name: {
+        type: String,
+        required: [true, 'Insert a name.'],
+    },
     longitude: {
         type: Number,
         required: [true, 'Insert a longitude.'],

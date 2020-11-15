@@ -5,6 +5,7 @@ class NodeDTO {
     ToInsert (req) {
         let node = {
             shortName: req.body.shortName,
+            name: req.body.name,
             longitude: req.body.longitude,
             latitude: req.body.latitude,
             collectionNode: req.body.collectionNode,
@@ -18,6 +19,7 @@ class NodeDTO {
         let node = {
             id: req.id,
             shortName: req.shortName,
+            name: req.name,
             longitude: req.longitude,
             latitude: req.latitude,
             collectionNode: req.collectionNode,

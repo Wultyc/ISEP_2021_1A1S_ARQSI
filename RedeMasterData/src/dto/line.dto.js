@@ -6,6 +6,7 @@ class LineDTO {
         let line = {
             code: req.body.code,
             name: req.body.name,
+            color: req.body.color,
             beginNode: req.body.beginNode,
             finalNode: req.body.finalNode,
             lineRoutes: req.body.lineRoutes,
@@ -21,6 +22,7 @@ class LineDTO {
             id: req.id,
             code: req.code,
             name: req.name,
+            color: req.color,
             beginNode: req.beginNode,
             finalNode: req.finalNode,
             lineRoutes: req.lineRoutes,
