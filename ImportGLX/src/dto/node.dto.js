@@ -7,8 +7,8 @@ NodeDTO = function (glx_entry) {
             name: glx_entry.Name,
             longitude: glx_entry.Longitude,
             latitude: glx_entry.Latitude,
-            collectionNode: glx_entry.IsDepot,
-            surrenderNode: glx_entry.IsReliefPoint
+            collectionNode: glx_entry.IsDepot.toLowerCase(),
+            surrenderNode: glx_entry.IsReliefPoint.toLowerCase()
         },
         status: "Not Processed"
     };
