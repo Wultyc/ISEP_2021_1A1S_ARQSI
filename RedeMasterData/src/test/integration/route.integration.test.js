@@ -11,9 +11,9 @@ describe('GET /routes and GET /routes/id', function() {
         const api = this.api
         
         // Create three todos
-        await api.post('/nodes', { shortName: 'Node 1',longitude: '40' , latitude: '20', collectionNode: false, surrenderNode: false })
-        await api.post('/nodes', { shortName: 'Node 2',longitude: '90' , latitude: '30', collectionNode: false, surrenderNode: false  })
-        await api.post('/nodes', { shortName: 'Node 3',longitude: '140' , latitude: '60', collectionNode: false, surrenderNode: false })
+        await api.post('/nodes', { shortName: 'Node 1', name: 'Node name 1',longitude: '40' , latitude: '20', collectionNode: false, surrenderNode: false })
+        await api.post('/nodes', { shortName: 'Node 2', name: 'Node name 2',longitude: '90' , latitude: '30', collectionNode: false, surrenderNode: false  })
+        await api.post('/nodes', { shortName: 'Node 3', name: 'Node name 3',longitude: '140' , latitude: '60', collectionNode: false, surrenderNode: false })
         
         const response_nodes = await api.get('/nodes')
     
@@ -91,6 +91,6 @@ describe('GET /routes and GET /routes/id', function() {
         expect(response_id.data.duration).to.deep.equals(32)
         expect(response_id.data.distance).to.deep.equals(93)
 
-
+            
     })
 })
