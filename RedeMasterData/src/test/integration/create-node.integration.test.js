@@ -19,13 +19,14 @@ describe('POST /nodes', function() {
         expect(errors.latitude).to.have.property('message').to.deep.equals('Insert a latitude.')
         expect(errors.collectionNode).to.have.property('message').to.deep.equals('Insert if it is a Collection Node.')
         expect(errors.surrenderNode).to.have.property('message').to.deep.equals('Insert if it is a Surrender Node.')
+        expect(errors.name).to.have.property('message').to.deep.equals('Insert a name.')
         expect(errors.shortName).to.have.property('message').to.deep.equals('Insert a shortName.')
 
     })
 
     it('surrender Node must always be a collection Node', async function() {
         const api = this.api
-        const response = await expect(api.post('/nodes/', {shortName: 'Node 10',longitude: '40' , latitude: '20', collectionNode: false, surrenderNode: true })).to.eventually.be.rejected
+        const response = await expect(api.post('/nodes/', {shortName: 'Node 10', name: 'Node ten', longitude: '40' , latitude: '20', collectionNode: false, surrenderNode: true })).to.eventually.be.rejected
         
         expect(response.response).to.have.property('status', 400)        
         expect(response.response.data).to.deep.equals('A Surrender Node must always be a Collection Node.')
@@ -33,9 +34,10 @@ describe('POST /nodes', function() {
 
     it('verifies correct create', async function() {
         const api = this.api
-        const response = await api.post('/nodes/', { shortName: 'Node 10',longitude: '40' , latitude: '20', collectionNode: false, surrenderNode: false })
+        const response = await api.post('/nodes/', { shortName: 'Node 10',name: 'Node ten', longitude: '40' , latitude: '20', collectionNode: false, surrenderNode: false })
         expect(response).to.have.property('status', 201)
         expect(response.data).to.have.property('shortName', 'Node 10')
+        expect(response.data).to.have.property('name', 'Node ten')
         expect(response.data).to.have.property('longitude', 40) 
         expect(response.data).to.have.property('latitude', 20) 
         expect(response.data).to.have.property('collectionNode', false)

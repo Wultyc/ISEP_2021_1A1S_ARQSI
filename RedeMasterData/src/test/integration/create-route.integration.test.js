@@ -4,6 +4,7 @@ const util = require('util')
 
 const testServer = require('../test-helpers/test-server')
 const testDb = require('../test-helpers/test-db')
+
 describe('POST /routes', function() {
     testServer.useInTest()
     testDb.useInTest()
@@ -11,9 +12,9 @@ describe('POST /routes', function() {
     it('verifies correct create', async function() {
         const api = this.api         
         // Create three todos
-        await api.post('/nodes', { shortName: 'Node 1',longitude: '40' , latitude: '20', collectionNode: false, surrenderNode: false })
-        await api.post('/nodes', { shortName: 'Node 2',longitude: '90' , latitude: '30', collectionNode: false, surrenderNode: false  })
-        await api.post('/nodes', { shortName: 'Node 3',longitude: '140' , latitude: '60', collectionNode: false, surrenderNode: false })
+        await api.post('/nodes', { shortName: 'Node 1', name: 'Node 1 name', longitude: '40' , latitude: '20', collectionNode: false, surrenderNode: false })
+        await api.post('/nodes', { shortName: 'Node 2', name: 'Node 2 name', longitude: '90' , latitude: '30', collectionNode: false, surrenderNode: false  })
+        await api.post('/nodes', { shortName: 'Node 3', name: 'Node 2 name', longitude: '140' , latitude: '60', collectionNode: false, surrenderNode: false })
         
         const response_nodes = await api.get('/nodes')
     
@@ -38,13 +39,13 @@ describe('POST /routes', function() {
             ]
         });
         expect(response).to.have.property('status', 201)
-        
-        // expect(response.data).to.have.property('description', 'Vehicle Type eletrico')
-        // expect(response.data).to.have.property('autonomy', 100) 
-        // expect(response.data).to.have.property('costPerKilometer', 2) 
-        // expect(response.data).to.have.property('averageCost', 12)
-        // expect(response.data).to.have.property('averageSpeed', 60)
-        // expect(response.data).to.have.property('fuelType', 'Eletrico')
+        console.log(response)
+        expect(response.data).to.have.property('distance', 93)
+        expect(response.data).to.have.property('duration', 32) 
+        expect(response.data).to.have.property('isReinforcementRoute', false) 
+        expect(response.data).to.have.property('isEmptyRoute', false)
+        expect(response.data).to.have.property('routeNodes').that.is.an('array')
+        .with.lengthOf(3)
     })
 
     it('responds with 400 ValidationError if fields are missing', async function() {
@@ -53,13 +54,10 @@ describe('POST /routes', function() {
         expect(response.response).to.have.property('status', 400)
         
         const errors = response.response
-        // console.log(util.inspect(errors, {showHidden: false, depth: null}))
-        
         expect(errors.data).to.deep.equals(['Route must have at least 2 nodes.'])
     })
 
-    // it('surrender Node must always be a collection Node', async function() {
-    // })
+   
 
 
 })

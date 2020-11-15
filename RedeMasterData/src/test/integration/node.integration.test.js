@@ -11,9 +11,9 @@ describe('GET /nodes and GET /nodes/id', function() {
         const api = this.api
         
         // Create three todos
-        await api.post('/nodes/', { shortName: 'Node 1',longitude: '40' , latitude: '20', collectionNode: false, surrenderNode: false })
-        await api.post('/nodes/', { shortName: 'Node 2',longitude: '90' , latitude: '30', collectionNode: false, surrenderNode: false  })
-        await api.post('/nodes/', { shortName: 'Node 3',longitude: '140' , latitude: '60', collectionNode: false, surrenderNode: false })
+        await api.post('/nodes/', { shortName: 'Node 1',name: 'Node Name 1', longitude: '40' , latitude: '20', collectionNode: false, surrenderNode: false })
+        await api.post('/nodes/', { shortName: 'Node 2',name: 'Node Name 2', longitude: '90' , latitude: '30', collectionNode: false, surrenderNode: false  })
+        await api.post('/nodes/', { shortName: 'Node 3',name: 'Node Name 2', longitude: '140' , latitude: '60', collectionNode: false, surrenderNode: false })
 
         // Make the actual request to GET /nodes
         const response = await api.get('/nodes')
