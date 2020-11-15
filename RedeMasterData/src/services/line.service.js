@@ -39,6 +39,9 @@ class LineService {
             callback(validationMessage);
             return;
         }
+        if (line.beginNode == null && line.finalNode == null) {
+            calculateBeginAndLastNodeForGlx(line, validationMessage);
+        }
         await getNodePromiseForLine(line.beginNode, validationMessage);
         await getNodePromiseForLine(line.finalNode, validationMessage);
         var hasGoRoute = false, hasReturnRoute = false;
@@ -57,11 +60,6 @@ class LineService {
                 validateBeginAndLastNode(line.beginNode, line.finalNode, routeI, orientationI, validationMessage);
             } else { break; }
         }
-        if (line.beginNode == null && line.finalNode == null) {
-            calculateBeginAndLastNodeForGlx(line, validationMessage);
-            validateBeginAndLastNode(line.beginNode, line.finalNode, routeI, orientationI, validationMessage); 
-        }
-
         if (!hasGoRoute || !hasReturnRoute) {
             validationMessage.push('A line must have at least 1 go route and 1 return route.');
         }
