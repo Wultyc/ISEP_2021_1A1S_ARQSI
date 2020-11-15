@@ -14,6 +14,14 @@
         "upload-dir":"file_archive",
         "fileExtension": "glx.xml"
     },
+    "endpoints":{
+        "redeMasterData":{
+            "vehicleType":"http://localhost:3005/api/vehicle-types/create",
+            "node":"http://localhost:3005/api/nodes/create",
+            "route":"http://localhost:3005/api/routes/create",
+            "line":"http://localhost:3005/api/lins/create"
+        }
+    },
     "errors":{
         "http":{
             "file-not-valid":{
