@@ -1,5 +1,5 @@
-# ARQSI project 2020/21
-Project carried out during the 1st semester in the Systems Architecture class at ISEP
+# Projeto de ARQSI 2020/21
+Projeto desenvolvido na UC Arquitetura de Sistemas (ARQSI) durante o primeiro semestre no ISEP
 
 ## Authors
 - Jorge Azevedo (1160929)
@@ -7,7 +7,11 @@ Project carried out during the 1st semester in the Systems Architecture class at
 - Daniel Coelho (1160943)
 - Filipe Sousa (1150470)
 
-## Components
-This project is composed of some sub projects to handle different parts of the system:
-- RedeMasterData   -> Rede Master Data web service
+## Componentes
+Este sistema é composto por vários componentes 
+- RedeMasterData -> Web service responsável por manter a informação de Rede
+- ImportGLX -> Web service responsável por inserir a informação de ficheiros GLX no MasterData que correspondem
+
+# Documentação
+Toda a documentação deste projeto está disponível na pasta ```Documentacao``` dentro deste repositório
 
