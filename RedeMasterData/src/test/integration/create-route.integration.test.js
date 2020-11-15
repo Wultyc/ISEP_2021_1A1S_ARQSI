@@ -9,9 +9,9 @@ describe('POST /routes', function() {
     testServer.useInTest()
     testDb.useInTest()
 
-    it('verifies correct create', async function() {
+    it('responds with 201 for creating routes', async function() {
         const api = this.api         
-        // Create three todos
+        // Create three nodes
         await api.post('/nodes', { shortName: 'Node 1', name: 'Node 1 name', longitude: '40' , latitude: '20', collectionNode: false, surrenderNode: false })
         await api.post('/nodes', { shortName: 'Node 2', name: 'Node 2 name', longitude: '90' , latitude: '30', collectionNode: false, surrenderNode: false  })
         await api.post('/nodes', { shortName: 'Node 3', name: 'Node 2 name', longitude: '140' , latitude: '60', collectionNode: false, surrenderNode: false })
@@ -39,7 +39,6 @@ describe('POST /routes', function() {
             ]
         });
         expect(response).to.have.property('status', 201)
-        console.log(response)
         expect(response.data).to.have.property('distance', 93)
         expect(response.data).to.have.property('duration', 32) 
         expect(response.data).to.have.property('isReinforcementRoute', false) 

@@ -3,14 +3,26 @@ const { expect_json } = require('chai-json')
 const testServer = require('../test-helpers/test-server')
 const testDb = require('../test-helpers/test-db')
 
-describe('GET /lines and GET lines/id', function () {
+describe('POST /lines and GET lines/id', function () {
     testServer.useInTest()
     testDb.useInTest()
 
-    it('responds with 200 { lines }', async function () {
+
+    it('responds with 400 ValidationError if fields are missing', async function() {
+        const api = this.api
+        const response = await expect(api.post('/lines/', { })).to.eventually.be.rejected
+        
+        
+        const errors = response.response
+        expect(errors).to.have.property('status', 400)
+        expect(errors.data).to.deep.equals([ 'A line must have at least 1 going route and 1 coming route.' ])
+
+    })
+
+    it('responds with 201 for creating line', async function () {
         const api = this.api
 
-        // Create three todos
+        // Create three nodes
         await api.post('/nodes', { shortName: 'Node 1', name: 'Node name 1', longitude: '40', latitude: '20', collectionNode: false, surrenderNode: false })
         await api.post('/nodes', { shortName: 'Node 2', name: 'Node name 2', longitude: '90', latitude: '30', collectionNode: false, surrenderNode: false })
         await api.post('/nodes', { shortName: 'Node 3', name: 'Node name 3', longitude: '140', latitude: '60', collectionNode: false, surrenderNode: false })
@@ -63,15 +75,13 @@ describe('GET /lines and GET lines/id', function () {
                 ]
         })
 
-        // Make the actual request to GET /nodes
+        // Make the actual request to GET /routes
         const response = await api.get('/routes')
 
         const route1 = response.data[0]._id
         const route2 = response.data[1]._id
 
-
-
-        await api.post('/lines', {
+        const response_get = await api.post('/lines', {
             code: 'Par_Ag', name: 'Paredes_Aguiar', color: 'RGB(38,91,11)', beginNode: node1, finalNode: node3, lineRoutes: [
 
                 {
@@ -94,12 +104,13 @@ describe('GET /lines and GET lines/id', function () {
 
                 }
             ]
-
         })
 
-        const response_get = await api.get('/lines')
+        console.log(response_get)
+
+        expect(response_get).to.have.property('status', 201)
         
-        expect(response_get).to.have.property('status', 200)
+        expect(response_get.data).to.have.property('name', 'Paredes_Aguiar')
 
     })
 })

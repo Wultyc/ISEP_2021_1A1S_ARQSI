@@ -32,7 +32,7 @@ describe('POST /nodes', function() {
         expect(response.response.data).to.deep.equals('A Surrender Node must always be a Collection Node.')
     })
 
-    it('verifies correct create', async function() {
+    it('responds with 201 for creating node', async function() {
         const api = this.api
         const response = await api.post('/nodes/', { shortName: 'Node 10',name: 'Node ten', longitude: '40' , latitude: '20', collectionNode: false, surrenderNode: false })
         expect(response).to.have.property('status', 201)
