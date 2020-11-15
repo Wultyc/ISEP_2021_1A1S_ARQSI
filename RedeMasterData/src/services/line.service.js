@@ -39,6 +39,18 @@ class LineService {
             callback(validationMessage);
             return;
         }
+        if (line.beginNode == null && line.finalNode == null) {
+            var firstLineRoute = await getRoutePromiseForLine(line.lineRoutes[0].routeId, validationMessage);
+            var firstOrientation = line.lineRoutes[0].orientation;
+            if (_.isEqual(firstOrientation, "Go")) {
+                line.beginNode = firstLineRoute.routeNodes[0].nodeId;
+                line.finalNode = firstLineRoute.routeNodes[firstLineRoute.routeNodes.length - 1].nodeId;
+            }
+            if (_.isEqual(firstOrientation, "Return")) {
+                line.finalNode = firstLineRoute.routeNodes[0].nodeId;
+                line.beginNode = firstLineRoute.routeNodes[firstLineRoute.routeNodes.length - 1].nodeId;
+            }
+        }
         await getNodePromiseForLine(line.beginNode, validationMessage);
         await getNodePromiseForLine(line.finalNode, validationMessage);
         var hasGoRoute = false, hasReturnRoute = false;
@@ -82,12 +94,12 @@ class LineService {
 
 // Business Logic
 lineCreatePreValidations = function (line, validationMessage) {
-    if (line.lineRoutes.length < 2) {
+    if (line.lineRoutes == null || line.lineRoutes.length < 2) {
         validationMessage.push('A line must have at least 1 going route and 1 coming route.');
     }
     return;
 };
-validateBeginAndLastNode = async function(beginNode, finalNode, route, orientation, validationMessage) {
+validateBeginAndLastNode = function(beginNode, finalNode, route, orientation, validationMessage) {
     var routeBeginNode = route.routeNodes[0].nodeId;
     var routeFinalNode = route.routeNodes[route.routeNodes.length - 1].nodeId;
     if (_.isEqual(orientation, "Go")) {

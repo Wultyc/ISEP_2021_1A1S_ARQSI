@@ -16,6 +16,10 @@ var Line = new Schema({
         type: String,
         required: [true, 'Insert a name.']
     },
+    color: {
+        type: String,
+        required: [true, 'Insert a colour.']
+    },
     
     // Nodes
     beginNode: {

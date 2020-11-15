@@ -18,7 +18,8 @@ describe('Convert Request Json body to Object', () => {
     it('Node', () => {
         const reqNode = {
             body: {
-                shortName: "node",
+                shortName: "nd",
+                name: "node",
                 longitude: 1,
                 latitude: 2,
                 collectionNode: false,
@@ -59,6 +60,7 @@ describe('Convert Request Json body to Object', () => {
             body: {
                 code: "1",
                 name: "lineName",
+                color: "red",
                 beginNode: "1",
                 finalNode: "2",
                 lineRoutes: [
@@ -85,7 +87,7 @@ describe('Convert Request Json body to Object', () => {
                 description: "autocarro",
                 autonomy: 10,
                 costPerKilometer: 25,
-                avarageCost: 10,
+                averageCost: 10,
                 averageSpeed: 50,
                 fuelType: "Gasoleo"
             }
@@ -107,7 +109,8 @@ describe('Convert Request Json body to Object', () => {
 
 const wantedNode = jest.fn(function () {
     return {
-        shortName: "node",
+        shortName: "nd",
+        name: "node",
         longitude: 1,
         latitude: 2,
         collectionNode: false,
@@ -140,6 +143,7 @@ const wantedLine = jest.fn(function () {
     return {
         code: "1",
         name: "lineName",
+        color: "red",
         beginNode: "1",
         finalNode: "2",
         lineRoutes: [
@@ -162,7 +166,7 @@ const wantedVehicleType = jest.fn(function () {
         description: "autocarro",
         autonomy: 10,
         costPerKilometer: 25,
-        avarageCost: 10,
+        averageCost: 10,
         averageSpeed: 50,
         fuelType: "Gasoleo"
     };
