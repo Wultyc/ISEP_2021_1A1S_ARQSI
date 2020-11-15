@@ -29,7 +29,7 @@ class NodeService {
         }
     };
 
-    nodeDelete(id) {
+    nodeDelete(id, callback) {
         repo.delete(id, callback);
     };
 

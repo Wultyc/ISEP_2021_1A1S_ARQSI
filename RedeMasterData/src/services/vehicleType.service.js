@@ -21,7 +21,7 @@ class VehicleTypeService {
         repo.save(vehicleType, callback);
     };
 
-    vehicleTypeDelete(id) {
+    vehicleTypeDelete(id, callback) {
         repo.delete(id, callback);
     };
 }

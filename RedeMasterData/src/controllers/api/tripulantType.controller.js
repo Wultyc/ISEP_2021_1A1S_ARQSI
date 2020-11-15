@@ -7,9 +7,10 @@ var transform = new dto();
 exports.tripulantTypeGetById = function (req, res) {
     service.tripulantTypeGetById(req.params.tripulantTypeId, function(err, params) {
         if(err){
-            return res.send(err).status(404);
+            return res.status(404).send(err);
         }
-        res.status(200).json(transform.ToDTO(params));
+        const response = transform.ToDTO(params);
+        res.status((!response.id) ? 404 : 200).send(response)
     });
 };
 
@@ -18,7 +19,7 @@ exports.tripulantTypeGetAll = function (req, res) {
         if(err){
             return res.status(404).send(err);
         }
-        res.json(params).status(200);
+        res.status(200).json(params);
     })
 };
 
@@ -28,7 +29,7 @@ exports.tripulantTypeCreate = function (req, res) {
         if (err) {
             return res.status(400).send(err);
         }
-        res.json(transform.ToDTO(params)).status(201);
+        res.status(201).json(transform.ToDTO(params));
     })
 };
 

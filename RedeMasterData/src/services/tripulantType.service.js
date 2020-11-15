@@ -18,7 +18,7 @@ class TripulantTypeService {
         repo.save(tripulantType, callback)
     };
 
-    tripulantTypeDelete(id) {
+    tripulantTypeDelete(id, callback) {
         repo.delete(id, callback);
     };
 

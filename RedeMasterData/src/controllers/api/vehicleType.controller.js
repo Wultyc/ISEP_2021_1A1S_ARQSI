@@ -10,7 +10,8 @@ exports.vehicleTypeGetById = function (req, res) {
         if(err){
             return res.status(404).send(err);
         }
-        res.status(200).json(transform.ToDTO(params));
+        const response = transform.ToDTO(params);
+        res.status((!response.id) ? 404 : 200).send(response)
     });
 };
 

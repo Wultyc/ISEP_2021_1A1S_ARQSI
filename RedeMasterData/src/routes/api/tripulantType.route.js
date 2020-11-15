@@ -4,10 +4,10 @@ const tripulantType_controller = require('../../controllers/api/tripulantType.co
 
 router.get('/', tripulantType_controller.tripulantTypeGetAll);
 
-router.get('/:tripluantTypeId', tripulantType_controller.tripulantTypeGetById);
+router.get('/:tripulantTypeId', tripulantType_controller.tripulantTypeGetById);
 
 router.post('/', tripulantType_controller.tripulantTypeCreate);
 
-router.delete('/:tripluantTypeId', tripulantType_controller.tripulantTypeDelete);
+router.delete('/:tripulantTypeId', tripulantType_controller.tripulantTypeDelete);
 
 module.exports = router;

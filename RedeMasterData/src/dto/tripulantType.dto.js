@@ -10,7 +10,7 @@ class TripulantTypeDTO {
     };
     
     ToDTO(req){
-        if(req == null) return 'Tripulant type does not exist.';
+         if(req == null) return 'Tripulant type does not exist.';
         let tripulantType = {
             id: req.id,
             description : req.description
