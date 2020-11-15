@@ -40,7 +40,16 @@ class LineService {
             return;
         }
         if (line.beginNode == null && line.finalNode == null) {
-            calculateBeginAndLastNodeForGlx(line, validationMessage);
+            var firstLineRoute = await getRoutePromiseForLine(line.lineRoutes[0].routeId, validationMessage);
+            var firstOrientation = line.lineRoutes[0].orientation;
+            if (_.isEqual(firstOrientation, "Go")) {
+                line.beginNode = firstLineRoute.routeNodes[0].nodeId;
+                line.finalNode = firstLineRoute.routeNodes[firstLineRoute.routeNodes.length - 1].nodeId;
+            }
+            if (_.isEqual(firstOrientation, "Return")) {
+                line.finalNode = firstLineRoute.routeNodes[0].nodeId;
+                line.beginNode = firstLineRoute.routeNodes[firstLineRoute.routeNodes.length - 1].nodeId;
+            }
         }
         await getNodePromiseForLine(line.beginNode, validationMessage);
         await getNodePromiseForLine(line.finalNode, validationMessage);
@@ -89,18 +98,6 @@ lineCreatePreValidations = function (line, validationMessage) {
         validationMessage.push('A line must have at least 1 going route and 1 coming route.');
     }
     return;
-};
-calculateBeginAndLastNodeForGlx = async function(line, validationMessage) {
-    var firstRoute = await getRoutePromiseForLine(line.lineRoutes[0].routeId, validationMessage);
-    var firstOrientation = line.lineRoutes[0].orientation;
-    if (_.isEqual(firstOrientation, "Go")) {
-        line.beginNode = firstRoute.routeNodes[0].nodeId;
-        line.finalNode = firstRoute.routeNodes[firstRoute.routeNodes.length - 1].nodeId;
-    }
-    if (_.isEqual(firstOrientation, "Return")) {
-        line.finalNode = firstRoute.routeNodes[0].nodeId;
-        line.beginNode = firstRoute.routeNodes[firstRoute.routeNodes.length - 1].nodeId;
-    }
 };
 validateBeginAndLastNode = function(beginNode, finalNode, route, orientation, validationMessage) {
     var routeBeginNode = route.routeNodes[0].nodeId;
