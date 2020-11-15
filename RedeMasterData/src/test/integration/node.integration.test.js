@@ -22,10 +22,7 @@ describe('GET /nodes and GET /nodes/id', function() {
         expect(response).to.have.property('status', 200)
         
         // Assert that all three todos are included
-        expect(response)
-            .to.have.nested.property('data')
-            .that.is.an('array')
-            .with.lengthOf(3)
+        expect(response).to.have.nested.property('data').that.is.an('array').with.lengthOf(3)
         const nodes = response.data
         // Assert that every todo contains all desired fields
         nodes.forEach(node => {

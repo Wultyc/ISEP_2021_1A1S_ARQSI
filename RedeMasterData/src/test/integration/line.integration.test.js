@@ -76,24 +76,16 @@ describe('GET /lines and GET lines/id', function () {
 
                 {
                     routeId: route1,
-                    orientation: "Return"
+                    orientation: "Go"
                 },
                 {
                     routeId: route2,
-                    orientation: "Go"
+                    orientation: "Return"
                 }
 
             ],
-            tripulantType: [
-                {
-                    
-                }
-            ],
-            vehicleType: [
-                {
-
-                }
-            ]
+            tripulantType: [ ],
+            vehicleType: [ ]
 
         })
 
