@@ -7,7 +7,7 @@ Breve descrição sobre a funcionalidade do endpoint
 |--------|-----------|------------|-------------|
 | 1.0    | REST      | HTTP       | N/A         |
 
-### Request
+### Pedido
 
 #### URI Parameters
 | Nome               | Campo          | Tipo de Dados      | Descrição |
