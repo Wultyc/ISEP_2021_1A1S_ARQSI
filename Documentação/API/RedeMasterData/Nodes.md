@@ -3,6 +3,7 @@ Rede Master Data é responsavel por gerir as informação sobre a rede armazenad
 
 ## [GET] /api/nodes
 Obtem um lista de todos os nós registados no sistema
+
 | Versão | Protocolo | Transporte | Autorização |
 |--------|-----------|------------|-------------|
 | 1.0    | REST      | HTTP       | N/A         |
@@ -19,6 +20,7 @@ http://localhost:3003/api/nodes
 ### Resposta
 #### Body
 A resposta deste pedido trás um array cujo formato é
+
 | Nome              | Campo          |Mandatorio| Tipo de Dados | Descrição                                               |
 |-------------------|----------------|----------|---------------|---------------------------------------------------------|
 | id                | _id            |Sim       | string        | Identificador único gerado pela base de dados           |
@@ -60,6 +62,7 @@ Body:
 
 ## [POST] /api/nodes
 Breve descrição sobre a funcionalidade do endpoint
+
 | Versão | Protocolo | Transporte | Autorização |
 |--------|-----------|------------|-------------|
 | 1.0    | REST      | HTTP       | N/A         |
@@ -67,6 +70,7 @@ Breve descrição sobre a funcionalidade do endpoint
 ### Pedido
 
 #### Body
+
 | Nome              | Campo          |Mandatorio| Tipo de Dados | Descrição                                               |
 |-------------------|----------------|----------|---------------|---------------------------------------------------------|
 | nome curto        | shortName      |Sim       | string        | Nome curto do nó de rede                                |
@@ -97,6 +101,7 @@ Body:
 ### Resposta
 
 #### Body
+
 | Nome              | Campo          |Mandatorio| Tipo de Dados | Descrição                                               |
 |-------------------|----------------|----------|---------------|---------------------------------------------------------|
 | id                | id             |Sim       | string        | Identificador único gerado pela base de dados           |
@@ -124,12 +129,14 @@ Body:
 
 ## [DELETE] /api/nodes/{nodeId}
 Obtem um lista de todos os nós registados no sistema
+
 | Versão | Protocolo | Transporte | Autorização |
 |--------|-----------|------------|-------------|
 | 1.0    | REST      | HTTP       | N/A         |
 
 ### Pedido
 Este request não requer nenhuma configuração extra
+
 #### URI Parameters
 | Nome | Campo | Tipo de Dados | Descrição                                     |
 |------|-------|---------------|-----------------------------------------------|
