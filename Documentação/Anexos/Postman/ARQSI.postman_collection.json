@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "7e0694c4-cd50-4392-9d06-12b40728676f",
+		"_postman_id": "5cc385ac-c85a-4467-b28c-4c4898398073",
 		"name": "ARQSI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -26,12 +26,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/nodes/",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/nodes/",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"nodes",
@@ -59,12 +57,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/nodes/",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/nodes/",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"nodes",
@@ -89,12 +85,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/nodes/123",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/nodes/123",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"nodes",
@@ -122,12 +116,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/nodes/123",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/nodes/123",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"nodes",
@@ -162,12 +154,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/lines/123/routes",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/lines/123/routes",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"lines",
@@ -193,12 +183,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/routes/",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/routes/",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"routes",
@@ -226,12 +214,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/routes/",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/routes/",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"routes",
@@ -256,12 +242,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/routes/123",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/routes/123",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"routes",
@@ -289,12 +273,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/routes/123",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/routes/123",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"routes",
@@ -329,12 +311,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/lines",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/lines",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"lines"
@@ -375,12 +355,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/lines/",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/lines/",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"lines",
@@ -408,12 +386,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/lines",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/lines",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"lines"
@@ -437,12 +413,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/lines/123",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/lines/123",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"lines",
@@ -470,12 +444,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/lines/123",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/lines/123",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"lines",
@@ -507,12 +479,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/vehicle-types/",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/vehicle-types/",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"vehicle-types",
@@ -540,12 +510,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/vehicle-types/123",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/vehicle-types/123",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"vehicle-types",
@@ -577,12 +545,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/tripulant-types/",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/tripulant-types/",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"tripulant-types",
@@ -610,12 +576,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/tripulant-types",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/tripulant-types",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"tripulant-types"
@@ -639,12 +603,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/vehicle-types/",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/vehicle-types/",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"vehicle-types",
@@ -669,12 +631,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/tripulant-types/",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/tripulant-types/",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"tripulant-types",
@@ -702,12 +662,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/vehicle-types/123",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/vehicle-types/123",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"vehicle-types",
@@ -735,12 +693,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/tripulant-types/123",
-									"protocol": "http",
+									"raw": "{{RedeMasterData}}/api/tripulant-types/123",
 									"host": [
-										"localhost"
+										"{{RedeMasterData}}"
 									],
-									"port": "3000",
 									"path": [
 										"api",
 										"tripulant-types",
@@ -776,12 +732,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3002/api/import-glx/",
-							"protocol": "http",
+							"raw": "{{ImportGLX}}/api/import-glx/",
 							"host": [
-								"localhost"
+								"{{ImportGLX}}"
 							],
-							"port": "3002",
 							"path": [
 								"api",
 								"import-glx",
