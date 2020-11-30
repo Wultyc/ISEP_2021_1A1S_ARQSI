@@ -1,5 +1,5 @@
 const TripulantTypeRepository = require('../repositories/tripulantType.repository');
-const TripulantType = require('../models/tripulantType.model');
+const TripulantTypeDomain = require('../domains/tripulantType.domain.ts');
 
 const repo = new TripulantTypeRepository();
 
@@ -14,8 +14,9 @@ class TripulantTypeService {
         repo.getAll(callback);
     };
 
-    tripulantTypeCreate(tripulantType, callback) {
-        repo.save(tripulantType, callback)
+    tripulantTypeCreate(tripulantTypeDTO, callback) {
+        const tripulantTypeDomain = TripulantTypeDomain.create(tripulantTypeDTO);
+        repo.save(tripulantTypeDomain, callback)
     };
 
     tripulantTypeDelete(id, callback) {
