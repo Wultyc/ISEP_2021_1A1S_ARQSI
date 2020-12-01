@@ -102,7 +102,7 @@ export class NodesComponent implements OnInit, AfterViewInit {
 
   submit() :void {
     // console.log(this.nodeForm.value)
-    console.log(this.nodeForm.value.shortName)
+    // console.log(this.nodeForm.value.shortName)
 
     var postEnitity = new Nodes();
 
@@ -118,7 +118,8 @@ export class NodesComponent implements OnInit, AfterViewInit {
         if (data) { 
           this.nodeList.push(data); 
           this.dataSource = new MatTableDataSource(this.nodeList);          
-          this.showDetails.push(false);        
+          this.showDetails.push(false); 
+          this.isAdding = !this.isAdding;       
         }
     },
     )

@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import {TripulantType} from '../models/tripulant-type';
+import {VehicleType} from '../models/vehicle-type';
 import {Observable, throwError } from 'rxjs'
 import { catchError, map, tap } from 'rxjs/operators';
+import { VehicleTypeComponent } from '../components/vehicle-type/vehicle-type.component';
 @Injectable({
   providedIn: 'root'
 })
-export class TripulantTypeService {
+export class VehicleTypeService {
 
   constructor(private httpClient: HttpClient) { }
-  url = 'http://localhost:3000/api/tripulant-types';
+
+  url = 'http://localhost:3000/api/vehicle-types';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
-  getTripulantType(): Observable<TripulantType[]> {
-    return this.httpClient.get<TripulantType[]>(this.url);    
+
+  getVehicleTypes(): Observable<VehicleType[]> {
+    return this.httpClient.get<VehicleType[]>(this.url);    
   }
-  postTripulantType(trip: TripulantType): Observable<TripulantType> {
-    return this.httpClient.post<TripulantType>(this.url, trip)
+  postVehicleType(vehicleType: VehicleType): Observable<VehicleType> {
+    return this.httpClient.post<VehicleType>(this.url, vehicleType)
       // .pipe(
       //   catchError(this.handleError(error: any))
       // );
@@ -32,5 +35,4 @@ export class TripulantTypeService {
         })
       )
   }
-
 }

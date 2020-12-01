@@ -25,6 +25,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { VehicleTypeComponent } from './RedeMasterData/components/vehicle-type/vehicle-type.component';
 import { TripulantTypeComponent } from './RedeMasterData/components/tripulant-type/tripulant-type.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { TripulantTypeComponent } from './RedeMasterData/components/tripulant-ty
     MatListModule,
     MatSortModule,
     MatSlideToggleModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   exports: [
     // MatButtonModule,
@@ -66,6 +68,7 @@ import { TripulantTypeComponent } from './RedeMasterData/components/tripulant-ty
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
+    MatSelectModule
     
   ],
   providers: [],
