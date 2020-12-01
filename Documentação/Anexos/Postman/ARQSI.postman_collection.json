@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5cc385ac-c85a-4467-b28c-4c4898398073",
+		"_postman_id": "b3090edf-b550-4a3a-b1cf-766ae382023c",
 		"name": "ARQSI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -522,6 +522,65 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Delete Vehicle Type",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"code\": \"1\",\r\n    \"name\": \"1\",\r\n    \"beginNode\": \"5faf17060d9ee23ac45f25ef\",\r\n    \"finalNode\": \"5faf17190d9ee23ac45f25f3\",\r\n    \"route\": [\"5faf1dc0094b213d082587f7\", \"5faf2053094b213d082587f9\"],\r\n    \"tripulantType\": [\"5f9f245103edb708e4ba0a9a\"],\r\n    \"vehicleType\": [\"5fa1e1537187174c70ef67b7\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/vehicle-types/",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"vehicle-types",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Vehicle Type by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\": \"autocarro\",\r\n    \"autonomy\": 200,\r\n    \"costPerKilometer\": 1.22,\r\n    \"avarageCost\": 13,\r\n    \"averageSpeed\": 22,\r\n    \"fuelType\": \"gasoleo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/vehicle-types/123",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"vehicle-types",
+										"123"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"protocolProfileBehavior": {},
@@ -589,34 +648,6 @@
 							"response": []
 						},
 						{
-							"name": "Delete Vehicle Type",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"code\": \"1\",\r\n    \"name\": \"1\",\r\n    \"beginNode\": \"5faf17060d9ee23ac45f25ef\",\r\n    \"finalNode\": \"5faf17190d9ee23ac45f25f3\",\r\n    \"route\": [\"5faf1dc0094b213d082587f7\", \"5faf2053094b213d082587f9\"],\r\n    \"tripulantType\": [\"5f9f245103edb708e4ba0a9a\"],\r\n    \"vehicleType\": [\"5fa1e1537187174c70ef67b7\"]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{RedeMasterData}}/api/vehicle-types/",
-									"host": [
-										"{{RedeMasterData}}"
-									],
-									"path": [
-										"api",
-										"vehicle-types",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Delete Tripulant Type",
 							"request": {
 								"method": "DELETE",
@@ -639,37 +670,6 @@
 										"api",
 										"tripulant-types",
 										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get Vehicle Type by Id",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"description\": \"autocarro\",\r\n    \"autonomy\": 200,\r\n    \"costPerKilometer\": 1.22,\r\n    \"avarageCost\": 13,\r\n    \"averageSpeed\": 22,\r\n    \"fuelType\": \"gasoleo\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{RedeMasterData}}/api/vehicle-types/123",
-									"host": [
-										"{{RedeMasterData}}"
-									],
-									"path": [
-										"api",
-										"vehicle-types",
-										"123"
 									]
 								}
 							},
