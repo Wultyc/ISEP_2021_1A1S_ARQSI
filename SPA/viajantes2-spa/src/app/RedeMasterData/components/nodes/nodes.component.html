@@ -1,0 +1,133 @@
+<!-- <mat-nav-list>
+    <mat-list-item *ngFor="let fruit of fruits">fruit</mat-list-item>
+</mat-nav-list> -->
+<h1>&nbsp; Nodes</h1>
+
+<div>
+  <a mat-button (click)= "setAdd()" >{{isAdding ? 'Close create mode' : 'Create Node'}}</a>
+</div>
+
+<div *ngIf="!isAdding; else createNodeTemplate">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Aguiar de Sousa" #input>
+  </mat-form-field>
+<table mat-table [dataSource]="dataSource"  class="mat-elevation-z8">
+  
+    <ng-container matColumnDef="shortName">
+      <th mat-header-cell *matHeaderCellDef > Short Name </th>
+      <td mat-cell *matCellDef="let nodes"> {{nodes.shortName}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef > Name </th>
+      <td mat-cell *matCellDef="let nodes" (click)="onShowDetails(row)"> {{nodes.name}} </td>
+    </ng-container>
+    
+    <!-- Weight Column -->
+    <ng-container matColumnDef="longitude">
+      <th mat-header-cell *matHeaderCellDef > Longitude </th>
+      <td mat-cell *matCellDef="let nodes"> {{nodes.longitude}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="latitude">
+        <th mat-header-cell *matHeaderCellDef> Latitude </th>
+        <td mat-cell *matCellDef="let nodes"> {{nodes.latitude}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="collectionNode">
+        <th mat-header-cell *matHeaderCellDef> Collection Node </th>
+        <td mat-cell *matCellDef="let nodes"> {{!!nodes.collectionNode ? 'x' : ''}} </td>
+      </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="surrenderNode">
+      <th mat-header-cell *matHeaderCellDef> Surrender Node </th>
+      <td mat-cell *matCellDef="let nodes"> {{!!nodes.surrenderNode ? 'x' : ''}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <mat-header-cell  *matHeaderCellDef ></mat-header-cell>
+        <mat-cell *matCellDef="let row" >
+             <button mat-button (click)= "onShowDetails(row)" ><mat-icon color='blueviolet'>create</mat-icon></button><button mat-button ><mat-icon color='blueviolet'>remove_circle</mat-icon></button>
+        </mat-cell>
+      </ng-container>
+
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row  *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+<ng-template #createNodeTemplate>
+  
+  <div [formGroup]="nodeForm">
+
+  <section class="example-section">
+      <mat-form-field class="example-full-width">
+        <mat-label>Short Name</mat-label>
+        <input matInput class="form-control" formControlName="shortName">
+        <mat-error *ngIf="formControl.hasError('required')">
+          Short Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;    
+      <mat-form-field class="example-full-width">
+        <mat-label>Node Name</mat-label>
+        <input matInput class="form-control" formControlName="name">
+        <mat-error *ngIf="formControl.hasError('required')">
+          Short Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>   
+  </section>
+
+  <section class="example-section">
+    <mat-form-field class="example-full-width">
+      <mat-label>Latitude</mat-label>
+      <input matInput class="form-control" formControlName="latitude">
+      <mat-error *ngIf="formControl.hasError('required')">
+        Latitude is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;    
+    <mat-form-field class="example-full-width">
+      <mat-label>Longitude</mat-label>
+      <input matInput class="form-control" formControlName="longitude">
+      <mat-error *ngIf="formControl.hasError('required')">
+        Longitude is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>   
+  </section>    
+    <section class="example-section">
+      <mat-slide-toggle
+      class="form-control" formControlName="surrenderNode"
+          [color]="primary"
+          [checked]="checked"
+          [disabled]="disabled">
+        Surrender Node
+    </mat-slide-toggle>&nbsp; &nbsp; &nbsp; &nbsp;
+      <mat-slide-toggle
+      class="form-control" formControlName="collectionNode"         
+          [color]="primary"
+          [checked]="checked"
+          [disabled]="disabled">
+        Collection Node
+      </mat-slide-toggle>
+    </section>
+  </div>
+    <div>
+      <a mat-button (click)= "submit()">Submit</a>
+    </div>
+
+    <!-- <p>
+      <mat-form-field class="example-full-width">
+        <mat-label>Name</mat-label>
+        <textarea matInput placeholder="Ex. 100 Main St">Santa Apolónia</textarea>
+        <mat-error *ngIf="formControl.hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Address 2</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+    </p> -->
+</ng-template>
