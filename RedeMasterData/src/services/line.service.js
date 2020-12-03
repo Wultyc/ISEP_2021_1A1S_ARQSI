@@ -7,6 +7,7 @@ const ServiceNode = require('../services/node.service');
 const ServiceRoute = require('../services/route.service');
 const ServiceTripulantType = require('../services/tripulantType.service');
 const ServiceVehicleType = require('../services/vehicleType.service');
+const { doesNotMatch } = require('assert');
 
 const serviceNode = new ServiceNode();
 const serviceRoute = new ServiceRoute();
@@ -98,6 +99,36 @@ class LineService {
         repo.delete(id, callback);
     };
 
+    async lineCreateAndAddRoute(routeForLine, callback) {
+        var validationMessage = [];
+        lineCreateAndAddRoutePreValidations(routeForLine, validationMessage);
+        if (validationMessage.length != 0) {
+            callback(validationMessage);
+            return;
+        }
+        var createdRoute = await createRouteForLine(routeForLine.route, validationMessage);
+        var line = await getLinePromise(routeForLine.lineId, validationMessage);
+        if (validationMessage.length != 0) {
+            callback(validationMessage);
+            return;
+        }
+        validateBeginAndLastNode(line.beginNode._id, line.finalNode._id, createdRoute, 
+            routeForLine.orientation, validationMessage);
+        if (validationMessage.length == 0) {
+            line.lineRoutes.push({
+                "routeId": createdRoute._id.toString(),
+                "orientation": routeForLine.orientation
+            });
+            return repo.updateRoutes(line._id.toString(), line.lineRoutes, callback);
+        } else {
+            if (!_.isEmpty(createdRoute)) {
+                await deleteRouteForLine(createdRoute._id);
+            }
+            callback(validationMessage);
+            return;
+        }
+    }
+
 }
 
 // Business Logic
@@ -131,6 +162,9 @@ validateBeginAndLastNode = function(beginNode, finalNode, route, orientation, va
         }
     }
 };
+validateGetLine = function(res, id) {
+    return _.isEmpty(res) ? 'Line with id ' + id + ' does not exist.' : '';
+};
 validateGetNodeForLine = function(res, id) {
     return _.isEmpty(res) ? 'Node with id ' + id + ' does not exist.' : '';
 };
@@ -143,8 +177,36 @@ validateGetTripulantTypeForLine = function(res, id) {
 validateGetVehicleTypeForLine = function(res, id) {
     return _.isEmpty(res) ? 'Vehicle Type with id ' + id + ' does not exist.' : '';
 };
+lineCreateAndAddRoutePreValidations = function (routeForLine, validationMessage) {
+    if (_.isEmpty(routeForLine.lineId)) {
+        validationMessage.push('The lineId must be introduced.');
+    }
+    if (_.isEmpty(routeForLine.orientation) || 
+       (!_.isEqual(routeForLine.orientation, 'Go') && !_.isEqual(routeForLine.orientation, 'Return'))) {
+        validationMessage.push('An orientation must be introduced with the correct values (Go or Return).');
+    }
+    if (_.isEmpty(routeForLine.route)) {
+        validationMessage.push('A route must be introduced.');
+    }
+    return;
+};
 
 // Promises
+getLinePromise = function (lineId, validationMessage) {
+    return new Promise((resolve, reject) => {
+        const serviceLine = new LineService();
+        serviceLine.lineGetById(lineId, (err, res) => {
+            if (err) {
+                reject(err);
+            }
+            var lineValidationMessage = validateGetLine(res, lineId);
+            if (!_.isEmpty(lineValidationMessage)) {
+                validationMessage.push(lineValidationMessage);
+            }
+            resolve(res);
+        });
+    });
+}
 getNodePromiseForLine = function (nodeId, validationMessage) {
     return new Promise((resolve, reject) => {
         serviceNode.nodeGetById(nodeId, (err, res) => {
@@ -199,6 +261,29 @@ getVehicleTypePromiseForLine = function (vehicleTypeId, validationMessage) {
             }
             resolve(res);
         });
+    });
+}
+
+createRouteForLine = function (route, validationMessage) {
+    return new Promise((resolve, reject) => {
+        serviceRoute.routeCreate(route, (err, res) => {
+            if (err) {
+                for (let i = 0; i < err.length; i++) {
+                    validationMessage.push(err[i]);
+                }
+            }
+            resolve(res);
+        })
+    });
+}
+deleteRouteForLine = function (routeId) {
+    return new Promise((resolve, reject) => {
+        serviceRoute.routeDelete(routeId, (err, res) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(res);
+        })
     });
 }
 

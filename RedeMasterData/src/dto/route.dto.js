@@ -4,8 +4,6 @@ class RouteDTO {
 
     ToInsert (req) {
         let route = {
-            distance: req.body.distance,
-            duration: req.body.duration,
             isReinforcementRoute: req.body.isReinforcementRoute,
             isEmptyRoute: req.body.isEmptyRoute,
             routeNodes: req.body.routeNodes

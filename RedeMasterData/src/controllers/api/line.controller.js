@@ -57,3 +57,13 @@ exports.lineDelete = function (req, res) {
         res.status(204).send('Line deleted.');
     });
 };
+
+exports.lineCreateAndAddRoute = function (req, res) {
+    let routeForLine = transform.ToInsertRouteInLine(req);
+    service.lineCreateAndAddRoute(routeForLine, function (err, params) {
+        if (err) {
+            return res.status(400).send(err);
+        }
+        res.status(201).json(transform.ToDTO(params));
+    })
+};

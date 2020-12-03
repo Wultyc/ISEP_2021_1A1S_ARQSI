@@ -25,7 +25,11 @@ class LineRepository {
     };
 
     delete(id, callback) {
-        Line.findByIdAndRemove(id, callback) 
+        Line.findByIdAndRemove(id, callback);
+    };
+
+    updateRoutes(id, routes, callback) {
+        Line.findByIdAndUpdate({"_id": id}, {"lineRoutes": routes}, callback);
     };
 
 }

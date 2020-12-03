@@ -49,7 +49,7 @@ class RouteService {
         }
     }
 
-    routeDelete(id) {
+    routeDelete(id, callback) {
         repo.delete(id, callback);
     };
 }
@@ -72,7 +72,7 @@ getNodePromiseForRoute = function (nodeId, nodeValidatior, validationMessage) {
 
 // Business Logic
 routeCreatePreValidations = function (route, validationMessage) {
-    if (route.routeNodes == null || route.routeNodes < 2) {
+    if (route.routeNodes == null || route.routeNodes.length < 2) {
         validationMessage.push('Route must have at least 2 nodes.');
     }
     return;

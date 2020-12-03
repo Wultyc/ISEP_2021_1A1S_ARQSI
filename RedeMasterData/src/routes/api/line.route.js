@@ -13,4 +13,6 @@ router.post('/', line_controller.lineCreate);
 
 router.delete('/:lineId', line_controller.lineDelete);
 
+router.post('/:lineId/createAndAddRoute/:orientation', line_controller.lineCreateAndAddRoute);
+
 module.exports = router;

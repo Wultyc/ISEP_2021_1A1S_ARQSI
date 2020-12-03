@@ -16,8 +16,8 @@ class LineDTO {
         return line;
     };
     
-    ToDTO(req){
-        if(req == null) return 'Line does not exist.';
+    ToDTO (req) {
+        if (req == null) return 'Line does not exist.';
         let line = {
             id: req.id,
             code: req.code,
@@ -32,6 +32,18 @@ class LineDTO {
         return line;
     };
     
+    ToInsertRouteInLine (req) {
+        let routeForLine = {
+            lineId: req.params.lineId,
+            orientation: req.params.orientation,
+            route: {
+                isReinforcementRoute: req.body.isReinforcementRoute,
+                isEmptyRoute: req.body.isEmptyRoute,
+                routeNodes: req.body.routeNodes
+            }
+        };
+        return routeForLine;
+    };
 }
 
 module.exports = LineDTO;
