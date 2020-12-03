@@ -9,7 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { FooterComponent } from './overall-components/footer/footer.component';
 import { AppRoutingModule } from './app-routing.module';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule} from '@angular/material/table';
 import { SideNavComponent } from './overall-components/side-nav/side-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -26,6 +26,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { VehicleTypeComponent } from './RedeMasterData/components/vehicle-type/vehicle-type.component';
 import { TripulantTypeComponent } from './RedeMasterData/components/tripulant-type/tripulant-type.component';
 import { MatSelectModule } from '@angular/material/select';
+import { ImportGLXComponent } from './RedeMasterData/components/import-glx/import-glx.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
@@ -36,6 +39,7 @@ import { MatSelectModule } from '@angular/material/select';
     SideNavComponent,
     VehicleTypeComponent,
     TripulantTypeComponent,
+    ImportGLXComponent,
     
   ],
   imports: [
@@ -58,17 +62,19 @@ import { MatSelectModule } from '@angular/material/select';
     MatSortModule,
     MatSlideToggleModule,
     ReactiveFormsModule,
-    MatSelectModule
-  ],
+    MatSelectModule,
+    MatSnackBarModule
+    ],
   exports: [
     // MatButtonModule,
     // MatFormFieldModule,
     // MatInputModule,
     // MatSortModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatSelectModule
+    // MatFormFieldModule,
+    // MatInputModule,
+    // MatCheckboxModule,
+    // MatSelectModule,
+    
     
   ],
   providers: [],

@@ -12,6 +12,9 @@ mat-icon {
   font-size: 14px;
   width: 100%;
 }
+mat-label {
+  color: blueviolet;
+}
 /* mat-button {
   color: blueviolet;
 } */

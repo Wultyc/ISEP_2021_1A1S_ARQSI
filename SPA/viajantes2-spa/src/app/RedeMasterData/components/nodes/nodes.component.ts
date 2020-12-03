@@ -6,6 +6,11 @@ import {Nodes} from '../../models/nodes';
 import {NodesService} from '../../services/nodes.service'
 import {MatDialog} from '@angular/material/dialog';
 import {FormControl, Validators, FormBuilder, FormGroup} from '@angular/forms';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar'
 
 @Component({
   selector: 'app-nodes',
@@ -38,7 +43,6 @@ export class NodesComponent implements OnInit, AfterViewInit {
     collectionNode: new FormControl()
   });
 
-  @ViewChild(MatSort) sort: MatSort;
   showDetails: boolean[] = [];
   nodeList: Nodes[] = [];
   displayedColumns: string[] = ['shortName', 'name', 'longitude', 'latitude', 'collectionNode', 'surrenderNode', 'actions'];
@@ -47,20 +51,30 @@ export class NodesComponent implements OnInit, AfterViewInit {
   isAdding: boolean = false;
  
 
-
+  @ViewChild(MatSort) sort : MatSort;
 
   constructor(
     private nodesService: NodesService,
     public dialog: MatDialog,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private _snackBar: MatSnackBar
     ) {}
   ngOnInit()  {
-   
+    this.dataSource.filterPredicate = 
+    (data: Nodes, filter: string) => data.name?.indexOf(filter) != -1;
     this.getNodes();
+
   }
   ngAfterViewInit() {
-
-    this.dataSource.sort = this.sort;
+    
+    // this.dataSource.sort = this.sort;
+  }
+  openSnackBar(error:any,) {
+    this._snackBar.open(error, 'Bad request', {
+      duration: 1000,
+      horizontalPosition: 'end',
+      verticalPosition: 'top',
+    });
   }
 
 
@@ -70,6 +84,10 @@ export class NodesComponent implements OnInit, AfterViewInit {
         if (data && data.length > 0) { 
           this.nodeList = data; 
           this.dataSource = new MatTableDataSource(this.nodeList);
+
+          
+
+          this.dataSource.sort = this.sort;
           for (let i = 0; i < data.length; i++) {
             this.showDetails.push(false);
           }         
@@ -84,10 +102,11 @@ export class NodesComponent implements OnInit, AfterViewInit {
     // console.log(row);
   }
 
-  applyFilter(event: Event) {
+  applyFilter(filterValue: string) {
     // let dataSource = new MatTableDataSource(this.nodeList);
-    const filterValue = (event.target as HTMLInputElement).value;
+  
     this.dataSource.filter = filterValue.trim().toLowerCase();
+
   }
   
   setAdd() : any {
@@ -100,6 +119,28 @@ export class NodesComponent implements OnInit, AfterViewInit {
     return false;    
   }
 
+  handleError(error: any){
+    // for (let i = 0; i < error.lenght; i++) {
+    
+    if (error.collectionNode){
+    this.openSnackBar(error.collectionNode.message);
+    }
+    // if (error.shortName){
+    // this.openSnackBar(error.shortName.message);
+    //   }
+    // if (error.name){
+    // this.openSnackBar(error.name.message);
+    //   }
+    // if (error.surrenderNode){
+    // this.openSnackBar(error.surrenderNode.message);
+    //   }
+    // if (error.latitude){
+    // this.openSnackBar(error.latitude.message);
+    // }
+  // }
+      this.isAdding = true
+  
+  }
   submit() :void {
     // console.log(this.nodeForm.value)
     // console.log(this.nodeForm.value.shortName)
@@ -122,6 +163,7 @@ export class NodesComponent implements OnInit, AfterViewInit {
           this.isAdding = !this.isAdding;       
         }
     },
+    error => this.handleError(error.error.errors)
     )
   }
 }

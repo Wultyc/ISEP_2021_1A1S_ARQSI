@@ -17,6 +17,11 @@ export class NodesService {
     return this.httpClient.get<Nodes[]>(this.url);    
   }
 
+
+  // getNodesByFilter(name: string): Observable<Nodes[]> {
+  //   return this.httpClient.get<Nodes[]>(this.url + '');    
+  // }
+
   postNode(node: Nodes): Observable<Nodes> {
     return this.httpClient.post<Nodes>(this.url, node)
       // .pipe(
