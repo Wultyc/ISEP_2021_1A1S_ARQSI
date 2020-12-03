@@ -16,6 +16,7 @@ class TripulantTypeService {
 
     tripulantTypeCreate(tripulantTypeDTO, callback) {
         const tripulantTypeDomain = TripulantTypeDomain.create(tripulantTypeDTO);
+        //usar um mapper para converter o objeto de dominio para DTO
         repo.save(tripulantTypeDomain, callback)
     };
 

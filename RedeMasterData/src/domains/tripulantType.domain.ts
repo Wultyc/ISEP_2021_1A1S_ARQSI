@@ -1,13 +1,12 @@
+import { AggregateRoot } from "./interface/AggregateRoot";
+import { UniqueEntityID } from "./interface/UniqueEntityID";
+
 class TripulantTypeProps {
   description: string;
 }
 
-class TripulantTypeDomain {
-    
-  private readonly _id: string;
-  private readonly props: TripulantTypeProps;
-
-  get id (): string {
+export class TripulantTypeDomain extends AggregateRoot<TripulantTypeProps> {
+  get id (): UniqueEntityID {
     return this._id;
   }
 
@@ -19,14 +18,15 @@ class TripulantTypeDomain {
     this.props.description = value;
   }
 
-  private constructor (props: TripulantTypeProps, id: string) {
-    this._id = id ;
-    this.props = props;
+  private constructor (props: TripulantTypeProps, id: UniqueEntityID) {
+    super(props, id)
   }
   
-  public static create (props: TripulantTypeProps, id: string) {
-    return new TripulantTypeDomain({ ...props }, id);
+  public static create (props: TripulantTypeProps, id: UniqueEntityID) {
+
+    //Fazer as validações. se estiver OK cria um objeto desta classe e retorna
+    //Atenção isto NÃO É O DTO!!
+    //se estiver invalido retorna um objeto {error: "mensagem de erro"}
+    return "";
   }
 }
-
-module.exports = TripulantTypeDomain;
