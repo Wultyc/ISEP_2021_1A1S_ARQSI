@@ -1,0 +1,44 @@
+<h1>&nbsp; Tripulant Types</h1>
+  
+<div>
+  <a mat-button (click)= "setAdd()" >{{isAdding ? 'Close create mode' : 'Create Tripulant Type'}}</a>
+</div>
+
+<div *ngIf="!isAdding; else createTripulantTypeTemplate">
+<mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Aguiar de Sousa" #input>
+  </mat-form-field>
+<table mat-table [dataSource]="dataSource"  class="mat-elevation-z8">
+<ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef > Description </th>
+    <td mat-cell *matCellDef="let tripulantTypes"> {{tripulantTypes.description}} </td>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <mat-header-cell  *matHeaderCellDef ></mat-header-cell>
+    <mat-cell *matCellDef="let row" >
+         <button mat-button><mat-icon color='blueviolet'>create</mat-icon></button><button mat-button ><mat-icon color='blueviolet'>remove_circle</mat-icon></button>
+    </mat-cell>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row  *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+</div>
+
+<ng-template #createTripulantTypeTemplate>
+  
+  <div [formGroup]="tripulantTypeForm">
+    <section class="example-section">
+      <mat-form-field class="example-full-width">
+        <mat-label>Description</mat-label>
+        <input matInput class="form-control" formControlName="description">
+        <mat-error *ngIf="formControl.hasError('required')">
+          Description is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </section>
+    </div>
+    <div>
+      <a mat-button (click)= "submit()">Submit</a>
+    </div>
+</ng-template>
