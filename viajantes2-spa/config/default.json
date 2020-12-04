@@ -1,0 +1,24 @@
+{
+    "app":{
+        "defaultServerPort":"3000"
+    },
+    "backend":{
+        "RedeMasterData":{
+            "host":"localhost:3003",
+            "services":{
+                "nodes":"/api/nodes",
+                "routes":"/api/routes",
+                "lines":"/api/lines",
+                "tipulantType":"/api/tipulant-type",
+                "vehicleType":"/api/vehicle-type"
+            }
+        },
+        "ImportGLX":{
+            "host":"localhost:3002",
+            "services":{
+                "importGLX":"/api/import-glx"
+            }
+        }
+    }
+
+}
