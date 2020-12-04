@@ -12,4 +12,6 @@ router.use('/nodes', node)
 router.use('/tripulant-types', tripulantType)
 router.use('/vehicle-types', vehicleType)
 
+router.get('/healthcheck', (req, res) => {res.send("I'm Alive")})
+
 module.exports = router
