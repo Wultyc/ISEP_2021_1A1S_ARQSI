@@ -1,33 +1,11 @@
-class NodeDTO {
-
-    constructor() {}
-
-    ToInsert (req) {
-        let node = {
-            shortName: req.body.shortName,
-            name: req.body.name,
-            longitude: req.body.longitude,
-            latitude: req.body.latitude,
-            collectionNode: req.body.collectionNode,
-            surrenderNode: req.body.surrenderNode
-        };
-        return node;
-    };
-    
-    ToDTO(req){
-        if(req == null) return 'Node does not exist.';
-        let node = {
-            id: req.id,
-            shortName: req.shortName,
-            name: req.name,
-            longitude: req.longitude,
-            latitude: req.latitude,
-            collectionNode: req.collectionNode,
-            surrenderNode: req.surrenderNode
-        };
-        return node;
-    };
-    
+class nodeDTO {
+    id = null
+    shortName = null
+    name = null
+    longitude = null
+    latitude = null
+    collectionNode = null
+    surrenderNode = null
 }
 
-module.exports = NodeDTO;
+module.exports = nodeDTO;

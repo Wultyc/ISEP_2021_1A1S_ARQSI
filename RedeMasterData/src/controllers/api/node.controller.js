@@ -1,13 +1,11 @@
-const Node = require('../../models/node.model');
+const nodeDTO = require('../../dto/node.dto');
+const NodesMapper = require('../../mappers/nodes.mapper');
 const ServiceNode = require('../../services/node.service');
 const config = require('config')
 
 const service = new ServiceNode();
+const nodeMapper = new NodesMapper();
 
-// DTO
-const dto = require('../../dto/node.dto');
-// const { config } = require('dotenv/types');
-var transform = new dto();
 
 exports.nodeGetById = function (req, res) {
 
@@ -15,7 +13,7 @@ exports.nodeGetById = function (req, res) {
         if(err){
             return res.status(404).send(err);
         }
-        const response = transform.ToDTO(params);
+        const response = nodeMapper.fromReqToDTO(params, new nodeDTO);
         res.status((!response.id) ? 404 : 200).send(response)
     });
 };
