@@ -1,6 +1,7 @@
 const axios = require('axios')
 const spawn = require('child_process').spawn
 const getPort = require('get-port')
+const config = require('config')
 const dotEnvLoader = require ('../../loaders/dotenv')
 dotEnvLoader();
 
@@ -53,7 +54,8 @@ exports.useInTest = function() {
         // 2. Assign PORT to a random free port
         const env = Object.assign({}, TEST_ENV, {
             PATH: process.env.PATH,
-            PORT: process.env.APP_PORT //await getPort()
+            PORT: process.env.APP_PORT, //await getPort()
+            DB_CONNECT: process.env.DB_CONNECT_TEST || config.get('app.defaultMongooseConnStringTst')
         })
        
         // Use our utility function that we created above to spawn the test server
