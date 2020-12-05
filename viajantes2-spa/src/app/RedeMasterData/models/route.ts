@@ -1,5 +1,7 @@
+import { Nodes } from './nodes';
+
 export interface RouteNodes {
-    nodeId: string;
+    node: Nodes;
     distance: number;
     duration: number;
 }
