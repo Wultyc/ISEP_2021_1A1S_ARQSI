@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiEndpointBackendRDM: 'http://localhost:3003/api/',
+  apiEndpointBackendGLX: 'http://localhost:3002/api/import-glx'
 };
 
 /*
