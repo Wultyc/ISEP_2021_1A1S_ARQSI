@@ -16,7 +16,7 @@ pipelines:
       - step:
           name: Build Image and Save on DockerHub
           script:
-            - export IMAGE_NAME=$DOCKER_HUB_USERNAME/viajantes2-redemasterdata:$BITBUCKET_COMMIT
+            - export IMAGE_NAME=$DOCKER_HUB_USERNAME/viajantes2-redemasterdata:latest
             # build the Docker image (this will use the Dockerfile in the root of the repo)
             - docker build -t $IMAGE_NAME ./RedeMasterData
             # authenticate with the Docker Hub registry
@@ -31,7 +31,13 @@ pipelines:
           script:
             - echo "$KUBECONFIG"
             - echo $KUBECONFIG | base64 -d > kubeconfig.yml
-            - sed -i "s|{{image}}|$DOCKER_HUB_USERNAME/$APPLICATION_NAME:$BITBUCKET_COMMIT|g" ./Kubernets/redemasterdata_deployment.yaml
+            # Remove anything at the path $(pwd)/config to avoid naming
+            # conflicts with the pipe. Ideally the pipe would allow the kube
+            # config path to be configured to circumvent this.
+            # Removing the folder isn't an issue since it's applying the
+            # pushed image that was created in the previous step.
+            - rm -rf config
+            # Execute the pipe as normal.
             - pipe: atlassian/kubectl-run:1.1.2
               variables:
                 KUBE_CONFIG: 'kubeconfig.yml'
