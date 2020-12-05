@@ -11,6 +11,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar'
+import { NodesMapper } from '../../models/mappers/nodeMapper';
 
 @Component({
   selector: 'app-nodes',
@@ -49,7 +50,8 @@ export class NodesComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Nodes>();
 
   isAdding: boolean = false;
- 
+
+  mapper = new NodesMapper();
 
   @ViewChild(MatSort) sort : MatSort;
 
@@ -60,6 +62,7 @@ export class NodesComponent implements OnInit, AfterViewInit {
     private _snackBar: MatSnackBar
     ) {}
   ngOnInit()  {
+
     this.dataSource.filterPredicate = 
     (data: Nodes, filter: string) => data.name?.indexOf(filter) != -1;
     this.getNodes();
@@ -77,26 +80,25 @@ export class NodesComponent implements OnInit, AfterViewInit {
     });
   }
 
-
-  getNodes() : void {
+  getNodes() : void {    
     this.nodesService.getNodes().subscribe(
       (data) => {
-        if (data && data.length > 0) { 
-          this.nodeList = data; 
+        if (data && data.length > 0) {
+          console.log (data)
+          for (let i = 0; i < data.length; i ++){              
+            this.nodeList.push(this.mapper.fromResponseToDto(new Nodes() as Nodes, data[i]));
+            console.log(this.nodeList[i])       
+            };
           this.dataSource = new MatTableDataSource(this.nodeList);
-
-          
-
           this.dataSource.sort = this.sort;
           for (let i = 0; i < data.length; i++) {
             this.showDetails.push(false);
           }         
-        };
-        
-      }
-     
+        };        
+      } 
     ); 
   };
+  
   onShowDetails(row: number) {
     // this.showDetails[row] = !this.showDetails[row];
     // console.log(row);
@@ -145,16 +147,16 @@ export class NodesComponent implements OnInit, AfterViewInit {
     // console.log(this.nodeForm.value)
     // console.log(this.nodeForm.value.shortName)
 
-    var postEnitity = new Nodes();
-
-    postEnitity.shortName = this.nodeForm.value.shortName;
-    postEnitity.name = this.nodeForm.value.name;
-    postEnitity.latitude = this.nodeForm.value.latitude;
-    postEnitity.longitude = this.nodeForm.value.longitude;
-    postEnitity.collectionNode = this.nodeForm.value.collectionNode;
-    postEnitity.surrenderNode = this.nodeForm.value.surrenderNode;
+    var postEntity = new Nodes();    
     
-    this.nodesService.postNode(postEnitity)
+    this.nodeForm.value.collectionNode = (this.nodeForm.value.collectionNode == undefined || this.nodeForm.value.collectionNode == null) ? false : (this.nodeForm.value.collectionNode == true ? true : false);
+    this.nodeForm.value.surrenderNode = (this.nodeForm.value.surrenderNode == undefined  || this.nodeForm.value.surrenderNode == null) ? false : (this.nodeForm.value.surrenderNode == true ? true : false);
+    console.log(this.nodeForm.value)
+    postEntity = this.mapper.fromFormToDTO(this.nodeForm.value, postEntity)
+    
+    console.log(postEntity)
+
+    this.nodesService.postNode(postEntity)
     .subscribe((data) => {
         if (data) { 
           this.nodeList.push(data); 

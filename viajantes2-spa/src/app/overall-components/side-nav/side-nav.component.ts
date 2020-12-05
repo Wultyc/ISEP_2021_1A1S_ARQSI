@@ -34,5 +34,8 @@ export class SideNavComponent {
     goToTGLX(): void {
       this.router.navigate(['import-glx'], { relativeTo: this.route });
     }
+    goToRoutes(): void {
+      this.router.navigate(['routes'], { relativeTo: this.route });
+    }
 }
 

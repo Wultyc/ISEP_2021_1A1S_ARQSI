@@ -6,11 +6,13 @@ import { LineComponent } from './RedeMasterData/components/line/line.component';
 import { TripulantTypeComponent } from './RedeMasterData/components/tripulant-type/tripulant-type.component';
 import { VehicleTypeComponent } from './RedeMasterData/components/vehicle-type/vehicle-type.component';
 import { ImportGLXComponent } from './RedeMasterData/components/import-glx/import-glx.component';
+import { RoutesComponent } from './RedeMasterData/components/routes/routes.component';
 const routes: Routes = [
   {path: 'nodes', component: NodesComponent },
   {path: 'lines', component: LineComponent },
   {path: 'tripulant-types', component: TripulantTypeComponent },
   {path: 'vehicle-types', component: VehicleTypeComponent },
+  {path: 'routes', component: RoutesComponent },
   {path: 'import-glx', component: ImportGLXComponent },
 ]
 @NgModule({
