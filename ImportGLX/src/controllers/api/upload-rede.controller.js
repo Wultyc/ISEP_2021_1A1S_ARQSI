@@ -11,20 +11,27 @@ const LineDTO = require('../../dto/line.dto')
 var updList = []
 
 exports.start = async function (fileName) {
-    const filepath = `${__dirname}/../../${config.get('glx-files.upload-dir')}/${fileName}`
+    const filepath = `${__dirname}/../../../${config.get('glx-files.upload-dir')}/${fileName}`
     const parser = new xml2js.Parser();
+
+    console.log({
+        filepath,
+        parser
+    })
 
     fs.readFile(filepath, function (err, data) {
         parser.parseString(data, function (err, result) {
-
             if (err) {
                 console.log(err)
                 return err
             }
-
             console.log('File Parsed successfully');
             processGLX(result)
         });
+        if (err) {
+            console.log(err)
+            return err
+        }
     });
 }
 
