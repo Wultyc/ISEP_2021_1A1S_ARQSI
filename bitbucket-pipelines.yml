@@ -28,6 +28,7 @@ pipelines:
         name: Deploy to Kubernets
         deployment: production
         script:
+          - echo $KUBECONFIG
           - echo $KUBECONFIG | base64 -d > kubeconfig.yml
           - sed -i "s|{{image}}|$DOCKER_HUB_USERNAME/$APPLICATION_NAME:$BITBUCKET_COMMIT|g" deployment.yml
           - pipe: atlassian/kubectl-run:1.1.2
