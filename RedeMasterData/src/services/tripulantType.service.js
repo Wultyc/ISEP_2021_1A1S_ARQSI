@@ -1,5 +1,5 @@
 const TripulantTypeRepository = require('../repositories/tripulantType.repository');
-const TripulantTypeDomain = require('../domains/tripulantType.domain.ts');
+const TripulantType = require('../models/tripulantType.model');
 
 const repo = new TripulantTypeRepository();
 
@@ -14,10 +14,8 @@ class TripulantTypeService {
         repo.getAll(callback);
     };
 
-    tripulantTypeCreate(tripulantTypeDTO, callback) {
-        const tripulantTypeDomain = TripulantTypeDomain.create(tripulantTypeDTO);
-        //usar um mapper para converter o objeto de dominio para DTO
-        repo.save(tripulantTypeDomain, callback)
+    tripulantTypeCreate(tripulantType, callback) {
+        repo.save(tripulantType, callback)
     };
 
     tripulantTypeDelete(id, callback) {
@@ -26,4 +24,4 @@ class TripulantTypeService {
 
 }
 
-module.exports = TripulantTypeService;    
+module.exports = TripulantTypeService;
