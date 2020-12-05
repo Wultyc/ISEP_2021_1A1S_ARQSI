@@ -80,5 +80,9 @@ export class LineComponent implements OnInit, AfterViewInit  {
   
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
+  };
+
+  setAdd() : any {
+    return this.isAdding = !this.isAdding;  
   }
 }

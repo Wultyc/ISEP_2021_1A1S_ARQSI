@@ -1,9 +1,16 @@
 <h1>&nbsp; Lines</h1>
-<mat-form-field  class="example-full-width">
+
+<div>
+  <a mat-button (click)= "setAdd()" >{{isAdding ? 'Close create line' : 'Create Line'}}</a>
+</div>
+
+<div *ngIf="!isAdding; else createLineTemplate">
+
+  <mat-form-field  class="example-full-width">
     <mat-label>Name: </mat-label>
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Ex. Aguiar de Sousa" #input>
   </mat-form-field>
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
   
     <ng-container matColumnDef="code">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Code </th>
@@ -16,7 +23,7 @@
     </ng-container>
     
     <ng-container matColumnDef="color">
-      <th mat-header-cell *matHeaderCellDef > color </th>
+      <th mat-header-cell *matHeaderCellDef > Color </th>
       <td mat-cell *matCellDef="let lines"> {{lines.color}} </td>
     </ng-container>
 
@@ -40,3 +47,17 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row  *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
+</div>
+
+<ng-template #createLineTemplate>
+  
+  <div [formGroup]="lineForm">
+
+<!-- FIELDS -->
+
+  </div>
+  <div>
+    <a mat-button (click)= "submit()">Submit</a>
+  </div>
+</ng-template>
