@@ -1,5 +1,10 @@
 import { Nodes } from './nodes';
 
+export class RouteNodesSimple {
+    nodeId: string;
+    distance: number;
+    duration: number;
+}
 export class RouteNodes {
     node: Nodes;
     distance: number;
@@ -11,4 +16,10 @@ export class Route {
     isReinforcementRoute: boolean;
     isEmptyRoute: boolean;
     routeNodes: RouteNodes[] = [];
+}
+
+export class RoutePost {
+    isReinforcementRoute: boolean;
+    isEmptyRoute: boolean;
+    routeNodes: RouteNodesSimple[] = [];
 }

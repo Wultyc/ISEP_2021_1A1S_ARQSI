@@ -2,9 +2,9 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import {AfterViewInit, OnInit, Component, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import {Route, RouteNodes} from '../../models/route';
+import {Route, RouteNodes, RoutePost} from '../../models/route';
 import {MatDialog} from '@angular/material/dialog';
-import {FormControl, Validators, FormBuilder, FormGroup} from '@angular/forms';
+import {FormControl, Validators, FormBuilder, FormGroup, FormArray} from '@angular/forms';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
@@ -36,21 +36,17 @@ export class RoutesComponent implements OnInit, AfterViewInit {
 
   routeList: Route[] = [];
   nodeList: Nodes[] = [];
-  routeNodes: any[] = [];
 
+  routeNodes = new FormArray([]);
+  routeNodesDistance = new FormArray([]);
+  routeNodesDuration = new FormArray([]);
   //addNode = []; when complete add
   addNode: number[] = [];
 
-
+  
   routeForm = new FormGroup ({
-    // distance: new FormControl(),
-    // duration: new FormControl(),
     isReinforcementRoute: new FormControl(),
     isEmptyRoute: new FormControl(),
-    node: new FormControl(),
-    durationNode: new FormControl(),
-    distanceNode: new FormControl()
-
   });
 
   constructor( private routeService: RoutesService,
@@ -87,7 +83,6 @@ export class RoutesComponent implements OnInit, AfterViewInit {
           for (let i = 0; i < data.length; i++) {
             this.showDetails.push(false);
           }
-          console.log(this.routeList[2])         
         }; 
         }
       );
@@ -99,7 +94,6 @@ export class RoutesComponent implements OnInit, AfterViewInit {
           if (data && data.length > 0) {
             for (let i = 0; i < data.length; i ++){              
               this.nodeList.push(this.nodeMapper.fromResponseToDto(new Nodes() as Nodes, data[i]));
-              console.log(this.nodeList)
               }        
           };        
         } 
@@ -127,7 +121,6 @@ export class RoutesComponent implements OnInit, AfterViewInit {
     }
     
     setAdd() : any {
-      console.log(this.routeForm.value)
       
       this.addNode = [];
       return this.isAdding = !this.isAdding;
@@ -140,48 +133,40 @@ export class RoutesComponent implements OnInit, AfterViewInit {
       //verifications here
       return false;    
     }
-    onSelectNode() {
-      return this.routeNodes.push(
-        {
-        id: this.routeForm.value.node,
-        distance: this.routeForm.value.distance,
-        duration: this.routeForm.value.duration
-        }
-    )
-    }
-    insertNode () {      
-      this.onSelectNode();
-      if (this.addNode.length > 1) {
-      if (this.routeNodes[this.addNode.length].id) {
-      return this.addNode.push(1);
-      }   
-      else {
-        return;
-      }      
-    }
-    else {
-      return this.addNode.push(1);
-    }
+    
+    insertNode () {     
+      this.routeNodes.push(new FormControl())
+      this.routeNodesDistance.push(new FormControl())
+      this.routeNodesDuration.push(new FormControl())
     }
     submit() :void {
-      // console.log(this.nodeForm.value)
-      // console.log(this.nodeForm.value.shortName)
-  
-      var postEnitity = new Route();
 
-      
-      this.routeService.postNode(postEnitity)
-      .subscribe((data) => {
-          if (data) { 
-            this.routeList.push(data); 
-            this.dataSource = new MatTableDataSource(this.routeList);          
-            this.showDetails.push(false); 
-            this.isAdding = !this.isAdding;
-            this.addNode = [];
+      let postEntity = new RoutePost();   
+      let routeNodesPost: any[] = [];
+      for (let i = 0; i < this.routeNodes.controls.length; i++) {
+        routeNodesPost.push(
+          {
+            id: this.routeNodes.value[i],
+            distance: this.routeNodesDistance.value[i],
+            duration: this.routeNodesDuration.value[i]
           }
-      },
-      // error => this.handleError(error.error.errors)
-      )
+        )
+      }
+      
+      this.routeForm.value.isEmptyRoute = (this.routeForm.value.isEmptyRoute == undefined || this.routeForm.value.isEmptyRoute == null) ? false : ( this.routeForm.value.isEmptyRoute == true ? true : false);
+      this.routeForm.value.isReinforcementRoute = (this.routeForm.value.isReinforcementRoute == undefined  || this.routeForm.value.isReinforcementRoute == null) ? false : (this.routeForm.value.isReinforcementRoute == true ? true : false);
+      postEntity = this.mapper.fromFormToPost(routeNodesPost,this.routeForm.value, postEntity)
+
+
+      this.routeService.postRoute(postEntity)
+    .subscribe((data) => {
+        if (data) {      
+          this.showDetails.push(false); 
+          this.isAdding = !this.isAdding;       
+        }
+    },
+    error => this.handleError(error.error.errors)
+    )
     }
   }  
 

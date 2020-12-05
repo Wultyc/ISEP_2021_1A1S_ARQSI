@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import {Route} from '../models/route';
+import {Route, RoutePost} from '../models/route';
 import {Observable, throwError } from 'rxjs'
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
@@ -18,8 +18,8 @@ export class RoutesService {
   getRoutes(): Observable<Route[]> {
     return this.httpClient.get<Route[]>(this.url);    
   }
-  postNode(route: Route): Observable<Route> {
-    return this.httpClient.post<Route>(this.url, route)
+  postRoute(route: RoutePost): Observable<RoutePost> {
+    return this.httpClient.post<RoutePost>(this.url, route)
       // .pipe(
       //   catchError(this.handleError(error: any))
       // );
