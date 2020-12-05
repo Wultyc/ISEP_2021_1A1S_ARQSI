@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: importglx-deployment
+  labels:
+    app: importglx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: importglx
+  template:
+    metadata:
+      labels:
+        app: importglx
+    spec:
+      containers:
+      - name: importglx
+        image: wultyc/viajantes2-importglx
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3002
