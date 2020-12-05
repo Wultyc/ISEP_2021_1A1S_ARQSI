@@ -9,25 +9,32 @@ import { environment } from '../../../environments/environment';
 export class ImportGLXService {
 
   url = environment.apiEndpointBackendGLX;
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })}
 
   constructor(private http: HttpClient) { }
 
   // file from event.target.files[0]
-  uploadFile(file: File): Observable<HttpEvent<any>> {
+  uploadFile(file: any): Observable<HttpEvent<any>> {
 
     let formData = new FormData();
-    formData.append('upload', file);
-
-    let params = new HttpParams();
-
-    const options = {
-      params: params,
-      reportProgress: true,
-    };
-    const req = new HttpRequest('POST', this.url, formData, options);
+    formData.append('glx', file);    
+    const req = new HttpRequest('POST', this.url, formData);
     return this.http.request(req);
   }
+  // postNode(node: Nodes): Observable<Nodes> {
+  //   return this.httpClient.post<Nodes>(this.url, node)
+  //     // .pipe(
+  //     //   catchError(this.handleError(error: any))
+  //     // );
+  //      .pipe(
+  //       catchError((err) => {
+  //         // console.error('Erro')
+  //         // console.error(err);
+ 
+  //         //Handle the error here
+ 
+  //         return throwError(err);    //Rethrow it back to component
+  //       })
+  //     )
+  // }
 }
   

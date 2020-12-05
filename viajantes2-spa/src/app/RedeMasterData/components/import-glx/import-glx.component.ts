@@ -40,7 +40,7 @@ export class ImportGLXComponent implements OnInit {
       console.log("No file selected!");
       return
 
-    }
+    }    
     let file: File = files[0];
     this.importGLXService.uploadFile(file)
       .subscribe(
