@@ -26,7 +26,7 @@ exports.tripulantTypeGetAll = function (req, res) {
 };
 
 exports.tripulantTypeCreate = function (req, res) {
-    let tripulantType = transform.ToInsert(req);
+    let tripulantType = tripulantTypeMapper.fromReqToDTO(req.body, new tripulantTypeDTO)
     service.tripulantTypeCreate(tripulantType, function (err, params) {
         if (err) {
             return res.status(400).send(err);

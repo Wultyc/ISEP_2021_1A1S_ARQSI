@@ -38,7 +38,7 @@ exports.lineGetByFilter = function (req, res) {
 };
 
 exports.lineCreate = function (req, res) {
-    let line = transform.ToInsert(req);
+    let line = lineMapper.fromReqToDTO(req.body, new lineDTO);
     service.lineCreate(line, function (err, params) {
         if (err) {
             return res.status(400).send(err);

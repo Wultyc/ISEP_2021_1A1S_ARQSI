@@ -28,7 +28,7 @@ exports.nodeGetAll = function (req, res) {
 };
 
 exports.nodeCreate = function (req, res) {
-    let node = transform.ToInsert(req);
+    let node = nodeMapper.fromReqToDTO(req.body, new nodeDTO);
     service.nodeCreate(node, function (err, params) {
         if (err) {
             return res.status(400).send(err);

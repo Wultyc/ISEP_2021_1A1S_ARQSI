@@ -27,7 +27,7 @@ exports.routeGetAll = function (req, res) {
 };
 
 exports.routeCreate = function (req, res) {
-    let route = transform.ToInsert(req);
+    let route = routeMapper.fromReqToDTO(req.body, new routeDTO);
     service.routeCreate(route, function (err, params) {
         if (err) {
             return res.status(400).send(err);

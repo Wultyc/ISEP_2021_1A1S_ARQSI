@@ -28,7 +28,7 @@ exports.vehicleTypeGetAll = function (req, res) {
 };
 
 exports.vehicleTypeCreate = function (req, res) {
-    let vehicleType = transform.ToInsert(req);
+    let vehicleType = vehicleTypeMapper.fromReqToDTO(req.body, new vehicleTypeDTO);
      service.vehicleTypeCreate(vehicleType, function (err, params){
         if (err) {
             return res.status(400).send(err);
