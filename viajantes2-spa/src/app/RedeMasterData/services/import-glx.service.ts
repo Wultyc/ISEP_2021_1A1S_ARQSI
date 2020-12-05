@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams, HttpRequest, HttpEvent, HttpHandler, HttpHeaders} from '@angular/common/http';
 import {Observable} from "rxjs";
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root', 
 })
 export class ImportGLXService {
-  url = 'http://localhost:3000/api/nodes';
+
+  url = environment.apiEndpointBackendGLX;
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })}
 
@@ -24,7 +26,6 @@ export class ImportGLXService {
       params: params,
       reportProgress: true,
     };
-
     const req = new HttpRequest('POST', this.url, formData, options);
     return this.http.request(req);
   }

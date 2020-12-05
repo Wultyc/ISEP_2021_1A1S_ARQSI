@@ -4,6 +4,8 @@ import {VehicleType} from '../models/vehicle-type';
 import {Observable, throwError } from 'rxjs'
 import { catchError, map, tap } from 'rxjs/operators';
 import { VehicleTypeComponent } from '../components/vehicle-type/vehicle-type.component';
+import { environment } from '../../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +13,7 @@ export class VehicleTypeService {
 
   constructor(private httpClient: HttpClient) { }
 
-  url = 'http://localhost:3000/api/vehicle-types';
+  url = environment.apiEndpointBackendRDM + 'vehicle-types';  
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
