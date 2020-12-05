@@ -28,6 +28,7 @@ import { TripulantTypeComponent } from './RedeMasterData/components/tripulant-ty
 import { MatSelectModule } from '@angular/material/select';
 import { ImportGLXComponent } from './RedeMasterData/components/import-glx/import-glx.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { RoutesComponent } from './RedeMasterData/components/routes/routes.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     VehicleTypeComponent,
     TripulantTypeComponent,
     ImportGLXComponent,
+    RoutesComponent,
     
   ],
   imports: [
