@@ -15,7 +15,12 @@ export class LinesService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
+
   getLines(): Observable<Line[]> {
     return this.httpClient.get<Line[]>(this.url);    
+  }
+
+  getLineRoutes(id: String): Observable<Line[]> {
+    return this.httpClient.get<Line[]>(this.url + "/" + id + "/routes");    
   }
 }

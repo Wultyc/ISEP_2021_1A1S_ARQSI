@@ -32,10 +32,13 @@ export class LineComponent implements OnInit, AfterViewInit  {
 
  showDetails: boolean[] = [];
  lineList: Line[] = [];
+ lineRoutes: any[] = [];
  displayedColumns: string[] = ['code', 'name', 'color', 'beginNode', 'finalNode', 'actions'];
  dataSource = new MatTableDataSource<Line>();
 
  isAdding: boolean = false;
+ isViewingRoutes: boolean = false;
+ hasRoutes: boolean = true;
 
 
  @ViewChild(MatSort) sort : MatSort;
@@ -57,12 +60,12 @@ export class LineComponent implements OnInit, AfterViewInit  {
  }
 
  getLines() : void {    
-  this.linesService.getLines().subscribe(
-    (data) => {
-      if (data && data.length > 0) {
-        console.log(data);
-        this.lineList = data;
-          };
+    this.linesService.getLines().subscribe(
+      (data) => {
+        if (data && data.length > 0) {
+          console.log(data);
+          this.lineList = data;
+        };
         this.dataSource = new MatTableDataSource(this.lineList);
         this.dataSource.sort = this.sort;
         for (let i = 0; i < data.length; i++) {
@@ -72,6 +75,21 @@ export class LineComponent implements OnInit, AfterViewInit  {
     ); 
   };
 
+  onShowDetails(row: any) {
+    console.log(row);
+    this.linesService.getLineRoutes(row._id).subscribe(
+      (data) => {
+        if (data && data.length > 0) {
+          this.hasRoutes = true;
+          this.lineRoutes = data;
+        } else {
+          this.hasRoutes = false;
+        };     
+      }  
+    );
+    this.isViewingRoutes = !this.isViewingRoutes;
+  }
+
   applyFilter(filterValue: string) {
     // let dataSource = new MatTableDataSource(this.nodeList);
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -79,6 +97,10 @@ export class LineComponent implements OnInit, AfterViewInit  {
 
   setAdd() : any {
     return this.isAdding = !this.isAdding;  
+  }
+
+  setViewLineRoutes() : any {
+    return this.isViewingRoutes = !this.isViewingRoutes;  
   }
 
   //will be implemented as front end validation
