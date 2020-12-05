@@ -17,7 +17,7 @@ pipelines:
         script:
           - export IMAGE_NAME=$DOCKER_HUB_USERNAME/viajantes2-redemasterdata:$BITBUCKET_COMMIT
           # build the Docker image (this will use the Dockerfile in the root of the repo)
-          - docker build -t $IMAGE_NAME .
+          - docker build -t $IMAGE_NAME ./RedeMasterData
           # authenticate with the Docker Hub registry
           - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
           # push the new Docker image to the Docker registry
