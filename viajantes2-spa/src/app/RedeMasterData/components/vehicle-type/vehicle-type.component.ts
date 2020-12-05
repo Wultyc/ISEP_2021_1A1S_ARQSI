@@ -102,7 +102,7 @@ export class VehicleTypeComponent implements OnInit {
       },
       (error) => { 
         this.hasError = true;
-        if (error instanceof Array) {
+        if (error.error != null && error.error.code == null) {
           console.error("This model does not have Business Validations.");
         } else {
           this.errorMessages.push("Error Submiting the Vehicle Type. " +
