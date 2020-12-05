@@ -7,7 +7,24 @@ class LineRepository {
     constructor() { }
 
     getById(id, callback) {
-        Line.findOne({ "_id": id }, callback).populate(['lineRoutes.routeId', 'beginNode', 'finalNode']);
+        Line.findOne({ "_id": id }, callback).populate({
+            path: 'lineRoutes',
+            populate: [
+                {
+                    path: 'routeId',
+                    populate: [
+                        {
+                            path: 'routeNodes',
+                            populate: [
+                                {
+                                    path: 'nodeId'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+        });
     };
 
     getRouteById(id, callback) {
@@ -32,7 +49,24 @@ class LineRepository {
     };
 
     getByFilter(query, sortString, callback) {
-        Line.find(query, callback).populate(['lineRoutes', 'beginNode', 'finalNode']).sort(sortString);
+        Line.find(query, callback).sort(sortString).populate({
+            path: 'lineRoutes',
+            populate: [
+                {
+                    path: 'routeId',
+                    populate: [
+                        {
+                            path: 'routeNodes',
+                            populate: [
+                                {
+                                    path: 'nodeId'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+        });
     };
 
     save(line, callback) {
