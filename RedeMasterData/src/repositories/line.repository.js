@@ -6,18 +6,35 @@ const Line = require('../models/line.model');
 class LineRepository {
     constructor() { }
 
-    getById(id, callback){
-        Line.findOne({"_id": id}, callback).populate(['lineRoutes.routeId', 'beginNode','finalNode']);
+    getById(id, callback) {
+        Line.findOne({ "_id": id }, callback).populate(['lineRoutes.routeId', 'beginNode', 'finalNode']);
     };
 
-    getRouteById(id, callback){
-        Line.findOne({"_id": id}, callback).populate(['lineRoutes.routeId', 'lineRoutes.routeId.routeNodes.nodeId']);
+    getRouteById(id, callback) {
+        Line.findOne({ "_id": id }, callback).populate({
+            path: 'lineRoutes',
+            populate: [
+                {
+                    path: 'routeId',
+                    populate: [
+                        {
+                            path: 'routeNodes',
+                            populate: [
+                                {
+                                    path: 'nodeId'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+        })
     };
 
-    getByFilter(query, sortString, callback){
-        Line.find(query, callback).populate(['lineRoutes','beginNode','finalNode']).sort(sortString);
+    getByFilter(query, sortString, callback) {
+        Line.find(query, callback).populate(['lineRoutes', 'beginNode', 'finalNode']).sort(sortString);
     };
-    
+
     save(line, callback) {
         console.log('Saving line in the repository.." ' + line);
         const lineModel = new Line(line);
@@ -29,7 +46,7 @@ class LineRepository {
     };
 
     updateRoutes(id, routes, callback) {
-        Line.findByIdAndUpdate({"_id": id}, {"lineRoutes": routes}, callback);
+        Line.findByIdAndUpdate({ "_id": id }, { "lineRoutes": routes }, callback);
     };
 
 }
