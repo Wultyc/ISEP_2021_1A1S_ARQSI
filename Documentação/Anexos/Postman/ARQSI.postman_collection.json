@@ -347,7 +347,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"code\": \"1\",\r\n    \"name\": \"1\",\r\n    \"color\": \"red\",\r\n    \"lineRoutes\": [\r\n        {\r\n            \"routeId\": \"5fb1530e1d68883f74e0d446\",\r\n            \"orientation\": \"Go\"\r\n        },\r\n        {\r\n            \"routeId\": \"5fb153261d68883f74e0d447\",\r\n            \"orientation\": \"Return\"\r\n        }\r\n    ],\r\n    \"tripulantType\": [],\r\n    \"vehicleType\": []\r\n}",
+									"raw": "{\r\n    \"code\": \"1\",\r\n    \"name\": \"1\",\r\n    \"color\": \"red\",\r\n    \"beginNode\":\"5fbed8b55911064d20645bff\",\r\n    \"finalNode\":\"5fbed6935911064d20645bfe\",\r\n    \"lineRoutes\": [\r\n        {\r\n            \"routeId\": \"5fb1530e1d68883f74e0d446\",\r\n            \"orientation\": \"Go\"\r\n        },\r\n        {\r\n            \"routeId\": \"5fb153261d68883f74e0d447\",\r\n            \"orientation\": \"Return\"\r\n        }\r\n    ],\r\n    \"tripulantType\": [],\r\n    \"vehicleType\": []\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -471,7 +471,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"description\": \"autocarro\",\r\n    \"autonomy\": 200,\r\n    \"costPerKilometer\": 1.22,\r\n    \"avarageCost\": 13,\r\n    \"averageSpeed\": 22,\r\n    \"fuelType\": \"gasoleo\"\r\n}",
+									"raw": "{\r\n    \"description\": \"autocarro\",\r\n    \"autonomy\": 200,\r\n    \"costPerKilometer\": 1.22,\r\n    \"averageCost\": 13,\r\n    \"averageSpeed\": 22,\r\n    \"fuelType\": \"Gasoleo\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -569,14 +569,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{RedeMasterData}}/api/vehicle-types/123",
+									"raw": "{{RedeMasterData}}/api/vehicle-types/5fcaf9fc8b61ff0a80412a76",
 									"host": [
 										"{{RedeMasterData}}"
 									],
 									"path": [
 										"api",
 										"vehicle-types",
-										"123"
+										"5fcaf9fc8b61ff0a80412a76"
 									]
 								}
 							},
@@ -709,6 +709,25 @@
 					],
 					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Healthcheck",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{RedeMasterData}}/api/healthcheck/",
+							"host": [
+								"{{RedeMasterData}}"
+							],
+							"path": [
+								"api",
+								"healthcheck",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -727,7 +746,7 @@
 								{
 									"key": "glx",
 									"type": "file",
-									"src": "/C:/Users/jorge/isep-workspace/ARQSI/arqsi_2021/Documentação/Exemplos/demo-lapr5.glx.xml"
+									"src": "/C:/Users/Jorge/isep-workspace/ARQSI/arqsi_2021/Documentação/Anexos/Exemplos/demo-lapr5.glx.xml"
 								}
 							]
 						},
@@ -739,6 +758,25 @@
 							"path": [
 								"api",
 								"import-glx",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Healthcheck",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ImportGLX}}/api/healthcheck/",
+							"host": [
+								"{{ImportGLX}}"
+							],
+							"path": [
+								"api",
+								"healthcheck",
 								""
 							]
 						}
