@@ -24,14 +24,11 @@ export class LineComponent implements OnInit, AfterViewInit  {
  ]);
  errorMessage: any;
 
-//  nodeForm = new FormGroup ({
-//    shortName: new FormControl(),
-//    name: new FormControl(),
-//    latitude: new FormControl(),
-//    longitude: new FormControl(),
-//    surrenderNode: new FormControl(),
-//    collectionNode: new FormControl()
-//  });
+  lineForm = new FormGroup ({
+    code: new FormControl(),
+    name: new FormControl(),
+    color: new FormControl()
+  });
 
  showDetails: boolean[] = [];
  lineList: Line[] = [];
@@ -77,12 +74,16 @@ export class LineComponent implements OnInit, AfterViewInit  {
 
   applyFilter(filterValue: string) {
     // let dataSource = new MatTableDataSource(this.nodeList);
-  
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
   };
 
   setAdd() : any {
     return this.isAdding = !this.isAdding;  
+  }
+
+  //will be implemented as front end validation
+  isValidForm() : boolean {
+    //verifications here
+    return false;    
   }
 }

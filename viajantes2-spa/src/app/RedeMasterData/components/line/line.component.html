@@ -54,7 +54,33 @@
   
   <div [formGroup]="lineForm">
 
-<!-- FIELDS -->
+    <section class="example-section">
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Code</mat-label>
+        <input matInput class="form-control" formControlName="code">
+        <mat-error *ngIf="formControl.hasError('required')">
+          Code is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Name</mat-label>
+        <input matInput class="form-control" formControlName="name">
+        <mat-error *ngIf="formControl.hasError('required')">
+          Line Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp; 
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Color</mat-label>
+        <input matInput class="form-control" formControlName="color">
+        <mat-error *ngIf="formControl.hasError('required')">
+          Line Color is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+    </section>
 
   </div>
   <div>
