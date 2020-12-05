@@ -1,0 +1,10 @@
+version: "3"
+services:
+  importglx:
+    build: ./ImportGLX
+    ports:
+      - "3102:3002"
+  redemasterdata:
+    build: ./RedeMasterData
+    ports:
+      - "3103:3003"
