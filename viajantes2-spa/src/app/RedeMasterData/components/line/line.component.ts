@@ -32,11 +32,13 @@ export class LineComponent implements OnInit, AfterViewInit  {
 
  showDetails: boolean[] = [];
  lineList: Line[] = [];
+ lineRoutes: any[] = [];
  displayedColumns: string[] = ['code', 'name', 'color', 'beginNode', 'finalNode', 'actions'];
  dataSource = new MatTableDataSource<Line>();
 
  isAdding: boolean = false;
  isViewingRoutes: boolean = false;
+ hasRoutes: boolean = true;
 
 
  @ViewChild(MatSort) sort : MatSort;
@@ -58,12 +60,12 @@ export class LineComponent implements OnInit, AfterViewInit  {
  }
 
  getLines() : void {    
-  this.linesService.getLines().subscribe(
-    (data) => {
-      if (data && data.length > 0) {
-        console.log(data);
-        this.lineList = data;
-          };
+    this.linesService.getLines().subscribe(
+      (data) => {
+        if (data && data.length > 0) {
+          console.log(data);
+          this.lineList = data;
+        };
         this.dataSource = new MatTableDataSource(this.lineList);
         this.dataSource.sort = this.sort;
         for (let i = 0; i < data.length; i++) {
@@ -78,9 +80,10 @@ export class LineComponent implements OnInit, AfterViewInit  {
     this.linesService.getLineRoutes(row._id).subscribe(
       (data) => {
         if (data && data.length > 0) {
-          console.log(data);
+          this.hasRoutes = true;
+          this.lineRoutes = data;
         } else {
-          // TODO: TABLE HAS NO ROUTES MESSAGE
+          this.hasRoutes = false;
         };     
       }  
     );

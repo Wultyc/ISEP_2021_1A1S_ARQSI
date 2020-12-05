@@ -94,6 +94,48 @@
 
 <ng-template #viewLineRoutesTemplate>
 
+  <div *ngIf="hasRoutes; else viewNoRoutesTemplate">
+
+    <section class="example-section">
+      <ul>
+        <li *ngFor="let lineRoute of lineRoutes">
+          <mat-label>Route Orientation: </mat-label>
+          {{lineRoute.orientation}}
+          &nbsp; &nbsp; &nbsp; &nbsp; 
+          <mat-label>Distance: </mat-label>
+          {{lineRoute.routeId.distance}}
+          &nbsp; &nbsp; &nbsp; &nbsp; 
+          <mat-label>Duration: </mat-label>
+          {{lineRoute.routeId.duration}}
+          &nbsp; &nbsp; &nbsp; &nbsp; 
+          <mat-label>Empty? </mat-label>
+          {{lineRoute.routeId.isEmptyRoute}}
+          &nbsp; &nbsp; &nbsp; &nbsp; 
+          <mat-label>Reinforcement? </mat-label>
+          {{lineRoute.routeId.isReinforcementRoute}}
+
+          <ul>
+            <li *ngFor="let routeNode of lineRoute.routeId.routeNodes">
+              <mat-label>Node Short Name: </mat-label>
+              {{routeNode.nodeId.shortName}}
+              &nbsp; &nbsp; &nbsp; &nbsp; 
+              <mat-label>Latitude: </mat-label>
+              {{routeNode.nodeId.latitude}}
+              &nbsp; &nbsp; &nbsp; &nbsp; 
+              <mat-label>Longitude: </mat-label>
+              {{routeNode.nodeId.longitude}}
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+
+  <ng-template #viewLineRoutesTemplate>
+    <mat-label>No routes were found to the Selected Line.</mat-label>
+  </ng-template>
+
   <div>
     <a mat-button (click)= "setViewLineRoutes()" >Close View</a>
   </div>
