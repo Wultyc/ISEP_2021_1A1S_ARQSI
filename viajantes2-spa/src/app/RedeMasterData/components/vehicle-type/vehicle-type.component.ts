@@ -6,6 +6,7 @@ import {VehicleType} from '../../models/vehicle-type';
 import {VehicleTypeService} from '../../services/vehicle-type.service'
 import {MatDialog} from '@angular/material/dialog';
 import {FormControl, Validators, FormBuilder, FormGroup, FormControlDirective} from '@angular/forms';
+import { VehicleTypeMapper } from '../../models/mappers/vehicleTypeMapper';
 
 export interface fuel {
   value: string;
@@ -17,11 +18,16 @@ export interface fuel {
   styleUrls: ['./vehicle-type.component.css']
 })
 export class VehicleTypeComponent implements OnInit {
+  
+  
+  // list
   vehicleTypeList: VehicleType[] = [];
   displayedColumns: string[] = ['description', 'autonomy', 'costPerKilometer', 'averageCost', 'averageSpeed', 'fuelType' ];
   dataSource = new MatTableDataSource<VehicleType>();
+  
+//  
+  mapper = new VehicleTypeMapper();
 
- 
   formControl = new FormControl('', [
     Validators.required,
  ]);
@@ -70,13 +76,13 @@ export class VehicleTypeComponent implements OnInit {
       this.vehicleTypeService.getVehicleTypes().subscribe(
         (data) => {
           if (data && data.length > 0) { 
-            this.vehicleTypeList = data; 
-            this.dataSource = new MatTableDataSource(this.vehicleTypeList);
-       
-          };
-          
-        }
-       
+            for (let i = 0; i < data.length; i ++){              
+              this.vehicleTypeList.push(this.mapper.fromResponseToDto(new VehicleType() as VehicleType, data[i]));
+              console.log(this.vehicleTypeList[i])       
+              };
+            this.dataSource = new MatTableDataSource(this.vehicleTypeList);       
+          };          
+        }       
       ); 
     };
 
@@ -86,15 +92,12 @@ export class VehicleTypeComponent implements OnInit {
       // console.log(this.nodeForm.value)
       // console.log(this.nodeForm.value.shortName)
   
-      var postEnitity = new VehicleType();
+      var postEntity = new VehicleType();
       // this.log()
-      postEnitity.description = this.vehicleTypeForm.value.description;
-      postEnitity.costPerKilometer = this.vehicleTypeForm.value.costPerKilometer;
-      postEnitity.autonomy = this.vehicleTypeForm.value.autonomy;
-      postEnitity.averageCost = this.vehicleTypeForm.value.averageCost;
-      postEnitity.averageSpeed = this.vehicleTypeForm.value.averageSpeed;
-      postEnitity.fuelType = this.vehicleTypeForm.value.fuel;
-      this.vehicleTypeService.postVehicleType(postEnitity)
+      postEntity = this.mapper.fromFormToDTO(this.vehicleTypeForm.value, postEntity)
+      console.log(postEntity)
+
+      this.vehicleTypeService.postVehicleType(postEntity)
       .subscribe((data) => {
           if (data) { 
             this.vehicleTypeList.push(data); 

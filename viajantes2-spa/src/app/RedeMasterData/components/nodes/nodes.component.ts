@@ -34,7 +34,7 @@ export class NodesComponent implements OnInit, AfterViewInit {
   ]);
 
   errorMessage: any;
-
+  // create form
   nodeForm = new FormGroup ({
     shortName: new FormControl(),
     name: new FormControl(),
@@ -43,14 +43,15 @@ export class NodesComponent implements OnInit, AfterViewInit {
     surrenderNode: new FormControl(),
     collectionNode: new FormControl()
   });
-
+  //listing and frotend logic (details not implemented, and neither will be)
   showDetails: boolean[] = [];
   nodeList: Nodes[] = [];
   displayedColumns: string[] = ['shortName', 'name', 'longitude', 'latitude', 'collectionNode', 'surrenderNode', 'actions'];
   dataSource = new MatTableDataSource<Nodes>();
-
+  //boolean that says if user is adding new entry
   isAdding: boolean = false;
 
+  //the data mapper
   mapper = new NodesMapper();
 
   @ViewChild(MatSort) sort : MatSort;
@@ -79,15 +80,13 @@ export class NodesComponent implements OnInit, AfterViewInit {
       verticalPosition: 'top',
     });
   }
-
+  //consumes the observer from the service, gets all the data and maps it
   getNodes() : void {    
     this.nodesService.getNodes().subscribe(
       (data) => {
         if (data && data.length > 0) {
-          console.log (data)
           for (let i = 0; i < data.length; i ++){              
             this.nodeList.push(this.mapper.fromResponseToDto(new Nodes() as Nodes, data[i]));
-            console.log(this.nodeList[i])       
             };
           this.dataSource = new MatTableDataSource(this.nodeList);
           this.dataSource.sort = this.sort;
@@ -103,7 +102,7 @@ export class NodesComponent implements OnInit, AfterViewInit {
     // this.showDetails[row] = !this.showDetails[row];
     // console.log(row);
   }
-
+  //applies the front end filter
   applyFilter(filterValue: string) {
     // let dataSource = new MatTableDataSource(this.nodeList);
   
@@ -114,13 +113,14 @@ export class NodesComponent implements OnInit, AfterViewInit {
   setAdd() : any {
     return this.isAdding = !this.isAdding;
   }
-
+  //will be implemented as front end validation
   isValidForm() : boolean {
 
     //verifications here
     return false;    
   }
 
+  //still to implement, warning from backend when data is wrongly sent. will be complemented with is valid
   handleError(error: any){
     // for (let i = 0; i < error.lenght; i++) {
     
@@ -143,6 +143,8 @@ export class NodesComponent implements OnInit, AfterViewInit {
       this.isAdding = true
   
   }
+
+  //adding new entry, as on click submits the form. The data is mapped and post.
   submit() :void {
     // console.log(this.nodeForm.value)
     // console.log(this.nodeForm.value.shortName)

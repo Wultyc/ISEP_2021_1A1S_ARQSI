@@ -8,7 +8,7 @@ export class VehicleTypeMapper {
             object.averageSpeed = formBody.averageSpeed,
             object.costPerKilometer = formBody.costPerKilometer,
             object.description = formBody.description,
-            object.fuelType = formBody.fuelType
+            object.fuelType = formBody.fuel
         return object;
     }
     

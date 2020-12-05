@@ -35,7 +35,7 @@ export class LineComponent implements OnInit, AfterViewInit  {
 
  showDetails: boolean[] = [];
  lineList: Line[] = [];
- displayedColumns: string[] = ['code', 'name', 'color', 'beginNode', 'finalNode'];
+ displayedColumns: string[] = ['code', 'name', 'color', 'beginNode', 'finalNode', 'actions'];
  dataSource = new MatTableDataSource<Line>();
 
  isAdding: boolean = false;
