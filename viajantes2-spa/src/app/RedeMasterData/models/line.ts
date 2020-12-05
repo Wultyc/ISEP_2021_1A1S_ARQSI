@@ -8,6 +8,8 @@ export interface LineRoutes {
 export class Line {
     constructor() {  
     }
+
+      id: String;
       code: String;
       name: String | undefined;
       color: number;

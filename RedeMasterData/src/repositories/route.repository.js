@@ -6,11 +6,11 @@ class RouteRepository {
     constructor() { }
 
     getById(id, callback){
-        Route.findOne({"_id": id}, callback);
+        Route.findOne({"_id": id}, callback).populate('routeNodes.nodeId');
     };
 
     getAll(callback) {
-        Route.find(callback); 
+        Route.find(callback).populate('routeNodes.nodeId'); 
     };
 
     save(route, callback) {

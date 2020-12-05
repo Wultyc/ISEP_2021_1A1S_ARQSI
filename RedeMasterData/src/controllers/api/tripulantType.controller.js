@@ -1,7 +1,7 @@
 const TripulantTypeService = require('../../services/tripulantType.service');
 const tripulantTypeDTO = require('../../dto/tripulantType.dto');
 const TripulantTypeMapper = require('../../mappers/tripulantType.mapper');
-const dto = require('../../dto/tripulantType.dto');
+const tripulantTypesValidationSchema = require('../../validations/tripulantType.validation');
 
 const service = new TripulantTypeService();
 const tripulantTypeMapper = new TripulantTypeMapper();
@@ -27,6 +27,10 @@ exports.tripulantTypeGetAll = function (req, res) {
 
 exports.tripulantTypeCreate = function (req, res) {
     let tripulantType = tripulantTypeMapper.fromReqToDTO(req.body, new tripulantTypeDTO)
+
+    const { error } = tripulantTypesValidationSchema.validate(tripulantType);
+    if (error) return res.status(400).send({ message: "some fields are missing or have invalid values", error: error })
+
     service.tripulantTypeCreate(tripulantType, function (err, params) {
         if (err) {
             return res.status(400).send(err);
