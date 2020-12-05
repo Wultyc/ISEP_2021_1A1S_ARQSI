@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redemasterdata-deployment
+  labels:
+    app: redemasterdata
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redemasterdata
+  template:
+    metadata:
+      labels:
+        app: redemasterdata
+    spec:
+      containers:
+      - name: redemasterdata
+        image: wultyc/viajantes2-redemasterdata
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3003

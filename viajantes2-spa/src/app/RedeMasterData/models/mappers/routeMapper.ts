@@ -1,21 +1,19 @@
-import { Route } from '../route';
+import { Route, RoutePost } from '../route';
 import { Nodes } from '../nodes';
 export class RoutesMapper {
     constructor() { }
 
-    fromFormToPost = function (formBody: any, object: any) {
-            object.distance = formBody.shortName
-            object.durantion = formBody.name
-            object.isEmptyRoute = formBody.longitude
-            object.isReinforcmentRoute = formBody.latitude            
-            if (formBody && formBody.routeNodes && formBody.routeNodes.length > 0 ) 
+    fromFormToPost = function (routeNodes: any, formBody: any, object: RoutePost) {
+            object.isEmptyRoute = formBody.isEmptyRoute
+            object.isReinforcementRoute = formBody.isReinforcementRoute            
+            if (routeNodes && routeNodes.length > 0 ) 
             {
-                for (var i = 0; i < formBody.routeNodes.length; i++) {
+                for (var i = 0; i < routeNodes.length; i++) {
                     object.routeNodes.push(
                         {
-                        id: formBody.routeNodes[i].id,
-                        distance: formBody.routeNodes[i].distance,
-                        duration: formBody.routeNodes[i].duration}
+                        nodeId: routeNodes[i].id,
+                        distance: routeNodes[i].distance,
+                        duration: routeNodes[i].duration}
                     )};   
             };                     
             
