@@ -31,7 +31,7 @@ pipelines:
           script:
             - echo "$KUBECONFIG"
             - echo $KUBECONFIG | base64 -d > kubeconfig.yml
-            - sed -i "s|{{image}}|$DOCKER_HUB_USERNAME/$APPLICATION_NAME:$BITBUCKET_COMMIT|g" deployment.yml
+            - sed -i "s|{{image}}|$DOCKER_HUB_USERNAME/$APPLICATION_NAME:$BITBUCKET_COMMIT|g" ./Kubernets/redemasterdata_deployment.yaml
             - pipe: atlassian/kubectl-run:1.1.2
               variables:
                 KUBE_CONFIG: 'kubeconfig.yml'
