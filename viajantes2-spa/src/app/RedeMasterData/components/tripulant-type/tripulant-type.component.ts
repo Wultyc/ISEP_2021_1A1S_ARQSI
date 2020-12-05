@@ -80,8 +80,8 @@ export class TripulantTypeComponent implements  OnInit  {
         if (error instanceof Array) {
           console.error("This model does not have Business Validations.");
         } else {
-          this.errorMessages.push("Error Submiting the Tripulant Type. " + 
-            "There is already a Tripulant with that description inserted.");
+          this.errorMessages.push("Error Submiting the Tripulant Type. " +
+            "If the description is filled, there may already exist a Tripulant with the description introduced.");
         }
       }
     )
