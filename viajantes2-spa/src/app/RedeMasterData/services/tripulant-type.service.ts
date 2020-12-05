@@ -25,12 +25,8 @@ export class TripulantTypeService {
       // );
        .pipe(
         catchError((err) => {
-          // console.error('Erro')
-          // console.error(err);
- 
-          //Handle the error here
- 
-          return throwError(err);    //Rethrow it back to component
+          console.error(err);
+          return throwError(err);
         })
       )
   }

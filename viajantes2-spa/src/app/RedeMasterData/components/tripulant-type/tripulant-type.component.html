@@ -41,4 +41,14 @@
     <div>
       <a mat-button (click)= "submit()">Submit</a>
     </div>
+    <div *ngIf="hasError">
+
+    <ul>
+      <div *ngFor="let errorMessage of errorMessages">
+        <mat-error-label>{{errorMessage}}</mat-error-label>
+      </div>
+    </ul>
+
+  </div>
+    
 </ng-template>
