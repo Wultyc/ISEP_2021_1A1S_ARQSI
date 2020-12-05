@@ -1,7 +1,7 @@
 {
     "app":{
         "defaultServerPort":"3003",
-        "defaultMongooseConnString":"DB_CONNECT=mongodb+srv://application:hO19n3lRSDhE@cluster0.y3cng.azure.mongodb.net/RedeMasterData"
+        "defaultMongooseConnString":"mongodb+srv://application:hO19n3lRSDhE@cluster0.y3cng.azure.mongodb.net/RedeMasterData"
     },
     "logs": {
         "folder": "logs",
