@@ -1,19 +1,17 @@
 const _ = require('lodash');
-const Line = require('../../models/line.model');
+const lineDTO = require('../../dto/line.dto');
+const LinesMapper = require('../../mappers/lines.mapper');
 const ServiceLine = require('../../services/line.service');
 
 const service = new ServiceLine();
-
-// DTO
-const dto = require('../../dto/line.dto');
-var transform = new dto();
+const lineMapper = new LinesMapper();
 
 exports.lineGetById = function (req, res) {
     service.lineGetById(req.params.lineId, function (err, params) {
         if (err) {
             return res.status(404).send(err);
         }
-        const response = transform.ToDTO(params);
+        const response =  lineMapper.fromReqToDTO(params, new lineDTO);
         res.status((!response.id) ? 404 : 200).send(response)
     });
 };
@@ -24,7 +22,7 @@ exports.lineGetRoutesById = function (req, res) {
         if (err) {
             return res.status(404).send(err);
         }
-        const response = transform.ToDTO(params).lineRoutes;
+        const response = lineMapper.fromReqToDTO(params, new lineDTO).lineRoutes;
         res.status((!response.id) ? 404 : 200).send(response)
     });
 };
@@ -45,7 +43,7 @@ exports.lineCreate = function (req, res) {
         if (err) {
             return res.status(400).send(err);
         }
-        res.status(201).json(transform.ToDTO(params));
+        res.status(201).json(lineMapper.fromReqToDTO(params, new lineDTO));
     })
 };
 
@@ -64,6 +62,6 @@ exports.lineCreateAndAddRoute = function (req, res) {
         if (err) {
             return res.status(400).send(err);
         }
-        res.status(201).json(transform.ToDTO(params));
+        res.status(201).json(lineMapper.fromReqToDTO(params, new lineDTO));
     })
 };

@@ -33,7 +33,7 @@ exports.nodeCreate = function (req, res) {
         if (err) {
             return res.status(400).send(err);
         }
-        res.status(201).json(transform.ToDTO(params));
+        res.status(201).json(nodeMapper.fromReqToDTO(params, new nodeDTO));
     })
 };
 

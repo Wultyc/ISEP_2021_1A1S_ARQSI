@@ -1,4 +1,5 @@
 class NodesMapper {
+    constructor(){}
     fromReqToDTO = function (reqBody, dto) {
             dto.id = reqBody.id,
             dto.shortName = reqBody.shortName,
@@ -13,3 +14,4 @@ class NodesMapper {
     fromDomainToDTO = function (domainObj, dto) {
     }
 }
+module.exports= NodesMapper;

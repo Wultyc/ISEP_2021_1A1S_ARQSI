@@ -1,16 +1,19 @@
 const VehicleType = require('../../models/vehicleType.model');
+const vehicleTypeDTO = require('../../dto/vehicleType.dto');
+const VehicleTypeMapper = require('../../mappers/vehicleType.mapper');
 const VehicleTypeService = require('../../services/vehicleType.service');
 const dto = require('../../dto/vehicleType.dto');
 
 const service = new VehicleTypeService();
-var transform = new dto();
+const vehicleTypeMapper = new VehicleTypeMapper();
+
 
 exports.vehicleTypeGetById = function (req, res) {
     service.vehicleTypeGetById(req.params.vehicleTypeId, function(err, params) {
         if(err){
             return res.status(404).send(err);
         }
-        const response = transform.ToDTO(params);
+        const response = vehicleTypeMapper.fromReqToDTO(params, new vehicleTypeDTO);
         res.status((!response.id) ? 404 : 200).send(response)
     });
 };
@@ -30,7 +33,7 @@ exports.vehicleTypeCreate = function (req, res) {
         if (err) {
             return res.status(400).send(err);
         }
-        res.status(201).json(transform.ToDTO(params));
+        res.status(201).json( vehicleTypeMapper.fromReqToDTO(params, new vehicleTypeDTO));
      })
 };
 
