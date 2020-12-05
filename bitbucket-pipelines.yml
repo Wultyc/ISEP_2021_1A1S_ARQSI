@@ -28,11 +28,13 @@ pipelines:
         name: Deploy to Kubernets
         deployment: production
         script:
-          - echo $KUBECONFIG
+          # Download kubectl
+          - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+          - chmod +x ./kubectl
+          - mv ./kubectl /usr/local/bin/kubectl
+
+          # Set KUBECONFIG
           - echo $KUBECONFIG | base64 -d > kubeconfig.yml
-          - sed -i "s|{{image}}|$DOCKER_HUB_USERNAME/$APPLICATION_NAME:$BITBUCKET_COMMIT|g" deployment.yml
-          - pipe: atlassian/kubectl-run:1.1.2
-            variables:
-              KUBE_CONFIG: 'kubeconfig.yml'
-              KUBECTL_COMMAND: 'apply'
-              RESOURCE_PATH: './Kubernets/redemasterdata_deployment.yaml'
+          - export KUBECONFIG=kubeconfig.yml
+
+          - kubectl apply -f ./Kubernets/redemasterdata_deployment.yaml
