@@ -13,6 +13,7 @@ export class NodesMapper {
     }
     
     fromResponseToDto = function (model: Nodes, response: any) {
+            model.id = response._id,
             model.shortName = response.shortName,
             model.name = response.name,
             model.longitude = response.longitude,
@@ -20,6 +21,6 @@ export class NodesMapper {
             model.collectionNode = response.collectionNode,
             model.surrenderNode = response.surrenderNode
         
-        return response;
+        return model;
     }
 }

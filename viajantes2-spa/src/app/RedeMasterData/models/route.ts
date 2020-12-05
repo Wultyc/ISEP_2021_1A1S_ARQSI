@@ -1,14 +1,14 @@
 import { Nodes } from './nodes';
 
-export interface RouteNodes {
+export class RouteNodes {
     node: Nodes;
     distance: number;
     duration: number;
 }
 export class Route {
     distance: number;
-    durantion: number;
-    isReinforcmentRoute: boolean;
+    duration: number;
+    isReinforcementRoute: boolean;
     isEmptyRoute: boolean;
-    routeNodes: RouteNodes[];
+    routeNodes: RouteNodes[] = [];
 }

@@ -29,7 +29,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { ImportGLXComponent } from './RedeMasterData/components/import-glx/import-glx.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RoutesComponent } from './RedeMasterData/components/routes/routes.component';
-
+import { CommonModule } from '@angular/common';
+ 
 
 @NgModule({
   declarations: [
@@ -65,7 +66,9 @@ import { RoutesComponent } from './RedeMasterData/components/routes/routes.compo
     MatSlideToggleModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    CommonModule
+
     ],
   exports: [
     // MatButtonModule,
