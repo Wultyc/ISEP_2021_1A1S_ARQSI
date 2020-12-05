@@ -1,7 +1,7 @@
 const nodeDTO = require('../../dto/node.dto');
 const NodesMapper = require('../../mappers/nodes.mapper');
 const ServiceNode = require('../../services/node.service');
-const config = require('config')
+const nodesValidationSchema = require('../../validations/nodes.validation')
 
 const service = new ServiceNode();
 const nodeMapper = new NodesMapper();
@@ -29,6 +29,10 @@ exports.nodeGetAll = function (req, res) {
 
 exports.nodeCreate = function (req, res) {
     let node = nodeMapper.fromReqToDTO(req.body, new nodeDTO);
+
+    const { error } = nodesValidationSchema.validate(node);
+    if (error) return res.status(400).send({ message: "some fields are missing or have invalid values", error: error })
+
     service.nodeCreate(node, function (err, params) {
         if (err) {
             return res.status(400).send(err);
