@@ -20,21 +20,5 @@ export class ImportGLXService {
     const req = new HttpRequest('POST', this.url, formData);
     return this.http.request(req);
   }
-  // postNode(node: Nodes): Observable<Nodes> {
-  //   return this.httpClient.post<Nodes>(this.url, node)
-  //     // .pipe(
-  //     //   catchError(this.handleError(error: any))
-  //     // );
-  //      .pipe(
-  //       catchError((err) => {
-  //         // console.error('Erro')
-  //         // console.error(err);
- 
-  //         //Handle the error here
- 
-  //         return throwError(err);    //Rethrow it back to component
-  //       })
-  //     )
-  // }
 }
   

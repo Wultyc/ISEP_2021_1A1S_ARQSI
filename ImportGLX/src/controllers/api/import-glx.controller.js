@@ -5,8 +5,8 @@ const uploadViagem = require('./upload-viagem.controller')
 
 exports.importfile = async function (req, res) {
 
-    if (!req.files || !req.files.glx || req.files.glx.mimetype != "application/xml") {
-        return res.status(config.get('errors.http.file-not-valid.status')).json(config.get('errors.http.file-not-valid.message'))
+    if (!req.files || !req.files.glx || (req.files.glx.mimetype != "text/xml" && req.files.glx.mimetype != "application/xml")) {
+        return res.status(400).json("A valid .glx file is required")
     }
 
     const glxFile = req.files.glx
