@@ -36,6 +36,7 @@ export class LineComponent implements OnInit, AfterViewInit  {
  dataSource = new MatTableDataSource<Line>();
 
  isAdding: boolean = false;
+ isViewingRoutes: boolean = false;
 
 
  @ViewChild(MatSort) sort : MatSort;
@@ -72,6 +73,20 @@ export class LineComponent implements OnInit, AfterViewInit  {
     ); 
   };
 
+  onShowDetails(row: any) {
+    console.log(row);
+    this.linesService.getLineRoutes(row._id).subscribe(
+      (data) => {
+        if (data && data.length > 0) {
+          console.log(data);
+        } else {
+          // TODO: TABLE HAS NO ROUTES MESSAGE
+        };     
+      }  
+    );
+    this.isViewingRoutes = !this.isViewingRoutes;
+  }
+
   applyFilter(filterValue: string) {
     // let dataSource = new MatTableDataSource(this.nodeList);
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -79,6 +94,10 @@ export class LineComponent implements OnInit, AfterViewInit  {
 
   setAdd() : any {
     return this.isAdding = !this.isAdding;  
+  }
+
+  setViewLineRoutes() : any {
+    return this.isViewingRoutes = !this.isViewingRoutes;  
   }
 
   //will be implemented as front end validation
