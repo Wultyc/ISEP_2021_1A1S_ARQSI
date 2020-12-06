@@ -127,7 +127,7 @@ export class LineComponent implements OnInit, AfterViewInit  {
 
   onShowDetails(row: any) {
     console.log(row);
-    this.linesService.getLineRoutes(row._id).subscribe(
+    this.linesService.getLineRoutes(row.id).subscribe(
       (data) => {
         if (data && data.length > 0) {
           this.hasRoutes = true;
