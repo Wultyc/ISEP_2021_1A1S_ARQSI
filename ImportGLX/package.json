@@ -10,11 +10,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://1160929@bitbucket.org/1160929/arqsi_2021.git"
+    "url": "git+https://bitbucket.org/1160929/1160929_1161042_1160943_1150470_viajantes2.git"
   },
-  "author": "Jorge Azevedo (1160929), Nuno Dinis (1161042), Daniel Coelho (1160943), Filipe Sousa (1150470)",
+  "author": "Jorge Azevedo (1160929), Nuno Dinis (1161042), Daniel Coelho (1160943), Diogo Barreto (1150468)",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/1160929/arqsi_2021#readme",
+  "homepage": "https://bitbucket.org/1160929/1160929_1161042_1160943_1150470_viajantes2",
   "dependencies": {
     "axios": "^0.21.0",
     "config": "^3.3.2",
