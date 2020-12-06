@@ -99,6 +99,10 @@ export class LineRouteComponent implements OnInit, AfterViewInit {
     this.routeNodesDuration.push(new FormControl())
   }
 
+  returnToLinesList() {
+    this.router.navigate(['lines']);
+  }
+
   submit() {
     let postEntity = new RoutePost();
     this.hasError = false;
