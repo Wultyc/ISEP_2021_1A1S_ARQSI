@@ -8,7 +8,7 @@
 </div>
 <div *ngIf="!isAdding; else createNodeTemplate">
   <mat-form-field  class="example-full-width">
-    <mat-label>Name: </mat-label>
+    <mat-label>Search: </mat-label>
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Ex. Aguiar de Sousa" #input>
   </mat-form-field>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
