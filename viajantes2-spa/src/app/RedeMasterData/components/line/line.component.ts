@@ -262,7 +262,8 @@ getRoutes() : void {
             this.errorMessages.push("Error Submiting the Line. " + error.error);
           }
         } else {
-          this.errorMessages.push("Error Submiting the Line.");
+          this.errorMessages.push("Error Submiting the Line. " +
+            "If no required fields are empty, there may already exist a Line with that code introduced.");
         }
       }
     )
