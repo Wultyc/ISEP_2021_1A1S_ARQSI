@@ -254,7 +254,13 @@ getRoutes() : void {
       (error) => { 
         this.hasError = true;
         if (error.error != null && error.error.code == null) {
-          this.errorMessages.push("Error Submiting the Line. " + error.error);
+          if (error.error instanceof Array) {
+            for (let i = 0; i < error.error.length; i ++) {       
+              this.errorMessages.push(error.error[i]);
+            }   
+          } else {
+            this.errorMessages.push("Error Submiting the Line. " + error.error);
+          }
         } else {
           this.errorMessages.push("Error Submiting the Line.");
         }
