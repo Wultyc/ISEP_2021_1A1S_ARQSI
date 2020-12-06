@@ -1,7 +1,15 @@
 table {
     width: 100%;
   }
-  
+  /* th.mat-header-cell, mat-cell {
+    text-align: center !important;
+  } */
+  mat-header-cell {
+    display:flex;
+    justify-content:center; }
+  mat-cell {
+    display:flex;
+    justify-content:center;}
   th.mat-sort-header-sorted {
     color: black;
   }
@@ -15,7 +23,6 @@ table {
   mat-label {
     color: blueviolet;
   }
-  
   /* mat-button {
     color: blueviolet;
   } */
@@ -41,7 +48,7 @@ table {
   .example-margin {
     color: blueviolet;
   }
-
+  
   mat-error-label {
     color: red;
   }

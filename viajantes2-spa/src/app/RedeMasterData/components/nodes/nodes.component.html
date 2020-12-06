@@ -8,7 +8,7 @@
 </div>
 <div *ngIf="!isAdding; else createNodeTemplate">
   <mat-form-field  class="example-full-width">
-    <mat-label>Name: </mat-label>
+    <mat-label>Search: </mat-label>
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Ex. Aguiar de Sousa" #input>
   </mat-form-field>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
@@ -48,12 +48,13 @@
         <mat-icon color='blueviolet'>done</mat-icon></i></td>
     </ng-container>
 
-    <ng-container matColumnDef="actions">
-        <mat-header-cell  *matHeaderCellDef ></mat-header-cell>
-        <mat-cell *matCellDef="let row" >
-             <button mat-button (click)= "onShowDetails(row)" ><mat-icon color='blueviolet'>create</mat-icon></button><button mat-button ><mat-icon color='blueviolet'>remove_circle</mat-icon></button>
-        </mat-cell>
-      </ng-container>
+    <!-- <ng-container matColumnDef="actions">
+      <mat-header-cell  *matHeaderCellDef ></mat-header-cell>
+      <mat-cell *matCellDef="let row" >
+            <button mat-button (click)= "onShowDetails(row)" ><mat-icon color='blueviolet'>create</mat-icon></button>
+            <button mat-button ><mat-icon color='blueviolet'>remove_circle</mat-icon></button>
+      </mat-cell>
+    </ng-container> -->
 
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -115,21 +116,17 @@
       </mat-slide-toggle>
     </section>
   </div>
-    <div>
-      <a mat-button (click)= "submit()">Submit</a>
-    </div>
 
-    <!-- <p>
-      <mat-form-field class="example-full-width">
-        <mat-label>Name</mat-label>
-        <textarea matInput placeholder="Ex. 100 Main St">Santa Apolónia</textarea>
-        <mat-error *ngIf="formControl.hasError('required')">
-          Name is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <mat-label>Address 2</mat-label>
-        <textarea matInput></textarea>
-      </mat-form-field>
-    </p> -->
+  <div>
+    <a mat-button (click)= "submit()">Submit</a>
+  </div>
+
+  <div *ngIf="hasError">
+    <ul>
+      <div *ngFor="let errorMessage of errorMessages">
+        <mat-error-label>{{errorMessage}}</mat-error-label>
+      </div>
+    </ul>
+  </div>
+
 </ng-template>

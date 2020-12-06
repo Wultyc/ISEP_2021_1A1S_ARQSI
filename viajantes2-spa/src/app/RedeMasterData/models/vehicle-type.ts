@@ -1,4 +1,5 @@
 export class VehicleType {
+    id: string;  
     description: string;
     autonomy: number;
     costPerKilometer: number;

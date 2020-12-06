@@ -9,7 +9,7 @@
   <div *ngIf="!isAdding; else createLineTemplate">
 
     <mat-form-field  class="example-full-width">
-      <mat-label>Name: </mat-label>
+      <mat-label>Search: </mat-label>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Ex. Aguiar de Sousa" #input>
     </mat-form-field>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
@@ -42,7 +42,8 @@
         <ng-container matColumnDef="actions">
           <mat-header-cell  *matHeaderCellDef ></mat-header-cell>
           <mat-cell *matCellDef="let row" >
-              <button mat-button (click)= "onShowDetails(row)" ><mat-icon color='blueviolet'>visibility</mat-icon></button><button mat-button ><mat-icon color='blueviolet'>remove_circle</mat-icon></button>
+              <button mat-button (click)= "onShowDetails(row)" ><mat-icon color='blueviolet'>visibility</mat-icon></button>
+              <button mat-button (click)= "goToInsertLineRoute(row.id)" ><mat-icon color='blueviolet'>edit_road</mat-icon></button>
           </mat-cell>
         </ng-container>
     
@@ -55,38 +56,106 @@
   <ng-template #createLineTemplate>
     
     <div [formGroup]="lineForm">
+      
+    <section class="example-section">
 
-      <section class="example-section">
+      <mat-form-field class="example-full-width">
+        <mat-label>Code</mat-label>
+        <input matInput class="form-control" formControlName="code">
+        <mat-error *ngIf="formControl.hasError('required')">
+          Code is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;
 
-        <mat-form-field class="example-full-width">
-          <mat-label>Code</mat-label>
-          <input matInput class="form-control" formControlName="code">
-          <mat-error *ngIf="formControl.hasError('required')">
-            Code is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;
+      <mat-form-field class="example-full-width">
+        <mat-label>Name</mat-label>
+        <input matInput class="form-control" formControlName="name">
+        <mat-error *ngIf="formControl.hasError('required')">
+          Line Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp; 
 
-        <mat-form-field class="example-full-width">
-          <mat-label>Name</mat-label>
-          <input matInput class="form-control" formControlName="name">
-          <mat-error *ngIf="formControl.hasError('required')">
-            Line Name is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp; 
+      <mat-form-field class="example-full-width">
+        <mat-label>Color</mat-label>
+        <input matInput class="form-control" formControlName="color">
+        <mat-error *ngIf="formControl.hasError('required')">
+          Line Color is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </section>
 
-        <mat-form-field class="example-full-width">
-          <mat-label>Color</mat-label>
-          <input matInput class="form-control" formControlName="color">
-          <mat-error *ngIf="formControl.hasError('required')">
-            Line Color is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
+    <section class="example-section">
 
-      </section>
+      <mat-form-field class="example-full-width">
+        <mat-label>Begin Node</mat-label>
+        <mat-select class="form-control"  formControlName="beginNode">
+          <mat-option *ngFor="let node of nodeList" [value]="node.id">
+            {{ node.shortName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp; 
 
+      <mat-form-field class="example-full-width">
+        <mat-label>Final Node</mat-label>
+        <mat-select class="form-control"  formControlName="finalNode">
+          <mat-option *ngFor="let node of nodeList" [value]="node.id">
+            {{ node.shortName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp; 
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Tripulant Types</mat-label>
+        <mat-select class="form-control"  formControlName="tripulantType" multiple>
+          <mat-option *ngFor="let tripType of tripList" [value]="tripType._id">
+            {{ tripType.description }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp; 
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Vehicle Types</mat-label>
+        <mat-select class="form-control"  formControlName="vehicleType" multiple>
+          <mat-option *ngFor="let vType of vehicleTypesList" [value]="vType._id">
+            {{ vType.description }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </section>
+
+    <mat-label>Add Route</mat-label>
+    <button mat-button (click)= "insertRoute()" ><mat-icon color='blueviolet'>add_box</mat-icon></button>
+
+    </div>
+    <div *ngFor="let control of lineRoutesForm.controls; index as i">
+      <mat-label> <br><br>Line Route<br><br></mat-label>
+      <mat-form-field class="example-full-width">
+        <mat-label>Route</mat-label>
+        <mat-select class="form-control" [formControl]="lineRoutesForm.controls[i]">
+          <mat-option *ngFor="let route of routeList" [value]="route.id">
+            {{route.routeNodes[0].node.shortName}} - {{route.routeNodes[route.routeNodes.length-1].node.shortName}}
+          </mat-option>
+        </mat-select>        
+      </mat-form-field><br><br>
+
+      <mat-form-field class="example-full-width">
+      <mat-label>Orientation</mat-label>
+        <mat-select class="form-control" [formControl]="orientationArray.controls[i]">
+          <mat-option *ngFor="let orientationG of orientations" [value]="orientationG.value">
+            {{ orientationG.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> 
     </div>
     <div>
       <a mat-button (click)= "submit()">Submit</a>
+    </div>
+    <div *ngIf="hasError">
+      <ul>
+        <div *ngFor="let errorMessage of errorMessages">
+          <mat-error-label>{{errorMessage}}</mat-error-label>
+        </div>
+      </ul>
     </div>
   </ng-template>
 

@@ -1,0 +1,54 @@
+<h1>&nbsp; Define a new route for the line</h1>
+
+<div [formGroup]="routeLineForm">
+    <section class="example-section">
+      <mat-slide-toggle
+      class="form-control" formControlName="isReinforcementRoute"
+      >
+        Reinforcement Route
+    </mat-slide-toggle>&nbsp; &nbsp; &nbsp; &nbsp;
+      <mat-slide-toggle
+      class="form-control" formControlName="isEmptyRoute"         
+         >
+        Empty Route
+      </mat-slide-toggle> &nbsp; &nbsp; &nbsp; &nbsp;
+      <mat-form-field class="example-full-width">
+        <mat-label>Orientation</mat-label>
+        <mat-select class="form-control" formControlName="routeOrientation">
+          <mat-option *ngFor="let orientationG of orientations" [value]="orientationG.value">
+            {{ orientationG.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;
+      <mat-label>Add Node</mat-label>
+      <button mat-button (click)= "insertNode()" ><mat-icon color='blueviolet'>add_box</mat-icon></button>
+    </section>
+  </div>
+  <div *ngFor="let control of routeNodes.controls; index as i">
+    <mat-label> <br><br>{{i > 0 ? 'Node: ' + i : 'Begin Node'}}<br><br></mat-label>
+    <mat-form-field class="example-full-width">
+      <mat-label>Node</mat-label>
+      <mat-select class="form-control" [formControl]="routeNodes.controls[i]">
+        <mat-option *ngFor="let node of nodeList" [value]="node.id">
+          {{ node.shortName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field><br>
+    <mat-form-field *ngIf="i > 0"class="example-full-width">
+      <mat-label>Duration</mat-label>
+      <input matInput class="form-control" [formControl]="routeNodesDuration.controls[i]">
+      <mat-error *ngIf="formControl.hasError('required')">
+        Duration is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;
+    <mat-form-field *ngIf="i > 0"class="example-full-width">
+      <mat-label>Distance</mat-label>
+      <input matInput class="form-control" [formControl]="routeNodesDistance.controls[i]">
+      <mat-error *ngIf="formControl.hasError('required')">
+        Distance is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;
+  </div>  
+  <div>
+    <a mat-button (click)= "submit()">Submit</a>
+  </div>
