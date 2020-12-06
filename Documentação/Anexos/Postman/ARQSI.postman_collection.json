@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b3090edf-b550-4a3a-b1cf-766ae382023c",
+		"_postman_id": "14ff1302-acd0-41ec-97ed-39f27e2d7a27",
 		"name": "ARQSI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -452,6 +452,66 @@
 										"api",
 										"lines",
 										"123"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Go route to line",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{​​​​​\r\n    \"isReinforcementRoute\": false,\r\n    \"isEmptyRoute\" : false,\r\n    \"routeNodes\": [\r\n        {​​​​​\r\n            \"nodeId\": \"5fb1521d1d68883f74e0d43d\",\r\n            \"distance\": 0,\r\n            \"duration\": 0\r\n        }​​​​​,\r\n        {​​​​​\r\n            \"nodeId\": \"5fb152301d68883f74e0d441\",\r\n            \"distance\": 2,\r\n            \"duration\": 3\r\n        }​​​​​\r\n    ]\r\n}​​​​​",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/lines/5fb1549968f9c207542f6bdd/createAndAddRoute/Go",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"lines",
+										"5fb1549968f9c207542f6bdd",
+										"createAndAddRoute",
+										"Go"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Return route to line",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{​​​​​\r\n    \"isReinforcementRoute\": false,\r\n    \"isEmptyRoute\" : false,\r\n    \"routeNodes\": [\r\n        {​​​​​\r\n            \"nodeId\": \"5fb152301d68883f74e0d441\",\r\n            \"distance\": 2,\r\n            \"duration\": 3\r\n        }​​​​​,\r\n        {​​​​​\r\n            \"nodeId\": \"5fb1521d1d68883f74e0d43d\",\r\n            \"distance\": 0,\r\n            \"duration\": 0\r\n        }​​​​​\r\n    ]\r\n}​​​​​",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/lines/5fb1549968f9c207542f6bdd/createAndAddRoute/Return",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"lines",
+										"5fb1549968f9c207542f6bdd",
+										"createAndAddRoute",
+										"Return"
 									]
 								}
 							},
