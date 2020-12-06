@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: importglx
+  labels:
+    app: importglx
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: importglx
+  sessionAffinity: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: importglx-deployment
+  labels:
+    app: importglx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: importglx
+  template:
+    metadata:
+      labels:
+        app: importglx
+    spec:
+      containers:
+      - name: importglx
+        image: wultyc/arqsi-viajantes2-importglx:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80

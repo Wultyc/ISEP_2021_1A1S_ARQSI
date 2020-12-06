@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redemasterdata
+  labels:
+    app: redemasterdata
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: redemasterdata
+  sessionAffinity: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redemasterdata-deployment
+  labels:
+    app: redemasterdata
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redemasterdata
+  template:
+    metadata:
+      labels:
+        app: redemasterdata
+    spec:
+      containers:
+      - name: redemasterdata
+        image: wultyc/arqsi-viajantes2-redemasterdata:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80

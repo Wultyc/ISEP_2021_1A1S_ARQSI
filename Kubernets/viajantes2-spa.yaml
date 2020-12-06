@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: viajantes2-spa
+  annotations:
+    service.beta.kubernetes.io/linode-loadbalancer-throttle: "4"
+  labels:
+    app: viajantes2-spa
+spec:
+  type: LoadBalancer
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: viajantes2-spa
+  sessionAffinity: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: viajantes2-spa-deployment
+  labels:
+    app: viajantes2-spa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: viajantes2-spa
+  template:
+    metadata:
+      labels:
+        app: viajantes2-spa
+    spec:
+      containers:
+      - name: viajantes2-spa
+        image: wultyc/arqsi-viajantes2-spa:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80

@@ -1,0 +1,791 @@
+{
+	"info": {
+		"_postman_id": "b3090edf-b550-4a3a-b1cf-766ae382023c",
+		"name": "ARQSI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Rede Master Data",
+			"item": [
+				{
+					"name": "Nodes",
+					"item": [
+						{
+							"name": "Create Node",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"shortName\": \"node7\",\r\n    \"name\": \"Valongo\",\r\n    \"longitude\": \"17\",\r\n    \"latitude\": \"56\",\r\n    \"collectionNode\": true,\r\n    \"surrenderNode\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/nodes/",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"nodes",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Node",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"shortName\": \"node1\",\r\n    \"longitude\": \"10\",\r\n    \"latitude\": \"20\",\r\n    \"collectionNode\": true,\r\n    \"surrenderNode\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/nodes/",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"nodes",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Node",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"shortName\": \"node1\",\r\n    \"longitude\": \"10\",\r\n    \"latitude\": \"20\",\r\n    \"collectionNode\": true,\r\n    \"surrenderNode\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/nodes/123",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"nodes",
+										"123"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Node by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"shortName\": \"node1\",\r\n    \"longitude\": \"10\",\r\n    \"latitude\": \"20\",\r\n    \"collectionNode\": true,\r\n    \"surrenderNode\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/nodes/123",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"nodes",
+										"123"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Routes",
+					"item": [
+						{
+							"name": "Get Line Routes",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"code\": \"1\",\r\n    \"name\": \"1\",\r\n    \"beginNode\": \"5faf17060d9ee23ac45f25ef\",\r\n    \"finalNode\": \"5faf17190d9ee23ac45f25f3\",\r\n    \"route\": [\"5faf1dc0094b213d082587f7\", \"5faf2053094b213d082587f9\"],\r\n    \"tripulantType\": [\"5f9f245103edb708e4ba0a9a\"],\r\n    \"vehicleType\": [\"5fa1e1537187174c70ef67b7\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/lines/123/routes",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"lines",
+										"123",
+										"routes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Route",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"isReinforcementRoute\": false,\r\n    \"isEmptyRoute\" : false,\r\n    \"routeNodes\": [\r\n        {\r\n            \"nodeId\": \"5fb152301d68883f74e0d441\",\r\n            \"distance\": 0,\r\n            \"duration\": 0\r\n        },\r\n        {\r\n            \"nodeId\": \"5fb152241d68883f74e0d43f\",\r\n            \"distance\": 3,\r\n            \"duration\": 4\r\n        },\r\n        {\r\n            \"nodeId\": \"5fb1521d1d68883f74e0d43d\",\r\n            \"distance\": 1,\r\n            \"duration\": 1\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/routes/",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"routes",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Route",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"startTime\": 1000,\r\n    \"orientation\": \"GoingRoute\",\r\n    \"isReinforcementRoute\": false,\r\n    \"isEmptyRoute\" : false,\r\n    \"segment\": [\"5fa6b79c223657212007e456\", \"5fa6b83f223657212007e458\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/routes/",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"routes",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Route",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"shortName\": \"node1\",\r\n    \"longitude\": \"10\",\r\n    \"latitude\": \"20\",\r\n    \"collectionNode\": true,\r\n    \"surrenderNode\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/routes/123",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"routes",
+										"123"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Route by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"startTime\": 1000,\r\n    \"orientation\": \"GoingRoute\",\r\n    \"isReinforcementRoute\": false,\r\n    \"isEmptyRoute\" : false,\r\n    \"segment\": [\"5fa6b79c223657212007e456\", \"5fa6b83f223657212007e458\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/routes/123",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"routes",
+										"123"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Line",
+					"item": [
+						{
+							"name": "Search Line",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"code\": \"1\",\r\n    \"name\": \"1\",\r\n    \"beginNode\": \"5faf17060d9ee23ac45f25ef\",\r\n    \"finalNode\": \"5faf17190d9ee23ac45f25f3\",\r\n    \"route\": [\"5faf1dc0094b213d082587f7\", \"5faf2053094b213d082587f9\"],\r\n    \"tripulantType\": [\"5f9f245103edb708e4ba0a9a\"],\r\n    \"vehicleType\": [\"5fa1e1537187174c70ef67b7\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/lines",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"lines"
+									],
+									"query": [
+										{
+											"key": "sort",
+											"value": "code",
+											"disabled": true
+										},
+										{
+											"key": "sortmode",
+											"value": "asc",
+											"disabled": true
+										},
+										{
+											"key": "lineRoutes",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Line",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"code\": \"1\",\r\n    \"name\": \"1\",\r\n    \"color\": \"red\",\r\n    \"beginNode\":\"5fbed8b55911064d20645bff\",\r\n    \"finalNode\":\"5fbed6935911064d20645bfe\",\r\n    \"lineRoutes\": [\r\n        {\r\n            \"routeId\": \"5fb1530e1d68883f74e0d446\",\r\n            \"orientation\": \"Go\"\r\n        },\r\n        {\r\n            \"routeId\": \"5fb153261d68883f74e0d447\",\r\n            \"orientation\": \"Return\"\r\n        }\r\n    ],\r\n    \"tripulantType\": [],\r\n    \"vehicleType\": []\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/lines/",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"lines",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Line",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"code\": \"1\",\r\n    \"name\": \"1\",\r\n    \"beginNode\": \"5faf17060d9ee23ac45f25ef\",\r\n    \"finalNode\": \"5faf17190d9ee23ac45f25f3\",\r\n    \"route\": [\"5faf1dc0094b213d082587f7\", \"5faf2053094b213d082587f9\"],\r\n    \"tripulantType\": [\"5f9f245103edb708e4ba0a9a\"],\r\n    \"vehicleType\": [\"5fa1e1537187174c70ef67b7\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/lines",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"lines"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Line",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"code\": \"1\",\r\n    \"name\": \"1\",\r\n    \"beginNode\": \"5faf17060d9ee23ac45f25ef\",\r\n    \"finalNode\": \"5faf17190d9ee23ac45f25f3\",\r\n    \"route\": [\"5faf1dc0094b213d082587f7\", \"5faf2053094b213d082587f9\"],\r\n    \"tripulantType\": [\"5f9f245103edb708e4ba0a9a\"],\r\n    \"vehicleType\": [\"5fa1e1537187174c70ef67b7\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/lines/123",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"lines",
+										"123"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Line by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"code\": \"1\",\r\n    \"name\": \"1\",\r\n    \"beginNode\": \"5faf17060d9ee23ac45f25ef\",\r\n    \"finalNode\": \"5faf17190d9ee23ac45f25f3\",\r\n    \"route\": [\"5faf1dc0094b213d082587f7\", \"5faf2053094b213d082587f9\"],\r\n    \"tripulantType\": [\"5f9f245103edb708e4ba0a9a\"],\r\n    \"vehicleType\": [\"5fa1e1537187174c70ef67b7\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/lines/123",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"lines",
+										"123"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Vehicle Type",
+					"item": [
+						{
+							"name": "Create Vehicle Type",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\": \"autocarro\",\r\n    \"autonomy\": 200,\r\n    \"costPerKilometer\": 1.22,\r\n    \"averageCost\": 13,\r\n    \"averageSpeed\": 22,\r\n    \"fuelType\": \"Gasoleo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/vehicle-types/",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"vehicle-types",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Vehicle Type by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\": \"autocarro\",\r\n    \"autonomy\": 200,\r\n    \"costPerKilometer\": 1.22,\r\n    \"avarageCost\": 13,\r\n    \"averageSpeed\": 22,\r\n    \"fuelType\": \"gasoleo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/vehicle-types/123",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"vehicle-types",
+										"123"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Vehicle Type",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"code\": \"1\",\r\n    \"name\": \"1\",\r\n    \"beginNode\": \"5faf17060d9ee23ac45f25ef\",\r\n    \"finalNode\": \"5faf17190d9ee23ac45f25f3\",\r\n    \"route\": [\"5faf1dc0094b213d082587f7\", \"5faf2053094b213d082587f9\"],\r\n    \"tripulantType\": [\"5f9f245103edb708e4ba0a9a\"],\r\n    \"vehicleType\": [\"5fa1e1537187174c70ef67b7\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/vehicle-types/",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"vehicle-types",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Vehicle Type by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\": \"autocarro\",\r\n    \"autonomy\": 200,\r\n    \"costPerKilometer\": 1.22,\r\n    \"avarageCost\": 13,\r\n    \"averageSpeed\": 22,\r\n    \"fuelType\": \"gasoleo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/vehicle-types/5fcaf9fc8b61ff0a80412a76",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"vehicle-types",
+										"5fcaf9fc8b61ff0a80412a76"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Trypulant Type",
+					"item": [
+						{
+							"name": "Create Trypulant Type",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\": \"black\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/tripulant-types/",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"tripulant-types",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Tripulant Types",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"shortName\": \"node1\",\r\n    \"longitude\": \"10\",\r\n    \"latitude\": \"20\",\r\n    \"collectionNode\": true,\r\n    \"surrenderNode\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/tripulant-types",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"tripulant-types"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Tripulant Type",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"code\": \"1\",\r\n    \"name\": \"1\",\r\n    \"beginNode\": \"5faf17060d9ee23ac45f25ef\",\r\n    \"finalNode\": \"5faf17190d9ee23ac45f25f3\",\r\n    \"route\": [\"5faf1dc0094b213d082587f7\", \"5faf2053094b213d082587f9\"],\r\n    \"tripulantType\": [\"5f9f245103edb708e4ba0a9a\"],\r\n    \"vehicleType\": [\"5fa1e1537187174c70ef67b7\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/tripulant-types/",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"tripulant-types",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Tripulant by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"shortName\": \"node1\",\r\n    \"longitude\": \"10\",\r\n    \"latitude\": \"20\",\r\n    \"collectionNode\": true,\r\n    \"surrenderNode\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RedeMasterData}}/api/tripulant-types/123",
+									"host": [
+										"{{RedeMasterData}}"
+									],
+									"path": [
+										"api",
+										"tripulant-types",
+										"123"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Healthcheck",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{RedeMasterData}}/api/healthcheck/",
+							"host": [
+								"{{RedeMasterData}}"
+							],
+							"path": [
+								"api",
+								"healthcheck",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ImportGLX",
+			"item": [
+				{
+					"name": "Upload GLX file",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "glx",
+									"type": "file",
+									"src": "/C:/Users/Jorge/isep-workspace/ARQSI/arqsi_2021/Documentação/Anexos/Exemplos/demo-lapr5.glx.xml"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{ImportGLX}}/api/import-glx/",
+							"host": [
+								"{{ImportGLX}}"
+							],
+							"path": [
+								"api",
+								"import-glx",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Healthcheck",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ImportGLX}}/api/healthcheck/",
+							"host": [
+								"{{ImportGLX}}"
+							],
+							"path": [
+								"api",
+								"healthcheck",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

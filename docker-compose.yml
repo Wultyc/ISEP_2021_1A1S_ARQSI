@@ -1,0 +1,22 @@
+version: "3"
+services:
+  importglx:
+    build: ./ImportGLX
+    ports:
+      - "8082:80"
+    networks:
+      - default
+  redemasterdata:
+    build: ./RedeMasterData
+    ports:
+      - "8083:80"
+    networks:
+      - default
+  viajantes2spa:
+    build: ./viajantes2-spa
+    ports:
+      - "8080:80"
+    networks:
+      - default
+networks:
+  default:
