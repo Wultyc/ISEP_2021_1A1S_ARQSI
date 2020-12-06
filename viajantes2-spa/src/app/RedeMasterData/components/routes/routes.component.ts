@@ -109,8 +109,17 @@ export class RoutesComponent implements OnInit, AfterViewInit {
   
   setAdd() : any {
     this.addNode = [];
+    this.clearFormArray(this.routeNodes);
+    this.clearFormArray(this.routeNodesDistance);
+    this.clearFormArray(this.routeNodesDuration);
     this.hasError = false;
     return this.isAdding = !this.isAdding;
+  }
+
+  clearFormArray = (formArray: FormArray) => {
+    while (formArray.length !== 0) {
+      formArray.removeAt(0)
+    }
   }
 
   isValidForm() : boolean {
