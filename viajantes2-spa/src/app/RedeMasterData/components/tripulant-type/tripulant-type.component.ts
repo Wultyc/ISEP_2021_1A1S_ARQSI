@@ -15,7 +15,7 @@ import {FormControl, Validators, FormBuilder, FormGroup} from '@angular/forms';
 export class TripulantTypeComponent implements  OnInit  {
 
   tripList: TripulantType[] = [];
-  displayedColumns: string[] = ['description', 'actions'];
+  displayedColumns: string[] = ['description'];
   dataSource = new MatTableDataSource<TripulantType>();
 
   formControl = new FormControl('', [
