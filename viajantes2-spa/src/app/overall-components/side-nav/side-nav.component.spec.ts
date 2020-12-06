@@ -4,7 +4,9 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { HttpClientModule } from '@angular/common/http';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { RouterTestingModule } from "@angular/router/testing";
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { SideNavComponent } from './side-nav.component';
@@ -17,6 +19,8 @@ describe('SideNavComponent', () => {
     TestBed.configureTestingModule({
       declarations: [SideNavComponent],
       imports: [
+        RouterTestingModule,
+        HttpClientModule,
         NoopAnimationsModule,
         LayoutModule,
         MatButtonModule,

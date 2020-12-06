@@ -59,25 +59,24 @@ export class LineComponent implements OnInit, AfterViewInit  {
     vehicleType: new FormControl()
   });
 
-
   hasError: boolean = false;
 
- showDetails: boolean[] = [];
- lineList: Line[] = [];
- lineRoutes: any[] = [];
- displayedColumns: string[] = ['code', 'name', 'color', 'beginNode', 'finalNode', 'actions'];
- dataSource = new MatTableDataSource<Line>();
+  showDetails: boolean[] = [];
+  lineList: Line[] = [];
+  lineRoutes: any[] = [];
+  displayedColumns: string[] = ['code', 'name', 'color', 'beginNode', 'finalNode', 'actions'];
+  dataSource = new MatTableDataSource<Line>();
 
- isAdding: boolean = false;
- isViewingRoutes: boolean = false;
- hasRoutes: boolean = true;
+  isAdding: boolean = false;
+  isViewingRoutes: boolean = false;
+  hasRoutes: boolean = true;
 
- errorMessages: any[] = [];
+  errorMessages: any[] = [];
 
- mapper = new LinesMapper;
+  mapper = new LinesMapper;
 
- mapperRoutes = new RoutesMapper;
- vehicleMapper = new VehicleTypeMapper;
+  mapperRoutes = new RoutesMapper;
+  vehicleMapper = new VehicleTypeMapper;
 
   lineRoutesForm = new FormArray([]);
   orientationArray = new FormArray([]);
@@ -254,7 +253,7 @@ getRoutes() : void {
     this.linesService.postLines(postEntity).subscribe(
       (data) => {
         if (data) {           
-          this.lineList.push(this.mapper.fromResponseToDto(new Line() as Line, this.updateDataToLineModel(data)));
+          this.lineList.push(this.mapper.fromResponseToDto(new Line() as Line, this.mapper.updateDataToResponseModel(data, this.nodeList)));
           this.dataSource = new MatTableDataSource(this.lineList);          
           this.showDetails.push(false); 
           this.isAdding = !this.isAdding;  
@@ -264,6 +263,7 @@ getRoutes() : void {
         this.hasError = true;
         if (error.error != null && error.error.code == null && error.error.message == null) {
           if (error.error instanceof Array) {
+            this.errorMessages.push("Error Submiting the Line.");
             for (let i = 0; i < error.error.length; i ++) {       
               this.errorMessages.push(error.error[i]);
             }   
@@ -278,14 +278,4 @@ getRoutes() : void {
     )
   }
 
-  updateDataToLineModel(data: any) : Route {
-    for (let i = 0; i < this.nodeList.length; i++) {
-      if (this.nodeList[i].id == data.beginNode) {
-        data.beginNode = this.nodeList[i];
-      } else if (this.nodeList[i].id == data.finalNode) {
-        data.finalNode = this.nodeList[i];
-      }
-    }
-    return data;
-  }
 }

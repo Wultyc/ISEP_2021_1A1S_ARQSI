@@ -7,7 +7,7 @@ Este projeto tem como objetivo implementar um sistema para a empresa OPT gerir a
 
 ### Nível 1
 De um modo mais alto nível apenas existirá o sistema OPT (implementado neste projeto) que terá 3 interfaces publicas (UI Cliente, UI Administrador, UI Administrador) e utilizará apenas uma a interface do sistema de ficheiros da máquina onde está a ser utilizado.
-![Diagrama de Nível 1](Diagramas/C4_1/N1.png)
+![Diagrama de Nível 1](Diagramas/C4_1/N1.jpg)
 
 ### Nível 2
 Entrando um pouco mais em detalhe, o sistema OPT será constituído pelos serviços  
@@ -16,11 +16,15 @@ Entrando um pouco mais em detalhe, o sistema OPT será constituído pelos servi�
 - Master Data Rede: Camada responsável por gerir as informações sobre a Rede
 - Master Data Viagem: Camada responsável por gerir as informações sobre as Viagens
 - ImportGLX: Camada responsável por ler as informações contidas num ficheiro .GLX e envia-la para o MasterData correspondente
-![Diagrama de Nível 2](Diagramas/C4_1/N2.png)
+![Diagrama de Nível 2](Diagramas/C4_1/N2.jpg)
 
-### Nível 3 - Master Data rede
+### Nível 3
+#### Master Data Rede
 O Master Data Rede será construido seguindo uma arquitetura por camadas. Inicialmente o request chegado ao servidor será passado para o controller que passara a informação para a camada de Service através de um DTO. A camada Service, responsável por conhecer as regras de negocio, este DTO será processado e passado ao Repositório para ser persistido. Este processo dar-se-á por meio de um Model. O repositório por sua vez irá fazer o processo de persistência usando um DataScheema que neste caso tem como objetivo modelar a informação para ser armazenada numa base de dados MongoDB.
-![Diagrama de Nível 3](Diagramas/C4_1/N3.png)
+![Diagrama de Nível 3](Diagramas/C4_1/N3-RMD.jpg)
+#### ImportGLX
+O ImportGLX será construido seguindo uma arquitetura por camadas. Inicialmente o request chegado ao servidor será passado para o controller que passara a informação para a camada de Service. Esta passa ao repositório para armazenar o ficheiro no filesystem da aplicação. De seguida outro serviço é chamado para fazer o import para o Rede Master Data. Neste caso o repositório de filesystem é novamente invocado para obter o ficheiro gravado inicialmente. Este serviço então transforma esse ficheiro em objetos DTO e usa-os para os passar ao repositório Master Data que vai efetuar os pedidos HTTP ao sistema final 
+![Diagrama de Nível 3](Diagramas/C4_1/N3-ImportGLX.jpg)
 
 ## Modelo de Domínio
 A baixo é apresentado o modelo de domínio segundo a notação Domain Driven Design (DDD). Neste diagrama é possível observar as relações entres as diferentes entidades presentes no sistema OPT.
