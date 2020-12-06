@@ -5,7 +5,7 @@ Projeto desenvolvido na UC Arquitetura de Sistemas (ARQSI) durante o primeiro se
 - Jorge Azevedo (1160929)
 - Nuno Dinis (1161042)
 - Daniel Coelho (1160943)
-- Filipe Sousa (1150470)
+- Diogo Barreto (1150468)
 
 ## Componentes
 Este sistema é composto por vários componentes
