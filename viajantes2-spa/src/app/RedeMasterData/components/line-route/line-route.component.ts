@@ -5,11 +5,6 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Route, RouteNodes, RoutePost} from '../../models/route';
 import {MatDialog} from '@angular/material/dialog';
 import {FormControl, Validators, FormBuilder, FormGroup, FormArray} from '@angular/forms';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar'
 import { RoutesService } from '../../services/routes.service';
 import { RoutesMapper } from '../../models/mappers/routeMapper';
 import { Nodes } from '../../models/nodes';
@@ -18,6 +13,7 @@ import { NodesMapper } from '../../models/mappers/nodeMapper';
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
+import { LinesService } from '../../services/lines.service';
 
 
 export interface orientation {
@@ -44,7 +40,7 @@ export class LineRouteComponent implements OnInit, AfterViewInit {
     routeOrientation: new FormControl
   });
 
-  id = new String;
+  id: string;
 
   routeNodes = new FormArray([]);
   routeNodesDistance = new FormArray([]);
@@ -64,7 +60,8 @@ export class LineRouteComponent implements OnInit, AfterViewInit {
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
     private routeService: RoutesService,
-    private nodesService: NodesService) { }
+    private nodesService: NodesService,
+    private linesService: LinesService) { }
 
   ngOnInit(): void {
     this.route.params
@@ -98,13 +95,38 @@ export class LineRouteComponent implements OnInit, AfterViewInit {
   }
 
   submit() {
+    let postEntity = new RoutePost();
+    // this.errorMessages = [];
+    let routeNodesPost: any[] = [];
+    for (let i = 0; i < this.routeNodes.controls.length; i++) {
+      routeNodesPost.push(
+        {
+          id: this.routeNodes.value[i],
+          distance: this.routeNodesDistance.value[i],
+          duration: this.routeNodesDuration.value[i]
+        }
+      )
+    }
     
-    console.log(this.routeNodes)
-    console.log(this.routeNodesDistance)
-    console.log(this.routeNodesDuration)
-    console.log(this.id)
-    console.log(this.routeLineForm)
-  }
+    this.routeLineForm.value.isEmptyRoute = (this.routeLineForm.value.isEmptyRoute == undefined || this.routeLineForm.value.isEmptyRoute == null) ? false : ( this.routeLineForm.value.isEmptyRoute == true ? true : false);
+    this.routeLineForm.value.isReinforcementRoute = (this.routeLineForm.value.isReinforcementRoute == undefined  || this.routeLineForm.value.isReinforcementRoute == null) ? false : (this.routeLineForm.value.isReinforcementRoute == true ? true : false);
+    this.routeLineForm.value.orientation
+    postEntity = this.mapper.fromFormToPost(routeNodesPost,this.routeLineForm.value, postEntity);
 
-  
+    this.linesService.postLineRoutes(this.id, postEntity, this.routeLineForm.value.orientation as string).subscribe(
+      (data) => {
+        if (data) {
+          console.log(data)
+        }
+      },
+      (error) => { 
+      console.log(error);        // if (error.error != null && error.error.code == null && error.error.message == null) {
+        //   this.errorMessages.push("Error Submiting the Route. " + error.error);
+        // } else {
+        //   this.errorMessages.push("Error Submiting the Route.");
+        // }
+      }
+    )
+    // fromFormToPost = function (routeNodes: any, formBody: any, object: RoutePost)
+  } 
 }
