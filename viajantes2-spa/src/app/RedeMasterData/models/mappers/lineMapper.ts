@@ -1,0 +1,60 @@
+import { Route, RoutePost } from '../route';
+import { Line, LinePost, LineRoutesPost } from '../line';
+import { RoutesMapper } from './routeMapper'
+
+export class LinesMapper {
+    constructor() { }
+
+    fromFormToPost = function (lineRoutes: any, formBody: any, object: LinePost) {
+            object.code = formBody.code
+            object.name = formBody.name
+            object.color = formBody.code
+            object.beginNode = formBody.beginNode
+            object.finalNode = formBody.finalNode      
+            
+            if (lineRoutes && lineRoutes.length > 0 ) 
+            {
+                for (var i = 0; i < lineRoutes.length; i++) {
+                    object.lineRoutes.push(
+                        {
+                        routeId: lineRoutes[i].id,
+                        orientation: lineRoutes[i].distance
+                    });   
+            };
+        }                     
+            
+        return object;
+    }
+    
+    fromResponseToDto = function (model: Line, response: any) : Line {
+        let mapper = new RoutesMapper();
+
+            model.code = response.code
+            model.name = response.name
+            model.color = response.color
+            model.beginNode = response.beginNode
+            model.finalNode = response.finalNode        
+            model.lineRoutes = [];
+            response.tripulantTypes = [];
+            response.vehicleType = [];
+            for (let i = 0; i < response.lineRoutes.length; i++) {
+            model.lineRoutes.push(
+                {
+                    route: mapper.fromResponseToDto(new Route() as Route, response.lineRoutes[i].routeId),
+                    orientation: response.lineRoutes[i].orientation
+                });
+            }        
+            model.tripulantTypes = response.tripulantTypes.map((tripulantType: any) => {
+                return {
+                    id: tripulantType.id
+                }
+            })
+            model.vehicleType = response.vehicleType.map((vehicleType: any) => {
+                return {
+                    id: vehicleType.id
+                }
+            })
+        
+        return model;
+    }
+}

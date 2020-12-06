@@ -11,6 +11,12 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar'
 import { LinesService } from '../../services/lines.service';
+import { Nodes } from '../../models/nodes';
+import { NodesService } from '../../services/nodes.service';
+import { NodesMapper } from '../../models/mappers/nodeMapper';
+import { TripulantType } from '../../models/tripulant-type';
+import { TripulantTypeService } from '../../services/tripulant-type.service';
+import { LinesMapper } from '../../models/mappers/lineMapper';
 
 
 @Component({
@@ -24,10 +30,20 @@ export class LineComponent implements OnInit, AfterViewInit  {
  ]);
  errorMessage: any;
 
+ nodeList: Nodes[] = [];
+ nodeMapper = new NodesMapper();
+
+ tripList: TripulantType[] = [];
+
+
   lineForm = new FormGroup ({
     code: new FormControl(),
     name: new FormControl(),
-    color: new FormControl()
+    color: new FormControl(),
+    beginNode: new FormControl(),
+    finalNode: new FormControl(),
+    tripulantType: new FormControl(),
+    vehicleType: new FormControl()
   });
 
  showDetails: boolean[] = [];
@@ -40,12 +56,15 @@ export class LineComponent implements OnInit, AfterViewInit  {
  isViewingRoutes: boolean = false;
  hasRoutes: boolean = true;
 
+ mapper = new LinesMapper;
 
  @ViewChild(MatSort) sort : MatSort;
 
  constructor(
    private linesService: LinesService,
-   public dialog: MatDialog,
+   private nodesService: NodesService,
+   private tripService: TripulantTypeService,
+   private dialog: MatDialog,
    private formBuilder: FormBuilder,
    private _snackBar: MatSnackBar
    ) {}
@@ -53,6 +72,8 @@ export class LineComponent implements OnInit, AfterViewInit  {
    this.dataSource.filterPredicate = 
    (data: Line, filter: string) => data.name?.indexOf(filter) != -1;
    this.getLines();
+   this.getNodes();
+   this.getTripulantTypes();
  }
  ngAfterViewInit() {
    
@@ -63,15 +84,44 @@ export class LineComponent implements OnInit, AfterViewInit  {
     this.linesService.getLines().subscribe(
       (data) => {
         if (data && data.length > 0) {
-          console.log(data);
-          this.lineList = data;
-        };
+          console.log(data)
+          for (let i = 0; i < data.length; i ++){              
+            this.lineList.push(this.mapper.fromResponseToDto(new Line() as Line, data[i]));
+          
+          }  
+          console.log(this.lineList)
+        };        
         this.dataSource = new MatTableDataSource(this.lineList);
         this.dataSource.sort = this.sort;
         for (let i = 0; i < data.length; i++) {
           this.showDetails.push(false);
-        }        
-      }  
+        }          
+     
+  });
+}
+
+  getNodes() : void {    
+    this.nodesService.getNodes().subscribe(
+      (data) => {
+        if (data && data.length > 0) {
+          for (let i = 0; i < data.length; i ++){              
+            this.nodeList.push(this.nodeMapper.fromResponseToDto(new Nodes() as Nodes, data[i]));
+            }     
+        };        
+      } 
+    ); 
+  };
+
+  getTripulantTypes() : void {
+    this.tripService.getTripulantType().subscribe(
+      (data) => {
+        if (data && data.length > 0) { 
+          for (let i = 0; i < data.length; i ++){  
+          this.tripList.push(data[i]);
+          }
+          console.log(this.tripList)
+        };
+      }
     ); 
   };
 
