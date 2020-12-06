@@ -59,7 +59,7 @@ pipelines:
               # install npm
               - npm install
               # build app
-              - npm run build
+              - npm run build --prod
               # set image name
               - export IMAGE_NAME=$DOCKER_HUB_USERNAME/arqsi-viajantes2-spa:latest
               # build the Docker image (this will use the Dockerfile in the root of the repo)
