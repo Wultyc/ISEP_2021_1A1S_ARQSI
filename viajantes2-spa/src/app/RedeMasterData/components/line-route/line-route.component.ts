@@ -12,7 +12,7 @@ import { NodesService } from '../../services/nodes.service';
 import { NodesMapper } from '../../models/mappers/nodeMapper';
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { LinesService } from '../../services/lines.service';
 
 
@@ -55,7 +55,12 @@ export class LineRouteComponent implements OnInit, AfterViewInit {
 
   routeList: Route[] = [];
   nodeList: Nodes[] = [];
+
+  hasError: boolean = false;
+  errorMessages: any[] = [];
+
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
@@ -96,7 +101,8 @@ export class LineRouteComponent implements OnInit, AfterViewInit {
 
   submit() {
     let postEntity = new RoutePost();
-    // this.errorMessages = [];
+    this.hasError = false;
+    this.errorMessages = [];
     let routeNodesPost: any[] = [];
     for (let i = 0; i < this.routeNodes.controls.length; i++) {
       routeNodesPost.push(
@@ -112,23 +118,31 @@ export class LineRouteComponent implements OnInit, AfterViewInit {
     this.routeLineForm.value.isReinforcementRoute = (this.routeLineForm.value.isReinforcementRoute == undefined  || this.routeLineForm.value.isReinforcementRoute == null) ? false : (this.routeLineForm.value.isReinforcementRoute == true ? true : false);
     
     postEntity = this.mapper.fromFormToPost(routeNodesPost,this.routeLineForm.value, postEntity);
-
     this.linesService.postLineRoutes(this.id, postEntity, this.routeLineForm.value.routeOrientation as string).subscribe(
       (data) => {
         if (data) {
-          console.log(data)
+          console.log(data);
+          this.router.navigate(['lines']);
         }
       },
       (error) => { 
-      console.log(error);        // if (error.error != null && error.error.code == null && error.error.message == null) {
-        //   this.errorMessages.push("Error Submiting the Route. " + error.error);
-        // } else {
-        //   this.errorMessages.push("Error Submiting the Route.");
-        // }
+        this.hasError = true;
+        if (error.error != null && error.error.code == null && error.error.message == null) {
+          if (error.error instanceof Array) {
+            this.errorMessages.push("Error Adding Route to Line.");
+            for (let i = 0; i < error.error.length; i ++) {       
+              this.errorMessages.push(error.error[i]);
+            }   
+          } else {
+            this.errorMessages.push("Error Adding Route to Line. " + error.error);
+          }
+        } else {
+          this.errorMessages.push("Error Adding Route to Line. " +
+            "If no required fields are empty, there may already exist a Line with that code introduced.");
+        }
       }
     )
-    // fromFormToPost = function (routeNodes: any, formBody: any, object: RoutePost)
-  } 
+  }
   updateDataToRouteModel(data: any) : Route {
     let route = new Route();
     route.distance = data.distance;

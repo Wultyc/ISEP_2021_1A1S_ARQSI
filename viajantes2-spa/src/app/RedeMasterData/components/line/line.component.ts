@@ -59,25 +59,24 @@ export class LineComponent implements OnInit, AfterViewInit  {
     vehicleType: new FormControl()
   });
 
-
   hasError: boolean = false;
 
- showDetails: boolean[] = [];
- lineList: Line[] = [];
- lineRoutes: any[] = [];
- displayedColumns: string[] = ['code', 'name', 'color', 'beginNode', 'finalNode', 'actions'];
- dataSource = new MatTableDataSource<Line>();
+  showDetails: boolean[] = [];
+  lineList: Line[] = [];
+  lineRoutes: any[] = [];
+  displayedColumns: string[] = ['code', 'name', 'color', 'beginNode', 'finalNode', 'actions'];
+  dataSource = new MatTableDataSource<Line>();
 
- isAdding: boolean = false;
- isViewingRoutes: boolean = false;
- hasRoutes: boolean = true;
+  isAdding: boolean = false;
+  isViewingRoutes: boolean = false;
+  hasRoutes: boolean = true;
 
- errorMessages: any[] = [];
+  errorMessages: any[] = [];
 
- mapper = new LinesMapper;
+  mapper = new LinesMapper;
 
- mapperRoutes = new RoutesMapper;
- vehicleMapper = new VehicleTypeMapper;
+  mapperRoutes = new RoutesMapper;
+  vehicleMapper = new VehicleTypeMapper;
 
   lineRoutesForm = new FormArray([]);
   orientationArray = new FormArray([]);
@@ -264,6 +263,7 @@ getRoutes() : void {
         this.hasError = true;
         if (error.error != null && error.error.code == null && error.error.message == null) {
           if (error.error instanceof Array) {
+            this.errorMessages.push("Error Submiting the Line.");
             for (let i = 0; i < error.error.length; i ++) {       
               this.errorMessages.push(error.error[i]);
             }   
