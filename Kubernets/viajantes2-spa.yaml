@@ -16,7 +16,7 @@ spec:
   selector:
     app: viajantes2-spa
   sessionAffinity: None
-  ---
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -24,7 +24,7 @@ metadata:
   labels:
     app: viajantes2-spa
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: viajantes2-spa
@@ -35,7 +35,7 @@ spec:
     spec:
       containers:
       - name: viajantes2-spa
-        image: wultyc/arqsi-viajantes2:spa
+        image: wultyc/arqsi-viajantes2-spa:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80

@@ -7,9 +7,9 @@ metadata:
 spec:
   ports:
   - name: http
-    port: 3003
+    port: 80
     protocol: TCP
-    targetPort: 3003
+    targetPort: 80
   selector:
     app: redemasterdata
   sessionAffinity: None
@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: redemasterdata
-        image: wultyc/arqsi-viajantes2:redemasterdata
+        image: wultyc/arqsi-viajantes2-redemasterdata:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 3003
+        - containerPort: 80

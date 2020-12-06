@@ -7,9 +7,9 @@ metadata:
 spec:
   ports:
   - name: http
-    port: 3002
+    port: 80
     protocol: TCP
-    targetPort: 3002
+    targetPort: 80
   selector:
     app: importglx
   sessionAffinity: None
@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: importglx
-        image: wultyc/arqsi-viajantes2:importglx
+        image: wultyc/arqsi-viajantes2-importglx:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 3002
+        - containerPort: 80
