@@ -47,6 +47,7 @@ export class TripulantTypeComponent implements  OnInit  {
   }
 
   setAdd() : any {
+    this.tripulantTypeForm.reset();
     this.hasError = false;
     return this.isAdding = !this.isAdding;  
   }
@@ -78,7 +79,7 @@ export class TripulantTypeComponent implements  OnInit  {
       },
       (error) => { 
         this.hasError = true;
-        if (error.error != null && error.error.code == null) {
+        if (error.error != null && error.error.code == null && error.error.message == null) {
           console.error("This model does not have Business Validations.");
         } else {
           this.errorMessages.push("Error Submiting the Tripulant Type. " +

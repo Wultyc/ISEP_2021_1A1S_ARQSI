@@ -66,6 +66,7 @@ export class VehicleTypeComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   setAdd() : any {
+    this.vehicleTypeForm.reset();
     this.hasError = false;
     return this.isAdding = !this.isAdding;  
   }
@@ -99,7 +100,7 @@ export class VehicleTypeComponent implements OnInit {
       },
       (error) => { 
         this.hasError = true;
-        if (error.error != null && error.error.code == null) {
+        if (error.error != null && error.error.code == null && error.error.message == null) {
           console.error("This model does not have Business Validations.");
         } else {
           this.errorMessages.push("Error Submiting the Vehicle Type. " +

@@ -214,6 +214,7 @@ getRoutes() : void {
   };
 
   setAdd() : any {
+    this.lineForm.reset();
     this.clearFormArray(this.lineRoutesForm);
     this.clearFormArray(this.orientationArray);
     this.hasError = false;
@@ -252,14 +253,16 @@ getRoutes() : void {
     console.log(postEntity)
     this.linesService.postLines(postEntity).subscribe(
       (data) => {
-        if (data) {      
+        if (data) {           
+          this.lineList.push(this.mapper.fromResponseToDto(new Line() as Line, this.updateDataToLineModel(data)));
+          this.dataSource = new MatTableDataSource(this.lineList);          
           this.showDetails.push(false); 
-          this.isAdding = !this.isAdding;       
+          this.isAdding = !this.isAdding;  
         }
       },
       (error) => { 
         this.hasError = true;
-        if (error.error != null && error.error.code == null) {
+        if (error.error != null && error.error.code == null && error.error.message == null) {
           if (error.error instanceof Array) {
             for (let i = 0; i < error.error.length; i ++) {       
               this.errorMessages.push(error.error[i]);
@@ -273,5 +276,16 @@ getRoutes() : void {
         }
       }
     )
+  }
+
+  updateDataToLineModel(data: any) : Route {
+    for (let i = 0; i < this.nodeList.length; i++) {
+      if (this.nodeList[i].id == data.beginNode) {
+        data.beginNode = this.nodeList[i];
+      } else if (this.nodeList[i].id == data.finalNode) {
+        data.finalNode = this.nodeList[i];
+      }
+    }
+    return data;
   }
 }
