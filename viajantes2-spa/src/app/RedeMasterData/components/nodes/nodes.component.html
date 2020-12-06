@@ -115,21 +115,17 @@
       </mat-slide-toggle>
     </section>
   </div>
-    <div>
-      <a mat-button (click)= "submit()">Submit</a>
-    </div>
 
-    <!-- <p>
-      <mat-form-field class="example-full-width">
-        <mat-label>Name</mat-label>
-        <textarea matInput placeholder="Ex. 100 Main St">Santa Apolónia</textarea>
-        <mat-error *ngIf="formControl.hasError('required')">
-          Name is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <mat-label>Address 2</mat-label>
-        <textarea matInput></textarea>
-      </mat-form-field>
-    </p> -->
+  <div>
+    <a mat-button (click)= "submit()">Submit</a>
+  </div>
+
+  <div *ngIf="hasError">
+    <ul>
+      <div *ngFor="let errorMessage of errorMessages">
+        <mat-error-label>{{errorMessage}}</mat-error-label>
+      </div>
+    </ul>
+  </div>
+
 </ng-template>

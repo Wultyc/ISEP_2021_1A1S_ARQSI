@@ -19,16 +19,12 @@ export class TripulantTypeService {
     return this.httpClient.get<TripulantType[]>(this.url);    
   }
   postTripulantType(trip: TripulantType): Observable<TripulantType> {
-    return this.httpClient.post<TripulantType>(this.url, trip)
-      // .pipe(
-      //   catchError(this.handleError(error: any))
-      // );
-       .pipe(
-        catchError((err) => {
-          console.error(err);
-          return throwError(err);
-        })
-      )
+    return this.httpClient.post<TripulantType>(this.url, trip).pipe(
+      catchError((err) => {
+        console.error(err);
+        return throwError(err);
+      })
+    )
   }
 
 }

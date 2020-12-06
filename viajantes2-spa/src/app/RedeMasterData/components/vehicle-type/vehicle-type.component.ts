@@ -19,20 +19,16 @@ export interface fuel {
 })
 export class VehicleTypeComponent implements OnInit {
   
-  
   // list
   vehicleTypeList: VehicleType[] = [];
   displayedColumns: string[] = ['description', 'autonomy', 'costPerKilometer', 'averageCost', 'averageSpeed', 'fuelType' ];
   dataSource = new MatTableDataSource<VehicleType>();
   
-//  
   mapper = new VehicleTypeMapper();
 
   formControl = new FormControl('', [
     Validators.required,
  ]);
-
- errorMessage: any;
 
  fuels: fuel[] = [
   {value: 'Gasoleo', viewValue: 'Gasoleo'},
@@ -50,12 +46,12 @@ export class VehicleTypeComponent implements OnInit {
    averageCost: new FormControl(),
    averageSpeed: new FormControl(),
    fuel:  new FormControl()
-
   });
 
-
-
  isAdding: boolean = false;
+ hasError: boolean = false;
+ errorMessages: any[] = [];
+
   constructor(private vehicleTypeService: VehicleTypeService,
     public dialog: MatDialog,
     private formBuilder: FormBuilder) { }
@@ -70,42 +66,49 @@ export class VehicleTypeComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   setAdd() : any {
-    return this.isAdding = !this.isAdding;  }
+    this.hasError = false;
+    return this.isAdding = !this.isAdding;  
+  }
 
-    getVehicleTypes() : void {
-      this.vehicleTypeService.getVehicleTypes().subscribe(
-        (data) => {
-          if (data && data.length > 0) { 
-            for (let i = 0; i < data.length; i ++){              
-              this.vehicleTypeList.push(this.mapper.fromResponseToDto(new VehicleType() as VehicleType, data[i]));
-              console.log(this.vehicleTypeList[i])       
-              };
-            this.dataSource = new MatTableDataSource(this.vehicleTypeList);       
-          };          
-        }       
-      ); 
-    };
+  getVehicleTypes() : void {
+    this.vehicleTypeService.getVehicleTypes().subscribe(
+      (data) => {
+        if (data && data.length > 0) { 
+          for (let i = 0; i < data.length; i ++){              
+            this.vehicleTypeList.push(this.mapper.fromResponseToDto(new VehicleType() as VehicleType, data[i]));
+            console.log(this.vehicleTypeList[i])       
+            };
+          this.dataSource = new MatTableDataSource(this.vehicleTypeList);       
+        };          
+      }       
+    ); 
+  };
 
+  submit() :void {
+    var postEntity = new VehicleType();
+    this.errorMessages = [];
+    postEntity = this.mapper.fromFormToDTO(this.vehicleTypeForm.value, postEntity)
+    console.log(postEntity)
 
- 
-    submit() :void {
-      // console.log(this.nodeForm.value)
-      // console.log(this.nodeForm.value.shortName)
-  
-      var postEntity = new VehicleType();
-      // this.log()
-      postEntity = this.mapper.fromFormToDTO(this.vehicleTypeForm.value, postEntity)
-      console.log(postEntity)
-
-      this.vehicleTypeService.postVehicleType(postEntity)
-      .subscribe((data) => {
-          if (data) { 
-            this.vehicleTypeList.push(data); 
-            this.dataSource = new MatTableDataSource(this.vehicleTypeList);          
-            // this.showDetails.push(false);
-            this.isAdding = !this.isAdding;
-          }
+    this.vehicleTypeService.postVehicleType(postEntity)
+    .subscribe(
+      (data) => {
+        if (data) { 
+          this.vehicleTypeList.push(data); 
+          this.dataSource = new MatTableDataSource(this.vehicleTypeList);          
+          // this.showDetails.push(false);
+          this.isAdding = !this.isAdding;
+        }
       },
-      )
-    }
+      (error) => { 
+        this.hasError = true;
+        if (error.error != null && error.error.code == null) {
+          console.error("This model does not have Business Validations.");
+        } else {
+          this.errorMessages.push("Error Submiting the Vehicle Type. " +
+            "If no field is empty, there may already exist a Vehicle with the description introduced.");
+        }
+      }        
+    )
+  }
 }

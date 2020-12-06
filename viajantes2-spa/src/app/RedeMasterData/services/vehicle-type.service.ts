@@ -22,19 +22,11 @@ export class VehicleTypeService {
     return this.httpClient.get<VehicleType[]>(this.url);    
   }
   postVehicleType(vehicleType: VehicleType): Observable<VehicleType> {
-    return this.httpClient.post<VehicleType>(this.url, vehicleType)
-      // .pipe(
-      //   catchError(this.handleError(error: any))
-      // );
-       .pipe(
-        catchError((err) => {
-          // console.error('Erro')
-          // console.error(err);
- 
-          //Handle the error here
- 
-          return throwError(err);    //Rethrow it back to component
-        })
-      )
+    return this.httpClient.post<VehicleType>(this.url, vehicleType).pipe(
+      catchError((err) => {
+        console.error(err);
+        return throwError(err);
+      })
+    )
   }
 }

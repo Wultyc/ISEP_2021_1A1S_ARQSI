@@ -34,7 +34,8 @@ export class TripulantTypeComponent implements  OnInit  {
     private tripulantTypeService: TripulantTypeService,
     public dialog: MatDialog,
     private formBuilder: FormBuilder
-    ) {}
+  ) {}
+  
   ngOnInit()  {
     this.getTripulantTypes();
   }
@@ -77,11 +78,11 @@ export class TripulantTypeComponent implements  OnInit  {
       },
       (error) => { 
         this.hasError = true;
-        if (error instanceof Array) {
+        if (error.error != null && error.error.code == null) {
           console.error("This model does not have Business Validations.");
         } else {
-          this.errorMessages.push("Error Submiting the Tripulant Type. " + 
-            "There is already a Tripulant with that description inserted.");
+          this.errorMessages.push("Error Submiting the Tripulant Type. " +
+            "If the description is filled, there may already exist a Tripulant with the description introduced.");
         }
       }
     )
