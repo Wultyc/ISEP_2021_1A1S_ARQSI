@@ -24,7 +24,7 @@ class LineRepository {
                     ]
                 }
             ],
-        });
+        }).populate('beginNode').populate('finalNode');
     };
 
     getRouteById(id, callback) {
@@ -45,7 +45,7 @@ class LineRepository {
                     ]
                 }
             ],
-        })
+        }).populate('beginNode').populate('finalNode')
     };
 
     getByFilter(query, sortString, callback) {
@@ -66,7 +66,7 @@ class LineRepository {
                     ]
                 }
             ],
-        });
+        }).populate('beginNode').populate('finalNode');
     };
 
     save(line, callback) {

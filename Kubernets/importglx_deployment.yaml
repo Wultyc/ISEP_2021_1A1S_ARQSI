@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: importglx
-        image: wultyc/viajantes2-importglx
+        image: wultyc/viajantes2-importglx:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3002
