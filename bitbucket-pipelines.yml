@@ -57,7 +57,7 @@ pipelines:
             script:
               - cd viajantes2-spa
               # install angular
-              - npm install -g @angular/cli  @angular-devkit/build-angular @ngtools/webpack
+              - npm install @angular/cli  @angular-devkit/build-angular @ngtools/webpack
               # install npm
               - npm install --only=production
               # build app
