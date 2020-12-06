@@ -1,3 +1,4 @@
 export class TripulantType {
-    description: string;
+  id: string;  
+  description: string;
   }

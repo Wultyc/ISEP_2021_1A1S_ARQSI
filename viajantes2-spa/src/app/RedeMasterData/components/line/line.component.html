@@ -82,6 +82,36 @@
           </mat-error>
         </mat-form-field>
 
+        <mat-label> <br><br>Begin Node<br><br></mat-label>
+        <mat-form-field class="example-full-width">
+          <mat-label>Node</mat-label>
+          <mat-select class="form-control"  formControlName="beginNode">
+            <mat-option *ngFor="let node of nodeList" [value]="node.id">
+              {{ node.shortName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-label> <br><br>Final Node<br><br></mat-label>
+        <mat-form-field class="example-full-width">
+          <mat-label>Node</mat-label>
+          <mat-select class="form-control"  formControlName="finalNode">
+            <mat-option *ngFor="let node of nodeList" [value]="node.id">
+              {{ node.shortName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-label> <br><br>Tripulant Types<br><br></mat-label>
+        <mat-form-field class="example-full-width">
+          <mat-label>Tripulant Type</mat-label>
+          <mat-select class="form-control"  formControlName="tripulantType" multiple>
+            <mat-option *ngFor="let tripType of tripList" [value]="tripType.id">
+              {{ tripType.description }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
       </section>
 
     </div>

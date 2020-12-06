@@ -12,7 +12,7 @@ export class NodesMapper {
         return object;
     }
     
-    fromResponseToDto = function (model: Nodes, response: any) {
+    fromResponseToDto = function (model: Nodes, response: any) : Nodes {
             model.id = response._id,
             model.shortName = response.shortName,
             model.name = response.name,
