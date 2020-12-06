@@ -16,7 +16,7 @@ export class RoutesMapper {
                         duration: routeNodes[i].duration}
                     )};   
             };                     
-            
+        console.log(object)
         return object;
     }
     

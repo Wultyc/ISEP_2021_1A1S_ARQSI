@@ -110,10 +110,10 @@ export class LineRouteComponent implements OnInit, AfterViewInit {
     
     this.routeLineForm.value.isEmptyRoute = (this.routeLineForm.value.isEmptyRoute == undefined || this.routeLineForm.value.isEmptyRoute == null) ? false : ( this.routeLineForm.value.isEmptyRoute == true ? true : false);
     this.routeLineForm.value.isReinforcementRoute = (this.routeLineForm.value.isReinforcementRoute == undefined  || this.routeLineForm.value.isReinforcementRoute == null) ? false : (this.routeLineForm.value.isReinforcementRoute == true ? true : false);
-    this.routeLineForm.value.orientation
+    
     postEntity = this.mapper.fromFormToPost(routeNodesPost,this.routeLineForm.value, postEntity);
 
-    this.linesService.postLineRoutes(this.id, postEntity, this.routeLineForm.value.orientation as string).subscribe(
+    this.linesService.postLineRoutes(this.id, postEntity, this.routeLineForm.value.routeOrientation as string).subscribe(
       (data) => {
         if (data) {
           console.log(data)
@@ -129,4 +129,26 @@ export class LineRouteComponent implements OnInit, AfterViewInit {
     )
     // fromFormToPost = function (routeNodes: any, formBody: any, object: RoutePost)
   } 
+  updateDataToRouteModel(data: any) : Route {
+    let route = new Route();
+    route.distance = data.distance;
+    route.duration = data.duration;
+    route.isEmptyRoute = route.isEmptyRoute;
+    route.isReinforcementRoute = route.isReinforcementRoute;
+    let routeNodesModel: any[] = [];
+    for (let i = 0; i < data.routeNodes.length; i++) {
+      for (let j = 0; j < this.nodeList.length; j++) {
+        if (this.nodeList[j].id == data.routeNodes[i].nodeId) {
+          routeNodesModel.push({
+            nodeId: this.nodeList[j],
+            distance: data.routeNodes[i].distance,
+            duration: data.routeNodes[i].duration
+          })
+          break;
+        }
+      }
+    }
+    route.routeNodes = routeNodesModel;
+    return route;
+  }
 }
