@@ -66,6 +66,7 @@ export class VehicleTypeComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   setAdd() : any {
+    this.vehicleTypeForm.reset();
     this.hasError = false;
     return this.isAdding = !this.isAdding;  
   }
@@ -76,7 +77,6 @@ export class VehicleTypeComponent implements OnInit {
         if (data && data.length > 0) { 
           for (let i = 0; i < data.length; i ++){              
             this.vehicleTypeList.push(this.mapper.fromResponseToDto(new VehicleType() as VehicleType, data[i]));
-            console.log(this.vehicleTypeList[i])       
             };
           this.dataSource = new MatTableDataSource(this.vehicleTypeList);       
         };          
@@ -88,8 +88,6 @@ export class VehicleTypeComponent implements OnInit {
     var postEntity = new VehicleType();
     this.errorMessages = [];
     postEntity = this.mapper.fromFormToDTO(this.vehicleTypeForm.value, postEntity)
-    console.log(postEntity)
-
     this.vehicleTypeService.postVehicleType(postEntity)
     .subscribe(
       (data) => {
@@ -102,7 +100,7 @@ export class VehicleTypeComponent implements OnInit {
       },
       (error) => { 
         this.hasError = true;
-        if (error instanceof Array) {
+        if (error.error != null && error.error.code == null && error.error.message == null) {
           console.error("This model does not have Business Validations.");
         } else {
           this.errorMessages.push("Error Submiting the Vehicle Type. " +

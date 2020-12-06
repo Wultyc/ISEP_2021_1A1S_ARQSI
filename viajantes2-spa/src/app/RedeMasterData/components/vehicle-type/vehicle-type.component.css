@@ -37,7 +37,9 @@ table {
   .example-margin {
     color: blueviolet;
   }
-
+  mat-label {
+    color: blueviolet;
+  }
   mat-error-label {
     color: red;
   }

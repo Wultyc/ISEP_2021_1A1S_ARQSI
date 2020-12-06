@@ -11,6 +11,7 @@ export class RouteNodes {
     duration: number;
 }
 export class Route {
+    id: string;
     distance: number;
     duration: number;
     isReinforcementRoute: boolean;

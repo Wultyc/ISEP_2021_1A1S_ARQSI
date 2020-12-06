@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: redemasterdata
-        image: wultyc/viajantes2-redemasterdata
+        image: wultyc/viajantes2-redemasterdata:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3003

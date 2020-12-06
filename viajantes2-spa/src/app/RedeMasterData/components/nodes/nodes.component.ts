@@ -26,8 +26,6 @@ import { NodesMapper } from '../../models/mappers/nodeMapper';
   ],
 })
 
-// const nodeList: nodes[];
-
 export class NodesComponent implements OnInit, AfterViewInit {
   formControl = new FormControl('', [
      Validators.required,
@@ -43,13 +41,15 @@ export class NodesComponent implements OnInit, AfterViewInit {
     surrenderNode: new FormControl(),
     collectionNode: new FormControl()
   });
-  //listing and frotend logic (details not implemented, and neither will be)
+  // listing and frotend logic (details not implemented, and neither will be)
   showDetails: boolean[] = [];
   nodeList: Nodes[] = [];
-  displayedColumns: string[] = ['shortName', 'name', 'longitude', 'latitude', 'collectionNode', 'surrenderNode', 'actions'];
+  displayedColumns: string[] = ['shortName', 'name', 'longitude', 'latitude', 'collectionNode', 'surrenderNode'];
   dataSource = new MatTableDataSource<Nodes>();
   //boolean that says if user is adding new entry
   isAdding: boolean = false;
+  hasError: boolean = false;
+  errorMessages: any[] = [];
 
   //the data mapper
   mapper = new NodesMapper();
@@ -60,26 +60,18 @@ export class NodesComponent implements OnInit, AfterViewInit {
     private nodesService: NodesService,
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
-    private _snackBar: MatSnackBar
-    ) {}
-  ngOnInit()  {
-
-    this.dataSource.filterPredicate = 
-    (data: Nodes, filter: string) => data.name?.indexOf(filter) != -1;
-    this.getNodes();
-
+    private _snackBar: MatSnackBar) {
   }
+
+  ngOnInit()  {
+    this.dataSource.filterPredicate = (data: Nodes, filter: string) => data.name?.indexOf(filter) != -1;
+    this.getNodes();
+  }
+
   ngAfterViewInit() {
-    
     // this.dataSource.sort = this.sort;
   }
-  openSnackBar(error:any,) {
-    this._snackBar.open(error, 'Bad request', {
-      duration: 1000,
-      horizontalPosition: 'end',
-      verticalPosition: 'top',
-    });
-  }
+
   //consumes the observer from the service, gets all the data and maps it
   getNodes() : void {    
     this.nodesService.getNodes().subscribe(
@@ -102,55 +94,22 @@ export class NodesComponent implements OnInit, AfterViewInit {
     // this.showDetails[row] = !this.showDetails[row];
     // console.log(row);
   }
-  //applies the front end filter
+  
   applyFilter(filterValue: string) {
     // let dataSource = new MatTableDataSource(this.nodeList);
-  
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
   }
   
   setAdd() : any {
+    this.nodeForm.reset();
+    this.hasError = false;
     return this.isAdding = !this.isAdding;
-  }
-  //will be implemented as front end validation
-  isValidForm() : boolean {
-
-    //verifications here
-    return false;    
-  }
-
-  //still to implement, warning from backend when data is wrongly sent. will be complemented with is valid
-  handleError(error: any){
-    // for (let i = 0; i < error.lenght; i++) {
-    
-    if (error.collectionNode){
-    this.openSnackBar(error.collectionNode.message);
-    }
-    // if (error.shortName){
-    // this.openSnackBar(error.shortName.message);
-    //   }
-    // if (error.name){
-    // this.openSnackBar(error.name.message);
-    //   }
-    // if (error.surrenderNode){
-    // this.openSnackBar(error.surrenderNode.message);
-    //   }
-    // if (error.latitude){
-    // this.openSnackBar(error.latitude.message);
-    // }
-  // }
-      this.isAdding = true
-  
   }
 
   //adding new entry, as on click submits the form. The data is mapped and post.
   submit() :void {
-    // console.log(this.nodeForm.value)
-    // console.log(this.nodeForm.value.shortName)
-
     var postEntity = new Nodes();    
-    
+    this.errorMessages = [];
     this.nodeForm.value.collectionNode = (this.nodeForm.value.collectionNode == undefined || this.nodeForm.value.collectionNode == null) ? false : (this.nodeForm.value.collectionNode == true ? true : false);
     this.nodeForm.value.surrenderNode = (this.nodeForm.value.surrenderNode == undefined  || this.nodeForm.value.surrenderNode == null) ? false : (this.nodeForm.value.surrenderNode == true ? true : false);
     console.log(this.nodeForm.value)
@@ -159,15 +118,25 @@ export class NodesComponent implements OnInit, AfterViewInit {
     console.log(postEntity)
 
     this.nodesService.postNode(postEntity)
-    .subscribe((data) => {
+    .subscribe(
+      (data) => {
         if (data) { 
           this.nodeList.push(data); 
           this.dataSource = new MatTableDataSource(this.nodeList);          
           this.showDetails.push(false); 
           this.isAdding = !this.isAdding;       
         }
-    },
-    error => this.handleError(error.error.errors)
+      },
+      (error) => { 
+        this.hasError = true;
+        if (error.error != null && error.error.code == null && error.error.message == null) {
+          this.errorMessages.push("Error Submiting the Node. " + error.error);
+        } else {
+          this.errorMessages.push("Error Submiting the Node. " +
+            "If no field is empty, a Node with that short name introduced or " +
+            "the introduced combination Latitude - Longitude may already exist.");
+        }
+      }
     )
   }
 }

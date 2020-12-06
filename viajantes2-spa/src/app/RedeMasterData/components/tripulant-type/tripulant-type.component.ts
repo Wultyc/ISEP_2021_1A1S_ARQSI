@@ -15,7 +15,7 @@ import {FormControl, Validators, FormBuilder, FormGroup} from '@angular/forms';
 export class TripulantTypeComponent implements  OnInit  {
 
   tripList: TripulantType[] = [];
-  displayedColumns: string[] = ['description', 'actions'];
+  displayedColumns: string[] = ['description'];
   dataSource = new MatTableDataSource<TripulantType>();
 
   formControl = new FormControl('', [
@@ -34,7 +34,8 @@ export class TripulantTypeComponent implements  OnInit  {
     private tripulantTypeService: TripulantTypeService,
     public dialog: MatDialog,
     private formBuilder: FormBuilder
-    ) {}
+  ) {}
+  
   ngOnInit()  {
     this.getTripulantTypes();
   }
@@ -46,6 +47,7 @@ export class TripulantTypeComponent implements  OnInit  {
   }
 
   setAdd() : any {
+    this.tripulantTypeForm.reset();
     this.hasError = false;
     return this.isAdding = !this.isAdding;  
   }
@@ -77,7 +79,7 @@ export class TripulantTypeComponent implements  OnInit  {
       },
       (error) => { 
         this.hasError = true;
-        if (error instanceof Array) {
+        if (error.error != null && error.error.code == null && error.error.message == null) {
           console.error("This model does not have Business Validations.");
         } else {
           this.errorMessages.push("Error Submiting the Tripulant Type. " +

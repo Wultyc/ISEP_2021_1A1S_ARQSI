@@ -139,8 +139,8 @@ lineCreatePreValidations = function (line, validationMessage) {
     return;
 };
 validateBeginAndLastNode = function(beginNode, finalNode, route, orientation, validationMessage) {
-    var routeBeginNode = route.routeNodes[0].nodeId;
-    var routeFinalNode = route.routeNodes[route.routeNodes.length - 1].nodeId;
+    var routeBeginNode = route.routeNodes[0].nodeId._id;
+    var routeFinalNode = route.routeNodes[route.routeNodes.length - 1].nodeId._id;
     if (_.isEqual(orientation, "Go")) {
         if (!_.isEqual(routeBeginNode.toString(), beginNode.toString())) {
             validationMessage.push("Node mismatch: The first node of the route " + route._id 

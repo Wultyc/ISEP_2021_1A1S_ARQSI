@@ -1,0 +1,41 @@
+# This is an example Starter pipeline configuration
+# Use a skeleton to build, test and deploy using manual and parallel steps
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: atlassian/default-image:2
+
+pipelines:
+  custom:
+    deploy-to-cloud:
+      - step:
+          name: 'Test RedeMasterData'
+          script:
+            - cd RedeMasterData
+            #- npm install
+            - echo "Tests ignored"
+      - step:
+          name: Build Image and Save on DockerHub
+          script:
+            - export IMAGE_NAME=$DOCKER_HUB_USERNAME/viajantes2-redemasterdata:latest
+            # build the Docker image (this will use the Dockerfile in the root of the repo)
+            - docker build -t $IMAGE_NAME ./RedeMasterData
+            # authenticate with the Docker Hub registry
+            - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
+            # push the new Docker image to the Docker registry
+            - docker push $IMAGE_NAME
+          services:
+            - docker
+      - step:
+          name: Deploy to Kubernets
+          deployment: production
+          script:
+            # Download kubectl
+            - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            - chmod +x ./kubectl
+            - mv ./kubectl /usr/local/bin/kubectl
+
+            # Set KUBECONFIG
+            - echo $KUBECONFIG | base64 -d > kubeconfig.yml
+            - export KUBECONFIG=kubeconfig.yml
+
+            - kubectl apply -f ./Kubernets/redemasterdata_deployment.yaml

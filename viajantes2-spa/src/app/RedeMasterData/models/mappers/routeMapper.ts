@@ -21,6 +21,7 @@ export class RoutesMapper {
     }
     
     fromResponseToDto = function (model: Route, response: any) : Route {
+            model.id    = response._id
             model.distance = response.distance
             model.duration = response.duration
             model.isEmptyRoute = response.isEmptyRoute
