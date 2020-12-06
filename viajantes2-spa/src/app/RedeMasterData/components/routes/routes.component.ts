@@ -155,7 +155,7 @@ export class RoutesComponent implements OnInit, AfterViewInit {
       },
       (error) => { 
         this.hasError = true;
-        if (error.error != null && error.error.code == null) {
+        if (error.error != null && error.error.code == null && error.error.message == null) {
           this.errorMessages.push("Error Submiting the Route. " + error.error);
         } else {
           this.errorMessages.push("Error Submiting the Route.");

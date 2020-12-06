@@ -1,4 +1,6 @@
 import { Route, RoutePost } from '../route';
+import { TripulantType } from '../tripulant-type';
+import { VehicleType } from '../vehicle-type';
 import { Line, LinePost, LineRoutesPost } from '../line';
 import { RoutesMapper } from './routeMapper'
 
@@ -41,34 +43,31 @@ export class LinesMapper {
     }
     
     fromResponseToDto = function (model: Line, response: any) : Line {
-        let mapper = new RoutesMapper();
-            model.id = response._id
-            model.code = response.code
-            model.name = response.name
-            model.color = response.color
-            model.beginNode = response.beginNode
-            model.finalNode = response.finalNode        
-            model.lineRoutes = [];
-            response.tripulantTypes = [];
-            response.vehicleType = [];
-            for (let i = 0; i < response.lineRoutes.length; i++) {
-            model.lineRoutes.push(
-                {
-                    route: mapper.fromResponseToDto(new Route() as Route, response.lineRoutes[i].routeId),
-                    orientation: response.lineRoutes[i].orientation
-                });
-            }        
-            model.tripulantTypes = response.tripulantTypes.map((tripulantType: any) => {
-                return {
-                    id: tripulantType.id
-                }
-            })
-            model.vehicleType = response.vehicleType.map((vehicleType: any) => {
-                return {
-                    id: vehicleType.id
-                }
-            })
-        
+        model.id = response._id
+        model.code = response.code
+        model.name = response.name
+        model.color = response.color
+        model.beginNode = response.beginNode
+        model.finalNode = response.finalNode        
+        model.lineRoutes = [];
+        model.tripulantType = [];
+        model.vehicleType = [];
+        for (let i = 0; i < response.lineRoutes.length; i++) {
+            model.lineRoutes.push({
+                route: response.lineRoutes[i].routeId,
+                orientation: response.lineRoutes[i].orientation
+            });
+        }
+        for (let i = 0; i < response.tripulantType.length; i++) {
+            let tripulantType = new TripulantType();
+            tripulantType.id = response.tripulantType.id;
+            model.tripulantType.push(tripulantType);
+        }  
+        for (let i = 0; i < response.vehicleType.length; i++) {
+            let vehicleType = new VehicleType();
+            vehicleType.id = response.vehicleType.id;
+            model.vehicleType.push(vehicleType);
+        }        
         return model;
     }
 }

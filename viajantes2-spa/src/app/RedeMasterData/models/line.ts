@@ -32,7 +32,7 @@ export class Line {
       beginNode: Nodes;
       finalNode: Nodes;
       lineRoutes: LineRoutes[];
-      tripulantTypes: TripulantType[];
+      tripulantType: TripulantType[];
       vehicleType: VehicleType[];
     }
     
