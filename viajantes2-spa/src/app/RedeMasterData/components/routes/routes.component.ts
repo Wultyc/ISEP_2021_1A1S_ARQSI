@@ -148,7 +148,7 @@ export class RoutesComponent implements OnInit, AfterViewInit {
     this.routeService.postRoute(postEntity).subscribe(
       (data) => {
         if (data) {
-          this.routeList.push(this.mapper.fromResponseToDto(new Route() as Route, this.updateDataToRouteModel(data)));
+          this.routeList.push(this.mapper.fromResponseToDto(new Route() as Route, this.mapper.updateDataToResponseModel(data, this.nodeList)));
           this.dataSource = new MatTableDataSource(this.routeList);          
           this.showDetails.push(false); 
           this.isAdding = !this.isAdding;   
@@ -165,28 +165,6 @@ export class RoutesComponent implements OnInit, AfterViewInit {
     )
   }
 
-  updateDataToRouteModel(data: any) : Route {
-    let route = new Route();
-    route.distance = data.distance;
-    route.duration = data.duration;
-    route.isEmptyRoute = route.isEmptyRoute;
-    route.isReinforcementRoute = route.isReinforcementRoute;
-    let routeNodesModel: any[] = [];
-    for (let i = 0; i < data.routeNodes.length; i++) {
-      for (let j = 0; j < this.nodeList.length; j++) {
-        if (this.nodeList[j].id == data.routeNodes[i].nodeId) {
-          routeNodesModel.push({
-            nodeId: this.nodeList[j],
-            distance: data.routeNodes[i].distance,
-            duration: data.routeNodes[i].duration
-          })
-          break;
-        }
-      }
-    }
-    route.routeNodes = routeNodesModel;
-    return route;
-  }
 }  
 
 

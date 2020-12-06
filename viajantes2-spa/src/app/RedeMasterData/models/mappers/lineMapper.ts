@@ -1,6 +1,7 @@
 import { Route, RoutePost } from '../route';
 import { TripulantType } from '../tripulant-type';
 import { VehicleType } from '../vehicle-type';
+import { Nodes } from '../nodes';
 import { Line, LinePost, LineRoutesPost } from '../line';
 import { RoutesMapper } from './routeMapper'
 
@@ -70,4 +71,15 @@ export class LinesMapper {
         }        
         return model;
     }
+
+    updateDataToResponseModel(data: any, nodeList: Nodes[]) : Route {
+        for (let i = 0; i < nodeList.length; i++) {
+          if (nodeList[i].id == data.beginNode) {
+            data.beginNode = nodeList[i];
+          } else if (nodeList[i].id == data.finalNode) {
+            data.finalNode = nodeList[i];
+          }
+        }
+        return data;
+      }
 }
