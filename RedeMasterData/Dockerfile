@@ -16,5 +16,8 @@ RUN npm install
 # Bundle app source
 COPY . .
 
+#create a env file specific for containers
+RUN mv config/docker.json config/default.json
+
 EXPOSE 3003
 CMD [ "npm", "start" ]
