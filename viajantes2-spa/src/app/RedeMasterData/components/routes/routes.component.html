@@ -59,8 +59,6 @@
 <ng-template #createRouteTemplate>
 
   <div [formGroup]="routeForm">
-    <mat-label>Add Node</mat-label>
-    <button mat-button (click)= "insertNode()" ><mat-icon color='blueviolet'>add_box</mat-icon></button>
     <section class="example-section">
       <mat-slide-toggle
       class="form-control" formControlName="isReinforcementRoute"
@@ -75,7 +73,9 @@
           [checked]="checked"
           [disabled]="disabled">
         Empty Route
-      </mat-slide-toggle>
+      </mat-slide-toggle> &nbsp; &nbsp; &nbsp; &nbsp;
+      <mat-label>Add Node</mat-label>
+      <button mat-button (click)= "insertNode()" ><mat-icon color='blueviolet'>add_box</mat-icon></button>
     </section>
   </div>
   <div *ngFor="let control of routeNodes.controls; index as i">
