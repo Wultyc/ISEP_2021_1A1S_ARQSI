@@ -17,7 +17,13 @@ pipelines:
         - step:
             name: 'Test ImportGLX'
             script:
-              - cd RedeMasterData
+              - cd ImportGLX
+              #- npm install
+              - echo "Tests ignored"
+        - step:
+            name: 'Test SPA'
+            script:
+              - cd viajantes2-spa
               #- npm install
               - echo "Tests ignored"
 
@@ -46,34 +52,33 @@ pipelines:
               - docker push $IMAGE_NAME
             services:
               - docker
-              
-      - parallel:
         - step:
-            name: Deploy RedeMasterData to Kubernets
+            name: Build SPA Image and Upload on DockerHub
             script:
-              # Download kubectl
-              - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-              - chmod +x ./kubectl
-              - mv ./kubectl /usr/local/bin/kubectl
-
-              # Set KUBECONFIG
-              - echo $KUBECONFIG | base64 -d > kubeconfig.yml
-              - export KUBECONFIG=kubeconfig.yml
+              - export IMAGE_NAME=$DOCKER_HUB_USERNAME/arqsi-viajantes2-spa:latest
+              # build the Docker image (this will use the Dockerfile in the root of the repo)
+              - docker build -t $IMAGE_NAME ./viajantes2-spa
+              # authenticate with the Docker Hub registry
+              - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
+              # push the new Docker image to the Docker registry
+              - docker push $IMAGE_NAME
+            services:
+              - docker
               
-              #Deploy to cloud
-              - kubectl apply -f ./Kubernets/redemasterdata.yaml
-        - step:
-            name: Deploy ImportGLX to Kubernets
-            script:
-              # Download kubectl
-              - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-              - chmod +x ./kubectl
-              - mv ./kubectl /usr/local/bin/kubectl
+      - step:
+          name: Deploy containers to Kubernets
+          script:
+            # Download kubectl
+            - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            - chmod +x ./kubectl
+            - mv ./kubectl /usr/local/bin/kubectl
 
-              # Set KUBECONFIG
-              - echo $KUBECONFIG | base64 -d > kubeconfig.yml
-              - export KUBECONFIG=kubeconfig.yml
-              
-              #Deploy to cloud
-              - kubectl apply -f ./Kubernets/importglx.yaml
+            # Set KUBECONFIG
+            - echo $KUBECONFIG | base64 -d > kubeconfig.yml
+            - export KUBECONFIG=kubeconfig.yml
+            
+            #Deploy to cloud
+            - kubectl apply -f ./Kubernets/redemasterdata.yaml
+            - kubectl apply -f ./Kubernets/importglx.yaml
+            - kubectl apply -f ./Kubernets/viajantes2-spa.yaml
 
