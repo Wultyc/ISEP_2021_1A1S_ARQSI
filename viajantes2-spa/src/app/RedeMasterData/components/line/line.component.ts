@@ -23,6 +23,7 @@ import { RoutesMapper } from '../../models/mappers/routeMapper';
 import { VehicleTypeService } from '../../services/vehicle-type.service';
 import { VehicleType } from '../../models/vehicle-type';
 import { VehicleTypeMapper } from '../../models/mappers/vehicleTypeMapper';
+import { Router } from '@angular/router';
 
 export interface orientation {
   value: string;
@@ -90,6 +91,7 @@ export class LineComponent implements OnInit, AfterViewInit  {
  @ViewChild(MatSort) sort : MatSort;
 
  constructor(
+  private router: Router,
    private linesService: LinesService,
    private routeService: RoutesService,
    private nodesService: NodesService,
@@ -181,6 +183,10 @@ getRoutes() : void {
       }
     ); 
   };
+
+  goToInsertLineRoute(id: any): void {
+    this.router.navigate(['routes/edit/',id]);
+  }
 
   onShowDetails(row: any) {
     console.log(row);

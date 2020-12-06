@@ -4,6 +4,7 @@ import { Line, LinePost } from '../models/line';
 import {Observable, throwError } from 'rxjs'
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
+import { Route, RoutePost } from '../models/route';
 
 @Injectable({
   providedIn: 'root'
@@ -32,4 +33,12 @@ export class LinesService {
     )
   }
 
+  postLineRoutes(id: string, route: RoutePost, orientation: string): Observable<RoutePost>  {
+    return this.httpClient.post<RoutePost>(this.url + "/" + id +"/createandaddroute/" + orientation, route).pipe(
+      catchError((err) => {
+        console.error(err);
+        return throwError(err);
+      })
+    )
+  }
 }

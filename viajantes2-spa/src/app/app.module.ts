@@ -30,6 +30,7 @@ import { ImportGLXComponent } from './RedeMasterData/components/import-glx/impor
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RoutesComponent } from './RedeMasterData/components/routes/routes.component';
 import { CommonModule } from '@angular/common';
+import { LineRouteComponent } from './RedeMasterData/components/line-route/line-route.component';
  
 
 @NgModule({
@@ -43,6 +44,7 @@ import { CommonModule } from '@angular/common';
     TripulantTypeComponent,
     ImportGLXComponent,
     RoutesComponent,
+    LineRouteComponent,
     
   ],
   imports: [

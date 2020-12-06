@@ -1,0 +1,65 @@
+table {
+    width: 100%;
+  }
+  /* th.mat-header-cell, mat-cell {
+    text-align: center !important;
+  } */
+  mat-header-cell {
+    display:flex;
+    justify-content:center; }
+  mat-cell {
+    display:flex;
+    justify-content:center;}
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+  mat-icon {
+    color: blueviolet;
+  }
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  mat-label {
+    color: blueviolet;
+  }
+  /* mat-button {
+    color: blueviolet;
+  } */
+  /* .a {
+    color: blueviolet;
+  } */
+  .example-form {
+    min-width: 50px;
+    max-width: 70px;
+    width: 50%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+    min-width: 200px;
+    max-width: 250px;
+  }
+  
+  td {
+    padding-right: 8px;
+  
+  }
+  .example-margin {
+    color: blueviolet;
+  }
+  
+  mat-error-label {
+    color: red;
+  }
+  
+  /* .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: blueviolet;
+  }
+  .mat-slide-toggle-thumb {
+    background-color: blueviolet;
+  }
+  
+  .mat-slide-toggle.mat-checked {
+    color: blueviolet;
+  } */
