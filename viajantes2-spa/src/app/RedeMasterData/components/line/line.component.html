@@ -55,7 +55,8 @@
   <ng-template #createLineTemplate>
     
     <div [formGroup]="lineForm">
-
+      <mat-label>Add Node</mat-label>
+    <button mat-button (click)= "insertRoute()" ><mat-icon color='blueviolet'>add_box</mat-icon></button>
       <section class="example-section">
 
         <mat-form-field class="example-full-width">
@@ -106,14 +107,44 @@
         <mat-form-field class="example-full-width">
           <mat-label>Tripulant Type</mat-label>
           <mat-select class="form-control"  formControlName="tripulantType" multiple>
-            <mat-option *ngFor="let tripType of tripList" [value]="tripType.id">
+            <mat-option *ngFor="let tripType of tripList" [value]="tripType._id">
               {{ tripType.description }}
             </mat-option>
           </mat-select>
         </mat-form-field>
 
-      </section>
+        <mat-label> <br><br>Vehicle Types<br><br></mat-label>
+        <mat-form-field class="example-full-width">
+          <mat-label>Vehicle Type</mat-label>
+          <mat-select class="form-control"  formControlName="vehicleType" multiple>
+            <mat-option *ngFor="let vType of vehicleTypesList" [value]="vType._id">
+              {{ vType.description }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
+
+      </section>
+    </div>
+    <div *ngFor="let control of lineRoutesForm.controls; index as i">
+      <mat-label> <br><br>Line Route<br><br></mat-label>
+      <mat-form-field class="example-full-width">
+        <mat-label>Route</mat-label>
+        <mat-select class="form-control" [formControl]="lineRoutesForm.controls[i]">
+          <mat-option *ngFor="let route of routeList" [value]="route.id">
+            {{route.routeNodes[0].node.shortName}} - {{route.routeNodes[route.routeNodes.length-1].node.shortName}}
+          </mat-option>
+        </mat-select>        
+      </mat-form-field><br><br>
+
+      <mat-form-field class="example-full-width">
+      <mat-label>Orientation</mat-label>
+        <mat-select class="form-control" [formControl]="orientationArray.controls[i]">
+          <mat-option *ngFor="let orientationG of orientations" [value]="orientationG.value">
+            {{ orientationG.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> 
     </div>
     <div>
       <a mat-button (click)= "submit()">Submit</a>

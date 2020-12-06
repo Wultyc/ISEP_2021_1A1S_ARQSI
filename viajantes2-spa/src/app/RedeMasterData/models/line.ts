@@ -18,7 +18,7 @@ export class LinePost {
   beginNode: string;
   finalNode: string;
   lineRoutes: LineRoutesPost[];
-  tripulantTypes: string[];
+  tripulantType: string[];
   vehicleType: string[];
 }
 export class Line {

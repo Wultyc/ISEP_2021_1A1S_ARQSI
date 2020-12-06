@@ -11,17 +11,31 @@ export class LinesMapper {
             object.color = formBody.code
             object.beginNode = formBody.beginNode
             object.finalNode = formBody.finalNode      
-            
+            object.lineRoutes = []
             if (lineRoutes && lineRoutes.length > 0 ) 
             {
                 for (var i = 0; i < lineRoutes.length; i++) {
                     object.lineRoutes.push(
                         {
                         routeId: lineRoutes[i].id,
-                        orientation: lineRoutes[i].distance
+                        orientation: lineRoutes[i].orientation
                     });   
             };
-        }                     
+            } 
+            object.tripulantType = [];
+            if (formBody.tripulantType && formBody.tripulantType.length > 0 ) 
+            {
+                for (var i = 0; i < formBody.tripulantType.length; i++) {
+                    object.tripulantType.push(formBody.tripulantType[i]);   
+            };
+            } 
+            object.vehicleType = [];
+            if (formBody.vehicleType && formBody.vehicleType.length > 0 ) 
+            {
+                for (var i = 0; i < formBody.vehicleType.length; i++) {
+                    object.vehicleType.push( formBody.vehicleType[i]);   
+            };
+            }                
             
         return object;
     }

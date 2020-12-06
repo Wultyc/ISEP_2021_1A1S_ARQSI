@@ -76,7 +76,6 @@ export class VehicleTypeComponent implements OnInit {
         if (data && data.length > 0) { 
           for (let i = 0; i < data.length; i ++){              
             this.vehicleTypeList.push(this.mapper.fromResponseToDto(new VehicleType() as VehicleType, data[i]));
-            console.log(this.vehicleTypeList[i])       
             };
           this.dataSource = new MatTableDataSource(this.vehicleTypeList);       
         };          
@@ -88,8 +87,6 @@ export class VehicleTypeComponent implements OnInit {
     var postEntity = new VehicleType();
     this.errorMessages = [];
     postEntity = this.mapper.fromFormToDTO(this.vehicleTypeForm.value, postEntity)
-    console.log(postEntity)
-
     this.vehicleTypeService.postVehicleType(postEntity)
     .subscribe(
       (data) => {
