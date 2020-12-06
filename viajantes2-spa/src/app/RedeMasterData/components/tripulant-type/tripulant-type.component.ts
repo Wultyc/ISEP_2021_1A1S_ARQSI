@@ -15,29 +15,28 @@ import {FormControl, Validators, FormBuilder, FormGroup} from '@angular/forms';
 export class TripulantTypeComponent implements  OnInit  {
 
   tripList: TripulantType[] = [];
-  displayedColumns: string[] = ['description', 'actions'];
+  displayedColumns: string[] = ['description'];
   dataSource = new MatTableDataSource<TripulantType>();
-
 
   formControl = new FormControl('', [
     Validators.required,
- ]);
+  ]);
 
- errorMessage: any;
+  tripulantTypeForm = new FormGroup ({
+    description: new FormControl(),
+  });
 
- tripulantTypeForm = new FormGroup ({
-   description: new FormControl(),
- });
-
- isAdding: boolean = false;
+  isAdding: boolean = false;
+  hasError: boolean = false;
+  errorMessages: any[] = [];
 
   constructor(
     private tripulantTypeService: TripulantTypeService,
     public dialog: MatDialog,
     private formBuilder: FormBuilder
-    ) {}
+  ) {}
+  
   ngOnInit()  {
-   
     this.getTripulantTypes();
   }
   
@@ -48,7 +47,10 @@ export class TripulantTypeComponent implements  OnInit  {
   }
 
   setAdd() : any {
-    return this.isAdding = !this.isAdding;  }
+    this.tripulantTypeForm.reset();
+    this.hasError = false;
+    return this.isAdding = !this.isAdding;  
+  }
 
   getTripulantTypes() : void {
     this.tripulantTypeService.getTripulantType().subscribe(
@@ -56,33 +58,34 @@ export class TripulantTypeComponent implements  OnInit  {
         if (data && data.length > 0) { 
           this.tripList = data; 
           this.dataSource = new MatTableDataSource(this.tripList);
-     
         };
-        
       }
-     
     ); 
   };
 
   submit() :void {
-    // console.log(this.nodeForm.value)
-    // console.log(this.nodeForm.value.shortName)
-
     var postEnitity = new TripulantType();
-
+    this.errorMessages = [];
     postEnitity.description = this.tripulantTypeForm.value.description;
-    
     this.tripulantTypeService.postTripulantType(postEnitity)
-    .subscribe((data) => {
+    .subscribe(
+      (data) => {
         if (data) { 
           this.tripList.push(data); 
           this.dataSource = new MatTableDataSource(this.tripList);          
           // this.showDetails.push(false);
             this.isAdding = !this.isAdding;
         }
-    },
+      },
+      (error) => { 
+        this.hasError = true;
+        if (error.error != null && error.error.code == null && error.error.message == null) {
+          console.error("This model does not have Business Validations.");
+        } else {
+          this.errorMessages.push("Error Submiting the Tripulant Type. " +
+            "If the description is filled, there may already exist a Tripulant with the description introduced.");
+        }
+      }
     )
   }
-
-
 }

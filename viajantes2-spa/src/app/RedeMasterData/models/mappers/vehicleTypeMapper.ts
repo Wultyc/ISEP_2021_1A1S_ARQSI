@@ -13,6 +13,7 @@ export class VehicleTypeMapper {
     }
     
     fromResponseToDto = function (model: VehicleType, response: any) {
+            model.id        = response._id,
             model.autonomy = response.autonomy,
             model.averageCost = response.averageCost,
             model.averageSpeed = response.averageSpeed,
