@@ -55,76 +55,76 @@
   <ng-template #createLineTemplate>
     
     <div [formGroup]="lineForm">
-      <mat-label>Add Node</mat-label>
+      
+    <section class="example-section">
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Code</mat-label>
+        <input matInput class="form-control" formControlName="code">
+        <mat-error *ngIf="formControl.hasError('required')">
+          Code is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Name</mat-label>
+        <input matInput class="form-control" formControlName="name">
+        <mat-error *ngIf="formControl.hasError('required')">
+          Line Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp; 
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Color</mat-label>
+        <input matInput class="form-control" formControlName="color">
+        <mat-error *ngIf="formControl.hasError('required')">
+          Line Color is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </section>
+
+    <section class="example-section">
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Begin Node</mat-label>
+        <mat-select class="form-control"  formControlName="beginNode">
+          <mat-option *ngFor="let node of nodeList" [value]="node.id">
+            {{ node.shortName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp; 
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Final Node</mat-label>
+        <mat-select class="form-control"  formControlName="finalNode">
+          <mat-option *ngFor="let node of nodeList" [value]="node.id">
+            {{ node.shortName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp; 
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Tripulant Types</mat-label>
+        <mat-select class="form-control"  formControlName="tripulantType" multiple>
+          <mat-option *ngFor="let tripType of tripList" [value]="tripType._id">
+            {{ tripType.description }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp; 
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Vehicle Types</mat-label>
+        <mat-select class="form-control"  formControlName="vehicleType" multiple>
+          <mat-option *ngFor="let vType of vehicleTypesList" [value]="vType._id">
+            {{ vType.description }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </section>
+
+    <mat-label>Add Route</mat-label>
     <button mat-button (click)= "insertRoute()" ><mat-icon color='blueviolet'>add_box</mat-icon></button>
-      <section class="example-section">
 
-        <mat-form-field class="example-full-width">
-          <mat-label>Code</mat-label>
-          <input matInput class="form-control" formControlName="code">
-          <mat-error *ngIf="formControl.hasError('required')">
-            Code is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;
-
-        <mat-form-field class="example-full-width">
-          <mat-label>Name</mat-label>
-          <input matInput class="form-control" formControlName="name">
-          <mat-error *ngIf="formControl.hasError('required')">
-            Line Name is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp; 
-
-        <mat-form-field class="example-full-width">
-          <mat-label>Color</mat-label>
-          <input matInput class="form-control" formControlName="color">
-          <mat-error *ngIf="formControl.hasError('required')">
-            Line Color is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-
-        <mat-label> <br><br>Begin Node<br><br></mat-label>
-        <mat-form-field class="example-full-width">
-          <mat-label>Node</mat-label>
-          <mat-select class="form-control"  formControlName="beginNode">
-            <mat-option *ngFor="let node of nodeList" [value]="node.id">
-              {{ node.shortName }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-label> <br><br>Final Node<br><br></mat-label>
-        <mat-form-field class="example-full-width">
-          <mat-label>Node</mat-label>
-          <mat-select class="form-control"  formControlName="finalNode">
-            <mat-option *ngFor="let node of nodeList" [value]="node.id">
-              {{ node.shortName }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-label> <br><br>Tripulant Types<br><br></mat-label>
-        <mat-form-field class="example-full-width">
-          <mat-label>Tripulant Type</mat-label>
-          <mat-select class="form-control"  formControlName="tripulantType" multiple>
-            <mat-option *ngFor="let tripType of tripList" [value]="tripType._id">
-              {{ tripType.description }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-label> <br><br>Vehicle Types<br><br></mat-label>
-        <mat-form-field class="example-full-width">
-          <mat-label>Vehicle Type</mat-label>
-          <mat-select class="form-control"  formControlName="vehicleType" multiple>
-            <mat-option *ngFor="let vType of vehicleTypesList" [value]="vType._id">
-              {{ vType.description }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-
-      </section>
     </div>
     <div *ngFor="let control of lineRoutesForm.controls; index as i">
       <mat-label> <br><br>Line Route<br><br></mat-label>

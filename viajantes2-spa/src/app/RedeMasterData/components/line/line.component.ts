@@ -247,9 +247,9 @@ getRoutes() : void {
       (error) => { 
         this.hasError = true;
         if (error.error != null && error.error.code == null) {
-          this.errorMessages.push("Error Submiting the Route. " + error.error);
+          this.errorMessages.push("Error Submiting the Line. " + error.error);
         } else {
-          this.errorMessages.push("Error Submiting the Route.");
+          this.errorMessages.push("Error Submiting the Line.");
         }
       }
     )
