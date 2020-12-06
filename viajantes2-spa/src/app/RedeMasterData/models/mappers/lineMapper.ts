@@ -28,7 +28,7 @@ export class LinesMapper {
     
     fromResponseToDto = function (model: Line, response: any) : Line {
         let mapper = new RoutesMapper();
-
+            model.id = response._id
             model.code = response.code
             model.name = response.name
             model.color = response.color
