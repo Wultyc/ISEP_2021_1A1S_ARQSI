@@ -103,6 +103,7 @@ export class RoutesComponent implements OnInit, AfterViewInit {
   }
   
   setAdd() : any {
+    this.routeForm.reset();
     this.clearFormArray(this.routeNodes);
     this.clearFormArray(this.routeNodesDistance);
     this.clearFormArray(this.routeNodesDuration);

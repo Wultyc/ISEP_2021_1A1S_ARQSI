@@ -101,6 +101,7 @@ export class NodesComponent implements OnInit, AfterViewInit {
   }
   
   setAdd() : any {
+    this.nodeForm.reset();
     this.hasError = false;
     return this.isAdding = !this.isAdding;
   }

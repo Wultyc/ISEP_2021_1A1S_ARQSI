@@ -208,6 +208,7 @@ getRoutes() : void {
   };
 
   setAdd() : any {
+    this.lineForm.reset();
     this.clearFormArray(this.lineRoutesForm);
     this.clearFormArray(this.orientationArray);
     this.hasError = false;

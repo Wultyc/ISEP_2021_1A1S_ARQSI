@@ -66,6 +66,7 @@ export class VehicleTypeComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   setAdd() : any {
+    this.vehicleTypeForm.reset();
     this.hasError = false;
     return this.isAdding = !this.isAdding;  
   }

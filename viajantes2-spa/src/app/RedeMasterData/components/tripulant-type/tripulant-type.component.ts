@@ -47,6 +47,7 @@ export class TripulantTypeComponent implements  OnInit  {
   }
 
   setAdd() : any {
+    this.tripulantTypeForm.reset();
     this.hasError = false;
     return this.isAdding = !this.isAdding;  
   }
