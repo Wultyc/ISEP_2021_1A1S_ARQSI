@@ -21,6 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { VehicleTypeComponent } from './RedeMasterData/components/vehicle-type/vehicle-type.component';
@@ -55,6 +56,7 @@ import { LineRouteComponent } from './RedeMasterData/components/line-route/line-
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule,
     MatCheckboxModule,
     MatCardModule,
     MatButtonModule,
@@ -62,14 +64,14 @@ import { LineRouteComponent } from './RedeMasterData/components/line-route/line-
     LayoutModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatIconModule,
     MatListModule,
     MatSortModule,
     MatSlideToggleModule,
     ReactiveFormsModule,
     MatSelectModule,
     MatSnackBarModule,
-    CommonModule
+    CommonModule,
+    RouterTestingModule
 
     ],
   exports: [

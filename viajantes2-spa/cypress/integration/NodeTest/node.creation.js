@@ -5,8 +5,9 @@ import { assertPlatform } from '@angular/core';
 describe('Testing Node Creation', function() {
 
   it('Create Node test', function() {
-    cy.visit('http://localhost:4200/nodes');
-    cy.get('#mat-input-0').type('Node20');
+    cy.visit('http://localhost:4200/');
+    cy.get(':nth-child(1) > .mat-list-item-content').click();
+    cy.get('#mat-input-0').type('Node2123');
     cy.get(' app-nodes.ng-tns-c153-1 > :nth-child(2) > .mat-focus-indicator').click();
     cy.get('#mat-input-1').type('ShortName20');
     cy.get('#mat-input-2').type('NodeName20');
