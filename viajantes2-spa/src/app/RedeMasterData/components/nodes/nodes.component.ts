@@ -44,7 +44,7 @@ export class NodesComponent implements OnInit, AfterViewInit {
   // listing and frotend logic (details not implemented, and neither will be)
   showDetails: boolean[] = [];
   nodeList: Nodes[] = [];
-  displayedColumns: string[] = ['shortName', 'name', 'longitude', 'latitude', 'collectionNode', 'surrenderNode', 'actions'];
+  displayedColumns: string[] = ['shortName', 'name', 'longitude', 'latitude', 'collectionNode', 'surrenderNode'];
   dataSource = new MatTableDataSource<Nodes>();
   //boolean that says if user is adding new entry
   isAdding: boolean = false;
