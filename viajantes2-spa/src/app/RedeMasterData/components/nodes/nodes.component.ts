@@ -60,25 +60,18 @@ export class NodesComponent implements OnInit, AfterViewInit {
     private nodesService: NodesService,
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
-    private _snackBar: MatSnackBar
-  
-    ) {}
+    private _snackBar: MatSnackBar) {
+  }
+
   ngOnInit()  {
-    this.dataSource.filterPredicate = 
-    (data: Nodes, filter: string) => data.name?.indexOf(filter) != -1;
+    this.dataSource.filterPredicate = (data: Nodes, filter: string) => data.name?.indexOf(filter) != -1;
     this.getNodes();
   }
 
   ngAfterViewInit() {
     // this.dataSource.sort = this.sort;
   }
-  openSnackBar(error:any,) {
-    this._snackBar.open(error, 'Bad request', {
-      duration: 1000,
-      horizontalPosition: 'end',
-      verticalPosition: 'top',
-    });
-  }
+
   //consumes the observer from the service, gets all the data and maps it
   getNodes() : void {    
     this.nodesService.getNodes().subscribe(
@@ -140,7 +133,7 @@ export class NodesComponent implements OnInit, AfterViewInit {
         } else {
           this.errorMessages.push("Error Submiting the Node. " +
             "If no field is empty, a Node with that short name introduced or " +
-            "the introduced combination Latitude - Longitude may already exist .");
+            "the introduced combination Latitude - Longitude may already exist.");
         }
       }
     )

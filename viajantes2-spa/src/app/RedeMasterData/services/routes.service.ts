@@ -19,19 +19,11 @@ export class RoutesService {
     return this.httpClient.get<Route[]>(this.url);    
   }
   postRoute(route: RoutePost): Observable<RoutePost> {
-    return this.httpClient.post<RoutePost>(this.url, route)
-      // .pipe(
-      //   catchError(this.handleError(error: any))
-      // );
-       .pipe(
-        catchError((err) => {
-          // console.error('Erro')
-          // console.error(err);
- 
-          //Handle the error here
- 
-          return throwError(err);    //Rethrow it back to component
-        })
-      )
+    return this.httpClient.post<RoutePost>(this.url, route).pipe(
+      catchError((err) => {
+        console.error(err);
+        return throwError(err);
+      })
+    )
   }
 }

@@ -56,69 +56,63 @@
   </table>
 </div>
 
-  <ng-template #createRouteTemplate>
-  
-    <div [formGroup]="routeForm">
-      <button mat-button (click)= "insertNode()" ><mat-icon color='blueviolet'>add_box</mat-icon></button>
-      <section class="example-section">
-        <mat-slide-toggle
-        class="form-control" formControlName="isReinforcementRoute"
-            [color]="primary"
-            [checked]="checked"
-            [disabled]="disabled">
-          Reinforcement Route
-      </mat-slide-toggle>&nbsp; &nbsp; &nbsp; &nbsp;
-        <mat-slide-toggle
-        class="form-control" formControlName="isEmptyRoute"         
-            [color]="primary"
-            [checked]="checked"
-            [disabled]="disabled">
-          Empty Route
-        </mat-slide-toggle>
-      </section>
-    </div>
-      <div *ngFor="let control of routeNodes.controls; index as i">
-        <mat-label> <br><br>{{i > 0 ? 'Node: ' + i : 'Begin Node'}}<br><br></mat-label>
-        <mat-form-field class="example-full-width">
-          <mat-label>Node</mat-label>
-          <mat-select class="form-control" [formControl]="routeNodes.controls[i]">
-            <mat-option *ngFor="let node of nodeList" [value]="node.id">
-              {{ node.shortName }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field><br>
-          <mat-form-field *ngIf="i > 0"class="example-full-width">
-            <mat-label>Duration</mat-label>
-            <input matInput class="form-control" [formControl]="routeNodesDuration.controls[i]">
-            <mat-error *ngIf="formControl.hasError('required')">
-              Duration is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;
-            <mat-form-field *ngIf="i > 0"class="example-full-width">
-              <mat-label>Distance</mat-label>
-              <input matInput class="form-control" [formControl]="routeNodesDistance.controls[i]">
-              <mat-error *ngIf="formControl.hasError('required')">
-                Distance is <strong>required</strong>
-              </mat-error>
-            </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;
-            
-          <!-- <div *ngIf="addNode?.length > 1">
-          <mat-form-field *ngIf="i > 0"class="example-full-width">
-            <mat-label>Duration</mat-label>
-            <input matInput class="form-control" formControlName="durationNode">
-            <mat-error *ngIf="formControl.hasError('required')">
-              Distance is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;    
-          <mat-form-field *ngIf="i > 0" class="example-full-width">
-            <mat-label>Distance</mat-label>
-            <input matInput class="form-control" formControlName="distanceNode">
-            <mat-error *ngIf="formControl.hasError('required')">
-              Distance is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-        </div>         -->
-      </div>  
-      <div>
-        <a mat-button (click)= "submit()">Submit</a>
+<ng-template #createRouteTemplate>
+
+  <div [formGroup]="routeForm">
+    <mat-label>Add Node</mat-label>
+    <button mat-button (click)= "insertNode()" ><mat-icon color='blueviolet'>add_box</mat-icon></button>
+    <section class="example-section">
+      <mat-slide-toggle
+      class="form-control" formControlName="isReinforcementRoute"
+          [color]="primary"
+          [checked]="checked"
+          [disabled]="disabled">
+        Reinforcement Route
+    </mat-slide-toggle>&nbsp; &nbsp; &nbsp; &nbsp;
+      <mat-slide-toggle
+      class="form-control" formControlName="isEmptyRoute"         
+          [color]="primary"
+          [checked]="checked"
+          [disabled]="disabled">
+        Empty Route
+      </mat-slide-toggle>
+    </section>
+  </div>
+  <div *ngFor="let control of routeNodes.controls; index as i">
+    <mat-label> <br><br>{{i > 0 ? 'Node: ' + i : 'Begin Node'}}<br><br></mat-label>
+    <mat-form-field class="example-full-width">
+      <mat-label>Node</mat-label>
+      <mat-select class="form-control" [formControl]="routeNodes.controls[i]">
+        <mat-option *ngFor="let node of nodeList" [value]="node.id">
+          {{ node.shortName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field><br>
+    <mat-form-field *ngIf="i > 0"class="example-full-width">
+      <mat-label>Duration</mat-label>
+      <input matInput class="form-control" [formControl]="routeNodesDuration.controls[i]">
+      <mat-error *ngIf="formControl.hasError('required')">
+        Duration is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;
+    <mat-form-field *ngIf="i > 0"class="example-full-width">
+      <mat-label>Distance</mat-label>
+      <input matInput class="form-control" [formControl]="routeNodesDistance.controls[i]">
+      <mat-error *ngIf="formControl.hasError('required')">
+        Distance is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;
+  </div>  
+  <div>
+    <a mat-button (click)= "submit()">Submit</a>
+  </div>
+
+  <div *ngIf="hasError">
+    <ul>
+      <div *ngFor="let errorMessage of errorMessages">
+        <mat-error-label>{{errorMessage}}</mat-error-label>
       </div>
+    </ul>
+  </div>
+
+</ng-template>
