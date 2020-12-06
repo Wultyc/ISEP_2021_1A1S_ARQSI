@@ -57,7 +57,7 @@ pipelines:
             script:
               - cd viajantes2-spa
               # install npm
-              - npm install
+              - npm install --only=production
               # build app
               - npm run build --prod
               # set image name
