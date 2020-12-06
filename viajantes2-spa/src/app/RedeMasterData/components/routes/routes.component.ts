@@ -35,9 +35,6 @@ export class RoutesComponent implements OnInit, AfterViewInit {
   routeList: Route[] = [];
   nodeList: Nodes[] = [];
 
-  // when complete add
-  addNode: number[] = [];
-
   dataSource = new MatTableDataSource<Route>();
   showDetails: boolean[] = [];
   isAdding: boolean = false;
@@ -106,7 +103,6 @@ export class RoutesComponent implements OnInit, AfterViewInit {
   }
   
   setAdd() : any {
-    this.addNode = [];
     this.clearFormArray(this.routeNodes);
     this.clearFormArray(this.routeNodesDistance);
     this.clearFormArray(this.routeNodesDuration);

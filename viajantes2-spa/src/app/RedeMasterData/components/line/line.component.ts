@@ -202,14 +202,22 @@ getRoutes() : void {
     this.orientationArray.push(new FormControl())
   }
 
-
   applyFilter(filterValue: string) {
     // let dataSource = new MatTableDataSource(this.nodeList);
     this.dataSource.filter = filterValue.trim().toLowerCase();
   };
 
   setAdd() : any {
-    return this.isAdding = !this.isAdding;  
+    this.clearFormArray(this.lineRoutesForm);
+    this.clearFormArray(this.orientationArray);
+    this.hasError = false;
+    return this.isAdding = !this.isAdding;
+  }
+
+  clearFormArray = (formArray: FormArray) => {
+    while (formArray.length !== 0) {
+      formArray.removeAt(0)
+    }
   }
 
   setViewLineRoutes() : any {
@@ -233,7 +241,6 @@ getRoutes() : void {
         }
       )
     }
-    
     
     postEntity = this.mapper.fromFormToPost(lineRoutesPost, this.lineForm.value, postEntity)
     console.log(postEntity)
