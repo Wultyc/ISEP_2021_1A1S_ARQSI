@@ -20,10 +20,10 @@
     },
     "endpoints":{
         "redeMasterData":{
-            "vehicleType":"http://redemasterdata/api/vehicle-types",
-            "node":"http://redemasterdata/api/nodes",
-            "route":"http://redemasterdata/api/routes",
-            "line":"http://redemasterdata/api/lines"
+            "vehicleType":"http://redemasterdata.viajantes2.tkapi/vehicle-types",
+            "node":"http://redemasterdata.viajantes2.tk/api/nodes",
+            "route":"http://redemasterdata.viajantes2.tk/api/routes",
+            "line":"http://redemasterdata.viajantes2.tk/api/lines"
         }
     },
     "errors":{
