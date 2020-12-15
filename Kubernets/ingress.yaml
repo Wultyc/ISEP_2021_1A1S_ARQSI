@@ -12,14 +12,12 @@ spec:
       - backend:
           serviceName: viajantes2-spa
           servicePort: 80
-  rules:
   - host: importglx.viajantes2.tk
     http:
       paths:
       - backend:
           serviceName: importglx
           servicePort: 80
-  rules:
   - host: redemasterdata.viajantes2.tk
     http:
       paths:
