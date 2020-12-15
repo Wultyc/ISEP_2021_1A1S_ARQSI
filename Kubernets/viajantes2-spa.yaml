@@ -2,12 +2,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: viajantes2-spa
-  annotations:
-    service.beta.kubernetes.io/linode-loadbalancer-throttle: "4"
   labels:
     app: viajantes2-spa
 spec:
-  type: LoadBalancer
   ports:
   - name: http
     port: 80
