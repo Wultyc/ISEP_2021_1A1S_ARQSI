@@ -17,8 +17,13 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/1160929/1160929_1161042_1160943_1150470_viajantes2#readme",
   "dependencies": {
+    "axios": "^0.21.0",
+    "config": "^3.3.2",
+    "core-util-is": "^1.0.2",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-fileupload": "^1.2.0",
     "mongoose": "^5.11.8",
     "node-config-ts": "^3.1.0"
   },
