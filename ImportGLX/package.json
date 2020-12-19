@@ -17,7 +17,8 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/1160929/1160929_1161042_1160943_1150470_viajantes2#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "node-config-ts": "^3.1.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.9",
