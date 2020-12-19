@@ -1,11 +1,11 @@
-import express from 'express'
+import {Application} from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import fileUpload from 'express-fileupload'
 import {router} from '../routes'
 import { accessLogger } from '../middlewares'
 
-const expressLoader = function (app) {
+const expressLoader = function (app: Application): Application {
 
     // enable files upload
     app.use(fileUpload({
