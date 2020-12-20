@@ -14,8 +14,9 @@
             "debug": false
         }
     },
-    "glx-files":{
-        "upload-dir":"file_archive",
+    "glx_files":{
+        "upload_dir":"file_archive",
+        "fileTimeStampFormat":"YYYYMMDD_hhmmss",
         "fileExtension": "glx.xml"
     },
     "endpoints":{
@@ -28,19 +29,19 @@
     },
     "errors":{
         "http":{
-            "file-not-valid":{
+            "file_not_valid":{
                 "status":"400",
                 "message":"A valid .glx file is required"
             }
         },
-        "file-system":{
-            "file-not-saved":{
+        "file_system":{
+            "file_not_saved":{
                 "status":"500",
                 "message":"An error occoured when storing the file"
             }
         },
         "import":{
-            "error-on-upload":{
+            "error_on_upload":{
                 "status":"500",
                 "message":"An error occoured when importing data"
             }

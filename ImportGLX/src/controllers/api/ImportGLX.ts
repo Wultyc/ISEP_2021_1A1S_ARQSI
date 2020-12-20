@@ -1,8 +1,7 @@
 import {Request, Response, NextFunction} from 'express'
 import GlxFileDto from '../../dto/glxFileDto'
 import GlxFileMapper from '../../mappers/glxFileMapper'
-import moment from 'moment';
-import {config} from 'node-config-ts'
+import StoreGLXService from '../../services/StoreGLXService'
 class ImportGLX {
 
     importfile(req: Request, res: Response, next: NextFunction = ()=>{}) {
@@ -14,17 +13,17 @@ class ImportGLX {
         const map: GlxFileMapper = new GlxFileMapper;
         const dto: GlxFileDto = map.mapFromRequest(req, new GlxFileDto)
 
-        /* const glxFile = req.files.glx
-        const fileDir = config.get('glx-files.upload-dir')
-        const filename = moment().format('YYYYMMDD_hhmmss') + "." + config.get('glx-files.fileExtension')
-    
-        try {
-            glxFile.mv(`${fileDir}/${filename}`)
-        } catch (e) {
-            console.log(e);
-            return res.status(config.get('errors.file-system.file-not-saved.status')).json(config.get('errors.file-system.file-not-saved.message'))
+        //Call Store GLX Service
+        const storeGlxService:StoreGLXService = new StoreGLXService(dto)
+        if(!storeGlxService.runService()){
+            res.status(503).send("Error saving the file")
         }
-    
+
+        //Call Send to RMD Service
+
+        //Call Send to VMD Service
+
+        /*
         try {
             await uploadRede.start(filename)
             await uploadViagem.start(filename)

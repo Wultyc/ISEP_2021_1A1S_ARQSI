@@ -1,7 +1,7 @@
 import express from 'express'
 const router = express.Router()
 
-import {ImportGLX} from '../../controllers/api/import-glx'
+import {ImportGLX} from '../../controllers/api/ImportGLX'
 
 const importGlxController = new ImportGLX();
 
