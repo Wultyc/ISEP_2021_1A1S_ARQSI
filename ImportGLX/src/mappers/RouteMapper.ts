@@ -12,7 +12,7 @@ export default class RouteMapper implements IGlxMapper {
                 isReinforcementRoute: false,
                 isEmptyRoute: glx_entry.$.IsEmpty.toLowerCase(),
                 routeNodes: glx_entry.PathNodes[0].PathNode.map(v => ({
-                    nodeId: "TEST VALUE",//nodeList.find((node) => node.node.glx_id == v.$.Node).node.system_id,
+                    nodeId: nodeList.find((node) => node.node.glx_id == v.$.Node)?.node.system_id,
                     distance: v.$.Distance || "0",
                     duration: v.$.Duration || "0"
                 }))

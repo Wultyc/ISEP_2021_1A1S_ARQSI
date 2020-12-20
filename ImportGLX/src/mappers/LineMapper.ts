@@ -13,7 +13,7 @@ export default class LineMapper implements IGlxMapper {
                 name: glx_entry.$.Name,
                 color: glx_entry.$.Color,
                 lineRoutes: glx_entry.LinePaths[0].LinePath.map(v => ({
-                    routeId: "TEST VALUE", //routeList.find((route) => route.glx_id == v.$.Path).system_id,
+                    routeId: routeList.find((route) => route.route.glx_id == v.$.Path)?.route.system_id,
                     orientation:v.$.Orientation
                 })),
                 tripulantType: [],
