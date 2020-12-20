@@ -1,3 +1,3 @@
 export default interface IService{
-    runService():boolean
+    runService():boolean|Promise<boolean>
 }

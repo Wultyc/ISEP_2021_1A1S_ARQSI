@@ -2,9 +2,10 @@ import {Request, Response, NextFunction} from 'express'
 import GlxFileDto from '../../dto/glxFileDto'
 import GlxFileMapper from '../../mappers/glxFileMapper'
 import StoreGLXService from '../../services/StoreGLXService'
+import ImportRMDService from '../../services/ImportRMDService'
 class ImportGLX {
 
-    importfile(req: Request, res: Response, next: NextFunction = ()=>{}) {
+    async importfile(req: Request, res: Response, next: NextFunction = ()=>{}) {
 
         if (!req.files || !req.files.glx /*|| (req.files.glx.mimetype != "text/xml" && req.files.glx.mimetype != "application/xml")*/) {
             return res.status(400).json("A valid .glx file is required")
@@ -20,6 +21,8 @@ class ImportGLX {
         }
 
         //Call Send to RMD Service
+        const importRMDService = new ImportRMDService(dto)
+        await importRMDService.runService()
 
         //Call Send to VMD Service
 

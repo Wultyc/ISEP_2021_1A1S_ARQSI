@@ -1,4 +1,4 @@
-import IMapper from './interface/Imapper'
+import IMapper from './interface/IMapper'
 import GlxFileDto from '../dto/glxFileDto';
 
 export default class GlxFileMapper implements IMapper{

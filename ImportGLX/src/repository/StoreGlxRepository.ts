@@ -1,7 +1,10 @@
 import IRepository from './interface/IRepository'
 import GlxFileDto from '../dto/glxFileDto'
 import {config} from 'node-config-ts'
+import {promisify} from 'util'
+import xml2js from 'xml2js'
 import path from 'path'
+import fs from 'fs'
 
 export default class StoreGlxRepository implements IRepository{
 
@@ -17,7 +20,6 @@ export default class StoreGlxRepository implements IRepository{
     }
     
     save():boolean{
-        console.log(this.filepath)
         try {
             this.glxDto.glx.mv(this.setFinalPath())
             return true
@@ -28,8 +30,16 @@ export default class StoreGlxRepository implements IRepository{
 
     }
 
-    load(){
-
+    async load(){
+        const parser = new xml2js.Parser
+        try {
+            const data = await fs.promises.readFile(this.filepath as string)
+            const result = await promisify(parser.parseString)(data)
+            return result
+        }
+        catch(err) {
+            console.log(err)
+        }
     }
 
     private setFinalPath(): string{
