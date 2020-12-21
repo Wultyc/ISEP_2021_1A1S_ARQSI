@@ -7,7 +7,7 @@ export default class LineMapper implements IGlxMapper {
     mapFromGLX(glx_entry: any, dto: LineDto, routeList: RouteDto[]): LineDto {
         dto = {
             system_id: "",
-            glx_id: glx_entry.key,
+            glx_id: glx_entry.$.key,
             data: {
                 code: glx_entry.$.key,
                 name: glx_entry.$.Name,

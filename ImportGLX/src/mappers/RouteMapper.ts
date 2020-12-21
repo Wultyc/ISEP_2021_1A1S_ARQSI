@@ -7,7 +7,7 @@ export default class RouteMapper implements IGlxMapper {
     mapFromGLX(glx_entry:any, dto: RouteDto, nodeList: NodeDto[]): RouteDto {
         dto = {
             system_id: "",
-            glx_id: glx_entry.key,
+            glx_id: glx_entry.$.key,
             data: {
                 isReinforcementRoute: false,
                 isEmptyRoute: glx_entry.$.IsEmpty.toLowerCase(),
