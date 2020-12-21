@@ -8,7 +8,7 @@ const accessLogger = (req: Request, res: Response, next: NextFunction) => {
     const log = `\n${req.ip} [${moment().format()}] ${req.method} ${req.originalUrl} ${req.protocol}`
 
     if (config.logs.access.enableFileLog == true)
-        fs.appendFileSync(path.join(__dirname, "..", config.logs.folder, config.logs.access.logfile), log);
+        fs.appendFileSync(path.join(__dirname, "../..", config.logs.folder, config.logs.access.logfile), log);
 
     if (config.logs.access.enableConsoleLog == true)
         console.log(log);
