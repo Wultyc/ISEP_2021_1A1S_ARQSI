@@ -3,7 +3,7 @@ import GlxFileDto from '../dto/glxFileDto'
 import StoreGlxRepository from '../repository/StoreGlxRepository'
 import MasterDataRepository from '../repository/MasterDataRepository'
 
-import IDto from '../dto/interface/IDto'
+import IGlxDto from '../dto/interface/IGlxDto'
 import vehicleTypeDTO from '../dto/VehicleTypeDto'
 import NodeDto from '../dto/NodeDto'
 import RouteDto from '../dto/RouteDto'
@@ -15,6 +15,7 @@ import RouteMapper from '../mappers/RouteMapper'
 import LineMapper from '../mappers/LineMapper'
 
 import util from 'util'
+import { config } from 'node-config-ts'
 
 export default class StoreGLXService implements IService {
 
@@ -49,28 +50,31 @@ export default class StoreGLXService implements IService {
     private processVehicleType() {
         const vtmap = new VehicleTypeMapper()
         this.vehicleTypes = this.network.VehicleTypes[0].VehicleType.map(v => vtmap.mapFromGLX(v.$, new vehicleTypeDTO))
+        this.callRepository(config.endpoints.redeMasterData, this.vehicleTypes, new MasterDataRepository())
     }
 
     private processNodes() {
         const nmap = new NodeMapper()
         this.nodes = this.network.Nodes[0].Node.map(v => nmap.mapFromGLX(v.$, new NodeDto))
+        this.callRepository(config.endpoints.redeMasterData, this.nodes, new MasterDataRepository())
     }
 
     private processRoutes() {
         const rmap = new RouteMapper()
         this.routes = this.network.Paths[0].Path.map(v => rmap.mapFromGLX(v, new RouteDto, this.nodes))
-        console.log(util.inspect(this.routes, { showHidden: false, depth: null }))
+        this.callRepository(config.endpoints.redeMasterData, this.routes, new MasterDataRepository())
     }
 
     private processLines() {
         const lmap = new LineMapper()
         this.lines = this.network.Lines[0].Line.map(v => lmap.mapFromGLX(v, new LineDto, this.routes))
-        console.log(util.inspect(this.lines, { showHidden: false, depth: null }))
+        this.callRepository(config.endpoints.redeMasterData, this.lines, new MasterDataRepository())
     }
 
-    private callRepository(endpoint: String, list:IDto[], repository: MasterDataRepository){
+    private callRepository(endpoint: String, list:IGlxDto[], repository: MasterDataRepository){
         repository.setEndpoint(endpoint)
         repository.setList(list)
+        //console.log(util.inspect(this.lines, { showHidden: false, depth: null }))
         //repository.save()
     }
 }

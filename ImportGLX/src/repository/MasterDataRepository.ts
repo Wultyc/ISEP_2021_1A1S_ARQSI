@@ -1,22 +1,22 @@
 import IRepository from './interface/IRepository'
-import IDto from '../dto/interface/IDto'
+import IGlxDto from '../dto/interface/IGlxDto'
 import axios from 'axios'
 
 export default class MasterDataRepository implements IRepository{
     
     endpoint: String
-    list: IDto[]
+    list: IGlxDto[]
 
     constructor(){
         this.endpoint = ""
-        this.list = <IDto>{}
+        this.list = []
     }
 
     setEndpoint(endpoint: String){
         this.endpoint = endpoint
     }
 
-    setList(list: IDto[]){
+    setList(list: IGlxDto[]){
         this.list = list
     }
 

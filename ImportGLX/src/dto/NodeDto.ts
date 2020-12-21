@@ -1,6 +1,6 @@
-import IDto from './interface/IDto'
+import IGlxDto from './interface/IGlxDto'
 
-export default class NodeDTO implements IDto {
+export default class NodeDTO implements IGlxDto {
     system_id: String
     glx_id: String
     data: {
