@@ -26,10 +26,12 @@ export default class StoreGLXService implements IService {
     nodes: NodeDto[] = []
     routes: RouteDto[] = []
     lines: LineDto[] = []
+    noRepositoryError: boolean
 
     constructor(glx: GlxFileDto, repo: StoreGlxRepository = new StoreGlxRepository) {
         this.glxDto = glx
         this.storeGlxRepository = repo
+        this.noRepositoryError = true
     }
 
     async runService(): Promise<boolean> {
@@ -56,25 +58,28 @@ export default class StoreGLXService implements IService {
     private processNodes() {
         const nmap = new NodeMapper()
         this.nodes = this.network.Nodes[0].Node.map(v => nmap.mapFromGLX(v.$, new NodeDto))
-        this.callRepository(config.endpoints.redeMasterData, this.nodes, new MasterDataRepository())
+        //this.callRepository(config.endpoints.redeMasterData, this.nodes, new MasterDataRepository())
     }
 
     private processRoutes() {
         const rmap = new RouteMapper()
         this.routes = this.network.Paths[0].Path.map(v => rmap.mapFromGLX(v, new RouteDto, this.nodes))
-        this.callRepository(config.endpoints.redeMasterData, this.routes, new MasterDataRepository())
+        //this.callRepository(config.endpoints.redeMasterData, this.routes, new MasterDataRepository())
     }
 
     private processLines() {
         const lmap = new LineMapper()
         this.lines = this.network.Lines[0].Line.map(v => lmap.mapFromGLX(v, new LineDto, this.routes))
-        this.callRepository(config.endpoints.redeMasterData, this.lines, new MasterDataRepository())
+        //this.callRepository(config.endpoints.redeMasterData, this.lines, new MasterDataRepository())
     }
 
-    private callRepository(endpoint: String, list:IGlxDto[], repository: MasterDataRepository){
+    private async callRepository(endpoint: String, list:IGlxDto[], repository: MasterDataRepository){
         repository.setEndpoint(endpoint)
         repository.setList(list)
-        //console.log(util.inspect(this.lines, { showHidden: false, depth: null }))
-        //repository.save()
+        //console.log(util.inspect(list, { showHidden: false, depth: null }))
+        if (this.noRepositoryError){
+            this.noRepositoryError = await repository.save()
+        }
+        console.log(util.inspect(list, { showHidden: false, depth: null }))
     }
 }
