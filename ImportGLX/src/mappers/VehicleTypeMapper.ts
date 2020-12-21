@@ -12,7 +12,7 @@ export default class VehicleTypeMapper implements IGlxMapper {
     }
     
     mapFromGLX(glx_entry:any, dto: vehicleTypeDto): vehicleTypeDto {
-        dto.vehicleType = {
+        dto = {
             system_id: "",
             glx_id: glx_entry.key,
             data: {
@@ -22,7 +22,8 @@ export default class VehicleTypeMapper implements IGlxMapper {
                 averageCost: glx_entry.Consumption,
                 averageSpeed: glx_entry.AverageSpeed,
                 fuelType: this.fuelTypeMap[glx_entry.EnergySource]
-            }
+            },
+            status: "Not Processed"
         }
         return dto
         }

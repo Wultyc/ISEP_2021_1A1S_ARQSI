@@ -4,7 +4,7 @@ import NodeDto from '../dto/NodeDto'
 export default class NodeMapper implements IGlxMapper {
 
     mapFromGLX(glx_entry: any, dto: NodeDto): NodeDto {
-        dto.node = {
+        dto = {
             system_id: "",
             glx_id: glx_entry.key,
             data: {
@@ -14,7 +14,8 @@ export default class NodeMapper implements IGlxMapper {
                 latitude: glx_entry.Latitude,
                 collectionNode: glx_entry.IsDepot.toLowerCase(),
                 surrenderNode: (glx_entry.IsDepot.toLowerCase() == "True") ? true : glx_entry.IsReliefPoint.toLowerCase()
-            }
+            },
+            status: "Not Processed"
         }
         return dto
     }

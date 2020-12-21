@@ -1,3 +1,3 @@
 export default interface IRepository{
-    save():boolean
+    save():boolean|Promise<boolean>
 }
