@@ -23,9 +23,14 @@ export default class MasterDataRepository implements IRepository{
     async save():Promise<boolean>{
         for (let index = 0; index < this.list.length; index++) {
             const entity = this.list[index]
-            const entityResponse = await axios.post(this.endpoint as string, entity.data)
-            this.list[index].system_id = entityResponse.data.id
-            this.list[index].status = "OK"
+            try{
+                const entityResponse = await axios.post(this.endpoint as string, entity.data)
+                this.list[index].system_id = entityResponse.data.id
+                this.list[index].status = "OK"
+            } catch (e) {
+                this.list[index].status = {"Error": e}
+                return false
+            }
         }
 
         return true
