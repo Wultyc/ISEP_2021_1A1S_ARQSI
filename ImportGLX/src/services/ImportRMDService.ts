@@ -39,38 +39,38 @@ export default class StoreGLXService implements IService {
         const rawData: any = await this.storeGlxRepository.load()
         this.network = rawData.GlDocumentInfo.world[0].GlDocument[0].GlDocumentNetwork[0].Network[0]
         this.processNetwork()
-        return true
+        return this.noRepositoryError
     }
 
-    private processNetwork() {
-        this.processVehicleType()
-        this.processNodes()
-        this.processRoutes()
-        this.processLines()
+    private async processNetwork() {
+        await this.processVehicleType()
+        await this.processNodes()
+        await this.processRoutes()
+        await this.processLines()
     }
 
-    private processVehicleType() {
+    private async processVehicleType() {
         const vtmap = new VehicleTypeMapper()
         this.vehicleTypes = this.network.VehicleTypes[0].VehicleType.map(v => vtmap.mapFromGLX(v.$, new vehicleTypeDTO))
-        this.callRepository(config.endpoints.redeMasterData, this.vehicleTypes, new MasterDataRepository())
+        await this.callRepository(config.endpoints.redeMasterData.vehicleType, this.vehicleTypes, new MasterDataRepository())
     }
 
-    private processNodes() {
+    private async processNodes() {
         const nmap = new NodeMapper()
         this.nodes = this.network.Nodes[0].Node.map(v => nmap.mapFromGLX(v.$, new NodeDto))
-        //this.callRepository(config.endpoints.redeMasterData, this.nodes, new MasterDataRepository())
+        await this.callRepository(config.endpoints.redeMasterData.node, this.nodes, new MasterDataRepository())
     }
 
-    private processRoutes() {
+    private async processRoutes() {
         const rmap = new RouteMapper()
         this.routes = this.network.Paths[0].Path.map(v => rmap.mapFromGLX(v, new RouteDto, this.nodes))
-        //this.callRepository(config.endpoints.redeMasterData, this.routes, new MasterDataRepository())
+        await this.callRepository(config.endpoints.redeMasterData.route, this.routes, new MasterDataRepository())
     }
 
-    private processLines() {
+    private async processLines() {
         const lmap = new LineMapper()
         this.lines = this.network.Lines[0].Line.map(v => lmap.mapFromGLX(v, new LineDto, this.routes))
-        //this.callRepository(config.endpoints.redeMasterData, this.lines, new MasterDataRepository())
+        await this.callRepository(config.endpoints.redeMasterData.line, this.lines, new MasterDataRepository())
     }
 
     private async callRepository(endpoint: String, list:IGlxDto[], repository: MasterDataRepository){
