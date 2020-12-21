@@ -11,5 +11,5 @@ export default class NodeDTO implements IGlxDto {
         collectionNode: boolean
         surrenderNode: boolean
     }
-    status: String = "Not Processed"
+    status: any
 }

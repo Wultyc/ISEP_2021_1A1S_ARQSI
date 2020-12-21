@@ -11,5 +11,5 @@ export default class VehicleTypeDTO implements IGlxDto {
         averageSpeed: Number
         fuelType: String
     }
-    status: String = "Not Processed"
+    status: any
 }

@@ -14,5 +14,5 @@ export default class RouteDTO implements IGlxDto {
         isEmptyRoute: boolean
         routeNodes: INodeData[]
     }
-    status: String = "Not Processed"
+    status: any
 }

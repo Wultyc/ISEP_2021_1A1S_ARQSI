@@ -16,5 +16,5 @@ export default class LineDTO implements IGlxDto {
         tripulantType: []
         vehicleType: []
     }
-    status: String = "Not Processed"
+    status: any
 }
