@@ -17,6 +17,7 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/1160929/1160929_1161042_1160943_1150470_viajantes2#readme",
   "dependencies": {
+    "caller": "^1.0.1",
     "core-util-is": "^1.0.2",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
