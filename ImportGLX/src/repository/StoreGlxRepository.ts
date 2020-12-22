@@ -43,6 +43,6 @@ export default class StoreGlxRepository implements IRepository{
     }
 
     private setFinalPath(): string{
-        return path.join(__dirname, "..", "..", this.filepath as string)
+        return path.join(path.resolve('./'), this.filepath as string)
     }
 }
