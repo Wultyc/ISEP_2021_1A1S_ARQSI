@@ -5,10 +5,16 @@
     },
     "logs":{
         "folder":"logs",
+        "fileNameTimeStampFormat":"YYYYMMDD",
         "access":{
             "enableConsoleLog":true,
             "enableFileLog":true,
             "logfile":"requests.log"
+        },
+        "any":{
+            "enableConsoleLog":true,
+            "enableFileLog":true,
+            "logfile":"execution.log"
         },
         "mongoose":{
             "debug": false
@@ -25,26 +31,6 @@
             "node":"http://localhost:3003/api/nodes",
             "route":"http://localhost:3003/api/routes",
             "line":"http://localhost:3003/api/lines"
-        }
-    },
-    "errors":{
-        "http":{
-            "file_not_valid":{
-                "status":"400",
-                "message":"A valid .glx file is required"
-            }
-        },
-        "file_system":{
-            "file_not_saved":{
-                "status":"500",
-                "message":"An error occoured when storing the file"
-            }
-        },
-        "import":{
-            "error_on_upload":{
-                "status":"500",
-                "message":"An error occoured when importing data"
-            }
         }
     }
 }
