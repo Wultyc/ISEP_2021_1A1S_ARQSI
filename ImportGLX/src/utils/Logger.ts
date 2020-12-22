@@ -1,10 +1,12 @@
 import moment from 'moment';
 import { config } from 'node-config-ts';
+import caller from 'caller'
 import path from 'path';
 import fs from 'fs';
 
 export default class Logger {
     loggerType: String
+    loggerLocation: String
     logMessage: string
     logFilePath: string
     enableConsoleLog: boolean
@@ -15,8 +17,9 @@ export default class Logger {
         this.setup()
     }
 
-    log() {
-
+    log(message: any, keyname?: String, keyvalue?: String) {
+        const logString = `${this.loggerLocation} keyname:${keyname || ""} keyvalue:${keyvalue || ""} \n${message}`
+        this.makeLog(logString)
     }
 
     requestLog(ip: String, method: String, originalUrl: String, protocol: String, query: any, headers: any, body: any) {
@@ -47,6 +50,7 @@ export default class Logger {
         this.logFilePath = path.join(__dirname, "../..", config.logs.folder, filename)
         this.enableConsoleLog = config.logs.access.enableConsoleLog
         this.enableFileLog = config.logs.access.enableFileLog
+        this.loggerLocation = caller(2).replace(path.resolve('./'),"")
     }
 
 }
