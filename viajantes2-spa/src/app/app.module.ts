@@ -70,8 +70,7 @@ import { LineRouteComponent } from './RedeMasterData/components/line-route/line-
     ReactiveFormsModule,
     MatSelectModule,
     MatSnackBarModule,
-    CommonModule,
-    RouterTestingModule
+    CommonModule
 
     ],
   exports: [
