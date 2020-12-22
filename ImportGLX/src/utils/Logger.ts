@@ -7,6 +7,7 @@ import fs from 'fs';
 export default class Logger {
     loggerType: String
     loggerLocation: String
+    logLevel: "INFO" | "DEBUG" | "WARNING" | "ERROR"
     logMessage: string
     logFilePath: string
     enableConsoleLog: boolean
@@ -18,11 +19,19 @@ export default class Logger {
     }
 
     log(message: any, keyname?: String, keyvalue?: String) {
+        this.logLevel = 'INFO'
+        const logString = `${this.loggerLocation} keyname:${keyname || ""} keyvalue:${keyvalue || ""} \n${message}`
+        this.makeLog(logString)
+    }
+
+    logError(message: any, keyname?: String, keyvalue?: String) {
+        this.logLevel = 'ERROR'
         const logString = `${this.loggerLocation} keyname:${keyname || ""} keyvalue:${keyvalue || ""} \n${message}`
         this.makeLog(logString)
     }
 
     requestLog(ip: String, method: String, originalUrl: String, protocol: String, query: any, headers: any, body: any) {
+        this.logLevel = 'INFO'
         const request = {query,headers,body}
         const requestStr = JSON.stringify(request, null, 2)
         const logString = `${ip} ${method} ${originalUrl} ${protocol}\n${requestStr}`
@@ -30,7 +39,7 @@ export default class Logger {
     }
 
     private makeLog(logString) {
-        this.logMessage = `\n[${moment().format()}] ${logString}`
+        this.logMessage = `\n[${moment().format()}] [${this.logLevel}] ${logString}`
         this.printLog()
         this.writeLog()
     }
@@ -51,6 +60,7 @@ export default class Logger {
         this.enableConsoleLog = config.logs.access.enableConsoleLog
         this.enableFileLog = config.logs.access.enableFileLog
         this.loggerLocation = caller(2).replace(path.resolve('./'),"")
+        this.logLevel = 'INFO'
     }
 
 }
