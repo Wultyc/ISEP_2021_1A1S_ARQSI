@@ -27,7 +27,7 @@ export default class Logger {
     }
 
     private makeLog(logString) {
-        this.logMessage = `[${moment().format()}] ${logString}`
+        this.logMessage = `\n[${moment().format()}] ${logString}`
         this.printLog()
         this.writeLog()
     }
@@ -42,7 +42,9 @@ export default class Logger {
     }
 
     private setup() {
-        this.logFilePath = path.join(__dirname, "../..", config.logs.folder, (this.loggerType == "request")?config.logs.access.logfile:config.logs.any.logfile)
+        const logFileName = (this.loggerType == "request")?config.logs.access.logfile:config.logs.any.logfile
+        const filename = `${moment().format(config.logs.fileNameTimeStampFormat)}_${logFileName}`
+        this.logFilePath = path.join(__dirname, "../..", config.logs.folder, filename)
         this.enableConsoleLog = config.logs.access.enableConsoleLog
         this.enableFileLog = config.logs.access.enableFileLog
     }

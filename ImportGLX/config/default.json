@@ -5,10 +5,16 @@
     },
     "logs":{
         "folder":"logs",
+        "fileNameTimeStampFormat":"YYYYMMDD",
         "access":{
             "enableConsoleLog":true,
             "enableFileLog":true,
             "logfile":"requests.log"
+        },
+        "any":{
+            "enableConsoleLog":true,
+            "enableFileLog":true,
+            "logfile":"execution.log"
         },
         "mongoose":{
             "debug": false
