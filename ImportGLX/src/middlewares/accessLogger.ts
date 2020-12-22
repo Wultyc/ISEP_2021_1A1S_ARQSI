@@ -1,17 +1,11 @@
 import {Request, Response, NextFunction} from 'express'
 import moment from 'moment';
-import {config} from 'node-config-ts';
-import path from 'path';
-import fs from 'fs';
+import Logger from '../utils/Logger'
 
 const accessLogger = (req: Request, res: Response, next: NextFunction) => {
-    const log = `\n${req.ip} [${moment().format()}] ${req.method} ${req.originalUrl} ${req.protocol}`
 
-    if (config.logs.access.enableFileLog == true)
-        fs.appendFileSync(path.join(__dirname, "../..", config.logs.folder, config.logs.access.logfile), log);
-
-    if (config.logs.access.enableConsoleLog == true)
-        console.log(log);
+    const logger = new Logger("request")
+    logger.requestLog(req.ip,req.method,req.originalUrl,req.protocol,req.query,req.headers,req.body)    
 
     next();
 }
