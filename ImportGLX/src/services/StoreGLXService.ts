@@ -3,6 +3,7 @@ import GlxFileDto from '../dto/glxFileDto'
 import StoreGlxRepository from '../repository/StoreGlxRepository'
 import {config} from 'node-config-ts'
 import moment from 'moment'
+import logger from '../utils/Logger'
 
 export default class StoreGLXService implements IService {
     
@@ -22,7 +23,7 @@ export default class StoreGLXService implements IService {
         if (!this.storeGlxRepository.save()){
             return false
         }
-
+        new logger().log("File imported sucessfully")
         this.glxDto.filepath = this.filename
 
         return true
