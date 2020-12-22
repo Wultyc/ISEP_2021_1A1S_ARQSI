@@ -14,7 +14,6 @@ import NodeMapper from '../mappers/NodeMapper'
 import RouteMapper from '../mappers/RouteMapper'
 import LineMapper from '../mappers/LineMapper'
 
-import util from 'util'
 import { config } from 'node-config-ts'
 
 export default class StoreGLXService implements IService {
@@ -76,10 +75,8 @@ export default class StoreGLXService implements IService {
     private async callRepository(endpoint: String, list:IGlxDto[], repository: MasterDataRepository){
         repository.setEndpoint(endpoint)
         repository.setList(list)
-        //console.log(util.inspect(list, { showHidden: false, depth: null }))
         if (this.noRepositoryError){
             this.noRepositoryError = await repository.save()
         }
-        console.log(util.inspect(list, { showHidden: false, depth: null }))
     }
 }
