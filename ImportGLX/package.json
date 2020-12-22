@@ -1,6 +1,6 @@
 {
   "name": "importglx",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Project carried out during the 1st semester in the Systems Architecture class at ISEP",
   "main": "app.js",
   "scripts": {
