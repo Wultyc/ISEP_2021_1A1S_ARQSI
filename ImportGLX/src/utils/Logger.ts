@@ -10,8 +10,8 @@ export default class Logger {
     enableConsoleLog: boolean
     enableFileLog: boolean
 
-    constructor(loggerType: String) {
-        this.loggerType = loggerType
+    constructor(loggerType?: String) {
+        this.loggerType = loggerType || "any"
         this.setup()
     }
 
