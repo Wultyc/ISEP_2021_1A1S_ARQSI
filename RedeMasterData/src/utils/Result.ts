@@ -4,7 +4,7 @@ interface failedData {
     message: String,
     details: any
 }
-
+ 
 export default class Result {
     data!: IDto | failedData
     isSuccessful!: boolean
