@@ -2,6 +2,7 @@ import IDto from '../dto/interface/IDto'
 
 interface failedData {
     message: String,
+    type: 'USER'|'SYSTEM'|'EXTERNAL_SYSTEM'
     details: any
 }
  
