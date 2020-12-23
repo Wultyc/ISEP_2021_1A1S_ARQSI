@@ -1,5 +1,6 @@
+import Result from '../../utils/Result'
 export default interface IRepository{
     save():boolean|Promise<boolean>
-    load(query:any,sort:any):any
-    loadById(id:any):any
+    load(query:any,sort:any):Result
+    loadById(id:any):Result
 }
