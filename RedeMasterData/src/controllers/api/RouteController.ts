@@ -6,14 +6,12 @@ import RouteService from '../../services/RouteService'
 
 export default class RouteController{
 
-    routeDTO: RouteDTO
-    routeMapper: RouteMapper
-    routeService: RouteService
+    dto!: RouteDTO
+    mapper!: RouteMapper
+    service!: RouteService
 
-    constructor(routeDTO: RouteDTO = new RouteDTO, routeMapper: RouteMapper = new RouteMapper, routeService: RouteService = new RouteService){
-        this.routeDTO = routeDTO
-        this.routeMapper = routeMapper
-        this.routeService = routeService
+    constructor(routeService: RouteService = new RouteService){
+        this.service = routeService
     }
     routeGetAll(req: Request, res: Response){}
     routeCreate(req: Request, res: Response){}

@@ -6,14 +6,12 @@ import TripulantTypeService from '../../services/TripulantTypeService'
 
 export default class TripulantTypeController{
 
-    tripulantTypeDTO: TripulantTypeDTO
-    tripulantTypeMapper: TripulantTypeMapper
-    tripulantTypeService: TripulantTypeService
+    dto!: TripulantTypeDTO
+    mapper!: TripulantTypeMapper
+    service!: TripulantTypeService
 
-    constructor(tripulantTypeDTO: TripulantTypeDTO = new TripulantTypeDTO, tripulantTypeMapper: TripulantTypeMapper = new TripulantTypeMapper, tripulantTypeService: TripulantTypeService = new TripulantTypeService){
-        this.tripulantTypeDTO = tripulantTypeDTO
-        this.tripulantTypeMapper = tripulantTypeMapper
-        this.tripulantTypeService = tripulantTypeService
+    constructor(tripulantTypeService: TripulantTypeService = new TripulantTypeService){
+        this.service = tripulantTypeService
     }
     tripulantTypeGetAll(req: Request, res: Response){}
     tripulantTypeCreate(req: Request, res: Response){}

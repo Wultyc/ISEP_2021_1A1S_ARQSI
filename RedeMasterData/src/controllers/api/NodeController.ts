@@ -6,14 +6,12 @@ import NodeService from '../../services/NodeService'
 
 export default class NodeController{
 
-    nodeDTO: NodeDTO
-    nodeMapper: NodeMapper
-    nodeService: NodeService
+    dto!: NodeDTO
+    mapper!: NodeMapper
+    service!: NodeService
 
-    constructor(nodeDTO: NodeDTO = new NodeDTO, nodeMapper: NodeMapper = new NodeMapper, nodeService: NodeService = new NodeService){
-        this.nodeDTO = nodeDTO
-        this.nodeMapper = nodeMapper
-        this.nodeService = nodeService
+    constructor(nodeService: NodeService = new NodeService){
+        this.service = nodeService
     }
     nodeGetAll(req: Request, res: Response){}
     nodeGetById(req: Request, res: Response){}

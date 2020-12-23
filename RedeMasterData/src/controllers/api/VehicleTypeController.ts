@@ -6,14 +6,12 @@ import VehicleTypeService from '../../services/VehicleTypeService'
 
 export default class VehicleTypeController{
 
-    vehicleTypeDTO: VehicleTypeDTO
-    vehicleTypeMapper: VehicleTypeMapper
-    vehicleTypeService: VehicleTypeService
+    dto!: VehicleTypeDTO
+    mapper!: VehicleTypeMapper
+    service!: VehicleTypeService
 
-    constructor(vehicleTypeDTO: VehicleTypeDTO = new VehicleTypeDTO, vehicleTypeMapper: VehicleTypeMapper = new VehicleTypeMapper, vehicleTypeService: VehicleTypeService = new VehicleTypeService){
-        this.vehicleTypeDTO = vehicleTypeDTO
-        this.vehicleTypeMapper = vehicleTypeMapper
-        this.vehicleTypeService = vehicleTypeService
+    constructor(vehicleTypeService: VehicleTypeService = new VehicleTypeService){
+        this.service = vehicleTypeService
     }
     vehicleTypeGetAll(req: Request, res: Response){}
     vehicleTypeCreate(req: Request, res: Response){}

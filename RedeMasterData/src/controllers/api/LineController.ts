@@ -5,14 +5,12 @@ import {LinesValidationSchema} from '../../models/joi/Lines'
 import LineService from '../../services/LineService'
 export default class LineController{
 
-    lineDTO: LineDTO
-    lineMapper: LineMapper
-    lineService: LineService
+    dto!: LineDTO
+    mapper!: LineMapper
+    service!: LineService
 
-    constructor(lineDTO: LineDTO = new LineDTO, lineMapper: LineMapper = new LineMapper, lineService: LineService = new LineService){
-        this.lineDTO = lineDTO
-        this.lineMapper = lineMapper
-        this.lineService = lineService
+    constructor(lineService: LineService = new LineService){
+        this.service = lineService
     }
 
     lineGetByFilter(req: Request, res: Response){}
