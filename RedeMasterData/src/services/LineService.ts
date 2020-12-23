@@ -2,7 +2,7 @@ import IService from './interface/IService'
 import LineDTO from '../dto/LineDTO'
 import LineMapper from '../mappers/LineMapper'
 
-export class LineService implements IService {
+export default class LineService implements IService {
 
     lineDTO: LineDTO
     lineMapper: LineMapper

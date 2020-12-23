@@ -2,7 +2,7 @@ import IService from './interface/IService'
 import VehicleTypeDTO from '../dto/VehicleTypeDTO'
 import VehicleTypeMapper from '../mappers/VehicleTypeMapper'
 
-export class VehicleTypeService implements IService {
+export default class VehicleTypeService implements IService {
 
     vehicleTypeDTO: VehicleTypeDTO
     vehicleTypeMapper: VehicleTypeMapper

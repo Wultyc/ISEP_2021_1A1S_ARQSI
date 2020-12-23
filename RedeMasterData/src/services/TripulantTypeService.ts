@@ -2,7 +2,7 @@ import IService from './interface/IService'
 import TripulantTypeDTO from '../dto/TripulantTypeDTO'
 import TripulantTypeMapper from '../mappers/TripulantTypeMapper'
 
-export class TripulantTypeService implements IService {
+export default class TripulantTypeService implements IService {
 
     tripulantTypeDTO: TripulantTypeDTO
     tripulantTypeMapper: TripulantTypeMapper
