@@ -1,6 +1,6 @@
-const Joi = require('joi');
+import Joi from 'Joi'
 
-const vehicleTypesValidationSchema = new Joi.object({
+const vehicleTypesValidationSchema = Joi.object({
     id: Joi.string(),
     description: Joi.string().required(),
     autonomy: Joi.number().required(),
@@ -10,4 +10,4 @@ const vehicleTypesValidationSchema = new Joi.object({
     fuelType: Joi.string().required()
 })
 
-module.exports = vehicleTypesValidationSchema;
+export {vehicleTypesValidationSchema};

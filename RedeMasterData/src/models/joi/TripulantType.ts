@@ -1,9 +1,8 @@
-const Joi = require('joi');
+import Joi from 'Joi'
 
-const tripulantTypesValidationSchema = new Joi.object({
-    id: Joi.string(),
+const tripulantTypesValidationSchema = Joi.object({
     id: Joi.string(),
     description: Joi.string().required()
 })
 
-module.exports = tripulantTypesValidationSchema;
+export {tripulantTypesValidationSchema};

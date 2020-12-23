@@ -1,6 +1,6 @@
-const Joi = require('joi');
+import Joi from 'Joi'
 
-const nodesValidationSchema = new Joi.object({
+const nodesValidationSchema = Joi.object({
     id: Joi.string(),
     shortName: Joi.string().required(),
     name: Joi.string().required(),
@@ -10,4 +10,4 @@ const nodesValidationSchema = new Joi.object({
     surrenderNode: Joi.boolean().required()
 })
 
-module.exports = nodesValidationSchema;
+export {nodesValidationSchema};

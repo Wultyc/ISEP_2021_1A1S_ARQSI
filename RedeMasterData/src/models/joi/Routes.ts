@@ -1,6 +1,6 @@
-const Joi = require('joi');
+import Joi from 'Joi'
 
-const routesValidationSchema = new Joi.object({
+const routesValidationSchema = Joi.object({
     id: Joi.string(),
     distance: Joi.number(),
     duration: Joi.number(),
@@ -13,4 +13,4 @@ const routesValidationSchema = new Joi.object({
     }).required()
 })
 
-module.exports = routesValidationSchema;
+export{routesValidationSchema};

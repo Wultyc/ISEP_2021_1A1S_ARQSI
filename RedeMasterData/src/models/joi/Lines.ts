@@ -1,6 +1,6 @@
-const Joi = require('joi');
+import Joi from 'Joi'
 
-const linesValidationSchema = new Joi.object({
+const LinesValidationSchema = Joi.object({
     id: Joi.string(),
     code: Joi.string().required(),
     name: Joi.string().required(),
@@ -15,4 +15,4 @@ const linesValidationSchema = new Joi.object({
     vehicleType: Joi.array().items(Joi.string()).required()
 })
 
-module.exports = linesValidationSchema;
+export {LinesValidationSchema};
