@@ -3,11 +3,13 @@ import LineDTO from '../../dto/LineDTO'
 import LineMapper from '../../mappers/LineMapper'
 import {LinesValidationSchema} from '../../models/joi/Lines'
 import LineService from '../../services/LineService'
+import Result from '../../utils/Result'
 export default class LineController{
 
     dto!: LineDTO
     mapper!: LineMapper
     service!: LineService
+    result!: Result
 
     constructor(lineService: LineService = new LineService){
         this.service = lineService

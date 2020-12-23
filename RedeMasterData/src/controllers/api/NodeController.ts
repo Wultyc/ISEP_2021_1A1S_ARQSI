@@ -3,12 +3,14 @@ import NodeDTO from '../../dto/NodeDTO'
 import NodeMapper from '../../mappers/NodeMapper'
 import {nodesValidationSchema} from '../../models/joi/Nodes'
 import NodeService from '../../services/NodeService'
+import Result from '../../utils/Result'
 
 export default class NodeController{
 
     dto!: NodeDTO
     mapper!: NodeMapper
     service!: NodeService
+    result!: Result
 
     constructor(nodeService: NodeService = new NodeService){
         this.service = nodeService
