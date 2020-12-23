@@ -1,19 +1,16 @@
-import IService from './interface/IService'
 import RouteDTO from '../dto/RouteDTO'
 import RouteMapper from '../mappers/RouteMapper'
+import Result from '../utils/Result'
 
-export default class RouteService implements IService {
+export default class RouteService {
 
-    routeDTO: RouteDTO
-    routeMapper: RouteMapper
+    dto: RouteDTO
+    mapper: RouteMapper
+    result!: Result
 
-    constructor(routeDTO:RouteDTO = new RouteDTO(), routeMapper:RouteMapper = new RouteMapper()){
-        this.routeDTO = routeDTO
-        this.routeMapper = routeMapper
-    }
-
-    runService(): boolean | Promise<boolean> {
-        throw new Error('Method not implemented.');
+    constructor(routeDTO: RouteDTO = new RouteDTO(), routeMapper: RouteMapper = new RouteMapper()) {
+        this.dto = routeDTO
+        this.mapper = routeMapper
     }
 
 }

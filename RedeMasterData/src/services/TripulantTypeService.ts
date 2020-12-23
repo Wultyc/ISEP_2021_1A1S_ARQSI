@@ -1,19 +1,16 @@
-import IService from './interface/IService'
 import TripulantTypeDTO from '../dto/TripulantTypeDTO'
 import TripulantTypeMapper from '../mappers/TripulantTypeMapper'
+import Result from '../utils/Result'
 
-export default class TripulantTypeService implements IService {
+export default class TripulantTypeService {
 
-    tripulantTypeDTO: TripulantTypeDTO
-    tripulantTypeMapper: TripulantTypeMapper
+    dto: TripulantTypeDTO
+    mapper: TripulantTypeMapper
+    result!: Result
 
-    constructor(tripulantTypeDTO:TripulantTypeDTO = new TripulantTypeDTO(), tripulantTypeMapper:TripulantTypeMapper = new TripulantTypeMapper()){
-        this.tripulantTypeDTO = tripulantTypeDTO
-        this.tripulantTypeMapper = tripulantTypeMapper
-    }
-
-    runService(): boolean | Promise<boolean> {
-        throw new Error('Method not implemented.');
+    constructor(tripulantTypeDTO: TripulantTypeDTO = new TripulantTypeDTO(), tripulantTypeMapper: TripulantTypeMapper = new TripulantTypeMapper()) {
+        this.dto = tripulantTypeDTO
+        this.mapper = tripulantTypeMapper
     }
 
 }

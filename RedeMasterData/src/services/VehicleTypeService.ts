@@ -1,19 +1,17 @@
-import IService from './interface/IService'
 import VehicleTypeDTO from '../dto/VehicleTypeDTO'
 import VehicleTypeMapper from '../mappers/VehicleTypeMapper'
+import Result from '../utils/Result'
 
-export default class VehicleTypeService implements IService {
 
-    vehicleTypeDTO: VehicleTypeDTO
-    vehicleTypeMapper: VehicleTypeMapper
+export default class VehicleTypeService {
 
-    constructor(vehicleTypeDTO:VehicleTypeDTO = new VehicleTypeDTO(), vehicleTypeMapper:VehicleTypeMapper = new VehicleTypeMapper()){
-        this.vehicleTypeDTO = vehicleTypeDTO
-        this.vehicleTypeMapper = vehicleTypeMapper
-    }
+    dto: VehicleTypeDTO
+    mapper: VehicleTypeMapper
+    result!: Result
 
-    runService(): boolean | Promise<boolean> {
-        throw new Error('Method not implemented.');
+    constructor(vehicleTypeDTO: VehicleTypeDTO = new VehicleTypeDTO(), vehicleTypeMapper: VehicleTypeMapper = new VehicleTypeMapper()) {
+        this.dto = vehicleTypeDTO
+        this.mapper = vehicleTypeMapper
     }
 
 }

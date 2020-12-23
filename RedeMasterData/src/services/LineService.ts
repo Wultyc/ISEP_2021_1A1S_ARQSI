@@ -1,19 +1,17 @@
-import IService from './interface/IService'
 import LineDTO from '../dto/LineDTO'
 import LineMapper from '../mappers/LineMapper'
+import Result from '../utils/Result'
 
-export default class LineService implements IService {
+export default class LineService {
 
-    lineDTO: LineDTO
-    lineMapper: LineMapper
+    dto: LineDTO
+    mapper: LineMapper
+    result!: Result
 
-    constructor(lineDTO:LineDTO = new LineDTO(), lineMapper:LineMapper = new LineMapper()){
-        this.lineDTO = lineDTO
-        this.lineMapper = lineMapper
+    constructor(lineDTO: LineDTO = new LineDTO(), lineMapper: LineMapper = new LineMapper()) {
+        this.dto = lineDTO
+        this.mapper = lineMapper
     }
 
-    runService(): boolean | Promise<boolean> {
-        throw new Error('Method not implemented.');
-    }
 
 }
