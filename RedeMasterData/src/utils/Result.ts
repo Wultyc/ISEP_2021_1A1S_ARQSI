@@ -7,7 +7,7 @@ interface failedData {
 }
  
 export default class Result {
-    data!: IDto | failedData
+    data!: IDto | IDto[] | failedData
     isSuccessful!: boolean
 
     setSuccessful(data: IDto){
