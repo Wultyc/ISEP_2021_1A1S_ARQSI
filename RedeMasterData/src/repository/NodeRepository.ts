@@ -14,7 +14,8 @@ export default class NodeRepository implements IRepository{
         throw new Error('Method not implemented.');
     }
     load(query: any, sort: any):Result {
-        throw new Error('Method not implemented.');
+        this.result.setSuccessful(Node.find(query).sort(sort))
+        return this.result
     }
     loadById(id: any):Result {
         throw new Error('Method not implemented.');

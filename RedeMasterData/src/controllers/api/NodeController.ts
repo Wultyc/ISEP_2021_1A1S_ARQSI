@@ -9,13 +9,16 @@ export default class NodeController{
 
     dto!: NodeDTO
     mapper!: NodeMapper
-    service!: NodeService
+    service: NodeService
     result!: Result
 
-    constructor(nodeService: NodeService = new NodeService){
+    constructor(nodeService: NodeService = new NodeService()){
         this.service = nodeService
     }
-    nodeGetAll(req: Request, res: Response){}
+    nodeGetAll(req: Request, res: Response){
+        this.result = this.service.getAll(req.query)
+        res.status((this.result.success) ? 200 : 500).send(this.result.data)
+    }
     nodeGetById(req: Request, res: Response){}
     nodeCreate(req: Request, res: Response){}
     nodeDelete(req: Request, res: Response){}
