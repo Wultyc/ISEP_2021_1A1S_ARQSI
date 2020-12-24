@@ -2,8 +2,8 @@
 export class Result<T> {
   public isSuccess: boolean;
   public isFailure: boolean
-  public error: T | string;
-  private _value: T;
+  public error: T | string | undefined;
+  private _value: T | undefined;
 
   public constructor (isSuccess: boolean, error?: T | string, value?: T) {
     if (isSuccess && error) {
@@ -22,12 +22,15 @@ export class Result<T> {
   }
 
   public getValue () : T {
-    if (!this.isSuccess) {
-      console.log(this.error,);
+        
+    if (this._value)  {
+      return this._value;
+    }
+    else 
+    // if (!this.isSuccess) {
+    //   console.log(this.error,);
       throw new Error("Can't get the value of an error result. Use 'errorValue' instead.")
-    } 
-
-    return this._value;
+    // }
   }
 
   public errorValue (): T {
@@ -35,7 +38,7 @@ export class Result<T> {
   }
 
   public static ok<U> (value?: U) : Result<U> {
-    return new Result<U>(true, null, value);
+    return new Result<U>(true, undefined, value);
   }
 
   public static fail<U> (error: any): Result<U> {

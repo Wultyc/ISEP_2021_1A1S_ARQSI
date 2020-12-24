@@ -52,7 +52,7 @@ export default class Node extends AggregateRoot<NodeDTO>{
 
 
         if(props.surrenderNode == true && props.collectionNode == false){
-            return Result.fail<Node>("A Surrender Node must always be a Collection Node.", props)
+            return Result.fail<Node>("A Surrender Node must always be a Collection Node.")
         }
 
         const newDomainNode = new Node(props, id)

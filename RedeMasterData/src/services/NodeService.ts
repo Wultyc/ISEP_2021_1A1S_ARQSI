@@ -29,7 +29,7 @@ export default class NodeService {
     create(dto: NodeDTO, callback){
         this.dto = dto
         Node.create(this.dto)
-
+        console.log(this.dto)
         this.repository.save(this.dto,callback)
     }
 
