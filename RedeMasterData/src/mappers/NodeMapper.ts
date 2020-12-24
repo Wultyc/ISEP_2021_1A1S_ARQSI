@@ -6,6 +6,13 @@ export default class NodeMapper implements IMapper{
         throw new Error('Method not implemented.');
     }
     mapFromRequest(req: any, dto: NodeDTO): NodeDTO {
-        throw new Error('Method not implemented.');
+        dto.id = req.body.id,
+        dto.shortName = req.body.shortName,
+        dto.name = req.body.name,
+        dto.longitude = req.body.longitude,
+        dto.latitude = req.body.latitude,
+        dto.collectionNode = req.body.collectionNode,
+        dto.surrenderNode = req.body.surrenderNode
+        return dto;
     }
 } 
