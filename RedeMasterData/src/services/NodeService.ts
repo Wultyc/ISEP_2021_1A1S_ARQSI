@@ -1,7 +1,7 @@
+import Node from '../domain/Node'
 import NodeDTO from '../dto/NodeDTO'
 import NodeMapper from '../mappers/NodeMapper'
 import NodeRepository from '../repository/NodeRepository'
-import Result from '../utils/Result'
 import * as queryfilter from '../utils/QueryFilterX'
 
 export default class NodeService {
@@ -9,7 +9,6 @@ export default class NodeService {
     dto: NodeDTO
     mapper: NodeMapper
     repository: NodeRepository
-    result!: Result
 
     constructor(nodeDTO: NodeDTO = new NodeDTO(), nodeMapper: NodeMapper = new NodeMapper(), nodeRepository: NodeRepository = new NodeRepository) {
         this.dto = nodeDTO
@@ -17,11 +16,25 @@ export default class NodeService {
         this.repository = nodeRepository
     }
 
-    getAll(query: any): Result{
+    getAll(query: any, callback){
         const sortString = queryfilter.sortString(query)
         const queryObject = queryfilter.queryCleaner(query);
-        this.result = this.repository.load(queryObject,sortString)
-        return this.result
+        this.repository.load(queryObject,sortString, callback)
+    }
+
+    getById(id: string, callback){
+        this.repository.loadById(id, callback)
+    }
+
+    create(dto: NodeDTO, callback){
+        this.dto = dto
+        Node.create(this.dto)
+
+        this.repository.save(this.dto,callback)
+    }
+
+    delete(id: string, callback){
+        this.repository.delete(id, callback)
     }
 
 }
