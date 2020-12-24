@@ -1,11 +1,13 @@
 import IDto from './interface/IDto'
 
 export default class LineDTO implements IDto{
-    lineId= null
-    orientation= null
-    route= {
-        isReinforcementRoute: null,
-        isEmptyRoute: null,
-        routeNodes: null
-    }
+    id = null
+    code = null
+    name = null
+    color = null
+    beginNode = null
+    finalNode = null
+    lineRoutes = null
+    tripulantType = null
+    vehicleType = null
 }
