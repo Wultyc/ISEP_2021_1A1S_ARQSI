@@ -5,10 +5,10 @@ const router = express.Router()
 
 const vehicleType_controller = new VehicleTypeController()
 
-router.get('/', vehicleType_controller.vehicleTypeGetAll);
-router.post('/', vehicleType_controller.vehicleTypeCreate);
+router.get('/', (req,res) => vehicleType_controller.vehicleTypeGetAll(req,res));
+router.post('/', (req,res) => vehicleType_controller.vehicleTypeCreate(req,res));
 
-router.get('/:vehicleTypeId', vehicleType_controller.vehicleTypeGetById);
-router.delete('/:vehicleTypeId', vehicleType_controller.vehicleTypeDelete);
+router.get('/:vehicleTypeId', (req,res) => vehicleType_controller.vehicleTypeGetById(req,res));
+router.delete('/:vehicleTypeId', (req,res) => vehicleType_controller.vehicleTypeDelete(req,res));
 
 export {router as vehicleType_router}

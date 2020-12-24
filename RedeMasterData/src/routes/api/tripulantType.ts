@@ -5,10 +5,10 @@ const router = express.Router()
 
 const tripulantType_controller = new TripulantTypeController()
 
-router.get('/', tripulantType_controller.tripulantTypeGetAll);
-router.post('/', tripulantType_controller.tripulantTypeCreate);
+router.get('/', (req,res) => tripulantType_controller.tripulantTypeGetAll(req,res));
+router.post('/', (req,res) => tripulantType_controller.tripulantTypeCreate(req,res));
 
-router.get('/:tripulantTypeId', tripulantType_controller.tripulantTypeGetById);
-router.delete('/:tripulantTypeId', tripulantType_controller.tripulantTypeDelete);
+router.get('/:tripulantTypeId', (req,res) => tripulantType_controller.tripulantTypeGetById(req,res));
+router.delete('/:tripulantTypeId', (req,res) => tripulantType_controller.tripulantTypeDelete(req,res));
 
 export {router as tripulantType_router}

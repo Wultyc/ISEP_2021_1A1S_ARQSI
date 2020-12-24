@@ -5,10 +5,10 @@ const router = express.Router()
 
 const route_controller = new RouteController()
 
-router.get('/', route_controller.routeGetAll);
-router.post('/', route_controller.routeCreate);
+router.get('/', (req,res) => route_controller.routeGetAll(req,res));
+router.post('/', (req,res) => route_controller.routeCreate(req,res));
 
-router.get('/:routeId', route_controller.routeGetById);
-router.delete('/:routeId', route_controller.routeDelete);
+router.get('/:routeId', (req,res) => route_controller.routeGetById(req,res));
+router.delete('/:routeId', (req,res) => route_controller.routeDelete(req,res));
 
 export {router as routes_router}
