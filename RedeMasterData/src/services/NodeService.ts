@@ -2,7 +2,7 @@ import NodeDTO from '../dto/NodeDTO'
 import NodeMapper from '../mappers/NodeMapper'
 import NodeRepository from '../repository/NodeRepository'
 import Result from '../utils/Result'
-import * as queryfilter from '../utils/QueryFilter'
+import * as queryfilter from '../utils/QueryFilterX'
 
 export default class NodeService {
 
