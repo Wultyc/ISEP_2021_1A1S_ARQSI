@@ -1,23 +1,21 @@
 import IRepository from './interface/IRepository'
-import Result from '../utils/Result';
 import VehicleType from '../models/mongo/VehicleType'
+import VehicleTypeDTO from '../dto/VehicleTypeDTO'
 
 export default class VehicleTypeRepository implements IRepository{
-
-    result: Result
-
-    constructor(result: Result = new Result){
-        this.result = result
+    save(dto: VehicleTypeDTO, callback: any): void {
+        throw new Error('Method not implemented.')
+    }
+    load(query: any, sort: any, callback: any): void {
+        throw new Error('Method not implemented.')
+    }
+    loadById(id: string, callback: any): void {
+        throw new Error('Method not implemented.')
+    }
+    delete(id: string, callback: any): void {
+        throw new Error('Method not implemented.')
     }
 
-    save(): boolean | Promise<boolean> {
-        throw new Error('Method not implemented.');
-    }
-    load(query: any, sort: any):Result {
-        throw new Error('Method not implemented.');
-    }
-    loadById(id: any):Result {
-        throw new Error('Method not implemented.');
-    }
+
 
 }
