@@ -1,7 +1,15 @@
 import IRepository from './interface/IRepository'
 import Result from '../utils/Result'
+import Node from '../models/mongo/Node'
 
 export default class NodeRepository implements IRepository{
+
+    result: Result
+
+    constructor(result: Result = new Result){
+        this.result = result
+    }
+
     save(): boolean | Promise<boolean> {
         throw new Error('Method not implemented.');
     }
