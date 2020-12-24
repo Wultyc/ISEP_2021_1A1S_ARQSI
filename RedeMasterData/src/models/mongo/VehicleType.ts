@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'
 const Schema = mongoose.Schema;
 
-var VehicleType = new  Schema({
+const VehicleType = new  Schema({
     description: {
         type: String,
         required: [true, 'Insert a description.'],
@@ -32,4 +32,4 @@ var VehicleType = new  Schema({
 
 
 // Export the model
-module.exports = mongoose.model('VehicleType', VehicleType);
+export default mongoose.model('VehicleType', VehicleType);

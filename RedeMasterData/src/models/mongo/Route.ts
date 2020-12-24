@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'
 const Schema = mongoose.Schema;
 
 const RouteNodes = new Schema({
@@ -7,7 +7,7 @@ const RouteNodes = new Schema({
     duration: { type: Number, required: [true, 'Insert the nodes duration.'] }
 },{ _id: false });
 
-var Route = new Schema({
+const Route = new Schema({
     distance: {
         type: Number,
         // determined by summing up the distance of its segments
@@ -32,4 +32,4 @@ var Route = new Schema({
 // TODO: make routeNodes unique
 
 // Export the model
-module.exports = mongoose.model('Route', Route);
+export default mongoose.model('Route', Route);

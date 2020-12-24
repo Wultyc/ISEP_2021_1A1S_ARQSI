@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'
 const Schema = mongoose.Schema;
 
 const LineRoutes = new Schema({
@@ -6,7 +6,7 @@ const LineRoutes = new Schema({
     orientation: { type: String, enum: ['Go', 'Return'], required: [true, 'Insert a orientation.'] }
 },{ _id: false });
 
-var Line = new Schema({
+const Line = new Schema({
     code: {
         type: String,
         required: [true, 'Insert a code.'],
@@ -47,7 +47,7 @@ var Line = new Schema({
 });
 
 // Export the models
-module.exports = mongoose.model('Line', Line, 'lines');
+export default mongoose.model('Line', Line, 'lines');
 
 
 

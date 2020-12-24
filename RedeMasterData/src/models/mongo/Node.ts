@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'
 const Schema = mongoose.Schema;
 
-var Node = new Schema({
+const Node = new Schema({
     shortName: {
         type: String,
         required: [true, 'Insert a shortName.'],
@@ -34,4 +34,4 @@ var Node = new Schema({
 Node.index({ longitude: 1, latitude: 1 }, { unique: true });
 
 // Export the model
-module.exports = mongoose.model('Node', Node);
+export default mongoose.model('Node', Node);

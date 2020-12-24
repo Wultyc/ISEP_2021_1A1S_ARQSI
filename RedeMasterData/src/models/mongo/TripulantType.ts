@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'
 const Schema = mongoose.Schema;
 
-var TripulantType = new  Schema({
+const TripulantType = new  Schema({
     description: {
         type: String,
         required: [true, 'Insert a description.'],
@@ -11,4 +11,4 @@ var TripulantType = new  Schema({
 
 
 // Export the model
-module.exports = mongoose.model('TripulantType', TripulantType);
+export default mongoose.model('TripulantType', TripulantType);
