@@ -13,7 +13,7 @@ export default class NodeRepository implements IRepository {
         });
 
         if (!repositoryResult) {
-            return Result.fail<any>({mongoError:mongoError.message})
+            return Result.fail<any>({error:mongoError.message})
         }
 
         return Result.ok<any>(repositoryResult)
@@ -26,7 +26,7 @@ export default class NodeRepository implements IRepository {
         });
 
         if (!repositoryResult) {
-            return Result.fail<any>({mongoError:mongoError.message})
+            return Result.fail<any>({error:mongoError.message})
         }
 
         return Result.ok<any>(repositoryResult)
@@ -39,7 +39,7 @@ export default class NodeRepository implements IRepository {
         });
 
         if (!repositoryResult) {
-            return Result.fail<any>({mongoError:mongoError.message})
+            return Result.fail<any>({error:mongoError.message})
         }
 
         return Result.ok<any>(repositoryResult)
@@ -52,7 +52,7 @@ export default class NodeRepository implements IRepository {
         });
 
         if (!repositoryResult) {
-            return Result.fail<any>({mongoError:mongoError.message})
+            return Result.fail<any>({error:mongoError.message})
         }
 
         return Result.ok<any>(repositoryResult)

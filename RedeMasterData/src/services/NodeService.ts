@@ -17,33 +17,39 @@ export default class NodeService {
         this.repository = nodeRepository
     }
 
-    getAll(query: any):Promise<Result<NodeDTO>> {
+    async getAll(query: any):Promise<Result<NodeDTO>> {
         const sortString = queryfilter.sortString(query)
         const queryObject = queryfilter.queryCleaner(query);
-        return this.repository.load(queryObject, sortString)
+        return await this.repository.load(queryObject, sortString)
     }
 
-    getById(id: string):Promise<Result<NodeDTO>> {
-        return this.repository.loadById(id)
+    async getById(id: string):Promise<Result<NodeDTO>> {
+        return await this.repository.loadById(id)
     }
 
     async create(dto: NodeDTO):Promise<Result<NodeDTO>> {
         this.dto = dto
 
-        let dtoResult: NodeDTO = new NodeDTO;
         const domainNode = Node.create(this.dto)
 
         if (domainNode.isFailure) {
             return Result.fail<NodeDTO>(Node.create(this.dto).errorValue());
         }
 
-        this.dto = this.mapper.mapFromDomain(domainNode, new NodeDTO);
+        this.dto = this.mapper.mapFromDomain(domainNode.getValue(), new NodeDTO);
+        const repositoryResponse = await this.repository.save(this.dto);
 
-        return await this.repository.save(this.dto);
+        if (repositoryResponse.isFailure){
+            return repositoryResponse
+        }
+
+        this.dto = this.mapper.mapFromMongo(repositoryResponse.getValue(), new NodeDTO)
+
+        return Result.ok<NodeDTO>(this.dto)
     }
 
-    delete(id: string):Promise<Result<NodeDTO>> {
-        return this.repository.delete(id)
+    async delete(id: string):Promise<Result<NodeDTO>> {
+        return await this.repository.delete(id)
     }
 
 }

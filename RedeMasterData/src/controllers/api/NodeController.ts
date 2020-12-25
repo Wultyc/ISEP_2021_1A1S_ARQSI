@@ -16,12 +16,9 @@ export default class NodeController {
         this.mapper = nodeMapper
     }
 
-    nodeGetAll(req: Request, res: Response) {
-        const isFailureOrSuccess: any = this.service.getAll(req.query)
-        if (isFailureOrSuccess?.isFailure && isFailureOrSuccess?.errorValue().mongoError) {
-            res.status(400).json("error saving");
-        }
-        else if (isFailureOrSuccess?.isFailure) {
+    async nodeGetAll(req: Request, res: Response) {
+        const isFailureOrSuccess: any = await this.service.getAll(req.query)
+        if (isFailureOrSuccess?.isFailure) {
             res.status(400).json(isFailureOrSuccess?.errorValue());
         }
         else {
@@ -29,13 +26,10 @@ export default class NodeController {
         }
     }
 
-    nodeGetById(req: Request, res: Response) {
-        const isFailureOrSuccess: any = this.service.getById(req.params.nodeId)
-        if (isFailureOrSuccess?.isFailure && isFailureOrSuccess?.errorValue().mongoError) {
-            res.status(400).json("error saving");
-        }
-        else if (isFailureOrSuccess?.isFailure) {
-            res.status(400).json(isFailureOrSuccess?.errorValue());
+    async nodeGetById(req: Request, res: Response) {
+        const isFailureOrSuccess: any = await this.service.getById(req.params.nodeId)
+        if (isFailureOrSuccess?.isFailure) {
+            res.status(404).json("Node not found");
         }
         else {
             res.json(isFailureOrSuccess.getValue());
@@ -45,12 +39,12 @@ export default class NodeController {
     async nodeCreate(req: Request, res: Response) {
         this.dto = this.mapper.mapFromRequest(req, new NodeDTO)
 
+        const { error } = nodesValidationSchema.validate(this.dto);
+        if (error) return res.status(400).send({ message: "some fields are missing or have invalid values", error: error })
+
         const isFailureOrSuccess: any = await this.service.create(this.dto);
 
-        if (isFailureOrSuccess?.isFailure && isFailureOrSuccess?.errorValue().mongoError) {
-            res.status(400).json("error saving");
-        }
-        else if (isFailureOrSuccess?.isFailure) {
+        if (isFailureOrSuccess?.isFailure) {
             res.status(400).json(isFailureOrSuccess?.errorValue());
         }
         else {
@@ -58,13 +52,10 @@ export default class NodeController {
         }
     }
 
-    nodeDelete(req: Request, res: Response) {
-        const isFailureOrSuccess: any = this.service.delete(req.params.nodeId)
-        
-        if (isFailureOrSuccess?.isFailure && isFailureOrSuccess?.errorValue().mongoError) {
-            res.status(400).json("error saving");
-        }
-        else if (isFailureOrSuccess?.isFailure) {
+    async nodeDelete(req: Request, res: Response) {
+        const isFailureOrSuccess: any = await this.service.delete(req.params.nodeId)
+
+        if (isFailureOrSuccess?.isFailure) {
             res.status(400).json(isFailureOrSuccess?.errorValue());
         }
         else {
