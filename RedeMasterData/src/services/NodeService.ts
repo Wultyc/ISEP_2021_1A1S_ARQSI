@@ -1,3 +1,4 @@
+import { Result } from '../core/logic/Result'
 import Node from '../domain/Node'
 import NodeDTO from '../dto/NodeDTO'
 import NodeMapper from '../mappers/NodeMapper'
@@ -28,9 +29,15 @@ export default class NodeService {
 
     create(dto: NodeDTO, callback){
         this.dto = dto
-        Node.create(this.dto)
-        console.log(this.dto)
-        this.repository.save(this.dto,callback)
+        let dtoResult: NodeDTO = new NodeDTO;
+        if (Node.create(this.dto).isFailure){
+        return Result.fail<NodeDTO>(Node.create(this.dto).errorValue());
+        }
+        else        
+        this.repository.save(this.dto, callback);
+        console.log(callback)     
+        this.mapper.mapFromDomain(dtoResult, this.dto);        
+        return Result.ok<NodeDTO>(dtoResult);
     }
 
     delete(id: string, callback){

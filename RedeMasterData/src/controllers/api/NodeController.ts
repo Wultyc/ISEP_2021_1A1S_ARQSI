@@ -1,4 +1,5 @@
 import {Request, Response} from 'express'
+import { Result } from '../../core/logic/Result'
 import NodeDTO from '../../dto/NodeDTO'
 import NodeMapper from '../../mappers/NodeMapper'
 import {nodesValidationSchema} from '../../models/joi/Nodes'
@@ -35,12 +36,13 @@ export default class NodeController{
 
     nodeCreate(req: Request, res: Response){
         this.dto = this.mapper.mapFromRequest(req, new NodeDTO)
-        this.service.create(this.dto, function (err, data){
-            if(err){
-                res.status(503).send(err)
+        const qualquer: Result<NodeDTO> | undefined = this.service.create(this.dto, function (err, data){});
+        if (qualquer?.isFailure){
+            res.status(400).json(qualquer?.errorValue());
             }
-            res.send(data)
-        })
+        else if(qualquer?.isSuccess) {
+                res.json(qualquer.getValue());
+        };    
     }
 
     nodeDelete(req: Request, res: Response){

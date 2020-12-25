@@ -49,13 +49,28 @@ export default class Node extends AggregateRoot<NodeDTO>{
 
 
     public static create(props: NodeProps, id?: UniqueEntityID):Result<Node> {
-
-
-        if(props.surrenderNode == true && props.collectionNode == false){
-            return Result.fail<Node>("A Surrender Node must always be a Collection Node.")
-        }
-
+        let err_msg: String [] = [];
+        if(props.surrenderNode == true && props.collectionNode == false || !props.latitude || !props.longitude || !props.name || !props.shortName || !props.surrenderNode || props.tempoMaxParagem){
+            if (props.surrenderNode == true && props.collectionNode == false) {
+            err_msg.push("A Surrender Node must always be a Collection Node.")
+            }
+            if (!props.latitude) {
+            err_msg.push("Insert a latitude")
+            }
+            if (!props.longitude) {
+            err_msg.push("Insert a longitude")
+            }  
+            if (!props.name) {
+            err_msg.push("Insert a name")
+            }
+            if (!props.shortName) {
+            err_msg.push("Insert a shortName")
+            }
+           return Result.fail<Node>(err_msg)
+        }    
+        else {
         const newDomainNode = new Node(props, id)
         return Result.ok<Node>(newDomainNode)
+        }
     }
 }
