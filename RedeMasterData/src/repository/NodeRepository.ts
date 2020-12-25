@@ -1,26 +1,61 @@
 import IRepository from './interface/IRepository'
 import Node from '../models/mongo/Node'
 import NodeDTO from '../dto/NodeDTO'
-import { Model } from 'mongoose';
+import { Result } from '../core/logic/Result';
 
-export default class NodeRepository implements IRepository{
+export default class NodeRepository implements IRepository {
 
-    save(dto: NodeDTO, callback):void {
+    async save(dto: NodeDTO): Promise<Result<NodeDTO>> {
+        let mongoError: any = ""
         const newNode = new Node(dto);
-        newNode.save(callback)
-        console.log(callback)
+        const repositoryResult = await newNode.save().catch((error) => {
+            mongoError = error
+        });
+
+        if (!repositoryResult) {
+            return Result.fail<any>({mongoError:mongoError.message})
+        }
+
+        return Result.ok<any>(repositoryResult)
     }
 
-    load(query: any, sort: any, callback):void {
-        Node.find(query, callback).sort(sort)
+    async load(query: any, sort: any): Promise<Result<NodeDTO>> {
+        let mongoError: any = ""
+        const repositoryResult = await Node.find(query).sort(sort).catch((error) => {
+            mongoError = error
+        });
+
+        if (!repositoryResult) {
+            return Result.fail<any>({mongoError:mongoError.message})
+        }
+
+        return Result.ok<any>(repositoryResult)
     }
 
-    loadById(id: string, callback):void {
-        Node.findOne({ "_id": id }, callback);
+    async loadById(id: string): Promise<Result<NodeDTO>> {
+        let mongoError: any = ""
+        const repositoryResult = await Node.findOne({ "_id": id }).catch((error) => {
+            mongoError = error
+        });
+
+        if (!repositoryResult) {
+            return Result.fail<any>({mongoError:mongoError.message})
+        }
+
+        return Result.ok<any>(repositoryResult)
     }
 
-    delete(id: string, callback):void {
-        Node.findByIdAndRemove(id, callback)
+    async delete(id: string): Promise<Result<NodeDTO>> {
+        let mongoError: any = ""
+        const repositoryResult = await Node.findByIdAndRemove(id).catch((error) => {
+            mongoError = error
+        });
+
+        if (!repositoryResult) {
+            return Result.fail<any>({mongoError:mongoError.message})
+        }
+
+        return Result.ok<any>(repositoryResult)
     }
 
 }

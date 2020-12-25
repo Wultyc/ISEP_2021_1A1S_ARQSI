@@ -17,31 +17,33 @@ export default class NodeService {
         this.repository = nodeRepository
     }
 
-    getAll(query: any, callback){
+    getAll(query: any):Promise<Result<NodeDTO>> {
         const sortString = queryfilter.sortString(query)
         const queryObject = queryfilter.queryCleaner(query);
-        this.repository.load(queryObject,sortString, callback)
+        return this.repository.load(queryObject, sortString)
     }
 
-    getById(id: string, callback){
-        this.repository.loadById(id, callback)
+    getById(id: string):Promise<Result<NodeDTO>> {
+        return this.repository.loadById(id)
     }
 
-    create(dto: NodeDTO, callback){
+    async create(dto: NodeDTO):Promise<Result<NodeDTO>> {
         this.dto = dto
+
         let dtoResult: NodeDTO = new NodeDTO;
-        if (Node.create(this.dto).isFailure){
-        return Result.fail<NodeDTO>(Node.create(this.dto).errorValue());
+        const domainNode = Node.create(this.dto)
+
+        if (domainNode.isFailure) {
+            return Result.fail<NodeDTO>(Node.create(this.dto).errorValue());
         }
-        else        
-        this.repository.save(this.dto, callback);
-        console.log(callback)     
-        this.mapper.mapFromDomain(dtoResult, this.dto);        
-        return Result.ok<NodeDTO>(dtoResult);
+
+        this.dto = this.mapper.mapFromDomain(domainNode, new NodeDTO);
+
+        return await this.repository.save(this.dto);
     }
 
-    delete(id: string, callback){
-        this.repository.delete(id, callback)
+    delete(id: string):Promise<Result<NodeDTO>> {
+        return this.repository.delete(id)
     }
 
 }
