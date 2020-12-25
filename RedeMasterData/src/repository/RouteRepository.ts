@@ -1,21 +1,21 @@
 import IRepository from './interface/IRepository'
 import Route from '../models/mongo/Route'
 import RouteDTO from '../dto/RouteDTO';
+import { Result } from '../core/logic/Result';
+import IDto from '../dto/interface/IDto';
 
 export default class RouteRepository implements IRepository{
-    save(dto: RouteDTO, callback: any): void {
+    save(dto: IDto, callback: any): Promise<Result<IDto>> {
         throw new Error('Method not implemented.');
     }
-    load(query: any, sort: any, callback: any): void {
+    load(query: any, sort: any, callback: any): Promise<Result<IDto>> {
         throw new Error('Method not implemented.');
     }
-    loadById(id: string, callback: any): void {
+    loadById(id: string, callback: any): Promise<Result<IDto>> {
         throw new Error('Method not implemented.');
     }
-    delete(id: string, callback: any): void {
+    delete(id: string, callback: any): Promise<Result<IDto>> {
         throw new Error('Method not implemented.');
     }
-
-
 
 }
