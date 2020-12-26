@@ -11,8 +11,8 @@ const router = express.Router()
 router.use('/lines',lines_router)
 router.use('/nodes',nodes_router)
 router.use('/routes',routes_router)
-router.use('/tripulantType',tripulantType_router)
-router.use('/vehicleType',vehicleType_router)
+router.use('/tripulant-types',tripulantType_router)
+router.use('/vehicle-types',vehicleType_router)
 
 router.get('/healthcheck', (req, res) => {res.send("I'm Alive")})
 

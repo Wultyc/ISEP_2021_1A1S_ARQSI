@@ -5,17 +5,56 @@ import { Result } from '../core/logic/Result'
 import IDto from '../dto/interface/IDto'
 
 export default class VehicleTypeRepository implements IRepository{
-    save(dto: IDto): Promise<Result<IDto>> {
-        throw new Error('Method not implemented.')
+    async save(dto: VehicleTypeDTO): Promise<Result<VehicleTypeDTO>> {
+        let mongoError: any = ""
+        const newNode = new VehicleType(dto);
+        const repositoryResult = await newNode.save().catch((error) => {
+            mongoError = error
+        });
+
+        if (!repositoryResult) {
+            return Result.fail<any>({error:mongoError.message})
+        }
+
+        return Result.ok<any>(repositoryResult)
     }
-    load(query: any, sort: any): Promise<Result<IDto>> {
-        throw new Error('Method not implemented.')
+
+    async load(query: any, sort: any): Promise<Result<VehicleTypeDTO>> {
+        let mongoError: any = ""
+        const repositoryResult = await VehicleType.find(query).sort(sort).catch((error) => {
+            mongoError = error
+        });
+
+        if (!repositoryResult) {
+            return Result.fail<any>({error:mongoError.message})
+        }
+
+        return Result.ok<any>(repositoryResult)
     }
-    loadById(id: string): Promise<Result<IDto>> {
-        throw new Error('Method not implemented.')
+   
+    async loadById(id: string): Promise<Result<VehicleTypeDTO>> {
+        let mongoError: any = ""
+        const repositoryResult = await VehicleType.findOne({ "_id": id }).catch((error) => {
+            mongoError = error
+        });
+
+        if (!repositoryResult) {
+            return Result.fail<any>({error:mongoError.message})
+        }
+
+        return Result.ok<any>(repositoryResult)
     }
-    delete(id: string): Promise<Result<IDto>> {
-        throw new Error('Method not implemented.')
+    async delete(id: string): Promise<Result<VehicleTypeDTO>> {
+        let mongoError: any = ""
+        const repositoryResult = await VehicleType.findByIdAndRemove(id).catch((error) => {
+            mongoError = error
+        });
+
+        if (!repositoryResult) {
+            return Result.fail<any>({error:mongoError.message})
+        }
+
+        return Result.ok<any>(repositoryResult)
     }
 
 }
