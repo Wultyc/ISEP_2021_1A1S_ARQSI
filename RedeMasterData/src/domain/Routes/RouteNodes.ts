@@ -1,8 +1,9 @@
 import { Entity } from '../../core/domain/Entity'
 import { UniqueEntityID } from '../../core/domain/UniqueEntityID'
+import {NodeId} from '../Nodes/NodeId'
 
 interface RouteProps {
-    nodeId: String,
+    nodeId: NodeId,
     distance: number,
     duration: number
 }
@@ -13,7 +14,7 @@ export default class RouteNodes extends Entity<RouteProps>{
     }
     
     get_id() {
-        return this.props.nodeId
+        return this.props.nodeId.get_value()
     }
     get_distance() {
         return this.props.distance

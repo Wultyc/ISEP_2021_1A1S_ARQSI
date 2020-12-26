@@ -4,7 +4,19 @@ import IMapper from './interface/IMapper'
 
 export default class RouteMapper implements IMapper{
     mapFromDomain(req: any, dto: RouteDTO): RouteDTO {
-        throw new Error('Method not implemented.');
+        dto.distance = req.get_distance()
+        dto.duration = req.get_duration()
+        dto.isReinforcementRoute = req.get_isReinforcementRoute()
+        dto.isEmptyRoute = req.get_isEmptyRoute()
+        dto.routeNodes = req.get_routeNodes().map((node) => {
+            console.log(node)
+            return {
+                nodeId: node.nodeId.get_value(),
+                distance: node.distance,
+                duration: node.duration
+            }
+        })
+        return dto;
     }
     mapFromRequest(req: any, dto: RouteDTO): RouteDTO {
         dto.id = req.body.id
@@ -21,5 +33,19 @@ export default class RouteMapper implements IMapper{
         })
         return dto;
     }
-    mapFromMongo: (arg0: NodeDTO, arg1: NodeDTO) => NodeDTO
+    mapFromMongo(req: any, dto: RouteDTO): RouteDTO {
+        dto.id = req.id
+        dto.distance = req.distance
+        dto.duration = req.duration
+        dto.isReinforcementRoute = req.isReinforcementRoute
+        dto.isEmptyRoute = req.isEmptyRoute
+        dto.routeNodes = req.routeNodes.map((node) => {
+            return {
+                nodeId: node.nodeId,
+                distance: node.distance || 0,
+                duration: node.duration || 0
+            }
+        })
+        return dto;
+    }
 } 

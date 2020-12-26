@@ -2,20 +2,60 @@ import IRepository from './interface/IRepository'
 import Route from '../models/mongo/Route'
 import RouteDTO from '../dto/RouteDTO';
 import { Result } from '../core/logic/Result';
-import IDto from '../dto/interface/IDto';
 
 export default class RouteRepository implements IRepository{
-    save(dto: IDto): Promise<Result<IDto>> {
-        throw new Error('Method not implemented.');
+    async save(dto: RouteDTO): Promise<Result<RouteDTO>> {
+        let mongoError: any = ""
+        const newRoute = new Route(dto);
+        const repositoryResult = await newRoute.save().catch((error) => {
+            mongoError = error
+        });
+
+        if (!repositoryResult) {
+            return Result.fail<any>({error:mongoError.message})
+        }
+
+        return Result.ok<any>(repositoryResult)
     }
-    load(query: any, sort: any): Promise<Result<IDto>> {
-        throw new Error('Method not implemented.');
+
+    async load(query: any, sort: any): Promise<Result<RouteDTO>> {
+        let mongoError: any = ""
+        const repositoryResult = await Route.find(query).sort(sort).catch((error) => {
+            mongoError = error
+        });
+
+        if (!repositoryResult) {
+            return Result.fail<any>({error:mongoError.message})
+        }
+
+        return Result.ok<any>(repositoryResult)
     }
-    loadById(id: string): Promise<Result<IDto>> {
-        throw new Error('Method not implemented.');
+
+    async loadById(id: string): Promise<Result<RouteDTO>> {
+        let mongoError: any = ""
+        const repositoryResult = await Route.findOne({ "_id": id }).catch((error) => {
+            mongoError = error
+        });
+
+        if (!repositoryResult) {
+            return Result.fail<any>({error:mongoError.message})
+        }
+
+        return Result.ok<any>(repositoryResult)
     }
-    delete(id: string): Promise<Result<IDto>> {
-        throw new Error('Method not implemented.');
+
+    async delete(id: string): Promise<Result<RouteDTO>> {
+        let mongoError: any = ""
+        const repositoryResult = await Route.findByIdAndRemove(id).catch((error) => {
+            mongoError = error
+        });
+
+        if (!repositoryResult) {
+            return Result.fail<any>({error:mongoError.message})
+        }
+
+        return Result.ok<any>(repositoryResult)
     }
+
 
 }
