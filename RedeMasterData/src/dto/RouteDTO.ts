@@ -1,10 +1,16 @@
 import IDto from './interface/IDto'
 
+interface INodeData {​​
+    nodeId: String
+    distance: number
+    duration: number
+}
+​​
 export default class RouteDTO implements IDto{
-    id = null
-    distance = null
-    duration = null
-    isReinforcementRoute = null
-    isEmptyRoute = null
-    routeNodes = null
+    id: String
+    distance: number
+    duration: number
+    isReinforcementRoute: boolean
+    isEmptyRoute: boolean
+    routeNodes: INodeData[]
 }
