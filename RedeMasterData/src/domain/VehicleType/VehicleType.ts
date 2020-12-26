@@ -43,10 +43,10 @@ export default class VehicleType extends AggregateRoot<VehicleTypeDTO>{
     public static create(props: VehicleTypeProps, id?: UniqueEntityID): Result<VehicleType> {
         let err_msg: String[] = [];
 
-        // if (props.surrenderNode == true && props.collectionNode == false) {
-        //     err_msg.push("A Surrender Node must always be a Collection Node.")
-        //     return Result.fail<Node>(err_msg)
-        // }
+        if (props.fuelType != 'Gasoleo' && props.fuelType != 'GPL' && props.fuelType != 'Hidrogenio' && props.fuelType != 'Eletrico' && props.fuelType != 'Gasolina') {
+            err_msg.push(`Fuel type ${props.fuelType} is not allowed`)
+            return Result.fail<VehicleType>(err_msg)
+        }
 
         // to do: validate fuel types
 
