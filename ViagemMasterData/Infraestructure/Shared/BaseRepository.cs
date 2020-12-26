@@ -28,12 +28,12 @@ namespace DDDSample1.Infrastructure.Shared
         {
             //return await this._context.Categories.FindAsync(id);
             return await this._objs
-                .Where(x => id.Equals(x.Id)).FirstOrDefaultAsync();
+                .Where(x => id.Equals(x.Code)).FirstOrDefaultAsync();
         }
         public async Task<List<TEntity>> GetByIdsAsync(List<TEntityId> ids)
         {
             return await this._objs
-                .Where(x => ids.Contains(x.Id)).ToListAsync();
+                .Where(x => ids.Contains(x.Code)).ToListAsync();
         }
         public async Task<TEntity> AddAsync(TEntity obj)
         {

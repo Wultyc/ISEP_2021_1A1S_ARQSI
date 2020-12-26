@@ -19,7 +19,7 @@ namespace DDDSample1.Domain.Categories
         {
             var list = await this._repo.GetAllAsync();
             
-            List<CategoryDto> listDto = list.ConvertAll<CategoryDto>(cat => new CategoryDto{Id = cat.Id.AsGuid(), Description = cat.Description});
+            List<CategoryDto> listDto = list.ConvertAll<CategoryDto>(cat => new CategoryDto{Id = cat.Code.AsGuid(), Description = cat.Description});
 
             return listDto;
         }
@@ -31,7 +31,7 @@ namespace DDDSample1.Domain.Categories
             if(cat == null)
                 return null;
 
-            return new CategoryDto{Id = cat.Id.AsGuid(), Description = cat.Description};
+            return new CategoryDto{Id = cat.Code.AsGuid(), Description = cat.Description};
         }
 
         public async Task<CategoryDto> AddAsync(CreatingCategoryDto dto)
@@ -42,7 +42,7 @@ namespace DDDSample1.Domain.Categories
 
             await this._unitOfWork.CommitAsync();
 
-            return new CategoryDto { Id = category.Id.AsGuid(), Description = category.Description };
+            return new CategoryDto { Id = category.Code.AsGuid(), Description = category.Description };
         }
 
         public async Task<CategoryDto> UpdateAsync(CategoryDto dto)
@@ -57,7 +57,7 @@ namespace DDDSample1.Domain.Categories
             
             await this._unitOfWork.CommitAsync();
 
-            return new CategoryDto { Id = category.Id.AsGuid(), Description = category.Description };
+            return new CategoryDto { Id = category.Code.AsGuid(), Description = category.Description };
         }
 
         public async Task<CategoryDto> InactivateAsync(CategoryId id)
@@ -72,7 +72,7 @@ namespace DDDSample1.Domain.Categories
             
             await this._unitOfWork.CommitAsync();
 
-            return new CategoryDto { Id = category.Id.AsGuid(), Description = category.Description };
+            return new CategoryDto { Id = category.Code.AsGuid(), Description = category.Description };
         }
 
          public async Task<CategoryDto> DeleteAsync(CategoryId id)
@@ -88,7 +88,7 @@ namespace DDDSample1.Domain.Categories
             this._repo.Remove(category);
             await this._unitOfWork.CommitAsync();
 
-            return new CategoryDto { Id = category.Id.AsGuid(), Description = category.Description };
+            return new CategoryDto { Id = category.Code.AsGuid(), Description = category.Description };
         }
     }
 }

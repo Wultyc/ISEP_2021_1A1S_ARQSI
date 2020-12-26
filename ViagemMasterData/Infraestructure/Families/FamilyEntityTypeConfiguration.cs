@@ -9,7 +9,7 @@ namespace DDDSample1.Infrastructure.Categories
         public void Configure(EntityTypeBuilder<Family> builder)
         {
             //builder.ToTable("Families", SchemaNames.DDDSample1);
-            builder.HasKey(b => b.Id);
+            builder.HasKey(b => b.Code);
             //builder.Property<bool>("_active").HasColumnName("Active");
         }
     }

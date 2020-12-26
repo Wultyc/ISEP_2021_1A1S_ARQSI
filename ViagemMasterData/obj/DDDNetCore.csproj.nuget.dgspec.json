@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jorge\\isep-workspace\\ARQSI\\dddnetcore\\DDDNetCore.csproj": {}
+    "D:\\Desktop\\ARQSI2021\\ViagemMasterData\\DDDNetCore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jorge\\isep-workspace\\ARQSI\\dddnetcore\\DDDNetCore.csproj": {
+    "D:\\Desktop\\ARQSI2021\\ViagemMasterData\\DDDNetCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jorge\\isep-workspace\\ARQSI\\dddnetcore\\DDDNetCore.csproj",
+        "projectUniqueName": "D:\\Desktop\\ARQSI2021\\ViagemMasterData\\DDDNetCore.csproj",
         "projectName": "DDDNetCore",
-        "projectPath": "C:\\Users\\Jorge\\isep-workspace\\ARQSI\\dddnetcore\\DDDNetCore.csproj",
-        "packagesPath": "C:\\Users\\Jorge\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jorge\\isep-workspace\\ARQSI\\dddnetcore\\obj\\",
+        "projectPath": "D:\\Desktop\\ARQSI2021\\ViagemMasterData\\DDDNetCore.csproj",
+        "packagesPath": "C:\\Users\\nunom\\.nuget\\packages\\",
+        "outputPath": "D:\\Desktop\\ARQSI2021\\ViagemMasterData\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Jorge\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nunom\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -51,7 +51,7 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.0, )"
+              "version": "[5.0.1, )"
             },
             "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
@@ -60,6 +60,10 @@
             "Microsoft.EntityFrameworkCore.Relational.Design": {
               "target": "Package",
               "version": "[1.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.1, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

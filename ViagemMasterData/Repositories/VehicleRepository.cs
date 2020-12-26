@@ -1,11 +1,19 @@
-﻿using System;
+﻿using DDDNetCore.Domain.Vehicles;
+using DDDNetCore.Repositories.IRepositories;
+using DDDSample1.Infrastructure;
+using DDDSample1.Infrastructure.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace DDDNetCore.Repositories
 {
-    public class VehicleRepository
+    public class VehicleRepository : BaseRepository<Vehicle, VehicleId>, IVehicleRepository
     {
+        public VehicleRepository(DDDSample1DbContext context) : base(context.Vehicles)
+        {
+
+        }
     }
 }

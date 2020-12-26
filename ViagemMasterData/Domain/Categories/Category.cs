@@ -17,7 +17,7 @@ namespace DDDSample1.Domain.Categories
 
         public Category(string description)
         {
-            this.Id = new CategoryId(Guid.NewGuid());
+            this.Code = new CategoryId(Guid.NewGuid());
             this.Description = description;
             this.Active = true;
         }

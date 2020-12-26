@@ -11,7 +11,7 @@ namespace DDDSample1.Infrastructure.Categories
             // cf. https://www.entityframeworktutorial.net/efcore/fluent-api-in-entity-framework-core.aspx
             
             //builder.ToTable("Categories", SchemaNames.DDDSample1);
-            builder.HasKey(b => b.Id);
+            builder.HasKey(b => b.Code);
             //builder.Property<bool>("_active").HasColumnName("Active");
         }
     }

@@ -7,7 +7,7 @@ namespace DDDNetCore.DTOs
 {
     public class VehicleDto
     {
-        public int Code { get; set; }
+        public string Code { get; set; }
         public string Matricula { get; set; }
         public string Vin { get; set; }
         public DateTime DataEntradaServico { get; set; }

@@ -1,7 +1,8 @@
 ﻿CREATE TABLE [dbo].[Vehicles]
 (
-	[Code] INT NOT NULL PRIMARY KEY,
-	[Matricula] Varchar(10) NOT NULL,
-	[Vim] Varchar(17) NOT NULL,
-	[DataEntradaServico] DateTime NOT NULL
+ [Code] Varchar NOT NULL PRIMARY KEY,
+ [LicencePlate] Varchar(10) NOT NULL,
+ [VehicleType] Varchar(Max) NOT NULL,
+ [Vin] Varchar(17) NOT NULL,
+ [StartDate] DateTime NOT NULL
 )

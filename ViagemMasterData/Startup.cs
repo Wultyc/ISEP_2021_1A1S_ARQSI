@@ -14,6 +14,9 @@ using DDDSample1.Domain.Shared;
 using DDDSample1.Domain.Categories;
 using DDDSample1.Domain.Products;
 using DDDSample1.Domain.Families;
+using DDDNetCore.Repositories;
+using DDDNetCore.Repositories.IRepositories;
+using DDDNetCore.Services;
 
 namespace DDDSample1
 {
@@ -29,8 +32,9 @@ namespace DDDSample1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DDDSample1DbContext>(opt =>
-                opt.UseInMemoryDatabase("DDDSample1DB")
+            var connection = Configuration.GetConnectionString("ViagemMD");
+            services.AddDbContext<DDDSample1DbContext>(options =>
+                options.UseSqlServer(connection)
                 .ReplaceService<IValueConverterSelector, StronglyEntityIdValueConverterSelector>());
 
             ConfigureMyServices(services);
@@ -76,6 +80,9 @@ namespace DDDSample1
 
             services.AddTransient<IFamilyRepository,FamilyRepository>();
             services.AddTransient<FamilyService>();
+
+            services.AddTransient<IVehicleRepository,VehicleRepository>();
+            services.AddTransient<VehicleService>();
         }
     }
 }

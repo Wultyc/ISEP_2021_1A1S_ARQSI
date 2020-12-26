@@ -16,7 +16,7 @@ namespace DDDSample1.Domain.Families
 
         public Family(string code, string description)
         {
-            this.Id = new FamilyId(code);
+            this.Code = new FamilyId(code);
             this.Description = description;
             this.Active = true;
         }

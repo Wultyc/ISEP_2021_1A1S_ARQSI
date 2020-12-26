@@ -19,7 +19,7 @@ namespace DDDSample1.Domain.Families
         {
             var list = await this._repo.GetAllAsync();
             
-            List<FamilyDto> listDto = list.ConvertAll<FamilyDto>(fam => new FamilyDto{Id = fam.Id.AsString(), Description = fam.Description});
+            List<FamilyDto> listDto = list.ConvertAll<FamilyDto>(fam => new FamilyDto{Id = fam.Code.AsString(), Description = fam.Description});
 
             return listDto;
         }
@@ -31,7 +31,7 @@ namespace DDDSample1.Domain.Families
             if(fam == null)
                 return null;
 
-            return new FamilyDto{Id = fam.Id.AsString(), Description = fam.Description};
+            return new FamilyDto{Id = fam.Code.AsString(), Description = fam.Description};
         }
 
         public async Task<FamilyDto> AddAsync(FamilyDto dto)
@@ -42,7 +42,7 @@ namespace DDDSample1.Domain.Families
 
             await this._unitOfWork.CommitAsync();
 
-            return new FamilyDto { Id = family.Id.AsString(), Description = family.Description };
+            return new FamilyDto { Id = family.Code.AsString(), Description = family.Description };
         }
 
         public async Task<FamilyDto> UpdateAsync(FamilyDto dto)
@@ -57,7 +57,7 @@ namespace DDDSample1.Domain.Families
             
             await this._unitOfWork.CommitAsync();
 
-            return new FamilyDto { Id = family.Id.AsString(), Description = family.Description };
+            return new FamilyDto { Id = family.Code.AsString(), Description = family.Description };
         }
 
         public async Task<FamilyDto> InactivateAsync(FamilyId id)
@@ -72,7 +72,7 @@ namespace DDDSample1.Domain.Families
             
             await this._unitOfWork.CommitAsync();
 
-            return new FamilyDto { Id = family.Id.AsString(), Description = family.Description };
+            return new FamilyDto { Id = family.Code.AsString(), Description = family.Description };
         }
 
          public async Task<FamilyDto> DeleteAsync(FamilyId id)
@@ -88,7 +88,7 @@ namespace DDDSample1.Domain.Families
             this._repo.Remove(family);
             await this._unitOfWork.CommitAsync();
 
-            return new FamilyDto { Id = family.Id.AsString(), Description = family.Description };
+            return new FamilyDto { Id = family.Code.AsString(), Description = family.Description };
         }
     }
 }

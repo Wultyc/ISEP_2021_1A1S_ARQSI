@@ -20,7 +20,7 @@ namespace DDDSample1.Domain.Products
         {
             if (catId == null)
                 throw new BusinessRuleValidationException("Every product requires a category.");
-            this.Id = new ProductId(Guid.NewGuid());
+            this.Code = new ProductId(Guid.NewGuid());
             this.Description = description;
             this.CategoryId = catId;
             this.Active = true;

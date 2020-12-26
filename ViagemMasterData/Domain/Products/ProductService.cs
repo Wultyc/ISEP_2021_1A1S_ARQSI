@@ -24,7 +24,7 @@ namespace DDDSample1.Domain.Products
             var list = await this._repo.GetAllAsync();
             
             List<ProductDto> listDto = list.ConvertAll<ProductDto>(prod => 
-                new ProductDto(prod.Id.AsGuid(),prod.Description,prod.CategoryId));
+                new ProductDto(prod.Code.AsGuid(),prod.Description,prod.CategoryId));
 
             return listDto;
         }
@@ -36,7 +36,7 @@ namespace DDDSample1.Domain.Products
             if(prod == null)
                 return null;
 
-            return new ProductDto(prod.Id.AsGuid(),prod.Description,prod.CategoryId);
+            return new ProductDto(prod.Code.AsGuid(),prod.Description,prod.CategoryId);
         }
 
         public async Task<ProductDto> AddAsync(CreatingProductDto dto)
@@ -48,7 +48,7 @@ namespace DDDSample1.Domain.Products
 
             await this._unitOfWork.CommitAsync();
 
-            return new ProductDto(product.Id.AsGuid(),product.Description,product.CategoryId);
+            return new ProductDto(product.Code.AsGuid(),product.Description,product.CategoryId);
         }
 
         public async Task<ProductDto> UpdateAsync(ProductDto dto)
@@ -65,7 +65,7 @@ namespace DDDSample1.Domain.Products
             
             await this._unitOfWork.CommitAsync();
 
-            return new ProductDto(product.Id.AsGuid(),product.Description,product.CategoryId);
+            return new ProductDto(product.Code.AsGuid(),product.Description,product.CategoryId);
         }
 
         public async Task<ProductDto> InactivateAsync(ProductId id)
@@ -79,7 +79,7 @@ namespace DDDSample1.Domain.Products
             
             await this._unitOfWork.CommitAsync();
 
-            return new ProductDto(product.Id.AsGuid(),product.Description,product.CategoryId);
+            return new ProductDto(product.Code.AsGuid(),product.Description,product.CategoryId);
         }
 
         public async Task<ProductDto> DeleteAsync(ProductId id)
@@ -95,7 +95,7 @@ namespace DDDSample1.Domain.Products
             this._repo.Remove(product);
             await this._unitOfWork.CommitAsync();
 
-            return new ProductDto(product.Id.AsGuid(),product.Description,product.CategoryId);
+            return new ProductDto(product.Code.AsGuid(),product.Description,product.CategoryId);
         }
 
         private async Task checkCategoryIdAsync(CategoryId categoryId)

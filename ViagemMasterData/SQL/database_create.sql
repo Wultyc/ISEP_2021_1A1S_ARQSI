@@ -54,7 +54,7 @@ GO
 CREATE TABLE [dbo].[Vehicles] (
     [Code]               INT          NOT NULL,
     [Matricula]          VARCHAR (10) NOT NULL,
-    [Vim]                VARCHAR (17) NOT NULL,
+    [Vin]                VARCHAR (17) NOT NULL,
     [DataEntradaServico] DATETIME     NOT NULL,
     PRIMARY KEY CLUSTERED ([Code] ASC)
 );
