@@ -1,3 +1,4 @@
+import NodeDTO from '../dto/NodeDTO';
 import RouteDTO from '../dto/RouteDTO';
 import IMapper from './interface/IMapper'
 
@@ -20,4 +21,5 @@ export default class RouteMapper implements IMapper{
         })
         return dto;
     }
+    mapFromMongo: (arg0: NodeDTO, arg1: NodeDTO) => NodeDTO
 } 

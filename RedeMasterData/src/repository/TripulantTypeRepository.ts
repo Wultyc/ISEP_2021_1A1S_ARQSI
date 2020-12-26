@@ -5,17 +5,51 @@ import { Result } from '../core/logic/Result'
 import IDto from '../dto/interface/IDto'
 
 export default class TripulantTypeRepository implements IRepository{
-    save(dto: IDto): Promise<Result<IDto>> {
-        throw new Error('Method not implemented.')
+    async save(dto: TripulantTypeDTO): Promise<Result<TripulantTypeDTO>> {
+        let mongoError: any = ""
+        const newTripulantType = new TripulantType(dto);
+        const repositoryResult = await newTripulantType.save().catch((error) => {
+            mongoError = error
+        });
+
+        if (!repositoryResult) {
+            return Result.fail<any>({error:mongoError.message})
+        }
+
+        return Result.ok<any>(repositoryResult)
     }
-    load(query: any, sort: any): Promise<Result<IDto>> {
-        throw new Error('Method not implemented.')
-    }
-    loadById(id: string): Promise<Result<IDto>> {
-        throw new Error('Method not implemented.')
-    }
-    delete(id: string): Promise<Result<IDto>> {
-        throw new Error('Method not implemented.')
+    async load(query: any, sort: any): Promise<Result<TripulantTypeDTO>> {
+        let mongoError: any = ""
+        const repositoryResult = await TripulantType.find(query).sort(sort).catch((error) => {
+            mongoError = error
+        });
+
+        if (!repositoryResult) {
+            return Result.fail<any>({error:mongoError.message})
+        }
+
+        return Result.ok<any>(repositoryResult)    
     }
 
+    async loadById(id: String): Promise<Result<TripulantTypeDTO>> {
+        let mongoError: any = ""
+        const repositoryResult = await TripulantType.findOne({ "_id": id }).catch((error) => {
+            mongoError = error
+        });
+        if (!repositoryResult) {
+            return Result.fail<any>({error:mongoError.message});
+        }
+        return Result.ok<any>(repositoryResult);
+    }
+    async delete(id: String): Promise<Result<TripulantTypeDTO>> {
+        let mongoError: any = ""
+        const repositoryResult = await TripulantType.findByIdAndRemove(id).catch((error) => {
+            mongoError = error
+        });
+
+        if (!repositoryResult) {
+            return Result.fail<any>({error:mongoError.message})
+        }
+        return Result.ok<any>(repositoryResult)
+    }
 }

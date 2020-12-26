@@ -1,3 +1,4 @@
+import NodeDTO from '../dto/NodeDTO';
 import VehicleTypeDTO from '../dto/VehicleTypeDTO';
 import IMapper from './interface/IMapper'
 
@@ -15,4 +16,5 @@ export default class VehicleTypeMapper implements IMapper {
         dto.fuelType = req.body.fuelType
         return dto;
     }
+    mapFromMongo: (arg0: NodeDTO, arg1: NodeDTO) => NodeDTO
 } 

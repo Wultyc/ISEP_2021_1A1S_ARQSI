@@ -1,5 +1,5 @@
 import { Result } from '../core/logic/Result'
-import Node from '../domain/Node'
+import Node from '../domain/Nodes/Node'
 import NodeDTO from '../dto/NodeDTO'
 import NodeMapper from '../mappers/NodeMapper'
 import NodeRepository from '../repository/NodeRepository'
@@ -24,7 +24,12 @@ export default class NodeService {
     }
 
     async getById(id: string):Promise<Result<NodeDTO>> {
-        return await this.repository.loadById(id)
+        const repositoryResponse = await this.repository.loadById(id)
+        if (repositoryResponse.isFailure){
+            return repositoryResponse
+        }
+        this.dto = this.mapper.mapFromMongo(repositoryResponse.getValue(), new NodeDTO)
+        return Result.ok<NodeDTO>(this.dto)        
     }
 
     async create(dto: NodeDTO):Promise<Result<NodeDTO>> {

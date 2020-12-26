@@ -1,11 +1,11 @@
-import { AggregateRoot } from '../core/domain/AggregateRoot'
-import { UniqueEntityID } from '../core/domain/UniqueEntityID'
-import { Result } from '../core/logic/Result'
+import { AggregateRoot } from '../../core/domain/AggregateRoot'
+import { UniqueEntityID } from '../../core/domain/UniqueEntityID'
+import { Result } from '../../core/logic/Result'
 import Latitute from './Latitute'
 import Longitude from './Longitude'
 import TempoMaxParagem from './TempoMaxParagem'
-import NodeDTO from '../dto/NodeDTO'
-import { Guard } from '../core/logic/Guard'
+import NodeDTO from '../../dto/NodeDTO'
+import { Guard } from '../../core/logic/Guard'
 
 interface NodeProps {
     id: String,

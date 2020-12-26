@@ -18,4 +18,7 @@ export default class LineMapper implements IMapper{
 
         return dto
     }
+    mapFromMongo(req: any, dto: LineDTO): LineDTO {
+        throw "not implemented";        
+    }
 } 
