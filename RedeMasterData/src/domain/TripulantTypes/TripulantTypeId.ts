@@ -1,5 +1,14 @@
-import {UniqueEntityID} from '../../core/domain/UniqueEntityID'
+import { ValueObject } from '../../core/domain/ValueObject';
 
-export class TripulantTypeId extends UniqueEntityID{
-    
+interface props {
+    value: string
+}
+export class TripulantTypeId extends ValueObject<props>{
+    get_value(): string {
+        return this.props.value;
+    }
+
+    constructor(props: props) {
+        super(props);
+    }
 }

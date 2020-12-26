@@ -5,17 +5,16 @@ import TripulantTypeDTO from '../../dto/TripulantTypeDTO'
 import { Guard } from '../../core/logic/Guard'
 
 interface TripulantTypeProps {
-    id: String,
     description: String
 }
 
-export default class TripulantType extends AggregateRoot<TripulantTypeDTO>{
+export default class TripulantType extends AggregateRoot<TripulantTypeProps>{
     private constructor(props: TripulantTypeProps, id?: UniqueEntityID) {
         super(props, id);
     }
 
     get_id() {
-        return this.props.id
+        return this.id
     }
     get_description() {
         return this.props.description

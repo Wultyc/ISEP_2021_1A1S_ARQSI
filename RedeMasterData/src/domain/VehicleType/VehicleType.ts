@@ -5,7 +5,6 @@ import VehicleTypeDTO from '../../dto/VehicleTypeDTO'
 import { Guard } from '../../core/logic/Guard'
 
 interface VehicleTypeProps {
-    id: String,
     description: String,
     autonomy: Number,
     costPerKilometer: Number,
@@ -14,12 +13,12 @@ interface VehicleTypeProps {
     fuelType: String
 }
 
-export default class VehicleType extends AggregateRoot<VehicleTypeDTO>{
+export default class VehicleType extends AggregateRoot<VehicleTypeProps>{
     private constructor(props: VehicleTypeProps, id?: UniqueEntityID) {
         super(props, id);
     }
-    get_id() {
-        return this.props.id
+    get_id () {
+        return this.id;
     }
     get_description() {
         return this.props.description

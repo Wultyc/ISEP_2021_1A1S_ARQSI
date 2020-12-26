@@ -18,7 +18,9 @@ export default class Route extends AggregateRoot<RouteProps>{
     private constructor(props: RouteProps, id?: UniqueEntityID) {
         super(props, id);
     }
-
+    get_id() {
+        return this.id
+    }
     get_distance() {
         return this.props.distance
     }
