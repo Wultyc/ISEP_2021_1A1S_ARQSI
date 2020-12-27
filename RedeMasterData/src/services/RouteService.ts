@@ -18,7 +18,7 @@ export default class RouteService {
     }
 
 
-    async getAll(query: any):Promise<Result<RouteDTO>> {
+    async getAll(query: any):Promise<Result<RouteDTO[]>> {
         const sortString = queryfilter.sortString(query)
         const queryObject = queryfilter.queryCleaner(query);
         return await this.repository.load(queryObject, sortString)

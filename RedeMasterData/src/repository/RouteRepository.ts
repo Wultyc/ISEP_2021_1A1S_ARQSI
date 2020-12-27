@@ -18,7 +18,7 @@ export default class RouteRepository implements IRepository{
         return Result.ok<any>(repositoryResult)
     }
 
-    async load(query: any, sort: any): Promise<Result<RouteDTO>> {
+    async load(query: any, sort: any): Promise<Result<RouteDTO[]>> {
         let mongoError: any = ""
         const repositoryResult = await Route.find(query).sort(sort).catch((error) => {
             mongoError = error
