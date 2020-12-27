@@ -8,6 +8,8 @@ import { TripulantTypeId } from '../TripulantTypes/TripulantTypeId'
 import { VehicleTypeId } from '../VehicleType/VehicleTypeId'
 import LineDTO from '../../dto/LineDTO'
 import { RouteId } from '../Routes/RouteId'
+import RouteDTO from '../../dto/RouteDTO'
+import LinePatchDTO from '../../dto/LinePatchDTO'
 
 interface LineProps {
     code: String,
@@ -51,39 +53,114 @@ export default class Line extends AggregateRoot<LineProps>{
         return this.props.linePaths
     }
 
-    public static create(props: LineDTO, id?: UniqueEntityID): Result<Line> {
-        let err_msg: String[] = [];
-        var tripTypes: TripulantTypeId[] = [];
-        // if (props.surrenderNode == true && props.collectionNode == false) {
-        //     err_msg.push("A Surrender Node must always be a Collection Node.")
-        //     return Result.fail<Node>(err_msg)
-        // }
+    public static create(props: LineDTO, routeList: Result<RouteDTO[]>, id?: UniqueEntityID): Result<Line> {
+        let failedNodesValidation: boolean = false;
 
-        // const guardedProps = [
-        //     { argument: props.name, argumentName: 'name' },
-        //     { argument: props.shortName, argumentName: 'shortName' },
-        //     { argument: props.longitude, argumentName: 'longitude' },
-        //     { argument: props.latitude, argumentName: 'latitude' },
-        //     { argument: props.collectionNode, argumentName: 'collectionNode' },
-        //     { argument: props.surrenderNode, argumentName: 'surrenderNode' }
-        // ];
+        if (routeList.isFailure) {
+            return Result.fail<Line>("Cannot retrieve routes to validate line")
+        }
 
-        // const guardResult = Guard.againstNullOrUndefinedBulk(guardedProps);
+        let guardedProps = [
+            { argument: props.code, argumentName: 'name' },
+            { argument: props.name, argumentName: 'name' },
+            { argument: props.color, argumentName: 'shortName' },
+            { argument: props.beginNode, argumentName: 'longitude' },
+            { argument: props.finalNode, argumentName: 'latitude' }
+        ]
 
-        // if (!guardResult.succeeded) {
-        //     return Result.fail<Node>(guardResult.message)
-        // }
-        const domainNode: LineProps = {
+        const tmpArray = props.lineRoutes.map(rn => [
+            { argument: rn.routeId, argumentName: 'routeId' },
+            { argument: rn.orientation, argumentName: 'orientation' }
+        ]
+        )
+
+        tmpArray.map(p => guardedProps = guardedProps.concat(p))
+
+        const guardResult = Guard.againstNullOrUndefinedBulk(guardedProps);
+
+        if (!guardResult.succeeded) {
+            return Result.fail<Line>(guardResult.message)
+        }
+
+        props.lineRoutes.forEach((lr, index, array) => {
+            let startNode: String | undefined
+            let finalNode: String | undefined
+            let route: RouteDTO | undefined
+
+            route = routeList.getValue().find(route => route.id == lr.routeId)
+
+            if (lr.orientation == "Go") {
+                startNode = route?.routeNodes[0].nodeId
+                finalNode = route?.routeNodes[route.routeNodes.length - 1].nodeId
+            } else {
+                startNode = route?.routeNodes[route.routeNodes.length - 1].nodeId
+                finalNode = route?.routeNodes[0].nodeId
+            }
+
+            if (startNode?.toString() != props.beginNode.toString() || finalNode?.toString() != props.finalNode.toString()) {
+                failedNodesValidation = true
+            }
+        })
+
+        if (failedNodesValidation) {
+            return Result.fail<Line>("Route begin node or final node are not the same of line")
+        }
+
+        const domainLine: LineProps = {
             code: props.code,
             name: props.name,
             color: props.color,
-            beginNode: new NodeId( {value: props.beginNode as string}),
-            finalNode: new NodeId( {value: props.finalNode as string}),
-            tripulantType: props.tripulantType.map( tp => { return new TripulantTypeId({value: tp as string})}),
-            vehicleType: props.vehicleType.map( tp => { return new VehicleTypeId({value: tp as string})}),
-            linePaths: props.lineRoutes?.map( rn => {return {routeId:new RouteId({value: rn.routeId as string}), orientation:rn.orientation as string}} )
+            beginNode: new NodeId({ value: props.beginNode as string }),
+            finalNode: new NodeId({ value: props.finalNode as string }),
+            tripulantType: props.tripulantType.map(tp => { return new TripulantTypeId({ value: tp as string }) }),
+            vehicleType: props.vehicleType.map(tp => { return new VehicleTypeId({ value: tp as string }) }),
+            linePaths: props.lineRoutes?.map(rn => { return { routeId: new RouteId({ value: rn.routeId as string }), orientation: rn.orientation as string } })
         }
-        const newDomainNode = new Line(domainNode, id)
-        return Result.ok<Line>(newDomainNode)
+        const newDomainLine = new Line(domainLine, id)
+        return Result.ok<Line>(newDomainLine)
+    }
+
+    public static update(line: Result<LineDTO>, newPath: LinePatchDTO, routeList: Result<RouteDTO[]>, id?: UniqueEntityID): Result<Line> {
+        if (line.isFailure) {
+            return Result.fail<Line>("Cannot retrieve line")
+        }
+        else if (routeList.isFailure) {
+            return Result.fail<Line>("Cannot retrieve routes to validate line")
+        }
+
+        const props: LineDTO = line.getValue()
+
+        let startNode: String | undefined
+        let finalNode: String | undefined
+        let route: RouteDTO | undefined
+
+        route = routeList.getValue().find(route => route.id == newPath.routeId)
+
+        if (newPath.orientation == "Go") {
+            startNode = route?.routeNodes[0].nodeId
+            finalNode = route?.routeNodes[route.routeNodes.length - 1].nodeId
+        } else {
+            startNode = route?.routeNodes[route.routeNodes.length - 1].nodeId
+            finalNode = route?.routeNodes[0].nodeId
+        }
+
+        if (startNode?.toString() != props.beginNode.toString() || finalNode?.toString() != props.finalNode.toString()) {
+            return Result.fail<Line>("Route begin node or final node are not the same of line")
+        }
+
+        props.lineRoutes.push(newPath)
+
+        const domainLine: LineProps = {
+            code: props.code,
+            name: props.name,
+            color: props.color,
+            beginNode: new NodeId({ value: props.beginNode as string }),
+            finalNode: new NodeId({ value: props.finalNode as string }),
+            tripulantType: props.tripulantType.map(tp => { return new TripulantTypeId({ value: tp as string }) }),
+            vehicleType: props.vehicleType.map(tp => { return new VehicleTypeId({ value: tp as string }) }),
+            linePaths: props.lineRoutes?.map(rn => { return { routeId: new RouteId({ value: rn.routeId as string }), orientation: rn.orientation as string } })
+        }
+        const newDomainLine = new Line(domainLine, id)
+        return Result.ok<Line>(newDomainLine)
     }
 }

@@ -1,9 +1,24 @@
 import LineDTO from '../dto/LineDTO';
+import LinePatchDTO from '../dto/LinePatchDTO';
 import IMapper from './interface/IMapper'
 
 export default class LineMapper implements IMapper{
-    mapFromDomain(req: any, dto: LineDTO): LineDTO {
-        throw new Error('Method not implemented.');
+    mapFromDomain(domain: any, dto: LineDTO): LineDTO {
+        dto.code = domain.get_code(),
+        dto.name = domain.get_name(),
+        dto.color = domain.get_color(),
+        dto.beginNode = domain.get_beginNode(),
+        dto.finalNode = domain.get_finalNode(),
+        dto.lineRoutes = domain.get_linePaths().map((route) => {
+            return {
+                routeId: route.routeId.get_value(),
+                orientation: route.orientation
+            }
+        }),
+        dto.tripulantType = domain.get_tripulantType(),
+        dto.vehicleType = domain.get_vehicleType()
+
+        return dto
     }
     mapFromRequest(req: any, dto: LineDTO): LineDTO {
         dto.id = req.body.id,
@@ -18,7 +33,23 @@ export default class LineMapper implements IMapper{
 
         return dto
     }
-    mapFromMongo(req: any, dto: LineDTO): LineDTO {
-        throw "not implemented";        
+    mapFromPatchRequest(req: any, dto: LinePatchDTO): LinePatchDTO {
+        dto.routeId = req.body.routeId,
+        dto.orientation = req.body.orientation
+
+        return dto
+    }
+    mapFromMongo(mongo: any, dto: LineDTO): LineDTO {
+        dto.id = mongo._id,
+        dto.code = mongo.code,
+        dto.name = mongo.name,
+        dto.color = mongo.color,
+        dto.beginNode = mongo.beginNode,
+        dto.finalNode = mongo.finalNode,
+        dto.lineRoutes = mongo.lineRoutes,
+        dto.tripulantType = mongo.tripulantType,
+        dto.vehicleType = mongo.vehicleType
+
+        return dto       
     }
 } 

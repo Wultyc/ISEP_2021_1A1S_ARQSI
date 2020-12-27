@@ -40,31 +40,45 @@ export default class Route extends AggregateRoot<RouteProps>{
     public static create(props: RouteDTO, id?: UniqueEntityID): Result<Route> {
         let err_msg: String[] = [];
 
-        // if (props.surrenderNode == true && props.collectionNode == false) {
-        //     err_msg.push("A Surrender Node must always be a Collection Node.")
-        //     return Result.fail<Node>(err_msg)
-        // }
+        if (props.routeNodes.length < 2) {
+            return Result.fail<Route>('Route must have at least 2 nodes.');
+        }
 
-        // const guardedProps = [
-        //     { argument: props.name, argumentName: 'name' },
-        //     { argument: props.shortName, argumentName: 'shortName' },
-        //     { argument: props.longitude, argumentName: 'longitude' },
-        //     { argument: props.latitude, argumentName: 'latitude' },
-        //     { argument: props.collectionNode, argumentName: 'collectionNode' },
-        //     { argument: props.surrenderNode, argumentName: 'surrenderNode' }
-        // ];
+        if (props.routeNodes.length == 2 && props.routeNodes[0].nodeId == props.routeNodes[1].nodeId) {
+            return Result.fail<Route>('When route only has 2 node, they must be different');
+        }
 
-        // const guardResult = Guard.againstNullOrUndefinedBulk(guardedProps);
+        let guardedProps = [
+            { argument: 0, argumentName: 'dummy' },
+            { argument: "dummy", argumentName: 'dummy' },
+            { argument: props.isReinforcementRoute, argumentName: 'isReinforcementRoute' },
+            { argument: props.isEmptyRoute, argumentName: 'isEmptyRoute' }
+        ]
 
-        // if (!guardResult.succeeded) {
-        //     return Result.fail<Node>(guardResult.message)
-        // }
+        const tmpArray = props.routeNodes.map(rn => [
+            { argument: rn.nodeId as string, argumentName: 'nodeId' },
+            { argument: rn.distance, argumentName: 'distance' },
+            { argument: rn.duration, argumentName: 'duration' }
+        ]
+        )
+
+        tmpArray.map(p => guardedProps = guardedProps.concat(p))
+
+        const guardResult = Guard.againstNullOrUndefinedBulk(guardedProps);
+
+        if (!guardResult.succeeded) {
+            return Result.fail<Route>(guardResult.message)
+        }
+
+        props.duration = props.routeNodes.reduce((acc, val) => acc + val.duration, 0)
+        props.distance = props.routeNodes.reduce((acc, val) => acc + val.distance, 0)
+
         const domainNode: RouteProps = {
             distance: props.distance,
             duration: props.duration,
             isReinforcementRoute: props.isReinforcementRoute,
             isEmptyRoute: props.isEmptyRoute,
-            routeNodes: props.routeNodes.map( rn => {return {nodeId:new NodeId({value:rn.nodeId as string}), distance:rn.distance, duration:rn.duration}} )
+            routeNodes: props.routeNodes.map(rn => { return { nodeId: new NodeId({ value: rn.nodeId as string }), distance: rn.distance, duration: rn.duration } })
         }
         const newDomainNode = new Route(domainNode, id)
         return Result.ok<Route>(newDomainNode)

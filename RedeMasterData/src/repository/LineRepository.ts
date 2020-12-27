@@ -2,20 +2,72 @@ import IRepository from './interface/IRepository'
 import Line from '../models/mongo/Line'
 import LineDTO from '../dto/LineDTO'
 import { Result } from '../core/logic/Result'
-import IDto from '../dto/interface/IDto'
 
 export default class LineRepository implements IRepository{
-    save(dto: IDto): Promise<Result<IDto>> {
-        throw new Error('Method not implemented.')
+    async save(dto: LineDTO): Promise<Result<LineDTO>> {
+        let mongoError: any = ""
+        const newLine = new Line(dto);
+        const repositoryResult = await newLine.save().catch((error) => {
+            mongoError = error
+        });
+
+        if (!repositoryResult) {
+            return Result.fail<any>({error:mongoError.message})
+        }
+
+        return Result.ok<any>(repositoryResult)
     }
-    load(query: any, sort: any): Promise<Result<IDto>> {
-        throw new Error('Method not implemented.')
+    async update(id:string, dto: LineDTO): Promise<Result<LineDTO>> {
+        let mongoError: any = ""
+        const repositoryResult = await Line.findByIdAndUpdate({ "_id": id },dto).catch((error) => {
+            mongoError = error
+        });
+
+        if (!repositoryResult) {
+            return Result.fail<any>({error:mongoError.message})
+        }
+
+        return Result.ok<any>(repositoryResult)
     }
-    loadById(id: string): Promise<Result<IDto>> {
-        throw new Error('Method not implemented.')
+
+    async load(query: any, sort: any): Promise<Result<LineDTO>> {
+        let mongoError: any = ""
+        const repositoryResult = await Line.find(query).sort(sort).catch((error) => {
+            mongoError = error
+        });
+
+        if (!repositoryResult) {
+            return Result.fail<any>({error:mongoError.message})
+        }
+
+        return Result.ok<any>(repositoryResult)
     }
-    delete(id: string): Promise<Result<IDto>> {
-        throw new Error('Method not implemented.')
+
+    async loadById(id: string): Promise<Result<LineDTO>> {
+        let mongoError: any = ""
+        const repositoryResult = await Line.findOne({ "_id": id }).catch((error) => {
+            mongoError = error
+        });
+
+        if (!repositoryResult) {
+            return Result.fail<any>({error:mongoError.message})
+        }
+
+        return Result.ok<any>(repositoryResult)
     }
+
+    async delete(id: string): Promise<Result<LineDTO>> {
+        let mongoError: any = ""
+        const repositoryResult = await Line.findByIdAndRemove(id).catch((error) => {
+            mongoError = error
+        });
+
+        if (!repositoryResult) {
+            return Result.fail<any>({error:mongoError.message})
+        }
+
+        return Result.ok<any>(repositoryResult)
+    }
+
 
 }

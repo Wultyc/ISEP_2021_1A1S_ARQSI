@@ -10,7 +10,7 @@ const LinesValidationSchema = Joi.object({
     lineRoutes: Joi.array().items({
         routeId: Joi.string().required(),
         orientation: Joi.string().required()
-    }).required(),
+    }),
     tripulantType: Joi.array().items(Joi.string()).required(),
     vehicleType: Joi.array().items(Joi.string()).required()
 })
