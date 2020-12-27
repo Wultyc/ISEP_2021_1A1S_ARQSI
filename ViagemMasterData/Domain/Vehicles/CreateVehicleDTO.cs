@@ -12,12 +12,12 @@ namespace ViagemMasterData.Domain.Vehicles
         public string VehicleType { get; set; }
         public DateTime StartDate { get; set; }
 
-        public CreateVehicleDTO(string LicencePlate, string Vin, string VehicleType)
+        public CreateVehicleDTO(string LicencePlate, string Vin, string VehicleType, DateTime StartDate)
         {
             this.LicencePlate = LicencePlate;
             this.Vin = Vin;
             this.VehicleType = VehicleType;
-            this.StartDate = DateTime.Now;
+            this.StartDate = StartDate;
         }
     }
 }
