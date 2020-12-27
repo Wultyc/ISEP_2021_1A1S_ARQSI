@@ -71,9 +71,9 @@ namespace ViagemMasterData.Controllers
             }
         }
 
-        // PUT: api/produto/5
-        [HttpPut("{id}")]
-        public IActionResult PutVehicle([FromRoute] string id, [FromBody] VehicleDTO vehicle)
+        // PUT: api/vehicle
+        [HttpPut]
+        public IActionResult PutVehicle([FromBody] VehicleDTO vehicle)
         {
             try
             {
@@ -90,9 +90,9 @@ namespace ViagemMasterData.Controllers
             }
         }
 
-        // DELETE: api/produto/5
+        // DELETE: api/vehicle/5
         [HttpDelete("{id}")]
-        public IActionResult DeleteProduto([FromRoute] string id)
+        public IActionResult DeleteVehicle([FromRoute] string id)
         {
             try
             {

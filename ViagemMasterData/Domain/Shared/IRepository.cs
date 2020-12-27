@@ -12,10 +12,10 @@ namespace ViagemMasterData.Domain.Shared
 
         void Update(T obj);
 
-        void Delete(dynamic id);
-
         T Select(dynamic id);
 
         IList<T> Select();
+
+        void Delete(dynamic id);
     }
 }
