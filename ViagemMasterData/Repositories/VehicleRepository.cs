@@ -1,4 +1,5 @@
 ﻿using DDDNetCore.Domain.Vehicles;
+using DDDNetCore.Models;
 using DDDNetCore.Repositories.IRepositories;
 using DDDSample1.Infrastructure;
 using DDDSample1.Infrastructure.Shared;

@@ -28,7 +28,7 @@ namespace DDDSample1.Infrastructure.Shared
         {
             //return await this._context.Categories.FindAsync(id);
             return await this._objs
-                .Where(x => id.Equals(x.Code)).FirstOrDefaultAsync();
+                .Where(x => id.Value.Equals(x.Code)).FirstOrDefaultAsync();
         }
         public async Task<List<TEntity>> GetByIdsAsync(List<TEntityId> ids)
         {

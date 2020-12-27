@@ -6,21 +6,23 @@ namespace DDDNetCore.Domain.Vehicles
     public class Vehicle : Entity<VehicleId>, IAggregateRoot
     {
         public string Code { get; set; }
-        public string Matricula { get; set; }
+        public string LicencePlate { get; set; }
         public string Vin { get; set; }
-        public DateTime DataEntradaServico { get; set; }
+        public string VehicleType { get; set; }
+        public DateTime StartDate { get; set; }
 
         private Vehicle()
         {  
         }
 
-        public Vehicle(string matricula, string vin, DateTime dataEntradaServico)
+        public Vehicle(string licencePlate, string vin, string vehicleType, DateTime startDate)
         {
 
             this.Code = new VehicleId(Guid.NewGuid()).ToString();
-            this.Matricula = Matricula;
+            this.LicencePlate = licencePlate;
             this.Vin = vin;
-            this.DataEntradaServico = dataEntradaServico;
+            this.VehicleType = vehicleType;
+            this.StartDate = startDate;
         }
 
         //public void ChangeDescription(string description)

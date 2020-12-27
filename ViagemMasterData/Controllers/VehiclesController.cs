@@ -1,4 +1,5 @@
-﻿using DDDNetCore.DTOs;
+﻿using DDDNetCore.Domain.Vehicles;
+using DDDNetCore.DTOs;
 using DDDNetCore.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,6 +25,22 @@ namespace DDDNetCore.Controllers
         public async Task<ActionResult<IEnumerable<VehicleDto>>> GetAll()
         {
             return await _service.GetAllAsync();
+        }
+
+        // GET: api/Vehicles/5
+        [Route("api/Vehicles/{Id}")]
+        [HttpGet("{id}")]
+        public async Task<ActionResult<VehicleDto>> GetById(string id)
+        {
+            Console.WriteLine(id);
+            var prod = await _service.GetByIdAsync(new VehicleId(id));
+
+            if (prod == null)
+            {
+                return NotFound();
+            }
+
+            return prod;
         }
     }
 }

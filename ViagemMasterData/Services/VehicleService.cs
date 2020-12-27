@@ -25,7 +25,7 @@ namespace DDDNetCore.Services
         {
             var list = await this._repo.GetAllAsync();
 
-            List<VehicleDto> listDto = list.ConvertAll<VehicleDto>(ve => new VehicleDto{ Code = ve.Code, DataEntradaServico = ve.DataEntradaServico, Matricula = ve.Matricula, Vin = ve.Vin });
+            List<VehicleDto> listDto = list.ConvertAll<VehicleDto>(ve => new VehicleDto{ Code = ve.Code, StartDate = ve.StartDate, LicencePlate = ve.LicencePlate, Vin = ve.Vin });
        
             return listDto; 
 
@@ -35,15 +35,12 @@ namespace DDDNetCore.Services
 
         public async Task<VehicleDto> GetByIdAsync(VehicleId id)
         {
-            //var cat = await this._repo.GetByIdAsync(id);
+            var ve = await this._repo.GetByIdAsync(id);
 
-            //if (cat == null)
-            //    return null;
+            if (ve == null)
+                return null;
 
-            //return new VehicleDto { Id = cat.Id.AsGuid(), Description = cat.Description };
-
-            // Not developed yet.
-            throw new NotImplementedException();
+            return new VehicleDto { Code = ve.Code, StartDate = ve.StartDate, LicencePlate = ve.LicencePlate, Vin = ve.Vin };
         }
 
         public async Task<VehicleDto> AddAsync(CreatingVehicleDto dto)

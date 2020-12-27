@@ -8,9 +8,10 @@ namespace DDDNetCore.Models
     public class Vehicles
     {
         //matricula, VIN, pelo seu tipo e data de entrada ao serviço
-        public int Code { get; set; }
-        public string Matricula { get; set; }
+        public string Code { get; set; }
+        public string LicencePlate { get; set; }
         public string Vin { get; set; }
-        public DateTime DataEntradaServico { get; set; }
+        public string VehicleType { get; set; }
+        public DateTime StartDate { get; set; }
     }
 }

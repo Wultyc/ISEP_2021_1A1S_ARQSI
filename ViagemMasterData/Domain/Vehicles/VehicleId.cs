@@ -25,7 +25,7 @@ namespace DDDNetCore.Domain.Vehicles
 
         protected override object createFromString(string text)
         {
-            throw new NotImplementedException();
+            return text;
         }
     }
 }
