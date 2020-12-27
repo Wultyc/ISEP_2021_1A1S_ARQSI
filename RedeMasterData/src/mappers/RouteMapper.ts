@@ -9,7 +9,6 @@ export default class RouteMapper implements IMapper{
         dto.isReinforcementRoute = req.get_isReinforcementRoute()
         dto.isEmptyRoute = req.get_isEmptyRoute()
         dto.routeNodes = req.get_routeNodes().map((node) => {
-            console.log(node)
             return {
                 nodeId: node.nodeId.get_value(),
                 distance: node.distance,

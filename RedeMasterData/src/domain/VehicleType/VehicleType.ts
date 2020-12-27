@@ -64,7 +64,7 @@ export default class VehicleType extends AggregateRoot<VehicleTypeProps>{
             return Result.fail<VehicleType>(guardResult.message)
         }
 
-        const newDomainNode = new VehicleType(props, id)
-        return Result.ok<VehicleType>(newDomainNode)
+        const newDomainVehicleType = new VehicleType(props, id)
+        return Result.ok<VehicleType>(newDomainVehicleType)
     }
 }
