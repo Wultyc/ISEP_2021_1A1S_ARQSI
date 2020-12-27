@@ -1,49 +1,46 @@
-using System;
+using ViagemMasterData.Domain.Shared;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using DDDSample1.Domain.Shared;
+using System.Text;
 
-namespace DDDSample1.Infrastructure.Shared
+namespace ViagemMasterData.Infrastructure.Shared
 {
-    public class BaseRepository<TEntity,TEntityId> : IRepository<TEntity,TEntityId>
-    where TEntity : Entity<TEntityId>
-    where TEntityId : EntityId
+    public class BaseRepository<T> : IRepository<T> where T : class
     {
-        private readonly DbSet<TEntity> _objs;
-        
-        public BaseRepository(DbSet<TEntity> objs)
+
+        private readonly BaseContext _context;
+
+        public BaseRepository(BaseContext context)
         {
-            this._objs = objs ?? throw new ArgumentNullException(nameof(objs));
-        
+            _context = context;
         }
 
-        public async Task<List<TEntity>> GetAllAsync()
+        public void Insert(T obj)
         {
-            return await this._objs.ToListAsync();
-        }
-        
-        public async Task<TEntity> GetByIdAsync(TEntityId id)
-        {
-            //return await this._context.Categories.FindAsync(id);
-            return await this._objs
-                .Where(x => id.Value.Equals(x.Code)).FirstOrDefaultAsync();
-        }
-        public async Task<List<TEntity>> GetByIdsAsync(List<TEntityId> ids)
-        {
-            return await this._objs
-                .Where(x => ids.Contains(x.Code)).ToListAsync();
-        }
-        public async Task<TEntity> AddAsync(TEntity obj)
-        {
-            var ret = await this._objs.AddAsync(obj);
-            return ret.Entity;
+            _context.Add(obj);
+            _context.SaveChanges();
         }
 
-        public void Remove(TEntity obj)
+        public void Update(T obj)
         {
-            this._objs.Remove(obj);
+            _context.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.SaveChanges();
+        }
+
+        public void Delete(string id)
+        {
+            _context.Set<T>().Remove(Select(id));
+            _context.SaveChanges();
+        }
+
+        public IList<T> Select()
+        {
+            return _context.Set<T>().ToList();
+        }
+
+        public T Select(dynamic id)
+        {
+            return _context.Set<T>().Find(id);
         }
     }
 }

@@ -1,6 +1,6 @@
 using System;
 
-namespace DDDSample1.Domain.Shared
+namespace ViagemMasterData.Domain.Shared
 {
     /// <summary>
     /// Base class for entities.

@@ -1,11 +1,11 @@
-﻿using DDDSample1.Domain.Shared;
+﻿using ViagemMasterData.Domain.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 
-namespace DDDNetCore.Domain.Vehicles
+namespace ViagemMasterData.Domain.Vehicles
 {
     public class VehicleId : EntityId
     {
@@ -18,14 +18,20 @@ namespace DDDNetCore.Domain.Vehicles
         {
         }
 
-        public override string AsString()
-        {
-            throw new NotImplementedException();
-        }
-
         protected override object createFromString(string text)
         {
-            return text;
+            return new Guid(text);
+        }
+
+        public override String AsString()
+        {
+            Guid obj = (Guid) base.ObjValue;
+            return obj.ToString();
+        }
+
+        public Guid AsGuid()
+        {
+            return (Guid)base.ObjValue;
         }
     }
 }

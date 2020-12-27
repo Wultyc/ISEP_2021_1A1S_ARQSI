@@ -5,20 +5,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using DDDSample1.Infrastructure;
-using DDDSample1.Infrastructure.Categories;
-using DDDSample1.Infrastructure.Products;
-using DDDSample1.Infrastructure.Families;
-using DDDSample1.Infrastructure.Shared;
-using DDDSample1.Domain.Shared;
-using DDDSample1.Domain.Categories;
-using DDDSample1.Domain.Products;
-using DDDSample1.Domain.Families;
-using DDDNetCore.Repositories;
-using DDDNetCore.Repositories.IRepositories;
-using DDDNetCore.Services;
+using ViagemMasterData.Infrastructure;
+using ViagemMasterData.Infrastructure.Shared;
+using ViagemMasterData.Domain.Shared;
+using ViagemMasterData.Domain.Vehicles;
+using ViagemMasterData.Services.Shared;
 
-namespace DDDSample1
+namespace ViagemMasterData
 {
     public class Startup
     {
@@ -33,13 +26,13 @@ namespace DDDSample1
         public void ConfigureServices(IServiceCollection services)
         {
             var connection = Configuration.GetConnectionString("ViagemMD");
-            services.AddDbContext<DDDSample1DbContext>(options =>
+            services.AddDbContext<BaseContext>(options =>
                 options.UseSqlServer(connection)
                 .ReplaceService<IValueConverterSelector, StronglyEntityIdValueConverterSelector>());
 
             ConfigureMyServices(services);
-            
 
+            services.AddMvc();
             services.AddControllers().AddNewtonsoftJson();
         }
 
@@ -70,19 +63,9 @@ namespace DDDSample1
 
         public void ConfigureMyServices(IServiceCollection services)
         {
-            services.AddTransient<IUnitOfWork,UnitOfWork>();
-
-            services.AddTransient<ICategoryRepository,CategoryRepository>();
-            services.AddTransient<CategoryService>();
-
-            services.AddTransient<IProductRepository,ProductRepository>();
-            services.AddTransient<ProductService>();
-
-            services.AddTransient<IFamilyRepository,FamilyRepository>();
-            services.AddTransient<FamilyService>();
-
-            services.AddTransient<IVehicleRepository,VehicleRepository>();
             services.AddTransient<VehicleService>();
+
+            services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
         }
     }
 }

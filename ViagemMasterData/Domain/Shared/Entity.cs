@@ -1,4 +1,4 @@
-namespace DDDSample1.Domain.Shared
+namespace ViagemMasterData.Domain.Shared
 {
     /// <summary>
     /// Base class for entities.
@@ -6,6 +6,6 @@ namespace DDDSample1.Domain.Shared
     public abstract class Entity<TEntityId>
     where TEntityId: EntityId
     {
-         public TEntityId Code { get;  protected set; }
+         public TEntityId Id { get;  protected set; }
     }
 }

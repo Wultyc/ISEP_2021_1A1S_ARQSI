@@ -1,14 +1,21 @@
+using ViagemMasterData.Domain.Vehicles;
+using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace DDDSample1.Domain.Shared
+namespace ViagemMasterData.Domain.Shared
 {
-    public interface IRepository<TEntity, TEntityId>
+    public interface IRepository<T> where T : class
     {
-        Task<List<TEntity>> GetAllAsync();
-        Task<TEntity> GetByIdAsync(TEntityId id);
-        Task<List<TEntity>> GetByIdsAsync(List<TEntityId> ids);
-        Task<TEntity> AddAsync(TEntity obj);
-        void Remove(TEntity obj);
+
+        void Insert(T obj);
+
+        void Update(T obj);
+
+        void Delete(string id);
+
+        T Select(dynamic id);
+
+        IList<T> Select();
     }
 }
