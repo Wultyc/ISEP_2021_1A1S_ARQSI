@@ -32,7 +32,26 @@ export default class LineRepository implements IRepository{
 
     async load(query: any, sort: any): Promise<Result<LineDTO>> {
         let mongoError: any = ""
-        const repositoryResult = await Line.find(query).sort(sort).catch((error) => {
+        const repositoryResult = await Line.find(query).sort(sort)
+        .populate({
+            path: 'lineRoutes',
+            populate: [
+                {
+                    path: 'routeId',
+                    populate: [
+                        {
+                            path: 'routeNodes',
+                            populate: [
+                                {
+                                    path: 'nodeId'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+        }).populate('beginNode').populate('finalNode')
+        .catch((error) => {
             mongoError = error
         });
 
@@ -45,7 +64,26 @@ export default class LineRepository implements IRepository{
 
     async loadById(id: string): Promise<Result<LineDTO>> {
         let mongoError: any = ""
-        const repositoryResult = await Line.findOne({ "_id": id }).catch((error) => {
+        const repositoryResult = await Line.findOne({ "_id": id })
+        .populate({
+            path: 'lineRoutes',
+            populate: [
+                {
+                    path: 'routeId',
+                    populate: [
+                        {
+                            path: 'routeNodes',
+                            populate: [
+                                {
+                                    path: 'nodeId'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+        }).populate('beginNode').populate('finalNode')
+        .catch((error) => {
             mongoError = error
         });
 

@@ -20,9 +20,12 @@ export default class RouteRepository implements IRepository{
 
     async load(query: any, sort: any): Promise<Result<RouteDTO[]>> {
         let mongoError: any = ""
-        const repositoryResult = await Route.find(query).sort(sort).catch((error) => {
-            mongoError = error
-        });
+        const repositoryResult = await Route.find(query)
+                                            .sort(sort)
+                                            .populate('routeNodes.nodeId')
+                                            .catch((error) => {
+                                                mongoError = error
+                                            });
 
         if (!repositoryResult) {
             return Result.fail<any>({error:mongoError.message})
@@ -33,9 +36,11 @@ export default class RouteRepository implements IRepository{
 
     async loadById(id: string): Promise<Result<RouteDTO>> {
         let mongoError: any = ""
-        const repositoryResult = await Route.findOne({ "_id": id }).catch((error) => {
-            mongoError = error
-        });
+        const repositoryResult = await Route.findOne({ "_id": id })
+                                            .populate('routeNodes.nodeId')
+                                            .catch((error) => {
+                                                mongoError = error
+                                            });
 
         if (!repositoryResult) {
             return Result.fail<any>({error:mongoError.message})
