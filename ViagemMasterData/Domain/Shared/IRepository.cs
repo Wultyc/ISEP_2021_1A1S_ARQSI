@@ -12,7 +12,7 @@ namespace ViagemMasterData.Domain.Shared
 
         void Update(T obj);
 
-        void Delete(string id);
+        void Delete(dynamic id);
 
         T Select(dynamic id);
 

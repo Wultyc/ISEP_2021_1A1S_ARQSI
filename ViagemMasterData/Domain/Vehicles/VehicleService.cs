@@ -45,7 +45,7 @@ using System.Collections.Generic;
             if (id.Length == 0)
                 throw new ArgumentException("The id can't be zero.");
 
-            _repository.Delete(id);
+            _repository.Delete(new VehicleId(id));
         }
 
         public IList<VehicleDTO> Get()

@@ -27,12 +27,6 @@ namespace ViagemMasterData.Infrastructure.Shared
             _context.SaveChanges();
         }
 
-        public void Delete(string id)
-        {
-            _context.Set<T>().Remove(Select(id));
-            _context.SaveChanges();
-        }
-
         public IList<T> Select()
         {
             return _context.Set<T>().ToList();
@@ -41,6 +35,12 @@ namespace ViagemMasterData.Infrastructure.Shared
         public T Select(dynamic id)
         {
             return _context.Set<T>().Find(id);
+        }
+
+        public void Delete(dynamic id)
+        {
+            _context.Set<T>().Remove(Select(id));
+            _context.SaveChanges();
         }
     }
 }
