@@ -28,7 +28,7 @@ namespace ViagemMasterData.Domain.Vehicles
                 .NotEmpty().WithMessage("Is necessary to inform the vin.")
                 .NotNull().WithMessage("Is necessary to inform the vin.");
 
-            RuleFor(c => c.VehicleType)
+            RuleFor(c => c.VehicleTypeId)
                 .NotEmpty().WithMessage("Is necessary to inform the vehicle type.")
                 .NotNull().WithMessage("Is necessary to inform the vehicle type.");
 

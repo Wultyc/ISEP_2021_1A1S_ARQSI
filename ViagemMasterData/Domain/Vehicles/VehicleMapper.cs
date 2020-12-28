@@ -10,18 +10,18 @@ namespace ViagemMasterData.Domain.Vehicles
         public VehicleDTO GetVehicleDTOForVehicle(Vehicle vehicle)
         {
             return new VehicleDTO(vehicle.Id.Value.ToString().ToUpper(),
-                vehicle.LicencePlate, vehicle.Vin, vehicle.VehicleType, vehicle.StartDate);
+                vehicle.LicencePlate, vehicle.Vin, vehicle.VehicleTypeId, vehicle.StartDate);
         }
 
         public Vehicle GetVehicleForVehicleDTO(VehicleDTO vehicleDTO)
         {
-            return new Vehicle(vehicleDTO.Code, vehicleDTO.LicencePlate, vehicleDTO.Vin, vehicleDTO.VehicleType, vehicleDTO.StartDate);
+            return new Vehicle(vehicleDTO.Code, vehicleDTO.LicencePlate, vehicleDTO.Vin, vehicleDTO.VehicleTypeId, vehicleDTO.StartDate);
         }
 
         public VehicleDTO GetVehicleDTOForCreateVehicleDTO(CreateVehicleDTO createVehicleDTO)
         {
             return new VehicleDTO(null,
-                createVehicleDTO.LicencePlate, createVehicleDTO.Vin, createVehicleDTO.VehicleType, createVehicleDTO.StartDate);
+                createVehicleDTO.LicencePlate, createVehicleDTO.Vin, createVehicleDTO.VehicleTypeId, createVehicleDTO.StartDate);
         }
     }
 }

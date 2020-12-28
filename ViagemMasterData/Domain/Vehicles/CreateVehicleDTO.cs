@@ -10,15 +10,15 @@ namespace ViagemMasterData.Domain.Vehicles
     {
         public string LicencePlate { get; set; }
         public string Vin { get; set; }
-        public string VehicleType { get; set; }
+        public string VehicleTypeId { get; set; }
         public DateTime StartDate { get; set; }
 
         [JsonConstructor]
-        public CreateVehicleDTO(string LicencePlate, string Vin, string VehicleType, DateTime StartDate)
+        public CreateVehicleDTO(string LicencePlate, string Vin, string VehicleTypeId, DateTime StartDate)
         {
             this.LicencePlate = LicencePlate;
             this.Vin = Vin;
-            this.VehicleType = VehicleType;
+            this.VehicleTypeId = VehicleTypeId;
             this.StartDate = StartDate;
         }
     }
