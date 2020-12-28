@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ViagemMasterData.Domain.Vehicles;
 
-namespace ViagemMasterData.Mappers
+namespace ViagemMasterData.Infrastructure.DBContext
 {
-    public class VehicleMap : IEntityTypeConfiguration<Vehicle>
+    public class VehicleDBContext : IEntityTypeConfiguration<Vehicle>
     {
         public void Configure(EntityTypeBuilder<Vehicle> builder)
         {

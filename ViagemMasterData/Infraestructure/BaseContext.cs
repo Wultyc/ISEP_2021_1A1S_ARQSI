@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ViagemMasterData.Domain.Vehicles;
-using ViagemMasterData.Mappers;
+using ViagemMasterData.Infrastructure.DBContext;
 
 namespace ViagemMasterData.Infrastructure
 {
@@ -18,7 +18,7 @@ namespace ViagemMasterData.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Vehicle>(new VehicleMap().Configure);
+            modelBuilder.Entity<Vehicle>(new VehicleDBContext().Configure);
         }
     }
 }
