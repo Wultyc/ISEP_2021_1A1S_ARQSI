@@ -8,7 +8,7 @@ using System.Collections.Generic;
  {   
     public class VehicleService
     {
-        private readonly VehicleMapper vehicleMapper;
+        private readonly VehicleMapper vehicleMapper = new VehicleMapper();
         private readonly IRepository<Vehicle> _repository;
 
         public VehicleService(IRepository<Vehicle> repository)

@@ -5,6 +5,8 @@ namespace ViagemMasterData.Domain.Vehicles
     public class VehicleMapper
     {
 
+        public VehicleMapper() { }
+
         public VehicleDTO GetVehicleDTOForVehicle(Vehicle vehicle)
         {
             return new VehicleDTO(vehicle.Id.Value.ToString().ToUpper(),
