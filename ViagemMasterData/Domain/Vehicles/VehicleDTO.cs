@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ViagemMasterData.Domain.Vehicles
 {
@@ -24,27 +21,5 @@ namespace ViagemMasterData.Domain.Vehicles
             this.StartDate = StartDate;
         }
 
-        public VehicleDTO(CreateVehicleDTO createVehicleDTO)
-        {
-            this.Code = null;
-            this.LicencePlate = createVehicleDTO.LicencePlate;
-            this.Vin = createVehicleDTO.Vin;
-            this.VehicleType = createVehicleDTO.VehicleType;
-            this.StartDate = createVehicleDTO.StartDate;
-        }
-
-        public VehicleDTO(Vehicle vehicle)
-        {
-            this.Code = vehicle.Id.Value.ToString().ToUpper();
-            this.LicencePlate = vehicle.LicencePlate;
-            this.Vin = vehicle.Vin;
-            this.VehicleType = vehicle.VehicleType;
-            this.StartDate = vehicle.StartDate;
-        }
-
-        public Vehicle ToVehicle()
-        {
-            return new Vehicle(this.Code, this.LicencePlate, this.Vin, this.VehicleType, this.StartDate);
-        }
     }
 }

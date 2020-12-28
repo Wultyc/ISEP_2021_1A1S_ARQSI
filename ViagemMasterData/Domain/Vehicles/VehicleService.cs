@@ -8,7 +8,7 @@ using System.Collections.Generic;
  {   
     public class VehicleService
     {
-
+        private readonly VehicleMapper vehicleMapper;
         private readonly IRepository<Vehicle> _repository;
 
         public VehicleService(IRepository<Vehicle> repository)
@@ -19,14 +19,14 @@ using System.Collections.Generic;
         public VehicleDTO Post(CreateVehicleDTO createVehicleDTO)
         {
 
-            VehicleDTO vehicleDTO = new VehicleDTO(createVehicleDTO);
+            VehicleDTO vehicleDTO = vehicleMapper.GetVehicleDTOForCreateVehicleDTO(createVehicleDTO);
             vehicleDTO.Code = Guid.NewGuid().ToString().ToUpper();
 
             Validate(vehicleDTO);
 
             // TODO: Validate Vehicle Type
 
-            _repository.Insert(vehicleDTO.ToVehicle());
+            _repository.Insert(vehicleMapper.GetVehicleForVehicleDTO(vehicleDTO));
             return vehicleDTO;
         }
 
@@ -36,7 +36,7 @@ using System.Collections.Generic;
 
             // TODO: Validate Vehicle Type
 
-            _repository.Update(vehicleDTO.ToVehicle());
+            _repository.Update(vehicleMapper.GetVehicleForVehicleDTO(vehicleDTO));
             return vehicleDTO;
         }
 
@@ -55,7 +55,7 @@ using System.Collections.Generic;
 
             foreach (Vehicle vehicle in vehicleList)
             {
-                vehicleDTOList.Add(new VehicleDTO(vehicle));
+                vehicleDTOList.Add(vehicleMapper.GetVehicleDTOForVehicle(vehicle));
             }
 
             return vehicleDTOList;
@@ -66,7 +66,9 @@ using System.Collections.Generic;
             if (id.Length == 0)
                 throw new ArgumentException("The id can't be zero.");
 
-            return new VehicleDTO(_repository.Select(new VehicleId(id)));
+            Vehicle vehicle = _repository.Select(new VehicleId(id));
+
+            return vehicleMapper.GetVehicleDTOForVehicle(vehicle);
         }
 
         private static void Validate(VehicleDTO vehicleDTO)
