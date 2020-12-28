@@ -2,6 +2,7 @@
 using ViagemMasterData.Domain.Shared;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace ViagemMasterData.Controllers
 {
@@ -53,36 +54,36 @@ namespace ViagemMasterData.Controllers
 
         // POST: api/vehicle
         [HttpPost]
-        public IActionResult PostVehicle([FromBody] CreateVehicleDTO createVehicle)
+        public async Task<IActionResult> PostVehicle([FromBody] CreateVehicleDTO createVehicle)
         {
-            // TODO
-            // String vehicleType = _vehicleTypeService.Get(vehicle.VehicleType);
-            String vehicleType = "to do";
-
-            if (vehicleType != null)
+            try
             {
-
-                VehicleDTO vehicle = _vehicleService.Post(createVehicle);
+                VehicleDTO vehicle = await _vehicleService.PostAsync(createVehicle);
                 return CreatedAtAction(nameof(GetVehicle), new { code = vehicle.Code }, vehicle);
+
             }
-            else
+            catch (BusinessRuleValidationException ex)
             {
-                return new BadRequestObjectResult("Vehicle Type not found.");
+                return new BadRequestObjectResult(ex.Message);
             }
         }
 
         // PUT: api/vehicle
         [HttpPut]
-        public IActionResult PutVehicle([FromBody] VehicleDTO vehicle)
+        public async Task<IActionResult> PutVehicle([FromBody] VehicleDTO vehicle)
         {
             try
             {
-                _vehicleService.Put(vehicle);
+                await _vehicleService.Put(vehicle);
                 return Ok(new ObjectResult(vehicle));
             }
             catch (ArgumentNullException ex)
             {
                 return NotFound(ex);
+            }
+            catch (BusinessRuleValidationException ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
             }
             catch (Exception ex)
             {

@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "+1rp+NUb750j6gD0IexiNz9uLF9dR1nM+Ms9z7c4KGdY/HJ+tGrWYsq5wZgNhT32HOiYTvu+DwBqdtTPTLj1vQ==",
+  "dgSpecHash": "uLNP7EFOMZSWmfp9mARsQ1PRvfHGn8VaTxKiF7grrIlQO0WbwogE5/oet5h6fUfXywQcKVQFRamPN1QuuoK2UQ==",
   "success": true,
   "projectFilePath": "D:\\MSIC\\1Ano\\1Semestre\\ARQSI\\Trabalho\\Programa\\arqsi_2021\\ViagemMasterData\\ViagemMasterData.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\danie\\.nuget\\packages\\fluentvalidation\\9.3.0\\fluentvalidation.9.3.0.nupkg.sha512",
+    "C:\\Users\\danie\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.7\\microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",
     "C:\\Users\\danie\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\5.0.0\\microsoft.aspnetcore.jsonpatch.5.0.0.nupkg.sha512",
     "C:\\Users\\danie\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\5.0.0\\microsoft.aspnetcore.mvc.newtonsoftjson.5.0.0.nupkg.sha512",
     "C:\\Users\\danie\\.nuget\\packages\\microsoft.aspnetcore.razor.design\\2.2.0\\microsoft.aspnetcore.razor.design.2.2.0.nupkg.sha512",

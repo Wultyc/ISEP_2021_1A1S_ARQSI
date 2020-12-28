@@ -1,14 +1,16 @@
-using ViagemMasterData.Infrastructure.Shared;
+using ViagemMasterData.Infraestructure;
 using ViagemMasterData.Domain.Shared;
 using System;
 using FluentValidation;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
  namespace ViagemMasterData.Domain.Vehicles
  {   
     public class VehicleService
     {
         private readonly VehicleMapper vehicleMapper = new VehicleMapper();
+        private readonly HttpRequests request = new HttpRequests();
         private readonly IRepository<Vehicle> _repository;
 
         public VehicleService(IRepository<Vehicle> repository)
@@ -16,7 +18,7 @@ using System.Collections.Generic;
             _repository = repository;
         }
 
-        public VehicleDTO Post(CreateVehicleDTO createVehicleDTO)
+        public async Task<VehicleDTO> PostAsync(CreateVehicleDTO createVehicleDTO)
         {
 
             VehicleDTO vehicleDTO = vehicleMapper.GetVehicleDTOForCreateVehicleDTO(createVehicleDTO);
@@ -24,17 +26,23 @@ using System.Collections.Generic;
 
             Validate(vehicleDTO);
 
-            // TODO: Validate Vehicle Type
+            bool validateVehicleType = await request.GetEntityForIdAsync("vehicle-types", vehicleDTO.VehicleType);
+
+            if (!validateVehicleType)
+                throw new BusinessRuleValidationException("Vehicle-Type not found!");
 
             _repository.Insert(vehicleMapper.GetVehicleForVehicleDTO(vehicleDTO));
             return vehicleDTO;
         }
 
-        public VehicleDTO Put(VehicleDTO vehicleDTO)
+        public async Task<VehicleDTO> Put(VehicleDTO vehicleDTO)
         {
             Validate(vehicleDTO);
 
-            // TODO: Validate Vehicle Type
+            bool validateVehicleType = await request.GetEntityForIdAsync("vehicle-types", vehicleDTO.VehicleType);
+
+            if (!validateVehicleType)
+                throw new BusinessRuleValidationException("Vehicle-Type not found!");
 
             _repository.Update(vehicleMapper.GetVehicleForVehicleDTO(vehicleDTO));
             return vehicleDTO;
