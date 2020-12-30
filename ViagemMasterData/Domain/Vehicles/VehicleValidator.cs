@@ -16,7 +16,7 @@ namespace ViagemMasterData.Domain.Vehicles
                     throw new ArgumentNullException("Can't found the object.");
                 });
 
-            RuleFor(c => c.Code)
+            RuleFor(c => c.Id)
                 .NotEmpty().WithMessage("Is necessary to inform the code.")
                 .NotNull().WithMessage("Is necessary to inform the code.");
 

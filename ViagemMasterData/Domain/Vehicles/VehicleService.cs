@@ -1,5 +1,6 @@
 using ViagemMasterData.Infraestructure;
 using ViagemMasterData.Domain.Shared;
+using ViagemMasterData.Schema;
 using System;
 using FluentValidation;
 using System.Collections.Generic;
@@ -11,9 +12,9 @@ using System.Threading.Tasks;
     {
         private readonly VehicleMapper vehicleMapper = new VehicleMapper();
         private readonly HttpRequests request = new HttpRequests();
-        private readonly IRepository<Vehicle> _repository;
+        private readonly IRepository<Schema.Vehicle> _repository;
 
-        public VehicleService(IRepository<Vehicle> repository)
+        public VehicleService(IRepository<Schema.Vehicle> repository)
         {
             _repository = repository;
         }
@@ -22,7 +23,7 @@ using System.Threading.Tasks;
         {
 
             VehicleDTO vehicleDTO = vehicleMapper.GetVehicleDTOForCreateVehicleDTO(createVehicleDTO);
-            vehicleDTO.Code = Guid.NewGuid().ToString().ToUpper();
+            vehicleDTO.Id = Guid.NewGuid().ToString().ToUpper();
 
             Validate(vehicleDTO);
 
@@ -58,10 +59,10 @@ using System.Threading.Tasks;
 
         public IList<VehicleDTO> Get()
         {
-            IList<Vehicle> vehicleList = _repository.Select();
+            IList<Schema.Vehicle> vehicleList = _repository.Select();
             IList<VehicleDTO> vehicleDTOList = new List<VehicleDTO>();
 
-            foreach (Vehicle vehicle in vehicleList)
+            foreach (Schema.Vehicle vehicle in vehicleList)
             {
                 vehicleDTOList.Add(vehicleMapper.GetVehicleDTOForVehicle(vehicle));
             }
@@ -74,8 +75,11 @@ using System.Threading.Tasks;
             if (id.Length == 0)
                 throw new ArgumentException("The id can't be zero.");
 
-            Vehicle vehicle = _repository.Select(new VehicleId(id));
-
+            Schema.Vehicle vehicle = _repository.Select(id);
+            if (vehicle == null)
+            {
+                return null;
+            }
             return vehicleMapper.GetVehicleDTOForVehicle(vehicle);
         }
 
