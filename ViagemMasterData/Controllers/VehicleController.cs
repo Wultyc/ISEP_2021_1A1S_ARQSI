@@ -34,12 +34,12 @@ namespace ViagemMasterData.Controllers
         }
 
         // GET: api/vehicle/5
-        [HttpGet("{code}")]
-        public IActionResult GetVehicle([FromRoute] string code)
+        [HttpGet("{Id}")]
+        public IActionResult GetVehicle([FromRoute] string id)
         {
             try
             {
-                VehicleDTO vehicle = _vehicleService.Get(code);
+                VehicleDTO vehicle = _vehicleService.Get(id);
                 return new ObjectResult(vehicle);
             }
             catch (ArgumentException ex)
@@ -59,7 +59,7 @@ namespace ViagemMasterData.Controllers
             try
             {
                 VehicleDTO vehicle = await _vehicleService.PostAsync(createVehicle);
-                return CreatedAtAction(nameof(GetVehicle), new { code = vehicle.Code }, vehicle);
+                return CreatedAtAction(nameof(GetVehicle), new { Id = vehicle.Id }, vehicle);
 
             }
             catch (BusinessRuleValidationException ex)

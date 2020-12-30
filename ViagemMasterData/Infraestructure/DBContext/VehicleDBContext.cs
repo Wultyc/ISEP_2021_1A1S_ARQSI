@@ -15,7 +15,7 @@ namespace ViagemMasterData.Infrastructure.DBContext
 
             builder.Property(b => b.Id)
                 .IsRequired()
-                .HasColumnName("Code");
+                .HasColumnName("Id");
 
         }
     }
