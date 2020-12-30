@@ -1,7 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using ViagemMasterData.Domain.Vehicles;
-using ViagemMasterData.Domain.Trips;
-using ViagemMasterData.Domain.TripSchedules;
 using ViagemMasterData.Infrastructure.DBContext;
 using ViagemMasterData.Schema;
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ViagemMasterData.Controllers
 {
-    public class TripulantsController
+    public class TripulantController
     {
     }
 }
