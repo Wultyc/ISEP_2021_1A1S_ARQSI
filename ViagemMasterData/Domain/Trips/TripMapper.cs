@@ -21,7 +21,7 @@ namespace ViagemMasterData.Domain.Trips
 
         public TripDTO GetTripDTOForCreateTripAdHocDTO(CreateTripAdHocDTO createTripAdHocDTO)
         {
-            return new TripDTO(null,
+            return new TripDTO(Guid.NewGuid().ToString().ToUpper(),
                 createTripAdHocDTO.LineId, createTripAdHocDTO.RouteId, null, createTripAdHocDTO.StartTime, TimeSpan.Zero);
         }
         

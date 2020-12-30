@@ -58,7 +58,7 @@ namespace ViagemMasterData.Controllers
         }
 
         // POST: api/trip/adhoc
-        [HttpPost("/adhoc")]
+        [HttpPost("adhoc")]
         public async Task<IActionResult> PostAdHocTrip([FromBody] CreateTripAdHocDTO createTripAdHoc)
         {
             try
