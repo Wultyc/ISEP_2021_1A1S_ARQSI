@@ -3,6 +3,7 @@ using ViagemMasterData.Domain.Shared;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace ViagemMasterData.Controllers
 {
@@ -78,8 +79,8 @@ namespace ViagemMasterData.Controllers
         {
             try
             {
-                TripDTO trip = await _tripService.PostAsync(createTrip);
-                return CreatedAtAction(nameof(GetTrip), new { id = trip.Id }, trip);
+                List<TripDTO> tripList = await _tripService.PostAsync(createTrip);
+                return new ObjectResult(tripList);
 
             }
             catch (BusinessRuleValidationException ex)

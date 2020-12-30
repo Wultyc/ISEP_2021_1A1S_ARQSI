@@ -8,17 +8,10 @@ namespace ViagemMasterData.Domain.Tripulant
 {
     public class Tripulant : Entity<TripulantId>, IAggregateRoot
     {
-        public TripulantId Id { get; set; }
         public string Name { get; set; }
         public DateTime BirthDate { get; set; }
         public string LicenceNr { get; set; }
         public DateTime LicenceExpires { get; set; }
-
-        private Tripulant()
-        {
-        }
-        public TripulantId tripulantId
-        { get; set; }
 
         public Tripulant(string id, string name, DateTime birthDate, string lincenceNr, DateTime licenceExpires)
         {   
