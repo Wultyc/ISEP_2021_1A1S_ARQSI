@@ -63,11 +63,13 @@ CREATE TABLE [dbo].[WorkBlock]
 CREATE TABLE [dbo].[TripulantService]
 (
  [Id] char(255) NOT NULL PRIMARY KEY,
- [TripulantId] char(255) NOT NULL
+ [TripulantId] char(255) NOT NULL,
+ [Date] DateTime NOT NULL
 );
  
 CREATE TABLE [dbo].[VehicleService]
 (
  [Id] char(255) NOT NULL PRIMARY KEY,
- [VehicleId] char(255) NOT NULL
+ [VehicleId] char(255) NOT NULL,
+ [Date] DateTime NOT NULL
 );
