@@ -20,7 +20,7 @@ namespace ViagemMasterData.Domain.Vehicles
 
         public VehicleDTO GetVehicleDTOForCreateVehicleDTO(CreateVehicleDTO createVehicleDTO)
         {
-            return new VehicleDTO(null,
+            return new VehicleDTO(Guid.NewGuid().ToString().ToUpper(),
                 createVehicleDTO.LicencePlate, createVehicleDTO.Vin, createVehicleDTO.VehicleTypeId, createVehicleDTO.StartDate);
         }
     }

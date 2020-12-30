@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ViagemMasterData.Domain.Trips
 {
@@ -23,13 +24,19 @@ namespace ViagemMasterData.Domain.Trips
             return new TripDTO(null,
                 createTripAdHocDTO.LineId, createTripAdHocDTO.RouteId, null, createTripAdHocDTO.StartTime, TimeSpan.Zero);
         }
-        /*
+        
         public List<TripDTO> GetTripDTOListForCreateTripDTO(CreateTripDTO createTripDTO)
         {
-            // Validate (on service) createTripDTO frequency and number of times
-            return new TripDTO(null,
-                createTripDTO.LicencePlate, createTripDTO.Vin, createTripDTO.TripTypeId, createTripDTO.StartDate);
+            List < TripDTO > tripDTOList = new List<TripDTO>();
+
+            for (int i = 0; i < createTripDTO.NumberOfTrips; i++)
+            {
+                tripDTOList.Add(new TripDTO(Guid.NewGuid().ToString().ToUpper(), createTripDTO.LineId, 
+                    createTripDTO.RouteId, null, createTripDTO.StartTime.Add(TimeSpan.FromMinutes(createTripDTO.Frequency * i)), TimeSpan.Zero));
+            }
+
+            return tripDTOList;
         }
-        */
+        
     }
 }

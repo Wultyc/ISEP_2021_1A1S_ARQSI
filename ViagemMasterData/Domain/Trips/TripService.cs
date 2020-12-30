@@ -27,12 +27,10 @@ using System.Threading.Tasks;
             Validate(tripDTO);
 
             bool validateLine = await request.GetEntityForIdAsync("lines", tripDTO.LineId);
-
             if (!validateLine)
                 throw new BusinessRuleValidationException("Line not found!");
 
             bool validateRoute = await request.GetEntityForIdAsync("routes", tripDTO.RouteId);
-
             if (!validateRoute)
                 throw new BusinessRuleValidationException("Route not found!");
 
@@ -42,22 +40,29 @@ using System.Threading.Tasks;
 
         public async Task<TripDTO> PostAsync(CreateTripDTO createTripDTO)
         {
+            if (createTripDTO.Frequency < 1)
+                throw new ArgumentException("The trip frequency can't be less than 1.");
 
-            //TripDTO tripDTO = tripMapper.GetTripDTOForCreatetripDTO(createTripDTO);
-            TripDTO tripDTO = null;
-            tripDTO.Id = Guid.NewGuid().ToString().ToUpper();
+            if (createTripDTO.NumberOfTrips < 1)
+                throw new ArgumentException("The number of trips can't be less than 1.");
 
-            Validate(tripDTO);
+            bool validateLine = await request.GetEntityForIdAsync("lines", createTripDTO.LineId);
+            if (!validateLine)
+                throw new BusinessRuleValidationException("Line not found!");
 
-            /*
-            bool validateTripType = await request.GetEntityForIdAsync("vehicle-types", tripDTO.VehicleTypeId);
+            bool validateRoute = await request.GetEntityForIdAsync("routes", createTripDTO.RouteId);
+            if (!validateRoute)
+                throw new BusinessRuleValidationException("Route not found!");
 
-            if (!validateVehicleType)
-                throw new BusinessRuleValidationException("Vehicle-Type not found!");
-            */
+            List<TripDTO> tripDTOList = tripMapper.GetTripDTOListForCreateTripDTO(createTripDTO);
 
-            _repository.Insert(tripMapper.GetTripForTripDTO(tripDTO));
-            return tripDTO;
+            for (int i = 0; i < tripDTOList.Count; i++)
+            {
+                Validate(tripDTOList[i]);
+                _repository.Insert(tripMapper.GetTripForTripDTO(tripDTOList[i]));
+            }
+
+            return null;
         }
 
         public void Delete(string id)

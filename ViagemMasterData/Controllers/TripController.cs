@@ -40,6 +40,10 @@ namespace ViagemMasterData.Controllers
             try
             {
                 TripDTO trip = _tripService.Get(id);
+                if (trip == null)
+                {
+                    return NotFound("Id Not Found: " + id);
+                }
                 return new ObjectResult(trip);
             }
             catch (ArgumentException ex)

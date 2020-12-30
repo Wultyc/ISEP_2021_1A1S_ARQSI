@@ -23,7 +23,6 @@ using System.Threading.Tasks;
         {
 
             VehicleDTO vehicleDTO = vehicleMapper.GetVehicleDTOForCreateVehicleDTO(createVehicleDTO);
-            vehicleDTO.Id = Guid.NewGuid().ToString().ToUpper();
 
             Validate(vehicleDTO);
 
