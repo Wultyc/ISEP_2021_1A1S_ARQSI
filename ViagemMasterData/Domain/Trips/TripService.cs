@@ -21,18 +21,20 @@ using System.Threading.Tasks;
         public async Task<TripDTO> PostAdHocAsync(CreateTripAdHocDTO createTripAdHocDTO)
         {
 
-            //TripDTO tripDTO = tripMapper.GetTripDTOForCreatetripAdHocDTO(createTripAdHocDTO);
-            TripDTO tripDTO = null;
+            TripDTO tripDTO = tripMapper.GetTripDTOForCreateTripAdHocDTO(createTripAdHocDTO);
             tripDTO.Id = Guid.NewGuid().ToString().ToUpper();
 
             Validate(tripDTO);
 
-            /*
-            bool validateTripType = await request.GetEntityForIdAsync("vehicle-types", tripDTO.VehicleTypeId);
+            bool validateLine = await request.GetEntityForIdAsync("lines", tripDTO.LineId);
 
-            if (!validateVehicleType)
-                throw new BusinessRuleValidationException("Vehicle-Type not found!");
-            */
+            if (!validateLine)
+                throw new BusinessRuleValidationException("Line not found!");
+
+            bool validateRoute = await request.GetEntityForIdAsync("routes", tripDTO.RouteId);
+
+            if (!validateRoute)
+                throw new BusinessRuleValidationException("Route not found!");
 
             _repository.Insert(tripMapper.GetTripForTripDTO(tripDTO));
             return tripDTO;

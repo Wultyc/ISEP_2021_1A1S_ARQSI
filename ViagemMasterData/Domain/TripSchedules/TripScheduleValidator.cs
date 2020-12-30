@@ -2,7 +2,6 @@ using FluentValidation;
 using System;
 
 namespace ViagemMasterData.Domain.TripSchedules
-
 {
     public class TripScheduleValidator : AbstractValidator<TripScheduleDTO>
     {
