@@ -10,8 +10,8 @@ namespace ViagemMasterData.Domain.TripSchedules
     public class TripScheduleService
     {
 
-        private readonly IRepository<TripSchedule> _repository;
-        public TripScheduleService(IRepository<TripSchedule> repository)
+        private readonly IRepository<Schema.TripSchedule> _repository;
+        public TripScheduleService(IRepository<Schema.TripSchedule> repository)
         {
             _repository = repository;
         }

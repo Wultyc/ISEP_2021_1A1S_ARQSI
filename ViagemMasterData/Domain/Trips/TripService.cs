@@ -14,8 +14,8 @@ using System.Threading.Tasks;
         private readonly HttpRequests request = new HttpRequests();
 
         private readonly TripScheduleService _tripScheduleService;
-        private readonly IRepository<Trip> _repository;
-        public TripService(IRepository<Trip> repository, TripScheduleService tripScheduleService)
+        private readonly IRepository<Schema.Trip> _repository;
+        public TripService(IRepository<Schema.Trip> repository, TripScheduleService tripScheduleService)
         {
             _repository = repository;
             _tripScheduleService = tripScheduleService;
@@ -79,10 +79,10 @@ using System.Threading.Tasks;
 
         public IList<TripDTO> Get()
         {
-            IList<Trip> tripList = _repository.Select();
+            IList<Schema.Trip> tripList = _repository.Select();
             IList<TripDTO> tripDTOList = new List<TripDTO>();
 
-            foreach (Trip trip in tripList)
+            foreach (Schema.Trip trip in tripList)
             {
                 tripDTOList.Add(tripMapper.GetTripDTOForTrip(trip));
             }
@@ -95,7 +95,11 @@ using System.Threading.Tasks;
             if (id.Length == 0)
                 throw new ArgumentException("The id can't be zero.");
 
-            Trip trip = _repository.Select(new TripId(id));
+            Schema.Trip trip = _repository.Select(new TripId(id));
+            if (trip == null)
+            {
+                return null;
+            }
 
             return tripMapper.GetTripDTOForTrip(trip);
         }

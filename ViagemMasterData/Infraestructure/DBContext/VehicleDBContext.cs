@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ViagemMasterData.Domain.Vehicles;
+using ViagemMasterData.Schema;
 
 namespace ViagemMasterData.Infrastructure.DBContext
 {

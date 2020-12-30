@@ -60,7 +60,6 @@ namespace ViagemMasterData.Infrastructure
                     .IsFixedLength(true);
 
                 entity.Property(e => e.WorkBlockId)
-                    .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false)
                     .IsFixedLength(true);

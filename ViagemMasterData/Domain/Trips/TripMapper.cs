@@ -8,15 +8,15 @@ namespace ViagemMasterData.Domain.Trips
 
         public TripMapper() { }
 
-        public TripDTO GetTripDTOForTrip(Trip trip)
+        public TripDTO GetTripDTOForTrip(Schema.Trip trip)
         {
-            return new TripDTO(trip.Id.Value.ToString().ToUpper(),
+            return new TripDTO(trip.Id.ToString().ToUpper(),
                 trip.LineId, trip.RouteId, trip.WorkBlockId, trip.StartTime, trip.EndTime);
         }
 
-        public Trip GetTripForTripDTO(TripDTO tripDTO)
+        public Schema.Trip GetTripForTripDTO(TripDTO tripDTO)
         {
-            return new Trip(tripDTO.Id, tripDTO.LineId, tripDTO.RouteId, tripDTO.WorkBlockId, tripDTO.StartTime, tripDTO.EndTime);
+            return new Schema.Trip(tripDTO.Id, tripDTO.LineId, tripDTO.RouteId, tripDTO.WorkBlockId, tripDTO.StartTime, tripDTO.EndTime);
         }
 
         public TripDTO GetTripDTOForCreateTripAdHocDTO(CreateTripAdHocDTO createTripAdHocDTO)
