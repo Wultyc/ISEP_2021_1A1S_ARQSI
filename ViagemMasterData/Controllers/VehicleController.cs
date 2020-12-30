@@ -40,6 +40,10 @@ namespace ViagemMasterData.Controllers
             try
             {
                 VehicleDTO vehicle = _vehicleService.Get(id);
+                if (vehicle == null)
+                {
+                    return NotFound("Id Not Found: " + id);
+                }
                 return new ObjectResult(vehicle);
             }
             catch (ArgumentException ex)

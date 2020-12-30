@@ -75,8 +75,11 @@ using System.Threading.Tasks;
             if (id.Length == 0)
                 throw new ArgumentException("The id can't be zero.");
 
-            Schema.Vehicle vehicle = _repository.Select(new VehicleId(id));
-
+            Schema.Vehicle vehicle = _repository.Select(id);
+            if (vehicle == null)
+            {
+                return null;
+            }
             return vehicleMapper.GetVehicleDTOForVehicle(vehicle);
         }
 
