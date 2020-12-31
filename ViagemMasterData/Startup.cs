@@ -8,9 +8,6 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ViagemMasterData.Infrastructure;
 using ViagemMasterData.Infrastructure.Shared;
 using ViagemMasterData.Domain.Shared;
-using ViagemMasterData.Domain.Vehicles;
-using ViagemMasterData.Domain.Trips;
-using ViagemMasterData.Domain.TripSchedules;
 using ViagemMasterData.Service;
 
 
@@ -69,7 +66,6 @@ namespace ViagemMasterData
             services.AddTransient<VehicleService>();
             services.AddTransient<TripService>();
             services.AddTransient<TripScheduleService>();
-
             services.AddTransient<TripulantService>();
 
             services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
