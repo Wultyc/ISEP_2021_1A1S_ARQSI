@@ -1,10 +1,9 @@
 using FluentValidation;
 using System;
-using ViagemMasterData.DTOs.VehicleDTOs;
 
 namespace ViagemMasterData.Domain.Vehicles
 {
-    public class VehicleValidator : AbstractValidator<VehicleDTO>
+    public class VehicleValidator : AbstractValidator<Vehicle>
     {
         public VehicleValidator()
         {

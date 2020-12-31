@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentValidation;
+using System;
 using ViagemMasterData.Domain.Shared;
 
 namespace ViagemMasterData.Domain.Vehicles
@@ -21,6 +22,12 @@ namespace ViagemMasterData.Domain.Vehicles
             this.Vin = vin;
             this.VehicleTypeId = vehicleTypeId;
             this.StartDate = startDate;
+        }
+
+        public void Validate()
+        {
+            VehicleValidator validator = new VehicleValidator();
+            validator.ValidateAndThrow(this);
         }
 
     }

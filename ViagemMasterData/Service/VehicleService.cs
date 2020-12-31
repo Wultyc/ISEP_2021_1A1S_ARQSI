@@ -2,7 +2,6 @@ using ViagemMasterData.Infraestructure;
 using ViagemMasterData.Domain.Shared;
 using ViagemMasterData.Schema;
 using System;
-using FluentValidation;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ViagemMasterData.Mappers;
@@ -27,7 +26,8 @@ namespace ViagemMasterData.Service
 
             VehicleDTO vehicleDTO = vehicleMapper.GetVehicleDTOForCreateVehicleDTO(createVehicleDTO);
 
-            Validate(vehicleDTO);
+            Domain.Vehicles.Vehicle vehicle = vehicleMapper.GetVehicleDomainForVehicleDTO(vehicleDTO);
+            vehicle.Validate();
 
             bool validateVehicleType = await request.CheckEntityForIdAsync("vehicle-types", vehicleDTO.VehicleTypeId);
 
@@ -40,7 +40,8 @@ namespace ViagemMasterData.Service
 
         public async Task<VehicleDTO> Put(VehicleDTO vehicleDTO)
         {
-            Validate(vehicleDTO);
+            Domain.Vehicles.Vehicle vehicle = vehicleMapper.GetVehicleDomainForVehicleDTO(vehicleDTO);
+            vehicle.Validate();
 
             bool validateVehicleType = await request.CheckEntityForIdAsync("vehicle-types", vehicleDTO.VehicleTypeId);
 
@@ -83,15 +84,6 @@ namespace ViagemMasterData.Service
                 return null;
             }
             return vehicleMapper.GetVehicleDTOForVehicle(vehicle);
-        }
-
-        private static void Validate(VehicleDTO vehicleDTO)
-        {
-            if (vehicleDTO == null)
-                throw new Exception("Vehicle not detected!");
-            
-            VehicleValidator validator = new VehicleValidator();
-            validator.ValidateAndThrow(vehicleDTO);
         }
 
     }

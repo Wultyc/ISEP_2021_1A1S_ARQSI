@@ -25,5 +25,10 @@ namespace ViagemMasterData.Mappers
             return new VehicleDTO(Guid.NewGuid().ToString().ToUpper(),
                 createVehicleDTO.LicencePlate, createVehicleDTO.Vin, createVehicleDTO.VehicleTypeId, createVehicleDTO.StartDate);
         }
+
+        internal Vehicle GetVehicleDomainForVehicleDTO(VehicleDTO vehicleDTO)
+        {
+            return new Vehicle(vehicleDTO.Id, vehicleDTO.LicencePlate, vehicleDTO.Vin, vehicleDTO.VehicleTypeId, vehicleDTO.StartDate);
+        }
     }
 }
