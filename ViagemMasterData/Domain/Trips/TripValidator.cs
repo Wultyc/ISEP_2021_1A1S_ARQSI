@@ -31,10 +31,7 @@ namespace ViagemMasterData.Domain.Trips
                 .NotEmpty().WithMessage("Is necessary to inform the trip start time.")
                 .NotNull().WithMessage("Is necessary to inform the trip start time.");
 
-            RuleFor(c => c.EndTime)
-                .NotEmpty().WithMessage("Is necessary to inform the trip end time.")
-                .NotNull().WithMessage("Is necessary to inform the trip end time.");
-
+            // don't validate trip end time
         }
 
     }
