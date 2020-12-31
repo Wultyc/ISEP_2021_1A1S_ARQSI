@@ -15,7 +15,7 @@ namespace ViagemMasterData.Controllers
     {
         private readonly TripulantService _tripulantService;
 
-        public TripulantsController(TripulantService tripulantService)
+        public TripulantController(TripulantService tripulantService)
         {
             _tripulantService = tripulantService;
         }

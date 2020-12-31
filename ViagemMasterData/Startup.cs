@@ -9,12 +9,10 @@ using ViagemMasterData.Infrastructure;
 using ViagemMasterData.Infrastructure.Shared;
 using ViagemMasterData.Domain.Shared;
 using ViagemMasterData.Domain.Vehicles;
-<<<<<<< HEAD
-using ViagemMasterData.Service;
-=======
 using ViagemMasterData.Domain.Trips;
 using ViagemMasterData.Domain.TripSchedules;
->>>>>>> eb696fb53b6ad874e67527883a022784b616f1c5
+using ViagemMasterData.Service;
+
 
 namespace ViagemMasterData
 {
