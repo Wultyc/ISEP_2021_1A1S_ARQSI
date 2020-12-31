@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'vehicle-types', component: VehicleTypeComponent },
   {path: 'routes', component: RoutesComponent },
   {path: 'import-glx', component: ImportGLXComponent },
-  { path: 'routes/edit/:id', component: LineRouteComponent },
+  {path: 'routes/edit/:id', component: LineRouteComponent },
   {path: 'trips', component: TripsComponent}
 ]
 @NgModule({

@@ -33,6 +33,7 @@ import { RoutesComponent } from './RedeMasterData/components/routes/routes.compo
 import { CommonModule } from '@angular/common';
 import { LineRouteComponent } from './RedeMasterData/components/line-route/line-route.component';
 import { TripsComponent } from './ViagemMasterData/components/trips/trips.component';
+import { TripulantComponent } from './ViagemMasterData/components/tripulant/tripulant.component';
  
 
 @NgModule({
@@ -48,6 +49,7 @@ import { TripsComponent } from './ViagemMasterData/components/trips/trips.compon
     RoutesComponent,
     LineRouteComponent,
     TripsComponent,
+    TripulantComponent,
     
   ],
   imports: [
