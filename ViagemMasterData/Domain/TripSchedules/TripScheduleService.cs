@@ -7,6 +7,7 @@ using ViagemMasterData.Domain.Trips;
 using ViagemMasterData.Infraestructure;
 using ViagemMasterData.DTOs.RedeMasterDataDTOs;
 using FluentValidation;
+using ViagemMasterData.Mappers;
 
 namespace ViagemMasterData.Domain.TripSchedules
 {

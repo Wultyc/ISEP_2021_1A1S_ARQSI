@@ -5,8 +5,9 @@ using System;
 using FluentValidation;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ViagemMasterData.Mappers;
 
- namespace ViagemMasterData.Domain.Vehicles
+namespace ViagemMasterData.Domain.Vehicles
  {   
     public class VehicleService
     {

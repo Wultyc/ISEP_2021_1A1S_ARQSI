@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using ViagemMasterData.Domain.Trips;
 
-namespace ViagemMasterData.Domain.Trips
+namespace ViagemMasterData.Mappers
 {
     public class TripMapper
     {

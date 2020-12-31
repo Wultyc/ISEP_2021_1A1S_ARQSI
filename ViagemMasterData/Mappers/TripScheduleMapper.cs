@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using ViagemMasterData.Domain.Trips;
+using ViagemMasterData.Domain.TripSchedules;
 using ViagemMasterData.DTOs.RedeMasterDataDTOs;
 
-namespace ViagemMasterData.Domain.TripSchedules
+namespace ViagemMasterData.Mappers
 {
     public class TripScheduleMapper
     {

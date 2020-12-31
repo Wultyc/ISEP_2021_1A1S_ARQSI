@@ -1,6 +1,7 @@
 ﻿using System;
+using ViagemMasterData.Domain.Vehicles;
 
-namespace ViagemMasterData.Domain.Vehicles
+namespace ViagemMasterData.Mappers
 {
     public class VehicleMapper
     {
