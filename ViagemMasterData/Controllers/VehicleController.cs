@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using ViagemMasterData.Service;
+using ViagemMasterData.DTOs.VehicleDTOs;
 
 namespace ViagemMasterData.Controllers
 {

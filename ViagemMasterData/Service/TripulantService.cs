@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ViagemMasterData.Domain.Shared;
 using ViagemMasterData.Domain.Tripulant;
-using ViagemMasterData.DTOs.Tripulants;
+using ViagemMasterData.DTOs.TripulantDTOs;
 using ViagemMasterData.Mappers;
 using ViagemMasterData.Schema;
 

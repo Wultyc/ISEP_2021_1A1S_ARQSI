@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using ViagemMasterData.Domain.Trips;
+using ViagemMasterData.DTOs.TripDTOs;
+
 
 namespace ViagemMasterData.Mappers
 {

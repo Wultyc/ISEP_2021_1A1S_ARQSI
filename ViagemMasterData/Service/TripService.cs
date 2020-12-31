@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ViagemMasterData.Mappers;
 using ViagemMasterData.Domain.Trips;
+using ViagemMasterData.DTOs.TripDTOs;
 
 namespace ViagemMasterData.Service
 {   

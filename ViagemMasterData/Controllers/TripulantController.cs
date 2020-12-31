@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ViagemMasterData.Domain.Shared;
-using ViagemMasterData.DTOs.Tripulants;
+using ViagemMasterData.DTOs.TripulantDTOs;
 using ViagemMasterData.Service;
 
 namespace ViagemMasterData.Controllers

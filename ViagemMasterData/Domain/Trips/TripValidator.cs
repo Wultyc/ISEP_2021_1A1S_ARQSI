@@ -1,5 +1,6 @@
 using FluentValidation;
 using System;
+using ViagemMasterData.DTOs.TripDTOs;
 
 namespace ViagemMasterData.Domain.Trips
 

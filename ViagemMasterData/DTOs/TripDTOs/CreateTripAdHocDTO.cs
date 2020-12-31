@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace ViagemMasterData.Domain.Trips
+namespace ViagemMasterData.DTOs.TripDTOs
 {
     public class CreateTripAdHocDTO
     {

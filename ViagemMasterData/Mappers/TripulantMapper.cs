@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ViagemMasterData.DTOs.Tripulants;
+using ViagemMasterData.DTOs.TripulantDTOs;
 using ViagemMasterData.Schema;
 
 namespace ViagemMasterData.Mappers

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ViagemMasterData.Mappers;
 using ViagemMasterData.Domain.Vehicles;
+using ViagemMasterData.DTOs.VehicleDTOs;
 
 namespace ViagemMasterData.Service
  {   

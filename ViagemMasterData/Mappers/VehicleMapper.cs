@@ -1,5 +1,6 @@
 ﻿using System;
 using ViagemMasterData.Domain.Vehicles;
+using ViagemMasterData.DTOs.VehicleDTOs;
 
 namespace ViagemMasterData.Mappers
 {

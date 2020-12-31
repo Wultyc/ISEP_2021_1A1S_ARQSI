@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using ViagemMasterData.Service;
+using ViagemMasterData.DTOs.TripDTOs;
 
 namespace ViagemMasterData.Controllers
 {
