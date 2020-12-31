@@ -28,6 +28,10 @@ namespace ViagemMasterData.Domain.TripSchedules
                 .NotEmpty().WithMessage("Is necessary to inform the node identifier.")
                 .NotNull().WithMessage("Is necessary to inform the node identifier.");
 
+            RuleFor(c => c.NodeOrder)
+                .NotEmpty().WithMessage("Is necessary to inform the node order.")
+                .NotNull().WithMessage("Is necessary to inform the node order.");
+
             RuleFor(c => c.PassingTime)
                 .NotEmpty().WithMessage("Is necessary to inform the node passing time.")
                 .NotNull().WithMessage("Is necessary to inform the node passing time.");

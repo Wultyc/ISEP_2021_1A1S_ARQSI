@@ -31,6 +31,7 @@ CREATE TABLE [dbo].[TripSchedule]
  [Id] varchar(255) NOT NULL PRIMARY KEY,
  [TripId] varchar(255) NOT NULL,
  [NodeId] varchar(255) NOT NULL,
+ [NodeOrder] int NOT NULL,
  [PassingTime] Time NOT NULL
 );
 

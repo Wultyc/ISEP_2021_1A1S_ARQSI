@@ -16,12 +16,14 @@ namespace ViagemMasterData.Mappers
         public List<TripScheduleDTO> GetTripScheduleForTripDTOAndRoutDTO(TripDTO tripDTO, RouteDTO routeDTO)
         {
             List<TripScheduleDTO> tripScheduleDTOList = new List<TripScheduleDTO>();
+            int order = 0;
             TimeSpan passingTime = tripDTO.StartTime;
 
             foreach (RouteNodesDTO routeNodesDTO in routeDTO.routeNodes)
             {
+                order += 1;
                 passingTime = passingTime.Add(TimeSpan.FromMinutes(routeNodesDTO.duration));
-                tripScheduleDTOList.Add(new TripScheduleDTO(Guid.NewGuid().ToString().ToUpper(), tripDTO.Id, routeNodesDTO.nodeId._id, passingTime));
+                tripScheduleDTOList.Add(new TripScheduleDTO(Guid.NewGuid().ToString().ToUpper(), tripDTO.Id, routeNodesDTO.nodeId._id, order, passingTime));
             }
 
             return tripScheduleDTOList;
@@ -29,7 +31,8 @@ namespace ViagemMasterData.Mappers
 
         public Schema.TripSchedule GetTripScheduleForTripScheduleDTO(TripScheduleDTO tripScheduleDTO)
         {
-            return new Schema.TripSchedule(tripScheduleDTO.Id, tripScheduleDTO.TripId, tripScheduleDTO.NodeId, tripScheduleDTO.PassingTime);
+            return new Schema.TripSchedule(tripScheduleDTO.Id, tripScheduleDTO.TripId, tripScheduleDTO.NodeId, 
+                tripScheduleDTO.NodeOrder, tripScheduleDTO.PassingTime);
         }
     }
 }
