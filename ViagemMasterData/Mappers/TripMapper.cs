@@ -14,18 +14,18 @@ namespace ViagemMasterData.Mappers
         public TripDTO GetTripDTOForTrip(Schema.Trip trip)
         {
             return new TripDTO(trip.Id.ToString().ToUpper(),
-                trip.LineId, trip.RouteId, trip.WorkBlockId, trip.StartTime, trip.EndTime);
+                trip.LineId, trip.RouteId, trip.StartTime, trip.EndTime);
         }
 
         public Schema.Trip GetTripForTripDTO(TripDTO tripDTO)
         {
-            return new Schema.Trip(tripDTO.Id, tripDTO.LineId, tripDTO.RouteId, tripDTO.WorkBlockId, tripDTO.StartTime, tripDTO.EndTime);
+            return new Schema.Trip(tripDTO.Id, tripDTO.LineId, tripDTO.RouteId, tripDTO.StartTime, tripDTO.EndTime);
         }
 
         public TripDTO GetTripDTOForCreateTripAdHocDTO(CreateTripAdHocDTO createTripAdHocDTO)
         {
             return new TripDTO(Guid.NewGuid().ToString().ToUpper(),
-                createTripAdHocDTO.LineId, createTripAdHocDTO.RouteId, null, createTripAdHocDTO.StartTime, TimeSpan.Zero);
+                createTripAdHocDTO.LineId, createTripAdHocDTO.RouteId, createTripAdHocDTO.StartTime, TimeSpan.Zero);
         }
         
         public List<TripDTO> GetTripDTOListForCreateTripDTO(CreateTripDTO createTripDTO)
@@ -35,7 +35,7 @@ namespace ViagemMasterData.Mappers
             for (int i = 0; i < createTripDTO.NumberOfTrips; i++)
             {
                 tripDTOList.Add(new TripDTO(Guid.NewGuid().ToString().ToUpper(), createTripDTO.LineId, 
-                    createTripDTO.RouteId, null, createTripDTO.StartTime.Add(TimeSpan.FromMinutes(createTripDTO.Frequency * i)), TimeSpan.Zero));
+                    createTripDTO.RouteId, createTripDTO.StartTime.Add(TimeSpan.FromMinutes(createTripDTO.Frequency * i)), TimeSpan.Zero));
             }
 
             return tripDTOList;
@@ -43,7 +43,7 @@ namespace ViagemMasterData.Mappers
 
         public Trip GetTripDomainForTripDTO(TripDTO tripDTO)
         {
-            return new Trip(tripDTO.Id, tripDTO.LineId, tripDTO.RouteId, tripDTO.WorkBlockId, tripDTO.StartTime, tripDTO.EndTime);
+            return new Trip(tripDTO.Id, tripDTO.LineId, tripDTO.RouteId, tripDTO.StartTime, tripDTO.EndTime);
         }
 
     }

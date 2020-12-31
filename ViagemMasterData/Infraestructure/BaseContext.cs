@@ -59,10 +59,6 @@ namespace ViagemMasterData.Infrastructure
                     .IsUnicode(false)
                     .IsFixedLength(true);
 
-                entity.Property(e => e.WorkBlockId)
-                    .HasMaxLength(255)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
             });
 
             //modelBuilder.Entity<TripSchedule>(new TripScheduleDBContext().Configure);

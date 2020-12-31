@@ -21,7 +21,6 @@ CREATE TABLE [dbo].[Trip]
  [Id] varchar(255) NOT NULL PRIMARY KEY,
  [LineId] varchar(255) NOT NULL,
  [RouteId] varchar(255) NOT NULL,
- [WorkBlockId] varchar(255) NOT NULL,
  [StartTime] Time NOT NULL,
  [EndTime] Time NOT NULL
 );
@@ -54,6 +53,7 @@ CREATE TABLE [dbo].[TripulantTypes]
 CREATE TABLE [dbo].[WorkBlock]
 (
  [Id] varchar(255) NOT NULL PRIMARY KEY,
+ [TripId] varchar(255) NOT NULL,
  [VehicleServiceId] varchar(255) NOT NULL,
  [TripulantServiceId] varchar(255) NOT NULL,
  [StartTime] Time NOT NULL,
