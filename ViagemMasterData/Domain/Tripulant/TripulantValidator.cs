@@ -17,9 +17,9 @@ namespace ViagemMasterData.Domain.Tripulant
                     throw new ArgumentNullException("Can't found the object.");
                 });
 
-            RuleFor(c => c.Id)
-                .NotEmpty().WithMessage("Is necessary to inform the code.")
-                .NotNull().WithMessage("Is necessary to inform the code.");
+            //RuleFor(c => c.Id)
+            //    .NotEmpty().WithMessage("Is necessary to inform the code.")
+            //    .NotNull().WithMessage("Is necessary to inform the code.");
 
             RuleFor(c => c.Name)
                     .NotEmpty().WithMessage("Is necessary to inform the licence plate.")
