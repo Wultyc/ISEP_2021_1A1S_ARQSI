@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using ViagemMasterData.Service;
 
 namespace ViagemMasterData.Controllers
 {

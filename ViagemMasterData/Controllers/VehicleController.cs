@@ -3,6 +3,7 @@ using ViagemMasterData.Domain.Shared;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using ViagemMasterData.Service;
 
 namespace ViagemMasterData.Controllers
 {

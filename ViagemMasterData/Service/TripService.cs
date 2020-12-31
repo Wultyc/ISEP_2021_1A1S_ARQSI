@@ -6,9 +6,10 @@ using FluentValidation;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ViagemMasterData.Mappers;
+using ViagemMasterData.Domain.Trips;
 
-namespace ViagemMasterData.Domain.Trips
- {   
+namespace ViagemMasterData.Service
+{   
     public class TripService
     {
         private readonly TripMapper tripMapper = new TripMapper();

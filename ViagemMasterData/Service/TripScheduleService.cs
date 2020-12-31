@@ -8,8 +8,9 @@ using ViagemMasterData.Infraestructure;
 using ViagemMasterData.DTOs.RedeMasterDataDTOs;
 using FluentValidation;
 using ViagemMasterData.Mappers;
+using ViagemMasterData.Domain.TripSchedules;
 
-namespace ViagemMasterData.Domain.TripSchedules
+namespace ViagemMasterData.Service
 {
     public class TripScheduleService
     {
