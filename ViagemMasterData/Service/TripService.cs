@@ -2,7 +2,6 @@ using ViagemMasterData.Infraestructure;
 using ViagemMasterData.Domain.Shared;
 using ViagemMasterData.Domain.TripSchedules;
 using System;
-using FluentValidation;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ViagemMasterData.Mappers;
@@ -29,7 +28,8 @@ namespace ViagemMasterData.Service
 
             TripDTO tripDTO = tripMapper.GetTripDTOForCreateTripAdHocDTO(createTripAdHocDTO);
 
-            Validate(tripDTO);
+            Trip trip = tripMapper.GetTripDomainForTripDTO(tripDTO);
+            trip.Validate();
 
             bool validateLine = await request.CheckEntityForIdAsync("lines", tripDTO.LineId);
             if (!validateLine)
@@ -64,7 +64,9 @@ namespace ViagemMasterData.Service
 
             foreach (TripDTO tripDTO in tripDTOList)
             {
-                Validate(tripDTO);
+                Trip trip = tripMapper.GetTripDomainForTripDTO(tripDTO);
+                trip.Validate();
+
                 await _tripScheduleService.PostAsync(tripDTO);
                 _repository.Insert(tripMapper.GetTripForTripDTO(tripDTO));
             }
@@ -105,15 +107,6 @@ namespace ViagemMasterData.Service
             }
 
             return tripMapper.GetTripDTOForTrip(trip);
-        }
-
-        private static void Validate(TripDTO tripDTO)
-        {
-            if (tripDTO == null)
-                throw new Exception("Trip not detected!");
-            
-            TripValidator validator = new TripValidator();
-            validator.ValidateAndThrow(tripDTO);
         }
 
     }

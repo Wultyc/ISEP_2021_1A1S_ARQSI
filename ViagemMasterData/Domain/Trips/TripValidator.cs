@@ -1,11 +1,9 @@
 using FluentValidation;
 using System;
-using ViagemMasterData.DTOs.TripDTOs;
 
 namespace ViagemMasterData.Domain.Trips
-
 {
-    public class TripValidator : AbstractValidator<TripDTO>
+    public class TripValidator : AbstractValidator<Trip>
     {
         public TripValidator()
         {

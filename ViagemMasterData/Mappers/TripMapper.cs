@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ViagemMasterData.Domain.Trips;
 using ViagemMasterData.DTOs.TripDTOs;
 
 
@@ -39,6 +40,11 @@ namespace ViagemMasterData.Mappers
 
             return tripDTOList;
         }
-        
+
+        public Trip GetTripDomainForTripDTO(TripDTO tripDTO)
+        {
+            return new Trip(tripDTO.Id, tripDTO.LineId, tripDTO.RouteId, tripDTO.WorkBlockId, tripDTO.StartTime, tripDTO.EndTime);
+        }
+
     }
 }

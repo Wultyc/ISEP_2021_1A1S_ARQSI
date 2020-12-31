@@ -1,5 +1,6 @@
 ﻿using System;
 using ViagemMasterData.Domain.Shared;
+using FluentValidation;
 
 namespace ViagemMasterData.Domain.Trips
 {
@@ -23,6 +24,12 @@ namespace ViagemMasterData.Domain.Trips
             this.WorkBlockId = workBlockId;
             this.StartTime = startTime;
             this.EndTime = endTime;
+        }
+
+        public void Validate()
+        {
+            TripValidator validator = new TripValidator();
+            validator.ValidateAndThrow(this);
         }
 
     }
