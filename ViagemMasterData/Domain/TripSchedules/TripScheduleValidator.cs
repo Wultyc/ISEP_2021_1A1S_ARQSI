@@ -1,10 +1,9 @@
 using FluentValidation;
 using System;
-using ViagemMasterData.DTOs.TripScheduleDTOs;
 
 namespace ViagemMasterData.Domain.TripSchedules
 {
-    public class TripScheduleValidator : AbstractValidator<TripScheduleDTO>
+    public class TripScheduleValidator : AbstractValidator<TripSchedule>
     {
         public TripScheduleValidator()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using ViagemMasterData.Domain.Shared;
+using FluentValidation;
 
 namespace ViagemMasterData.Domain.TripSchedules
 {
@@ -23,5 +24,10 @@ namespace ViagemMasterData.Domain.TripSchedules
             this.PassingTime = passingTime;
         }
 
+        public void Validate()
+        {
+            TripScheduleValidator validator = new TripScheduleValidator();
+            validator.ValidateAndThrow(this);
+        }
     }
 }

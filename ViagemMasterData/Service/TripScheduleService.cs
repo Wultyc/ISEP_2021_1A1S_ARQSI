@@ -6,7 +6,6 @@ using ViagemMasterData.Domain.Shared;
 using ViagemMasterData.Domain.Trips;
 using ViagemMasterData.Infraestructure;
 using ViagemMasterData.DTOs.RedeMasterDataDTOs;
-using FluentValidation;
 using ViagemMasterData.Mappers;
 using ViagemMasterData.Domain.TripSchedules;
 using ViagemMasterData.DTOs.TripScheduleDTOs;
@@ -38,18 +37,12 @@ namespace ViagemMasterData.Service
 
             foreach (TripScheduleDTO tripScheduleDTO in tripScheduleDTOList)
             {
-                Validate(tripScheduleDTO);
+                TripSchedule tripSchedule = tripScheduleMapper.GetTripScheduleDomainForTripScheduleDTO(tripScheduleDTO);
+                tripSchedule.Validate();
+
                 _repository.Insert(tripScheduleMapper.GetTripScheduleForTripScheduleDTO(tripScheduleDTO));
             }
         }
 
-        private static void Validate(TripScheduleDTO tripScheduleDTO)
-        {
-            if (tripScheduleDTO == null)
-                throw new Exception("Trip Schedule not detected!");
-
-            TripScheduleValidator validator = new TripScheduleValidator();
-            validator.ValidateAndThrow(tripScheduleDTO);
-        }
     }
 }

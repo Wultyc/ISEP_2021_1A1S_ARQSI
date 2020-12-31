@@ -34,5 +34,11 @@ namespace ViagemMasterData.Mappers
             return new Schema.TripSchedule(tripScheduleDTO.Id, tripScheduleDTO.TripId, tripScheduleDTO.NodeId, 
                 tripScheduleDTO.NodeOrder, tripScheduleDTO.PassingTime);
         }
+
+        internal TripSchedule GetTripScheduleDomainForTripScheduleDTO(TripScheduleDTO tripScheduleDTO)
+        {
+            return new TripSchedule(tripScheduleDTO.Id, tripScheduleDTO.TripId, tripScheduleDTO.NodeId,
+                tripScheduleDTO.NodeOrder, tripScheduleDTO.PassingTime);
+        }
     }
 }
