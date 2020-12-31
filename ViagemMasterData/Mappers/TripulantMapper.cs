@@ -34,6 +34,13 @@ namespace ViagemMasterData.Mappers
 
         //    return new Schema.Tripulant(tripulantDTO.Id, tripulantDTO.Name, tripulantDTO.BirthDate, tripulantDTO.LicenceNr, tripulantDTO.LicenceExpires, tripTypes);
         //}
+
+        public Domain.Tripulant.Tripulant GetDomainFromTripulantDTO(TripulantDTO tripulantDTO)
+        {
+            return new Domain.Tripulant.Tripulant(tripulantDTO.Id, tripulantDTO.Name, tripulantDTO.BirthDate, tripulantDTO.LicenceNr, 
+                tripulantDTO.LicenceExpires, tripulantDTO.TripulantTypes);
+        }
+
         public Schema.Tripulant GetSchemaFromDomain(Domain.Tripulant.Tripulant tripulant)
         {
 

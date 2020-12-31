@@ -27,7 +27,7 @@ namespace ViagemMasterData.Service
 
             TripulantDTO tripulantDTO = TripulantMapper.GetTripulantDTOForCreateTripulantDTO(createTripulantDTO);
 
-            var tripulantDomain = new Domain.Tripulant.Tripulant(tripulantDTO.Id, tripulantDTO.Name, tripulantDTO.BirthDate, tripulantDTO.LicenceNr, tripulantDTO.LicenceExpires, tripulantDTO.TripulantTypes);
+            Domain.Tripulant.Tripulant tripulantDomain = TripulantMapper.GetDomainFromTripulantDTO(tripulantDTO);
 
             tripulantDomain.Validate(tripulantDomain);
 
