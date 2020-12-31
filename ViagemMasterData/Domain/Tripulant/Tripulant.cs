@@ -11,7 +11,6 @@ namespace ViagemMasterData.Domain.Tripulant
 {
     public class Tripulant : Entity<TripulantId>, IAggregateRoot
     {
-        public TripulantId Id { get; set; }
         public string Name { get; set; }
         public DateTime BirthDate { get; set; }
         public string LicenceNr { get; set; }
@@ -21,11 +20,15 @@ namespace ViagemMasterData.Domain.Tripulant
         private readonly HttpRequests request = new HttpRequests();
 
 
+<<<<<<< HEAD
         private Tripulant()
         {
         }
 
         public Tripulant(string id, string name, DateTime birthDate, string lincenceNr, DateTime licenceExpires, ArrayList tripulantId) 
+=======
+        public Tripulant(string id, string name, DateTime birthDate, string lincenceNr, DateTime licenceExpires)
+>>>>>>> eb696fb53b6ad874e67527883a022784b616f1c5
         {   
             if (id != null)
             {

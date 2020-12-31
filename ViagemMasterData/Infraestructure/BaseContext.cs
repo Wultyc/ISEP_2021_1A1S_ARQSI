@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using ViagemMasterData.Domain.Vehicles;
 using ViagemMasterData.Infrastructure.DBContext;
 using ViagemMasterData.Schema;
 
@@ -20,11 +19,9 @@ namespace ViagemMasterData.Infrastructure
         public virtual DbSet<Tripulant> Tripulants { get; set; }
         public virtual DbSet<TripulantService> TripulantServices { get; set; }
         public virtual DbSet<TripulantType> TripulantTypes { get; set; }
-        public virtual DbSet<Schema.Vehicle> Vehicles { get; set; } /* -- using the schema*/
-        public virtual DbSet<Schema.VehicleService> VehicleServices { get; set; }
+        public virtual DbSet<Vehicle> Vehicles { get; set; } /* -- using the schema*/
+        public virtual DbSet<VehicleService> VehicleServices { get; set; }
         public virtual DbSet<WorkBlock> WorkBlocks { get; set; }
-        //public DbSet<Domain.Vehicles.Vehicle> Vehicles { get; set; }
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -40,6 +37,7 @@ namespace ViagemMasterData.Infrastructure
             // future work, use configuration files 
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
+            //modelBuilder.Entity<Trip>(new TripDBContext().Configure);
             modelBuilder.Entity<Trip>(entity =>
             {
                 entity.ToTable("Trip");
@@ -62,12 +60,12 @@ namespace ViagemMasterData.Infrastructure
                     .IsFixedLength(true);
 
                 entity.Property(e => e.WorkBlockId)
-                    .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false)
                     .IsFixedLength(true);
             });
 
+            //modelBuilder.Entity<TripSchedule>(new TripScheduleDBContext().Configure);
             modelBuilder.Entity<TripSchedule>(entity =>
             {
                 entity.ToTable("TripSchedule");
@@ -154,10 +152,8 @@ namespace ViagemMasterData.Infrastructure
                     .HasConstraintName("FK__Tripulant__Tripu__69FBBC1F");
             });
 
-            //modelBuilder.Entity<Domain.Vehicles.Vehicle>(new VehicleDBContext().Configure);
-
-
-            modelBuilder.Entity<Schema.Vehicle>(entity =>
+            //modelBuilder.Entity<Vehicle>(new VehicleDBContext().Configure);
+            modelBuilder.Entity<Vehicle>(entity =>
             {
                 entity.ToTable("Vehicle");
 

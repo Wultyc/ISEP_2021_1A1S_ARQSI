@@ -5,11 +5,11 @@ using ViagemMasterData.Schema;
 
 namespace ViagemMasterData.Infrastructure.DBContext
 {
-    public class VehicleDBContext : IEntityTypeConfiguration<Vehicle>
+    public class TripDBContext : IEntityTypeConfiguration<Trip>
     {
-        public void Configure(EntityTypeBuilder<Vehicle> builder)
+        public void Configure(EntityTypeBuilder<Trip> builder)
         {
-            builder.ToTable("Vehicle");
+            builder.ToTable("Trip");
 
             builder.HasKey(b => b.Id);
 

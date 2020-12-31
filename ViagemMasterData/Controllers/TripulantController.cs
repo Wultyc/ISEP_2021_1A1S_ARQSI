@@ -11,7 +11,7 @@ namespace ViagemMasterData.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TripulantsController : Controller
+    public class TripulantController : Controller
     {
         private readonly TripulantService _tripulantService;
 
