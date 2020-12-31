@@ -9,6 +9,7 @@ using ViagemMasterData.Infrastructure;
 using ViagemMasterData.Infrastructure.Shared;
 using ViagemMasterData.Domain.Shared;
 using ViagemMasterData.Domain.Vehicles;
+using ViagemMasterData.Service;
 
 namespace ViagemMasterData
 {
@@ -64,7 +65,10 @@ namespace ViagemMasterData
         {
             services.AddTransient<VehicleService>();
 
+            services.AddTransient<TripulantService>();
+
             services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
+
         }
     }
 }
