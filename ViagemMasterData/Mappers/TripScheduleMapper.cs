@@ -20,7 +20,7 @@ namespace ViagemMasterData.Mappers
 
             foreach (RouteNodesDTO routeNodesDTO in routeDTO.routeNodes)
             {
-                passingTime.Add(TimeSpan.FromMinutes(routeNodesDTO.duration));
+                passingTime = passingTime.Add(TimeSpan.FromMinutes(routeNodesDTO.duration));
                 tripScheduleDTOList.Add(new TripScheduleDTO(Guid.NewGuid().ToString().ToUpper(), tripDTO.Id, routeNodesDTO.nodeId._id, passingTime));
             }
 
