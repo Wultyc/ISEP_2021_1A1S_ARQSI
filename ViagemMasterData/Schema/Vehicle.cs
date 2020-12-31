@@ -14,7 +14,6 @@ namespace ViagemMasterData.Schema
         public string Vin { get; set; }
         public DateTime StartDate { get; set; }
 
-        [JsonConstructor]
         public Vehicle(string Id, string LicencePlate, string Vin, string VehicleTypeId, DateTime StartDate)
         {
             this.Id = Id;

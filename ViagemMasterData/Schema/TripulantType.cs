@@ -10,7 +10,6 @@ namespace ViagemMasterData.Schema
         public string Id { get; set; }
         public string TripulantId { get; set; }
         public string TripulantTypeId { get; set; }
-
         public virtual Tripulant Tripulant { get; set; }
     }
 }

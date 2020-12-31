@@ -28,16 +28,16 @@ using System.Threading.Tasks;
 
             Validate(tripDTO);
 
-            bool validateLine = await request.GetEntityForIdAsync("lines", tripDTO.LineId);
+            bool validateLine = await request.CheckEntityForIdAsync("lines", tripDTO.LineId);
             if (!validateLine)
                 throw new BusinessRuleValidationException("Line not found!");
 
-            bool validateRoute = await request.GetEntityForIdAsync("routes", tripDTO.RouteId);
+            bool validateRoute = await request.CheckEntityForIdAsync("routes", tripDTO.RouteId);
             if (!validateRoute)
                 throw new BusinessRuleValidationException("Route not found!");
 
+            await _tripScheduleService.PostAsync(tripDTO);
             _repository.Insert(tripMapper.GetTripForTripDTO(tripDTO));
-            _tripScheduleService.PostAsync(tripDTO);
             return tripDTO;
         }
 
@@ -49,21 +49,21 @@ using System.Threading.Tasks;
             if (createTripDTO.NumberOfTrips < 1)
                 throw new ArgumentException("The number of trips can't be less than 1.");
 
-            bool validateLine = await request.GetEntityForIdAsync("lines", createTripDTO.LineId);
+            bool validateLine = await request.CheckEntityForIdAsync("lines", createTripDTO.LineId);
             if (!validateLine)
                 throw new BusinessRuleValidationException("Line not found!");
 
-            bool validateRoute = await request.GetEntityForIdAsync("routes", createTripDTO.RouteId);
+            bool validateRoute = await request.CheckEntityForIdAsync("routes", createTripDTO.RouteId);
             if (!validateRoute)
                 throw new BusinessRuleValidationException("Route not found!");
 
             List<TripDTO> tripDTOList = tripMapper.GetTripDTOListForCreateTripDTO(createTripDTO);
 
-            for (int i = 0; i < tripDTOList.Count; i++)
+            foreach (TripDTO tripDTO in tripDTOList)
             {
-                Validate(tripDTOList[i]);
-                _repository.Insert(tripMapper.GetTripForTripDTO(tripDTOList[i]));
-                _tripScheduleService.PostAsync(tripDTOList[i]);
+                Validate(tripDTO);
+                await _tripScheduleService.PostAsync(tripDTO);
+                _repository.Insert(tripMapper.GetTripForTripDTO(tripDTO));
             }
 
             return tripDTOList;

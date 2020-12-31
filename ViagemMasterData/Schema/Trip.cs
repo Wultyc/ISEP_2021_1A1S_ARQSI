@@ -14,15 +14,14 @@ namespace ViagemMasterData.Schema
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
 
-        [JsonConstructor]
         public Trip(string id, string lineId, string routeId, string workBlockId, TimeSpan startTime, TimeSpan endTime)
         {
-            Id = id;
-            LineId = lineId;
-            RouteId = routeId;
-            WorkBlockId = workBlockId;
-            StartTime = startTime;
-            EndTime = endTime;
+            this.Id = id;
+            this.LineId = lineId;
+            this.RouteId = routeId;
+            this.WorkBlockId = workBlockId;
+            this.StartTime = startTime;
+            this.EndTime = endTime;
         }
     }
 }

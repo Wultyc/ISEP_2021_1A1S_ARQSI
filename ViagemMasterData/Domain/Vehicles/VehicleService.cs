@@ -26,7 +26,7 @@ using System.Threading.Tasks;
 
             Validate(vehicleDTO);
 
-            bool validateVehicleType = await request.GetEntityForIdAsync("vehicle-types", vehicleDTO.VehicleTypeId);
+            bool validateVehicleType = await request.CheckEntityForIdAsync("vehicle-types", vehicleDTO.VehicleTypeId);
 
             if (!validateVehicleType)
                 throw new BusinessRuleValidationException("Vehicle-Type not found!");
@@ -39,7 +39,7 @@ using System.Threading.Tasks;
         {
             Validate(vehicleDTO);
 
-            bool validateVehicleType = await request.GetEntityForIdAsync("vehicle-types", vehicleDTO.VehicleTypeId);
+            bool validateVehicleType = await request.CheckEntityForIdAsync("vehicle-types", vehicleDTO.VehicleTypeId);
 
             if (!validateVehicleType)
                 throw new BusinessRuleValidationException("Vehicle-Type not found!");
