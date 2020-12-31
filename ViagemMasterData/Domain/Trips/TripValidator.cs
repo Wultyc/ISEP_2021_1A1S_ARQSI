@@ -27,13 +27,14 @@ namespace ViagemMasterData.Domain.Trips
                 .NotEmpty().WithMessage("Is necessary to inform the route identifier.")
                 .NotNull().WithMessage("Is necessary to inform the route identifier.");
 
-            // don't validate work block indertifier
-
             RuleFor(c => c.StartTime)
                 .NotEmpty().WithMessage("Is necessary to inform the trip start time.")
                 .NotNull().WithMessage("Is necessary to inform the trip start time.");
 
-            // don't validate trip end time
+            RuleFor(c => c.EndTime)
+                .NotEmpty().WithMessage("Is necessary to inform the trip end time.")
+                .NotNull().WithMessage("Is necessary to inform the trip end time.");
+
         }
 
     }
