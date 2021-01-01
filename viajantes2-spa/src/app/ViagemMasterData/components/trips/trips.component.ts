@@ -27,6 +27,9 @@ export class TripsComponent implements OnInit {
   lineList: Line[] = [];
   routeList: Route[] = [];
 
+  hours: Number[] = [];
+  minutes: Number[] = [];
+
   linesMapper = new LinesMapper();
   routesMapper = new RoutesMapper();
 
@@ -40,7 +43,8 @@ export class TripsComponent implements OnInit {
   tripForm = new FormGroup ({
     line: new FormControl(),
     route: new FormControl(),
-    startTime: new FormControl(),
+    startTimeHour: new FormControl(),
+    startTimeMinute: new FormControl(),
     frequency: new FormControl(),
     numberOfTrips: new FormControl(),
   });
@@ -48,7 +52,8 @@ export class TripsComponent implements OnInit {
   tripAdHocForm = new FormGroup ({
     line: new FormControl(),
     route: new FormControl(),
-    startTime: new FormControl()
+    startTimeHour: new FormControl(),
+    startTimeMinute: new FormControl(),
   });
 
   isAdding: boolean = false;
@@ -68,6 +73,13 @@ export class TripsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getObjects();
+
+    for(var i = 0; i <= 23; i++){
+      this.hours.push(i);
+    }
+    for(var i = 0; i <= 60; i++){
+      this.minutes.push(i);
+    }
   }
 
   applyFilter(event: Event) {
