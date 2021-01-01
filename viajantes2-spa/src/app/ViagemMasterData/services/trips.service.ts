@@ -18,8 +18,8 @@ export class TripsService {
   getTrips(): Observable<Trip[]> {
     return this.httpClient.get<Trip[]>(this.url);
   }
-  postTrip(trip: Trip): Observable<Trip> {
-    return this.httpClient.post<Trip>(this.url, trip).pipe(
+  postTrip(trip: TripPost): Observable<TripPost[]> {
+    return this.httpClient.post<TripPost[]>(this.url, trip).pipe(
           catchError((err) => {
             console.error(err);
             return throwError(err);
