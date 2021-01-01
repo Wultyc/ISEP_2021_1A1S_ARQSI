@@ -6,7 +6,7 @@ import { Vehicle } from '../../models/vehicles';
 import { VehiclesService } from '../../services/vehicles.service';
 import { VehicleTypeService } from '../../../RedeMasterData/services/vehicle-type.service';
 import { VehicleMapper } from '../../models/mappers/vehicles'
-import { VehicleType } from 'src/app/RedeMasterData/models/vehicle-type';
+import { VehicleType } from '../../../RedeMasterData/models/vehicle-type';
 
 @Component({
   selector: 'app-vehicles',
