@@ -2,9 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+
 import { Trip } from '../../models/trip';
 import { TripsService } from '../../services/trips.service';
-import { TripMapper } from '../../models/mappers/trip'
+import { TripMapper } from '../../models/mappers/trip';
+
+import { Line } from '../../../RedeMasterData/models/line';
+import { LinesService } from '../../../RedeMasterData/services/lines.service';
+import { LinesMapper } from '../../../RedeMasterData/models/mappers/lineMapper';
+
+import { Route } from '../../../RedeMasterData/models/route';
+import { RoutesService } from '../../../RedeMasterData/services/routes.service';
+import { RoutesMapper } from '../../../RedeMasterData/models/mappers/routeMapper';
 
 @Component({
   selector: 'app-trips',
@@ -15,7 +24,13 @@ import { TripMapper } from '../../models/mappers/trip'
 export class TripsComponent implements OnInit {
 
   tripList: Trip[] = [];
-  displayedColumns: string[] = ['lineId','routeId','startTime','endTime'];
+  lineList: Line[] = [];
+  routeList: Route[] = [];
+
+  linesMapper = new LinesMapper();
+  routesMapper = new RoutesMapper();
+
+  displayedColumns: string[] = ['line','route','startTime','endTime'];
   dataSource = new MatTableDataSource<Trip>();
 
   formControl = new FormControl('', [
@@ -23,8 +38,8 @@ export class TripsComponent implements OnInit {
   ]);
 
   tripForm = new FormGroup ({
-    lineId: new FormControl(),
-    routeId: new FormControl(),
+    line: new FormControl(),
+    route: new FormControl(),
     startTime: new FormControl(),
     endTIme: new FormControl()
   });
@@ -35,13 +50,15 @@ export class TripsComponent implements OnInit {
 
   constructor(
     private tripMapper: TripMapper,
+    private linesService: LinesService,
+    private routesService: RoutesService,
     private tripsService: TripsService,
     public dialog: MatDialog,
     private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
-    this.getTrips();
+    this.getObjects();
   }
 
   applyFilter(event: Event) {
@@ -56,11 +73,35 @@ export class TripsComponent implements OnInit {
     return this.isAdding = !this.isAdding;
   }
 
+  getObjects() : void {
+    this.getLines();
+  }
+
+  getLines() : void {    
+    this.linesService.getLines().subscribe(
+      (data) => {
+        if (data && data.length > 0) {
+          data.forEach(l => this.lineList.push(this.linesMapper.fromResponseToDto(new Line(), l)));
+        };
+        this.getRoutes();        
+      });
+  }
+
+  getRoutes() : void {
+    this.routesService.getRoutes().subscribe(
+      (data) => {
+        if (data && data.length > 0) {
+          data.forEach(r => this.routeList.push(this.routesMapper.fromResponseToDto(new Route(), r)));
+        };
+        this.getTrips();
+      });
+  }
+
   getTrips(){
     this.tripsService.getTrips().subscribe(
       (data) => {
         if (data && data.length > 0) { 
-          data.forEach(t => this.tripList.push(this.tripMapper.fromResponseToDto(new Trip(), t)))
+          data.forEach(t => this.tripList.push(this.tripMapper.fromResponseToDto(new Trip(), t, this.lineList, this.routeList)));
           this.dataSource = new MatTableDataSource(this.tripList);
         };
       }

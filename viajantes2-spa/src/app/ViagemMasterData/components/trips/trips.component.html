@@ -10,13 +10,14 @@
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Aguiar de Sousa" #input>
     </mat-form-field>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <ng-container matColumnDef="lineId">
+        <ng-container matColumnDef="line">
             <th mat-header-cell *matHeaderCellDef> Line </th>
-            <td mat-cell *matCellDef="let trip"> {{trip.lineId}} </td>
+            <td mat-cell *matCellDef="let trip"> {{trip.line.code}} </td>
         </ng-container>
-        <ng-container matColumnDef="routeId">
+        <ng-container matColumnDef="route">
             <th mat-header-cell *matHeaderCellDef> Route </th>
-            <td mat-cell *matCellDef="let trip"> {{trip.routeId}} </td>
+            <td mat-cell *matCellDef="let trip"> {{trip.route.routeNodes[0].node.shortName}} - 
+                {{trip.route.routeNodes[trip.route.routeNodes.length-1].node.shortName}} </td>
         </ng-container>
         <ng-container matColumnDef="startTime">
             <th mat-header-cell *matHeaderCellDef> Start Time </th>
