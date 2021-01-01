@@ -262,10 +262,10 @@ namespace ViagemMasterData.Infrastructure
                     .HasConstraintName("FK__WorkBlock__WorkB__4589517F");
             });
 
-            OnModelCreatingPartial(modelBuilder);
+            //OnModelCreatingPartial(modelBuilder);
         }
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        //partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
     }
 }

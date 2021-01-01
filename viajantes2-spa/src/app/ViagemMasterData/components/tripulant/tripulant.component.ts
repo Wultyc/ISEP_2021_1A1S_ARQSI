@@ -92,7 +92,7 @@ export class TripulantComponent implements OnInit {
     this.tripulantForm.value.licenseExpires = new Date(this.tripulantForm.value.licenseExpires.valueOf() - this.tripulantForm.value.licenseExpires.getTimezoneOffset() * 60000).toISOString().replace(/\.\d{3}Z$/, ''); 
     
     var postEntity = this.tripulantMapper.fromFormToCreate(this.tripulantForm.value, new TripulantPost);
-
+  
 
     console.log(postEntity);
 
