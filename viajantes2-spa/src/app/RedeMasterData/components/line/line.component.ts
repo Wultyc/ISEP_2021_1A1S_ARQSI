@@ -191,9 +191,9 @@ getRoutes() : void {
     console.log(row);
     this.linesService.getLineRoutes(row.id).subscribe(
       (data) => {
-        if (data && data.length > 0) {
+        if (data && data.lineRoutes.length > 0) {
           this.hasRoutes = true;
-          this.lineRoutes = data;
+          this.lineRoutes = data.lineRoutes;
         } else {
           this.hasRoutes = false;
         };     
