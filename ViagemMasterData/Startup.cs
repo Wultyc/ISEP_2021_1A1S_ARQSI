@@ -25,6 +25,21 @@ namespace ViagemMasterData
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200",
+                                            "http://redemasterdata.viajantes2.tk",
+                                            "http://importglx.viajantes2.tk",
+                                            "http://viajantes2.tk")
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod();
+                    });
+            });
+
             var connection = Configuration.GetConnectionString("ViagemMD");
             services.AddDbContext<BaseContext>(options =>
                 options.UseSqlServer(connection)
@@ -52,6 +67,8 @@ namespace ViagemMasterData
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 
