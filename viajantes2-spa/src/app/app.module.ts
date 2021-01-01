@@ -38,8 +38,7 @@ import { VehiclesComponent } from './ViagemMasterData/components/vehicles/vehicl
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MomentDateModule, MomentDateAdapter } from '@angular/material-moment-adapter';
-
-
+import { AmazingTimePickerModule } from 'amazing-time-picker';
 
 @NgModule({
   declarations: [
@@ -82,7 +81,8 @@ import { MomentDateModule, MomentDateAdapter } from '@angular/material-moment-ad
     MatSnackBarModule,
     CommonModule, 
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    AmazingTimePickerModule
 
     ],
   exports: [
