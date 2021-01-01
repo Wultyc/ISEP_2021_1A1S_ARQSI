@@ -1,1 +1,36 @@
-<p>trips works!</p>
+<h1>&nbsp; Trips</h1>
+
+<div>
+    <a mat-button (click)="setAdd()">{{isAdding ? 'Close create mode' : 'Create Trip'}}</a>
+</div>
+
+<div *ngIf="!isAdding; else createTripTemplate">
+    <mat-form-field>
+        <mat-label>Search: </mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Aguiar de Sousa" #input>
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="lineId">
+            <th mat-header-cell *matHeaderCellDef> Line </th>
+            <td mat-cell *matCellDef="let trip"> {{trip.lineId}} </td>
+        </ng-container>
+        <ng-container matColumnDef="routeId">
+            <th mat-header-cell *matHeaderCellDef> Route </th>
+            <td mat-cell *matCellDef="let trip"> {{trip.routeId}} </td>
+        </ng-container>
+        <ng-container matColumnDef="startTime">
+            <th mat-header-cell *matHeaderCellDef> Start Time </th>
+            <td mat-cell *matCellDef="let trip"> {{trip.startTime}} </td>
+        </ng-container>
+        <ng-container matColumnDef="endTime">
+            <th mat-header-cell *matHeaderCellDef> End Time </th>
+            <td mat-cell *matCellDef="let trip"> {{trip.endTime}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+
+<ng-template #createTripTemplate>
+ 
+</ng-template>

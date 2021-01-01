@@ -73,6 +73,9 @@ export class SideNavComponent {
   goToVehicles(): void {
     this.router.navigate(['vmd/vehicles'], { relativeTo: this.route });
   }
+  goToTrips(): void {
+    this.router.navigate(['vmd/trips'], { relativeTo: this.route });
+  }
 
   goToTGLX(): void {
     this.router.navigate(['import-glx'], { relativeTo: this.route });
