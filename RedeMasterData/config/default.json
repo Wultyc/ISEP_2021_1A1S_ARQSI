@@ -1,8 +1,8 @@
 {
     "app":{
         "defaultServerPort":"3003",
-        "defaultMongooseConnString":"mongodb+srv://application:hO19n3lRSDhE@cluster0.y3cng.azure.mongodb.net/RedeMasterData_DEV_TS",
-        "defaultMongooseConnStringTst":"mongodb+srv://application:hO19n3lRSDhE@cluster0.y3cng.azure.mongodb.net/RedeMasterData_TEST_TS"
+        "defaultMongooseConnString":"mongodb+srv://application:hO19n3lRSDhE@cluster0.y3cng.azure.mongodb.net/RedeMasterData_DEV",
+        "defaultMongooseConnStringTst":"mongodb+srv://application:hO19n3lRSDhE@cluster0.y3cng.azure.mongodb.net/RedeMasterData_TEST"
     },
     "logs":{
         "folder":"logs",
