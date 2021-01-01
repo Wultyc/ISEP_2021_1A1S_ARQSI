@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { AmazingTimePickerService } from 'amazing-time-picker';
 
-import { Trip } from '../../models/trip';
+import { Trip, TripPost, TripAdHocPost } from '../../models/trip';
 import { TripsService } from '../../services/trips.service';
 import { TripMapper } from '../../models/mappers/trip';
 
@@ -171,20 +171,18 @@ export class TripsComponent implements OnInit {
   }
 
   submitAdHoc() :void {
-    var postEntity = new Trip();
+    var postAdHocTrip = new TripAdHocPost();
     this.errorMessages = [];
 
-    //postEntity = this.tripMapper.fromFormToDTO(this.tripForm.value, new Trip)
+    postAdHocTrip = this.tripMapper.fromAdHocFormToDTO(this.tripAdHocForm.value, new TripAdHocPost)
+    console.log(postAdHocTrip)
 
-    console.log(postEntity)
-
-    this.tripsService.postTrip(postEntity)
+    this.tripsService.postAdHocTrip(postAdHocTrip)
     .subscribe(
       (data) => {
         if (data) { 
-          this.tripList.push(data);
-          // this.showDetails.push(false);
-            this.isAdding = !this.isAdding;
+          this.tripList.push(this.tripMapper.fromResponseToDto(new Trip(), data, this.lineList, this.routeList));
+          this.isAddingAdHoc = false;
         }
       },
       (error) => { 

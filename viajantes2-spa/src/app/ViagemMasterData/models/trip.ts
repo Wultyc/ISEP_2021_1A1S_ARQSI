@@ -11,14 +11,14 @@ export class Trip {
 }
 
 export class TripAdHocPost {
-    line: Line;
-    route: Route;
+    lineId: string;
+    routeId: string;
     startTime: Time;
 }
 
 export class TripPost {
-    line: Line;
-    route: Route;
+    lineId: string;
+    routeId: string;
     startTime: Time;
     frequency: number;
     numberOfTrips: number;
