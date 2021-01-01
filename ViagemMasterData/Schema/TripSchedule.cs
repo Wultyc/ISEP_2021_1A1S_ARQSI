@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace ViagemMasterData.Schema
 {
     public partial class TripSchedule
@@ -11,6 +13,7 @@ namespace ViagemMasterData.Schema
         public int NodeOrder { get; set; }
         public TimeSpan PassingTime { get; set; }
 
+        public virtual Trip Trip { get; set; }
         public TripSchedule(string id, string tripId, string nodeId, int nodeOrder, TimeSpan passingTime)
         {
             this.Id = id;
