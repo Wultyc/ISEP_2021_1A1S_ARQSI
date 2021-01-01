@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -8,10 +7,11 @@ namespace ViagemMasterData.Schema
 {
     public partial class Tripulant
     {
-        //public Tripulant()
-        //{
-        //    TripulantTypes = new HashSet<TripulantType>();
-        //}
+        public Tripulant()
+        {
+            TripulantServices = new HashSet<TripulantService>();
+            TripulantTypes = new HashSet<TripulantType>();
+        }
 
         public string Id { get; set; }
         public string Name { get; set; }
@@ -19,8 +19,8 @@ namespace ViagemMasterData.Schema
         public string LicenceNr { get; set; }
         public DateTime LicenceExpires { get; set; }
 
+        public virtual ICollection<TripulantService> TripulantServices { get; set; }
         public virtual ICollection<TripulantType> TripulantTypes { get; set; }
-
         [JsonConstructor]
         public Tripulant(string id, string name, DateTime birthDate, string licenceNr, DateTime licenceExpires)
         {
@@ -30,5 +30,5 @@ namespace ViagemMasterData.Schema
             this.LicenceNr = licenceNr;
             this.LicenceExpires = licenceExpires;
         }
-    }   
+    }
 }
