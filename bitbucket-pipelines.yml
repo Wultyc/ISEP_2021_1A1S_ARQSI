@@ -32,8 +32,13 @@ pipelines:
             name: Build RedeMasterData Image and Upload on DockerHub
             script:
               - export IMAGE_NAME=$DOCKER_HUB_USERNAME/arqsi-viajantes2-redemasterdata:latest
+              - cd RedeMasterData/
+              # install all dependencies
+              - npm install
+              #build application
+              - npm run build
               # build the Docker image (this will use the Dockerfile in the root of the repo)
-              - docker build -t $IMAGE_NAME ./RedeMasterData
+              - docker build -t $IMAGE_NAME .
               # authenticate with the Docker Hub registry
               - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
               # push the new Docker image to the Docker registry
