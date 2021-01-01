@@ -20,5 +20,8 @@
         "mongoose":{
             "debug": false
         }
+    },
+    "cors":{
+        "allowedDomains":["http://viajantes2.tk", "http://importglx.viajantes2.tk", "http://viagemmasterdata.viajantes2.tk"]
     }
 }
