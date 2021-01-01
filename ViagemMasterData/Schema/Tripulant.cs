@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
-using System.Text.Json.Serialization;
-=======
 using Newtonsoft.Json;
->>>>>>> 4ac056fd2e338a22103780fce720e651422a3d46
 
 #nullable disable
 
