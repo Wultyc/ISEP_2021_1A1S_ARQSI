@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   apiEndpointBackendRDM: 'http://localhost:3003/api/',
-  apiEndpointBackendGLX: 'http://localhost:3002/api/import-glx'
+  apiEndpointBackendGLX: 'http://localhost:3002/api/import-glx',
+  apiEndpointBackendVDM: 'http://localhost:3004/api/'
 };
 
 /*

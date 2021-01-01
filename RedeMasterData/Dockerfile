@@ -19,5 +19,5 @@ COPY . .
 #create a env file specific for containers
 RUN mv config/docker.json config/default.json
 
-EXPOSE 3003
+EXPOSE 3002
 CMD [ "npm", "start" ]

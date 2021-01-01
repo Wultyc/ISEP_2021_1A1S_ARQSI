@@ -4,43 +4,24 @@
         "defaultMongooseConnString":"mongodb+srv://application:hO19n3lRSDhE@cluster0.y3cng.azure.mongodb.net/RedeMasterData",
         "defaultMongooseConnStringTst":"mongodb+srv://application:hO19n3lRSDhE@cluster0.y3cng.azure.mongodb.net/RedeMasterData_TEST"
     },
-    "logs": {
-        "folder": "logs",
-        "access": {
-            "enableConsoleLog": true,
-            "enableFileLog": true,
-            "logfile": "requests.log"
+    "logs":{
+        "folder":"logs",
+        "fileNameTimeStampFormat":"YYYYMMDD",
+        "access":{
+            "enableConsoleLog":true,
+            "enableFileLog":true,
+            "logfile":"requests.log"
         },
-        "mongoose": {
+        "any":{
+            "enableConsoleLog":true,
+            "enableFileLog":true,
+            "logfile":"execution.log"
+        },
+        "mongoose":{
             "debug": false
         }
     },
-    "errors": {
-        "http": {
-            "post_error": {
-                "status": "400",
-                "message": "Bad Request"
-            },
-            "not_found": {
-                "status": "404",
-                "message": "Not Found"
-            }
-        }
-    },
-    "success_message" :{
-        "http": {
-            "success": {
-                "status": "200",
-                "message": ""
-            },
-            "created": {
-                "status":"201",
-                "message": ""
-            },
-            "deleted": {
-                "status":"204",
-                "message": "Object deleted"
-            }
-        }
+    "cors":{
+        "allowedDomains":["http://viajantes2.tk", "http://importglx.viajantes2.tk", "http://viagemmasterdata.viajantes2.tk"]
     }
 }

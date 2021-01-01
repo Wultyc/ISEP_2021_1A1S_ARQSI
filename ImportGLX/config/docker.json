@@ -5,17 +5,24 @@
     },
     "logs":{
         "folder":"logs",
+        "fileNameTimeStampFormat":"YYYYMMDD",
         "access":{
             "enableConsoleLog":true,
             "enableFileLog":true,
             "logfile":"requests.log"
         },
+        "any":{
+            "enableConsoleLog":true,
+            "enableFileLog":true,
+            "logfile":"execution.log"
+        },
         "mongoose":{
             "debug": false
         }
     },
-    "glx-files":{
-        "upload-dir":"file_archive",
+    "glx_files":{
+        "upload_dir":"file_archive",
+        "fileTimeStampFormat":"YYYYMMDD_hhmmss",
         "fileExtension": "glx.xml"
     },
     "endpoints":{
@@ -24,26 +31,6 @@
             "node":"http://redemasterdata.viajantes2.tk/api/nodes",
             "route":"http://redemasterdata.viajantes2.tk/api/routes",
             "line":"http://redemasterdata.viajantes2.tk/api/lines"
-        }
-    },
-    "errors":{
-        "http":{
-            "file-not-valid":{
-                "status":"400",
-                "message":"A valid .glx file is required"
-            }
-        },
-        "file-system":{
-            "file-not-saved":{
-                "status":"500",
-                "message":"An error occoured when storing the file"
-            }
-        },
-        "import":{
-            "error-on-upload":{
-                "status":"500",
-                "message":"An error occoured when importing data"
-            }
         }
     }
 }

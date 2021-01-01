@@ -8,14 +8,20 @@ import { VehicleTypeComponent } from './RedeMasterData/components/vehicle-type/v
 import { ImportGLXComponent } from './RedeMasterData/components/import-glx/import-glx.component';
 import { RoutesComponent } from './RedeMasterData/components/routes/routes.component';
 import { LineRouteComponent } from './RedeMasterData/components/line-route/line-route.component';
+import { VehiclesComponent } from './ViagemMasterData/components/vehicles/vehicles.component';
+import { TripsComponent } from './ViagemMasterData/components/trips/trips.component'
 const routes: Routes = [
-  {path: 'nodes', component: NodesComponent },
-  {path: 'lines', component: LineComponent },
-  {path: 'tripulant-types', component: TripulantTypeComponent },
-  {path: 'vehicle-types', component: VehicleTypeComponent },
-  {path: 'routes', component: RoutesComponent },
-  {path: 'import-glx', component: ImportGLXComponent },
-  { path: 'routes/edit/:id', component: LineRouteComponent },
+  {path: 'rmd/nodes', component: NodesComponent },
+  {path: 'rmd/lines', component: LineComponent },
+  {path: 'rmd/tripulant-types', component: TripulantTypeComponent },
+  {path: 'rmd/vehicle-types', component: VehicleTypeComponent },
+  {path: 'rmd/routes', component: RoutesComponent },
+  {path: 'rmd/routes/edit/:id', component: LineRouteComponent },
+
+  {path: 'vmd/vehicles', component: VehiclesComponent },
+  {path: 'vmd/trips', component: TripsComponent},
+  
+  {path: 'import-glx', component: ImportGLXComponent }
 ]
 @NgModule({
   declarations: [],
