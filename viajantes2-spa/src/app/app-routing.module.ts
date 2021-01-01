@@ -8,6 +8,7 @@ import { VehicleTypeComponent } from './RedeMasterData/components/vehicle-type/v
 import { ImportGLXComponent } from './RedeMasterData/components/import-glx/import-glx.component';
 import { RoutesComponent } from './RedeMasterData/components/routes/routes.component';
 import { LineRouteComponent } from './RedeMasterData/components/line-route/line-route.component';
+import { VehiclesComponent } from './ViagemMasterData/components/vehicles/vehicles.component';
 import { TripsComponent } from './ViagemMasterData/components/trips/trips.component'
 const routes: Routes = [
   {path: 'nodes', component: NodesComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path: 'vehicle-types', component: VehicleTypeComponent },
   {path: 'routes', component: RoutesComponent },
   {path: 'import-glx', component: ImportGLXComponent },
-  {path: 'routes/edit/:id', component: LineRouteComponent },
+  { path: 'routes/edit/:id', component: LineRouteComponent },
+  {path: 'vehicles', component: VehiclesComponent },
   {path: 'trips', component: TripsComponent}
 ]
 @NgModule({

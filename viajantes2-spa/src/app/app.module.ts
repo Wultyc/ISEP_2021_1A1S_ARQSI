@@ -34,6 +34,7 @@ import { CommonModule } from '@angular/common';
 import { LineRouteComponent } from './RedeMasterData/components/line-route/line-route.component';
 import { TripsComponent } from './ViagemMasterData/components/trips/trips.component';
 import { TripulantComponent } from './ViagemMasterData/components/tripulant/tripulant.component';
+import { VehiclesComponent } from './ViagemMasterData/components/vehicles/vehicles.component';
  
 
 @NgModule({
@@ -50,6 +51,7 @@ import { TripulantComponent } from './ViagemMasterData/components/tripulant/trip
     LineRouteComponent,
     TripsComponent,
     TripulantComponent,
+    VehiclesComponent,
     
   ],
   imports: [

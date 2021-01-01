@@ -7429,19 +7429,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\nunom\\.nuget\\packages\\": {}
+    "C:\\Users\\jorge\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Desktop\\ARQSI2021\\ViagemMasterData\\ViagemMasterData.csproj",
+      "projectUniqueName": "C:\\Users\\jorge\\ISEP-Workspace\\ARQSI\\Arqsi_Viajantes2\\ViagemMasterData\\ViagemMasterData.csproj",
       "projectName": "ViagemMasterData",
-      "projectPath": "D:\\Desktop\\ARQSI2021\\ViagemMasterData\\ViagemMasterData.csproj",
-      "packagesPath": "C:\\Users\\nunom\\.nuget\\packages\\",
-      "outputPath": "D:\\Desktop\\ARQSI2021\\ViagemMasterData\\obj\\",
+      "projectPath": "C:\\Users\\jorge\\ISEP-Workspace\\ARQSI\\Arqsi_Viajantes2\\ViagemMasterData\\ViagemMasterData.csproj",
+      "packagesPath": "C:\\Users\\jorge\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jorge\\ISEP-Workspace\\ARQSI\\Arqsi_Viajantes2\\ViagemMasterData\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\nunom\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jorge\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
