@@ -6,7 +6,7 @@ export class TripulantMapper {
     fromFormToCreate = function (formBody: any, object: TripulantPost) {
         object.Name = formBody.name;
         object.BirthDate = formBody.birthDate;
-        object.LicenceNr = formBody.licenceNumber;
+        object.LicenceNr = formBody.licenseNumber;
         object.LicenceExpires = formBody.licenseExpires;
         object.TripulantTypes = [];
         for (let i = 0; i < formBody.tripulantTypes.length; i++){
