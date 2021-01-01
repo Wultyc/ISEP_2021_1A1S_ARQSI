@@ -11,15 +11,17 @@ import { LineRouteComponent } from './RedeMasterData/components/line-route/line-
 import { VehiclesComponent } from './ViagemMasterData/components/vehicles/vehicles.component';
 import { TripsComponent } from './ViagemMasterData/components/trips/trips.component'
 const routes: Routes = [
-  {path: 'nodes', component: NodesComponent },
-  {path: 'lines', component: LineComponent },
-  {path: 'tripulant-types', component: TripulantTypeComponent },
-  {path: 'vehicle-types', component: VehicleTypeComponent },
-  {path: 'routes', component: RoutesComponent },
-  {path: 'import-glx', component: ImportGLXComponent },
-  { path: 'routes/edit/:id', component: LineRouteComponent },
-  {path: 'vehicles', component: VehiclesComponent },
-  {path: 'trips', component: TripsComponent}
+  {path: 'rmd/nodes', component: NodesComponent },
+  {path: 'rmd/lines', component: LineComponent },
+  {path: 'rmd/tripulant-types', component: TripulantTypeComponent },
+  {path: 'rmd/vehicle-types', component: VehicleTypeComponent },
+  {path: 'rmd/routes', component: RoutesComponent },
+  {path: 'rmd/routes/edit/:id', component: LineRouteComponent },
+
+  {path: 'vmd/vehicles', component: VehiclesComponent },
+  {path: 'vmd/trips', component: TripsComponent},
+  
+  {path: 'import-glx', component: ImportGLXComponent }
 ]
 @NgModule({
   declarations: [],

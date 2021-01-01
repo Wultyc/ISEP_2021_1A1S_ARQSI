@@ -55,25 +55,27 @@ export class SideNavComponent {
     private router: Router, private breakpointObserver: BreakpointObserver) { }
 
   goToNodes(): void {
-    this.router.navigate(['nodes'], { relativeTo: this.route });
+    this.router.navigate(['rmd/nodes'], { relativeTo: this.route });
   }
   goToLines(): void {
-    this.router.navigate(['lines'], { relativeTo: this.route });
+    this.router.navigate(['rmd/lines'], { relativeTo: this.route });
   }
   goToVType(): void {
-    this.router.navigate(['vehicle-types'], { relativeTo: this.route });
+    this.router.navigate(['rmd/vehicle-types'], { relativeTo: this.route });
   }
   goToTType(): void {
-    this.router.navigate(['tripulant-types'], { relativeTo: this.route });
-  }
-  goToTGLX(): void {
-    this.router.navigate(['import-glx'], { relativeTo: this.route });
+    this.router.navigate(['rmd/tripulant-types'], { relativeTo: this.route });
   }
   goToRoutes(): void {
-    this.router.navigate(['routes'], { relativeTo: this.route });
+    this.router.navigate(['rmd/routes'], { relativeTo: this.route });
   }
+
   goToVehicles(): void {
-    this.router.navigate(['vehicles'], { relativeTo: this.route });
+    this.router.navigate(['vmd/vehicles'], { relativeTo: this.route });
+  }
+
+  goToTGLX(): void {
+    this.router.navigate(['import-glx'], { relativeTo: this.route });
   }
 }
 
