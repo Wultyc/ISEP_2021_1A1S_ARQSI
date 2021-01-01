@@ -76,7 +76,25 @@
                 <mat-error *ngIf="formControl.hasError('required')">
                     Number of Trips is <strong>required</strong>
                 </mat-error>
-            </mat-form-field> 
+            </mat-form-field> &nbsp; &nbsp; &nbsp; &nbsp; 
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Start Time Hour</mat-label>
+                <mat-select class="form-control"  formControlName="startTimeHour">
+                    <mat-option *ngFor="let hour of hours" [value]="hour">
+                    {{ hour }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp; 
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Start Time Minute</mat-label>
+                <mat-select class="form-control"  formControlName="startTimeMinute">
+                    <mat-option *ngFor="let minute of minutes" [value]="minute">
+                    {{ minute }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
         </section>
 
     </div>
@@ -114,7 +132,25 @@
                     {{route.routeNodes[0].node.shortName}} - {{route.routeNodes[route.routeNodes.length-1].node.shortName}}
                     </mat-option>
                 </mat-select>
+            </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Start Time Hour</mat-label>
+                <mat-select class="form-control"  formControlName="startTimeHour">
+                    <mat-option *ngFor="let hour of hours" [value]="hour">
+                    {{ hour }}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp; 
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Start Time Minute</mat-label>
+                <mat-select class="form-control"  formControlName="startTimeMinute">
+                    <mat-option *ngFor="let minute of minutes" [value]="minute">
+                    {{ minute }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
 
         </section>
 
