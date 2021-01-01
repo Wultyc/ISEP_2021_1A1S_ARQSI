@@ -66,8 +66,8 @@ export class VehiclesComponent implements OnInit {
         if (data && data.length > 0) { 
           data.forEach(v => this.vehicleList.push(this.vehicleMapper.fromResponseToDto(new Vehicle(), v)))
           this.dataSource = new MatTableDataSource(this.vehicleList);
-          this.getVehicleTypes()
         };
+        this.getVehicleTypes();
       }
     ); 
   }
