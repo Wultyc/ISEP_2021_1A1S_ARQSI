@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { AmazingTimePickerService } from 'amazing-time-picker';
 
-import { Trip } from '../../models/trip';
+import { Trip, TripPost, TripAdHocPost } from '../../models/trip';
 import { TripsService } from '../../services/trips.service';
 import { TripMapper } from '../../models/mappers/trip';
 
@@ -27,9 +28,6 @@ export class TripsComponent implements OnInit {
   lineList: Line[] = [];
   routeList: Route[] = [];
 
-  hours: Number[] = [];
-  minutes: Number[] = [];
-
   linesMapper = new LinesMapper();
   routesMapper = new RoutesMapper();
 
@@ -43,8 +41,7 @@ export class TripsComponent implements OnInit {
   tripForm = new FormGroup ({
     line: new FormControl(),
     route: new FormControl(),
-    startTimeHour: new FormControl(),
-    startTimeMinute: new FormControl(),
+    startTime: new FormControl(),
     frequency: new FormControl(),
     numberOfTrips: new FormControl(),
   });
@@ -52,8 +49,7 @@ export class TripsComponent implements OnInit {
   tripAdHocForm = new FormGroup ({
     line: new FormControl(),
     route: new FormControl(),
-    startTimeHour: new FormControl(),
-    startTimeMinute: new FormControl(),
+    startTime: new FormControl()
   });
 
   isAdding: boolean = false;
@@ -68,18 +64,19 @@ export class TripsComponent implements OnInit {
     private routesService: RoutesService,
     private tripsService: TripsService,
     public dialog: MatDialog,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private atp: AmazingTimePickerService) {
+  }
+
+  open() {
+    const amazingTimePicker = this.atp.open();
+    amazingTimePicker.afterClose().subscribe(time => {
+      console.log(time);
+    });
   }
 
   ngOnInit(): void {
     this.getObjects();
-
-    for(var i = 0; i <= 23; i++){
-      this.hours.push(i);
-    }
-    for(var i = 0; i <= 60; i++){
-      this.minutes.push(i);
-    }
   }
 
   applyFilter(event: Event) {
@@ -174,20 +171,18 @@ export class TripsComponent implements OnInit {
   }
 
   submitAdHoc() :void {
-    var postEntity = new Trip();
+    var postAdHocTrip = new TripAdHocPost();
     this.errorMessages = [];
 
-    //postEntity = this.tripMapper.fromFormToDTO(this.tripForm.value, new Trip)
+    postAdHocTrip = this.tripMapper.fromAdHocFormToDTO(this.tripAdHocForm.value, new TripAdHocPost)
+    console.log(postAdHocTrip)
 
-    console.log(postEntity)
-
-    this.tripsService.postTrip(postEntity)
+    this.tripsService.postAdHocTrip(postAdHocTrip)
     .subscribe(
       (data) => {
         if (data) { 
-          this.tripList.push(data);
-          // this.showDetails.push(false);
-            this.isAdding = !this.isAdding;
+          this.tripList.push(this.tripMapper.fromResponseToDto(new Trip(), data, this.lineList, this.routeList));
+          this.isAddingAdHoc = false;
         }
       },
       (error) => { 
