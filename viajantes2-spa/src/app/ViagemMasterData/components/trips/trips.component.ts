@@ -41,7 +41,14 @@ export class TripsComponent implements OnInit {
     line: new FormControl(),
     route: new FormControl(),
     startTime: new FormControl(),
-    endTIme: new FormControl()
+    frequency: new FormControl(),
+    numberOfTrips: new FormControl(),
+  });
+
+  tripAdHocForm = new FormGroup ({
+    line: new FormControl(),
+    route: new FormControl(),
+    startTime: new FormControl()
   });
 
   isAdding: boolean = false;
@@ -77,7 +84,7 @@ export class TripsComponent implements OnInit {
   }
 
   setAddAdHoc() : any {
-    this.tripForm.reset();
+    this.tripAdHocForm.reset();
     this.hasError = false;
     this.isAdding = false;
     this.isAddingAdHoc = true;
@@ -85,6 +92,7 @@ export class TripsComponent implements OnInit {
 
   closeAdd() : any {
     this.tripForm.reset();
+    this.tripAdHocForm.reset();
     this.hasError = false;
     this.isAdding = false;
     this.isAddingAdHoc = false;
@@ -126,6 +134,34 @@ export class TripsComponent implements OnInit {
   }
 
   submit() :void {
+    var postEntity = new Trip();
+    this.errorMessages = [];
+
+    //postEntity = this.tripMapper.fromFormToDTO(this.tripForm.value, new Trip)
+
+    console.log(postEntity)
+
+    this.tripsService.postTrip(postEntity)
+    .subscribe(
+      (data) => {
+        if (data) { 
+          this.tripList.push(data);
+          // this.showDetails.push(false);
+            this.isAdding = !this.isAdding;
+        }
+      },
+      (error) => { 
+        this.hasError = true;
+        if (error.error != null && error.error.code == null && error.error.message == null) {
+          console.error("This model does not have Business Validations.");
+        } else {
+          this.errorMessages.push("Error Submiting the Trip.");
+        }
+      }
+    )
+  }
+
+  submitAdHoc() :void {
     var postEntity = new Trip();
     this.errorMessages = [];
 
