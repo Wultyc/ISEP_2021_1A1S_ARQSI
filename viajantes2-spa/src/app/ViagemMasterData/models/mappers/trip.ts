@@ -1,6 +1,6 @@
 import { Route } from 'src/app/RedeMasterData/models/route';
 import { Line } from 'src/app/RedeMasterData/models/line';
-import { Trip } from '../trip';
+import { Trip, TripPost, TripAdHocPost } from '../trip';
 export class TripMapper {
     constructor() { }
 
@@ -27,5 +27,12 @@ export class TripMapper {
         model.endTime = response.endTime;
 
         return model;
+    }
+
+    fromAdHocFormToDTO = function (formBody: any, object: TripAdHocPost) {
+        object.lineId = formBody.line;
+        object.routeId = formBody.route;
+        object.startTime = formBody.startTime;
+        return object;
     }
 }
