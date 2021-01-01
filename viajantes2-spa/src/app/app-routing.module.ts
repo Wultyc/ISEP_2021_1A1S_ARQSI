@@ -14,10 +14,10 @@ import { TripulantComponent } from './ViagemMasterData/components/tripulant/trip
 const routes: Routes = [
   {path: 'rmd/nodes', component: NodesComponent },
   {path: 'rmd/lines', component: LineComponent },
+  {path: 'rmd/lines/:id/edit', component: LineRouteComponent },
   {path: 'rmd/tripulant-types', component: TripulantTypeComponent },
   {path: 'rmd/vehicle-types', component: VehicleTypeComponent },
   {path: 'rmd/routes', component: RoutesComponent },
-  {path: 'rmd/routes/edit/:id', component: LineRouteComponent },
 
   {path: 'vmd/vehicles', component: VehiclesComponent },
   {path: 'vmd/tripulants', component: TripulantComponent },

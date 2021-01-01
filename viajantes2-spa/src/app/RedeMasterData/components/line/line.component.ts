@@ -184,7 +184,7 @@ getRoutes() : void {
   };
 
   goToInsertLineRoute(id: any): void {
-    this.router.navigate(['routes/edit/',id]);
+    this.router.navigate(['rmd/lines',id,'edit']);
   }
 
   onShowDetails(row: any) {
