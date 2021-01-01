@@ -1,10 +1,15 @@
 <h1>&nbsp; Trips</h1>
 
-<div>
-    <a mat-button (click)="setAdd()">{{isAdding ? 'Close create mode' : 'Create Trip'}}</a>
+<div *ngIf="!isAdding && !isAddingAdHoc">
+    <a mat-button (click)= "setAdd()" >Create Trip</a>
+    <a mat-button (click)= "setAddAdHoc()" >Create Trip AdHoc</a>
 </div>
 
-<div *ngIf="!isAdding; else createTripTemplate">
+<div *ngIf="isAdding || isAddingAdHoc">
+    <a mat-button (click)="closeAdd()">Close create mode</a>
+</div>
+
+<div *ngIf="!isAdding && !isAddingAdHoc">
     <mat-form-field>
         <mat-label>Search: </mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Aguiar de Sousa" #input>

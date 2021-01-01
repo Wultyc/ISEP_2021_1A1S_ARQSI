@@ -45,6 +45,8 @@ export class TripsComponent implements OnInit {
   });
 
   isAdding: boolean = false;
+  isAddingAdHoc: boolean = false;
+
   hasError: boolean = false;
   errorMessages: any[] = [];
 
@@ -70,7 +72,22 @@ export class TripsComponent implements OnInit {
   setAdd() : any {
     this.tripForm.reset();
     this.hasError = false;
-    return this.isAdding = !this.isAdding;
+    this.isAdding = true;
+    this.isAddingAdHoc = false;
+  }
+
+  setAddAdHoc() : any {
+    this.tripForm.reset();
+    this.hasError = false;
+    this.isAdding = false;
+    this.isAddingAdHoc = true;
+  }
+
+  closeAdd() : any {
+    this.tripForm.reset();
+    this.hasError = false;
+    this.isAdding = false;
+    this.isAddingAdHoc = false;
   }
 
   getObjects() : void {
