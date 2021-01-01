@@ -21,8 +21,8 @@ export class LinesService {
     return this.httpClient.get<Line[]>(this.url);    
   }
 
-  getLineRoutes(id: String): Observable<Line[]> {
-    return this.httpClient.get<Line[]>(this.url + "/" + id + "/routes");    
+  getLineRoutes(id: String): Observable<Line> {
+    return this.httpClient.get<Line>(this.url + "/" + id);    
   }
   postLines(line: LinePost): Observable<LinePost> {
     return this.httpClient.post<LinePost>(this.url, line).pipe(

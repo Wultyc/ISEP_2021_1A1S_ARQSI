@@ -19,20 +19,20 @@ namespace ViagemMasterData.Domain.Tripulant
             //    .NotNull().WithMessage("Is necessary to inform the code.");
 
             RuleFor(c => c.Name)
-                    .NotEmpty().WithMessage("Is necessary to inform the licence plate.")
-                    .NotNull().WithMessage("Is necessary to inform the licence plate.");
+                    .NotEmpty().WithMessage("Is necessary to inform the name.")
+                    .NotNull().WithMessage("Is necessary to inform the name.");
 
             RuleFor(c => c.BirthDate)
-                    .NotEmpty().WithMessage("Is necessary to inform the vin.")
-                    .NotNull().WithMessage("Is necessary to inform the vin.");
+                    .NotEmpty().WithMessage("Is necessary to inform the Birth Date.")
+                    .NotNull().WithMessage("Is necessary to inform the Birth Date.");
 
             RuleFor(c => c.LicenceNr)
-                    .NotEmpty().WithMessage("Is necessary to inform the vehicle type.")
-                    .NotNull().WithMessage("Is necessary to inform the vehicle type.");
+                    .NotEmpty().WithMessage("Is necessary to inform the Licence Nr.")
+                    .NotNull().WithMessage("Is necessary to inform the Licence Nr.");
 
             RuleFor(c => c.LicenceExpires)
-                    .NotEmpty().WithMessage("Is necessary to inform the start date.")
-                    .NotNull().WithMessage("Is necessary to inform the start date.");
+                    .NotEmpty().WithMessage("Is necessary to inform the Licence Expires.")
+                    .NotNull().WithMessage("Is necessary to inform the Licence Expires.");
         }
     }
 }

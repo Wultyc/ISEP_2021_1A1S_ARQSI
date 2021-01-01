@@ -45,7 +45,7 @@ namespace ViagemMasterData.Domain.Tripulant
             //}
         }
 
-        public async void Validate(Tripulant tripulant)
+        public async Task Validate(Tripulant tripulant)
         {
             TripulantValidator validator = new TripulantValidator();
             validator.ValidateAndThrow(tripulant);
@@ -59,6 +59,7 @@ namespace ViagemMasterData.Domain.Tripulant
                     throw new BusinessRuleValidationException("Tripulant-Type " + tripulantType + " not found!");
                 }
             }
+
         }
 
     }

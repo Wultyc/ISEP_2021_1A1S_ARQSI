@@ -59,18 +59,22 @@ namespace ViagemMasterData.Controllers
 
         // POST: api/vehicle
         [HttpPost]
-        public async Task<TripulantDTO> PostVehicle([FromBody] CreateTripulantDTO createTripulant)
+        public async Task<IActionResult> PostVehicle([FromBody] CreateTripulantDTO createTripulant)
         {
-            //try
-            //{
+            try
+            {
                 TripulantDTO tripulant = await _tripulantService.PostAsync(createTripulant);
-                return tripulant;
+                return Ok(new ObjectResult(tripulant));
 
-            //}
-            //catch (BusinessRuleValidationException ex)
-            //{
-            //    return new BadRequestObjectResult(ex.Message);
-            //}
+            }
+            catch (BusinessRuleValidationException ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         // PUT: api/vehicle
