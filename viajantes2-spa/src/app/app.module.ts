@@ -35,7 +35,11 @@ import { LineRouteComponent } from './RedeMasterData/components/line-route/line-
 import { TripsComponent } from './ViagemMasterData/components/trips/trips.component';
 import { TripulantComponent } from './ViagemMasterData/components/tripulant/tripulant.component';
 import { VehiclesComponent } from './ViagemMasterData/components/vehicles/vehicles.component';
- 
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MomentDateModule, MomentDateAdapter } from '@angular/material-moment-adapter';
+
+
 
 @NgModule({
   declarations: [
@@ -76,7 +80,9 @@ import { VehiclesComponent } from './ViagemMasterData/components/vehicles/vehicl
     ReactiveFormsModule,
     MatSelectModule,
     MatSnackBarModule,
-    CommonModule
+    CommonModule, 
+    MatDatepickerModule,
+    MatNativeDateModule
 
     ],
   exports: [

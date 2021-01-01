@@ -10,11 +10,11 @@ export class Tripulant {
 }
 
 export class TripulantPost {
-    name: string;
-    birthDate: Date;
-    licenceNumber: string;
-    licenseExpires: Date;
-    tripulantTypes: string[];
+    Name: string;
+    BirthDate: Date;
+    LicenceNr: string;
+    LicenceExpires: Date;
+    TripulantTypes: string[];
 }
 
 export class TripulantFilled {

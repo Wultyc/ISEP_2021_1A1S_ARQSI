@@ -84,6 +84,8 @@ export class VehiclesComponent implements OnInit {
     var postEntity = new Vehicle();
     this.errorMessages = [];
 
+    this.vehicleForm.value.startDate = new Date(this.vehicleForm.value.startDate.valueOf() - this.vehicleForm.value.startDate.getTimezoneOffset() * 60000).toISOString().replace(/\.\d{3}Z$/, ''); 
+
     postEntity = this.vehicleMapper.fromFormToDTO(this.vehicleForm.value, new Vehicle)
 
     console.log(postEntity)
