@@ -28,7 +28,7 @@ CREATE TABLE [dbo].[Trip]
 CREATE TABLE [dbo].[TripSchedule]
 (
  [Id] varchar(255) NOT NULL PRIMARY KEY,
- [TripId] varchar(255) NOT NULL,
+ [TripId] varchar(255) NOT NULL FOREIGN KEY REFERENCES Trip(Id),
  [NodeId] varchar(255) NOT NULL,
  [NodeOrder] int NOT NULL,
  [PassingTime] Time NOT NULL
@@ -50,26 +50,32 @@ CREATE TABLE [dbo].[TripulantTypes]
  [TripulantTypeId] varchar(255) NOT NULL
 );
 
-CREATE TABLE [dbo].[WorkBlock]
-(
- [Id] varchar(255) NOT NULL PRIMARY KEY,
- [TripId] varchar(255) NOT NULL,
- [VehicleServiceId] varchar(255) NOT NULL,
- [TripulantServiceId] varchar(255) NOT NULL,
- [StartTime] Time NOT NULL,
- [EndTime] Time NOT NULL
-);
-
 CREATE TABLE [dbo].[TripulantService]
 (
  [Id] varchar(255) NOT NULL PRIMARY KEY,
- [TripulantId] varchar(255) NOT NULL,
+ [TripulantId] varchar(255) NOT NULL FOREIGN KEY REFERENCES Tripulant(Id),
  [Date] DateTime NOT NULL
 );
  
 CREATE TABLE [dbo].[VehicleService]
 (
  [Id] varchar(255) NOT NULL PRIMARY KEY,
- [VehicleId] varchar(255) NOT NULL,
+ [VehicleId] varchar(255) NOT NULL FOREIGN KEY REFERENCES Vehicle(Id),
  [Date] DateTime NOT NULL
+);
+
+CREATE TABLE [dbo].[WorkBlock]
+(
+ [Id] varchar(255) NOT NULL PRIMARY KEY,
+ [TripId] varchar(255) NOT NULL KEY REFERENCES Trip(Id),
+ [VehicleServiceId] varchar(255) NOT NULL KEY REFERENCES VehicleService(Id),
+ [TripulantServiceId] varchar(255) NOT NULL KEY REFERENCES TripulantService(Id),
+ [StartTime] Time NOT NULL,
+ [EndTime] Time NOT NULL
+);
+
+CREATE TABLE [dbo].[WorkBlockTrip]
+(
+ [TripId] varchar(255) NOT NULL PRIMARY KEY KEY REFERENCES Trip(Id),
+ [WorkBlockId] varchar(255) NOT NULL PRIMARY KEY KEY REFERENCES WorkBlock(Id)
 );
