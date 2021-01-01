@@ -10,6 +10,7 @@ import { RoutesComponent } from './RedeMasterData/components/routes/routes.compo
 import { LineRouteComponent } from './RedeMasterData/components/line-route/line-route.component';
 import { VehiclesComponent } from './ViagemMasterData/components/vehicles/vehicles.component';
 import { TripsComponent } from './ViagemMasterData/components/trips/trips.component'
+import { TripulantComponent } from './ViagemMasterData/components/tripulant/tripulant.component';
 const routes: Routes = [
   {path: 'rmd/nodes', component: NodesComponent },
   {path: 'rmd/lines', component: LineComponent },
@@ -19,6 +20,8 @@ const routes: Routes = [
   {path: 'rmd/routes/edit/:id', component: LineRouteComponent },
 
   {path: 'vmd/vehicles', component: VehiclesComponent },
+  {path: 'vmd/tripulants', component: TripulantComponent },
+
   {path: 'vmd/trips', component: TripsComponent},
   
   {path: 'import-glx', component: ImportGLXComponent }

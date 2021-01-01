@@ -20,7 +20,7 @@ export class TripulantService {
   getTripulants(): Observable<Tripulant[]> {
     return this.httpClient.get<Tripulant[]>(this.url);    
   }
-  postVehicleType(tripulant: TripulantPost): Observable<Tripulant> {
+  postTripulant(tripulant: TripulantPost): Observable<Tripulant> {
     return this.httpClient.post<Tripulant>(this.url, tripulant).pipe(
       catchError((err) => {
         console.error(err);
