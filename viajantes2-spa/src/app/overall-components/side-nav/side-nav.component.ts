@@ -78,14 +78,19 @@ export class SideNavComponent {
     this.router.navigate(['vmd/vehicle-service'], { relativeTo: this.route });
 
   }
+  
+  goToTripulants(): void {
+    this.router.navigate(['vmd/tripulants'], { relativeTo: this.route });
+  }
+  
   goToTrips(): void {
     this.router.navigate(['vmd/trips'], { relativeTo: this.route });
   }
 
-  goToTripulants(): void {
-    this.router.navigate(['vmd/tripulants'], { relativeTo: this.route });
+  goToWorkBlocks(): void {
+    this.router.navigate(['vmd/workBlocks'], { relativeTo: this.route });
   }
-
+  
   goToTGLX(): void {
     this.router.navigate(['import-glx'], { relativeTo: this.route });
   }

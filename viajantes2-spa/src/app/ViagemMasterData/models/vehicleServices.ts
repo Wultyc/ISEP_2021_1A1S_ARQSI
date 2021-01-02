@@ -1,10 +1,11 @@
+import { Vehicle } from "./vehicles";
 
 export class VehicleServicePost {
     VehicleId: string;
     Date: Date;
 }
 export class VehicleService {
-    Id: string;
-    VehicleId: string;
-    Date: Date;
+    id: string;
+    vehicle: Vehicle;
+    date: Date;
 }

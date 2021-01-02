@@ -9,7 +9,8 @@ import { ImportGLXComponent } from './RedeMasterData/components/import-glx/impor
 import { RoutesComponent } from './RedeMasterData/components/routes/routes.component';
 import { LineRouteComponent } from './RedeMasterData/components/line-route/line-route.component';
 import { VehiclesComponent } from './ViagemMasterData/components/vehicles/vehicles.component';
-import { TripsComponent } from './ViagemMasterData/components/trips/trips.component'
+import { TripsComponent } from './ViagemMasterData/components/trips/trips.component';
+import { WorkBlocksComponent } from './ViagemMasterData/components/work-blocks/work-blocks.component';
 import { TripulantComponent } from './ViagemMasterData/components/tripulant/tripulant.component';
 import { VehicleServiceComponent } from './ViagemMasterData/components/vehicle-service/vehicle-service.component';
 const routes: Routes = [
@@ -26,6 +27,8 @@ const routes: Routes = [
   {path: 'vmd/tripulants', component: TripulantComponent },
 
   {path: 'vmd/trips', component: TripsComponent},
+  
+  {path: 'vmd/workBlocks', component: WorkBlocksComponent},
   
   {path: 'import-glx', component: ImportGLXComponent }
 ]
