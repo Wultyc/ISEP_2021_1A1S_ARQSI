@@ -20,6 +20,7 @@ export class Route {
 }
 
 export class RoutePost {
+    id: string | undefined 
     isReinforcementRoute: boolean;
     isEmptyRoute: boolean;
     routeNodes: RouteNodesSimple[] = [];

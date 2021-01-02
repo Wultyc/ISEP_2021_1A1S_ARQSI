@@ -11,6 +11,10 @@ export interface LineRoutes {
   route: Route;
   orientation: string;
 }
+export class LinePatch{
+  routeId: string;
+  orientation: string;
+}
 export class LinePost {
   code: String;
   name: String | undefined;

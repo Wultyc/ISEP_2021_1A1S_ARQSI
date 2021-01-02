@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Line, LinePost } from '../models/line';
+import { Line, LinePatch, LinePost } from '../models/line';
 import {Observable, throwError } from 'rxjs'
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
@@ -33,8 +33,8 @@ export class LinesService {
     )
   }
 
-  postLineRoutes(id: string, route: RoutePost, orientation: string): Observable<RoutePost>  {
-    return this.httpClient.post<RoutePost>(this.url + "/" + id +"/createandaddroute/" + orientation, route).pipe(
+  patchLine(id: string, linePatch: LinePatch): Observable<Line>  {
+    return this.httpClient.patch<Line>(this.url + "/" + id , linePatch).pipe(
       catchError((err) => {
         console.error(err);
         return throwError(err);
