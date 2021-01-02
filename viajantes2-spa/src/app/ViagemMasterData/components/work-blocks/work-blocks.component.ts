@@ -178,17 +178,16 @@ export class WorkBlocksComponent implements OnInit {
   }
 
   submit() :void {
-    /*
-    var postEntity = new TripPost();
+    var postEntity = new WorkBlockPost();
     this.errorMessages = [];
-    postEntity = this.tripMapper.fromFormToDTO(this.tripForm.value, new TripPost);
-    console.log(postEntity)
+    postEntity = this.workBlockMapper.fromFormToDTO(this.workBlockForm.value, new WorkBlockPost);
+    console.log(postEntity);
 
-    this.tripsService.postTrip(postEntity)
+    this.workBlockService.postWorkBlock(postEntity)
     .subscribe(
       (data) => {
         if (data) { 
-          data.forEach(t => this.tripList.push(this.tripMapper.fromResponseToDto(new Trip(), t, this.lineList, this.routeList)));
+          data.forEach(wb => this.workBlockList.push(this.workBlockMapper.fromResponseToDto(new WorkBlock(), wb, this.tripList, this.vehicleServiceList)));
           this.isAdding = false;
         }
       },
@@ -200,7 +199,6 @@ export class WorkBlocksComponent implements OnInit {
         }
       }
     )
-    */
   }
 
 }
