@@ -59,6 +59,24 @@ namespace ViagemMasterData.Controllers
             }
         }
 
+        // GET: api/trip/lines/5
+        [HttpGet("lines/{lineId}")]
+        public IActionResult GetTripLines([FromRoute] string lineId)
+        {
+            try
+            {
+                return new ObjectResult(_tripService.GetLines(lineId));
+            }
+            catch (ArgumentException ex)
+            {
+                return NotFound(ex);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         // POST: api/trip/adhoc
         [HttpPost("adhoc")]
         public async Task<IActionResult> PostAdHocTrip([FromBody] CreateTripAdHocDTO createTripAdHoc)

@@ -109,5 +109,28 @@ namespace ViagemMasterData.Service
             return tripMapper.GetTripDTOForTrip(trip);
         }
 
+        public IList<TripDTO> GetLines(string lineId)
+        {
+            IList<Schema.Trip> tripList = _repository.Select();
+            IList<TripDTO> tripDTOList = new List<TripDTO>();
+
+            foreach (Schema.Trip trip in tripList)
+            {
+                tripDTOList.Add(tripMapper.GetTripDTOForTrip(trip));
+            }
+
+            IList<TripDTO> tripDTOListWithLineId = new List<TripDTO>();
+
+            foreach (TripDTO tripDTO in tripDTOList)
+            {
+                if (tripDTO.LineId.ToUpper() == lineId.ToUpper())
+                {
+                    tripDTOListWithLineId.Add(tripDTO);
+                }
+            }
+
+            return tripDTOListWithLineId;
+        }
+
     }
 }
