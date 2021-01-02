@@ -15,10 +15,10 @@ import { VehicleServiceComponent } from './ViagemMasterData/components/vehicle-s
 const routes: Routes = [
   {path: 'rmd/nodes', component: NodesComponent },
   {path: 'rmd/lines', component: LineComponent },
+  {path: 'rmd/lines/:id/edit', component: LineRouteComponent },
   {path: 'rmd/tripulant-types', component: TripulantTypeComponent },
   {path: 'rmd/vehicle-types', component: VehicleTypeComponent },
   {path: 'rmd/routes', component: RoutesComponent },
-  {path: 'rmd/routes/edit/:id', component: LineRouteComponent },
 
   {path: 'vmd/vehicles', component: VehiclesComponent },
   {path: 'vmd/vehicle-service', component: VehicleServiceComponent },

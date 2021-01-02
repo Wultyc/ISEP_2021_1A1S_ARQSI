@@ -1,8 +1,7 @@
-import {animate, state, style, transition, trigger} from '@angular/animations';
 import {AfterViewInit, OnInit, Component, ViewChild} from '@angular/core';
-import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Route, RouteNodes, RoutePost} from '../../models/route';
+import {LinePatch} from '../../models/line'
 import {MatDialog} from '@angular/material/dialog';
 import {FormControl, Validators, FormBuilder, FormGroup, FormArray} from '@angular/forms';
 import { RoutesService } from '../../services/routes.service';
@@ -10,10 +9,9 @@ import { RoutesMapper } from '../../models/mappers/routeMapper';
 import { Nodes } from '../../models/nodes';
 import { NodesService } from '../../services/nodes.service';
 import { NodesMapper } from '../../models/mappers/nodeMapper';
-import { CommonModule } from '@angular/common';  
-import { BrowserModule } from '@angular/platform-browser';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { LinesService } from '../../services/lines.service';
+import { LinesMapper } from '../../models/mappers/lineMapper';
 
 
 export interface orientation {
@@ -32,6 +30,7 @@ export class LineRouteComponent implements OnInit, AfterViewInit {
   ]);
 
   mapper = new RoutesMapper();
+  lineMapper = new LinesMapper();
   nodeMapper = new NodesMapper;
 
   routeLineForm = new FormGroup ({
@@ -108,6 +107,7 @@ export class LineRouteComponent implements OnInit, AfterViewInit {
     this.hasError = false;
     this.errorMessages = [];
     let routeNodesPost: any[] = [];
+
     for (let i = 0; i < this.routeNodes.controls.length; i++) {
       routeNodesPost.push(
         {
@@ -122,29 +122,28 @@ export class LineRouteComponent implements OnInit, AfterViewInit {
     this.routeLineForm.value.isReinforcementRoute = (this.routeLineForm.value.isReinforcementRoute == undefined  || this.routeLineForm.value.isReinforcementRoute == null) ? false : (this.routeLineForm.value.isReinforcementRoute == true ? true : false);
     
     postEntity = this.mapper.fromFormToPost(routeNodesPost,this.routeLineForm.value, postEntity);
-    this.linesService.postLineRoutes(this.id, postEntity, this.routeLineForm.value.routeOrientation as string).subscribe(
+    
+    this.routeService.postRoute(postEntity).subscribe(
       (data) => {
-        if (data) {
-          console.log(data);
-          this.router.navigate(['lines']);
-        }
-      },
-      (error) => { 
-        this.hasError = true;
-        if (error.error != null && error.error.code == null && error.error.message == null) {
-          if (error.error instanceof Array) {
-            this.errorMessages.push("Error Adding Route to Line.");
-            for (let i = 0; i < error.error.length; i ++) {       
-              this.errorMessages.push(error.error[i]);
-            }   
-          } else {
-            this.errorMessages.push("Error Adding Route to Line. " + error.error);
+        const linePatch: LinePatch = this.lineMapper.fromFormToPatchLine(data.id as string, this.routeLineForm.value.routeOrientation, new LinePatch())
+        this.linesService.patchLine(this.id, linePatch).subscribe(
+          (data) => {
+            this.router.navigate(['rmd/lines']);
+          },
+          (error) => {
+            console.log(error)
+            this.hasError = true;
+            this.errorMessages.push("Error updating Line");
           }
-        } else {
-          this.errorMessages.push("Error Adding Route to Line. " +
-            "If no required fields are empty, there may already exist a Line with that code introduced.");
-        }
+        )
+      },
+      (error) => {
+        console.log(error)
+        this.hasError = true;
+        this.errorMessages.push("Error creating Route");
       }
     )
+
+
   }
 }
