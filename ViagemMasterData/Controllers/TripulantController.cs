@@ -57,7 +57,7 @@ namespace ViagemMasterData.Controllers
             }
         }
 
-        // POST: api/vehicle
+        // POST: api/tripulant
         [HttpPost]
         public async Task<IActionResult> PostVehicle([FromBody] CreateTripulantDTO createTripulant)
         {
