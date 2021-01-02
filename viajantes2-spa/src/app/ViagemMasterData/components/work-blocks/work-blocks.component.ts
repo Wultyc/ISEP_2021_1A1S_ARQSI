@@ -193,7 +193,7 @@ export class WorkBlocksComponent implements OnInit {
       },
       (error) => { 
         this.hasError = true;
-        this.errorMessages.push("Error Submiting the Trip.");
+        this.errorMessages.push("Error Submiting the Work Blocks.");
         if (error.error != null && error.error.title != null && error.error.message == null) {
           this.errorMessages.push(error.error.title);
         }
