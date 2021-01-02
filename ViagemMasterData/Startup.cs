@@ -84,7 +84,7 @@ namespace ViagemMasterData
             services.AddTransient<TripService>();
             services.AddTransient<TripScheduleService>();
             services.AddTransient<TripulantService>();
-
+            services.AddTransient<VehicleServiceService>();
             services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
 
         }

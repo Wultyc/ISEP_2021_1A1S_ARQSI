@@ -27,10 +27,16 @@ namespace ViagemMasterData.Mappers
             return new Schema.VehicleService(vehicleServices.Id.Value.ToString(), vehicleServices.VehicleId.Value.ToString(), vehicleServices.Date);
         }
 
-        public VehicleServiceDTO GetTripulantDTOFromCreateTripulantDTO(CreateVehicleServiceDTO createVehicleServiceDTO)
+        public VehicleServiceDTO GetDTOFromCreateDTO(CreateVehicleServiceDTO createVehicleServiceDTO)
         {
             return new VehicleServiceDTO(null,
                 createVehicleServiceDTO.VehicleId, createVehicleServiceDTO.Date, null);
+        }
+
+        public VehicleServiceDTO GetDTOFromDomain(Domain.VehicleServices.VehicleServices vehicleServices)
+        {
+            return new VehicleServiceDTO(vehicleServices.Id.Value.ToString(),
+                vehicleServices.VehicleId.Value.ToString(), vehicleServices.Date, null);
         }
     }
 }

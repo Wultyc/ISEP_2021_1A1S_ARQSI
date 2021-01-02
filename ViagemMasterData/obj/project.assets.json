@@ -7425,23 +7425,24 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.1",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.1",
       "Newtonsoft.Json >= 12.0.3",
+      "System.Collections >= 4.3.0",
       "System.Collections.NonGeneric >= 4.3.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jorge\\.nuget\\packages\\": {}
+    "C:\\Users\\nunom\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jorge\\ISEP-Workspace\\ARQSI\\Arqsi_Viajantes2\\ViagemMasterData\\ViagemMasterData.csproj",
+      "projectUniqueName": "D:\\Desktop\\ARQSI2021\\ViagemMasterData\\ViagemMasterData.csproj",
       "projectName": "ViagemMasterData",
-      "projectPath": "C:\\Users\\jorge\\ISEP-Workspace\\ARQSI\\Arqsi_Viajantes2\\ViagemMasterData\\ViagemMasterData.csproj",
-      "packagesPath": "C:\\Users\\jorge\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jorge\\ISEP-Workspace\\ARQSI\\Arqsi_Viajantes2\\ViagemMasterData\\obj\\",
+      "projectPath": "D:\\Desktop\\ARQSI2021\\ViagemMasterData\\ViagemMasterData.csproj",
+      "packagesPath": "C:\\Users\\nunom\\.nuget\\packages\\",
+      "outputPath": "D:\\Desktop\\ARQSI2021\\ViagemMasterData\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jorge\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nunom\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7509,6 +7510,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[12.0.3, )"
+          },
+          "System.Collections": {
+            "target": "Package",
+            "version": "[4.3.0, )"
           },
           "System.Collections.NonGeneric": {
             "target": "Package",

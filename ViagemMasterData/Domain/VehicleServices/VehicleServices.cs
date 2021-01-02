@@ -36,12 +36,26 @@ namespace ViagemMasterData.Domain.VehicleServices
         {
             var dbContext = new BaseContext();
             VehicleServiceValidator validator = new VehicleServiceValidator();
-            validator.ValidateAndThrow(vehicleServices);
+            var validatorMessages = validator.Validate(vehicleServices);
+            if (!validatorMessages.IsValid)
+            { 
+                string error = "";
+                foreach (var failure in validatorMessages.Errors)
+                {
+                    error = error + " " + failure.ErrorMessage;
+
+                }
+                    throw new BusinessRuleValidationException(error);
+            }
 
             var vehicle = dbContext.Vehicles.Where(b => b.Id == vehicleServices.VehicleId.Value.ToString()).FirstOrDefault();
             if (vehicle == null)
             {
                 throw new BusinessRuleValidationException("Vehicle " + vehicleServices.VehicleId.Value.ToString() + " not found!");
+            }
+            var vehicleService = dbContext.VehicleServices.Where(b => b.VehicleId == vehicleServices.VehicleId.Value.ToString() && b.Date == vehicleServices.Date).FirstOrDefault();
+            if (vehicleService != null) {
+                throw new BusinessRuleValidationException("Vehicle " + vehicleServices.VehicleId.Value.ToString() + " already has the day " + vehicleServices.Date + "assigned!");
             }
         }
 
