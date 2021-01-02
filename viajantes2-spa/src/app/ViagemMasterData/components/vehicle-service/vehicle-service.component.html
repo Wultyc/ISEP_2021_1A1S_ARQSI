@@ -1,4 +1,4 @@
-<h1>&nbsp; VehicleService</h1>
+<h1>&nbsp; Vehicle Service</h1>
 
 <div [formGroup]="vehicleServiceForm">
     <section class="example-section">
@@ -12,8 +12,8 @@
           <mat-form-field class="example-full-width">
             <mat-label>Vehicle</mat-label>
             <mat-select class="form-control" formControlName="vehicleId">
-                <mat-option *ngFor="let vType of vehicleList" [value]="vType.id">
-                    {{ vType.vehicleType.description }}({{vType.vehicleType.fuelType}}) - {{vType.vin}}
+                <mat-option *ngFor="let vehicle of vehicleList" [value]="vehicle.id">
+                    {{ vehicle.licencePlate}} ({{vehicle.vehicleType.description}})
                 </mat-option>
             </mat-select>
         </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;    
