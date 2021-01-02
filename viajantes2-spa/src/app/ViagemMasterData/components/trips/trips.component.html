@@ -44,7 +44,7 @@
         <section class="example-section">
             <mat-form-field class="example-full-width">
                 <mat-label>Line</mat-label>
-                <mat-select class="form-control"  formControlName="line">
+                <mat-select class="form-control"  formControlName="line" (selectionChange)="refreshRouteLine($event.value)">
                     <mat-option *ngFor="let line of lineList" [value]="line.id">
                     {{ line.code }}
                     </mat-option>
@@ -54,7 +54,7 @@
             <mat-form-field class="example-full-width">
                 <mat-label>Route</mat-label>
                 <mat-select class="form-control"  formControlName="route">
-                    <mat-option *ngFor="let route of routeList" [value]="route.id">
+                    <mat-option *ngFor="let route of lineRouteList" [value]="route.id">
                     {{route.routeNodes[0].node.shortName}} - {{route.routeNodes[route.routeNodes.length-1].node.shortName}}
                     </mat-option>
                 </mat-select>
@@ -105,7 +105,7 @@
         <section class="example-section">
             <mat-form-field class="example-full-width">
                 <mat-label>Line</mat-label>
-                <mat-select class="form-control"  formControlName="line">
+                <mat-select class="form-control"  formControlName="line" (selectionChange)="refreshRouteLine($event.value)">
                     <mat-option *ngFor="let line of lineList" [value]="line.id">
                     {{ line.code }}
                     </mat-option>
@@ -115,7 +115,7 @@
             <mat-form-field class="example-full-width">
                 <mat-label>Route</mat-label>
                 <mat-select class="form-control"  formControlName="route">
-                    <mat-option *ngFor="let route of routeList" [value]="route.id">
+                    <mat-option *ngFor="let route of lineRouteList" [value]="route.id">
                     {{route.routeNodes[0].node.shortName}} - {{route.routeNodes[route.routeNodes.length-1].node.shortName}}
                     </mat-option>
                 </mat-select>

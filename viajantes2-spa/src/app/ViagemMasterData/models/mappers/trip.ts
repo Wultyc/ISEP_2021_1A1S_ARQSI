@@ -29,6 +29,15 @@ export class TripMapper {
         return model;
     }
 
+    fromFormToDTO = function (formBody: any, object: TripPost) {
+        object.lineId = formBody.line;
+        object.routeId = formBody.route;
+        object.startTime = formBody.startTime;
+        object.frequency = formBody.frequency;
+        object.numberOfTrips = formBody.numberOfTrips;
+        return object;
+    }
+    
     fromAdHocFormToDTO = function (formBody: any, object: TripAdHocPost) {
         object.lineId = formBody.line;
         object.routeId = formBody.route;

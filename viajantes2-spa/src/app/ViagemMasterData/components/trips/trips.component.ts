@@ -27,6 +27,7 @@ export class TripsComponent implements OnInit {
   tripList: Trip[] = [];
   lineList: Line[] = [];
   routeList: Route[] = [];
+  lineRouteList: Route[] = [];
 
   linesMapper = new LinesMapper();
   routesMapper = new RoutesMapper();
@@ -75,6 +76,25 @@ export class TripsComponent implements OnInit {
     });
   }
 
+  refreshRouteLine(selectedLineId: string) {
+    console.log(selectedLineId);
+    this.lineRouteList = [];
+    if (this.isAdding) {
+      this.tripForm.value.route = null;
+    }
+    if (this.isAddingAdHoc) {
+      this.tripAdHocForm.value.route = null;
+    }
+    var lineWithSelectedId = new Line();
+    for (let index = 0; index < this.lineList.length; index++) {
+      if (this.lineList[index].id == selectedLineId) {
+        lineWithSelectedId = this.lineList[index];
+        break;
+      }
+    }
+    lineWithSelectedId.lineRoutes.forEach(r => this.lineRouteList.push(this.routesMapper.fromResponseToDto(new Route(), r.route)));
+  }
+
   ngOnInit(): void {
     this.getObjects();
   }
@@ -87,6 +107,7 @@ export class TripsComponent implements OnInit {
 
   setAdd() : any {
     this.tripForm.reset();
+    this.lineRouteList = [];
     this.hasError = false;
     this.isAdding = true;
     this.isAddingAdHoc = false;
@@ -94,6 +115,7 @@ export class TripsComponent implements OnInit {
 
   setAddAdHoc() : any {
     this.tripAdHocForm.reset();
+    this.lineRouteList = [];
     this.hasError = false;
     this.isAdding = false;
     this.isAddingAdHoc = true;
@@ -102,6 +124,7 @@ export class TripsComponent implements OnInit {
   closeAdd() : any {
     this.tripForm.reset();
     this.tripAdHocForm.reset();
+    this.lineRouteList = [];
     this.hasError = false;
     this.isAdding = false;
     this.isAddingAdHoc = false;
@@ -143,28 +166,24 @@ export class TripsComponent implements OnInit {
   }
 
   submit() :void {
-    var postEntity = new Trip();
+    var postEntity = new TripPost();
     this.errorMessages = [];
-
-    //postEntity = this.tripMapper.fromFormToDTO(this.tripForm.value, new Trip)
-
+    postEntity = this.tripMapper.fromFormToDTO(this.tripForm.value, new TripPost);
     console.log(postEntity)
 
     this.tripsService.postTrip(postEntity)
     .subscribe(
       (data) => {
         if (data) { 
-          this.tripList.push(data);
-          // this.showDetails.push(false);
-            this.isAdding = !this.isAdding;
+          data.forEach(t => this.tripList.push(this.tripMapper.fromResponseToDto(new Trip(), t, this.lineList, this.routeList)));
+          this.isAdding = false;
         }
       },
       (error) => { 
         this.hasError = true;
-        if (error.error != null && error.error.code == null && error.error.message == null) {
-          console.error("This model does not have Business Validations.");
-        } else {
-          this.errorMessages.push("Error Submiting the Trip.");
+        this.errorMessages.push("Error Submiting the Trip.");
+        if (error.error != null && error.error.title != null && error.error.message == null) {
+          this.errorMessages.push(error.error.title);
         }
       }
     )
@@ -173,7 +192,6 @@ export class TripsComponent implements OnInit {
   submitAdHoc() :void {
     var postAdHocTrip = new TripAdHocPost();
     this.errorMessages = [];
-
     postAdHocTrip = this.tripMapper.fromAdHocFormToDTO(this.tripAdHocForm.value, new TripAdHocPost)
     console.log(postAdHocTrip)
 
@@ -187,10 +205,9 @@ export class TripsComponent implements OnInit {
       },
       (error) => { 
         this.hasError = true;
-        if (error.error != null && error.error.code == null && error.error.message == null) {
-          console.error("This model does not have Business Validations.");
-        } else {
-          this.errorMessages.push("Error Submiting the Trip.");
+        this.errorMessages.push("Error Submiting the Trip.");
+        if (error.error != null && error.error.title != null && error.error.message == null) {
+          this.errorMessages.push(error.error.title);
         }
       }
     )
