@@ -1,6 +1,6 @@
 <h1>&nbsp; Lines</h1>
 
-<div *ngIf="!isViewingRoutes; else viewLineRoutesTemplate">
+<div *ngIf="!isViewingDetails; else viewLineDetailsTemplate">
 
   <div>
     <a mat-button (click)= "setAdd()" >{{isAdding ? 'Close create line' : 'Create Line'}}</a>
@@ -107,8 +107,8 @@
       <mat-form-field class="example-full-width">
         <mat-label>Tripulant Types</mat-label>
         <mat-select class="form-control"  formControlName="tripulantType" multiple>
-          <mat-option *ngFor="let tripType of tripList" [value]="tripType._id">
-            {{ tripType.description }}
+          <mat-option *ngFor="let tripulantType of tripulantTypeList" [value]="tripulantType._id">
+            {{ tripulantType.description }}
           </mat-option>
         </mat-select>
       </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp; 
@@ -116,8 +116,8 @@
       <mat-form-field class="example-full-width">
         <mat-label>Vehicle Types</mat-label>
         <mat-select class="form-control"  formControlName="vehicleType" multiple>
-          <mat-option *ngFor="let vType of vehicleTypesList" [value]="vType._id">
-            {{ vType.description }}
+          <mat-option *ngFor="let vehicleType of vehicleTypesList" [value]="vehicleType._id">
+            {{ vehicleType.description }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -161,52 +161,78 @@
 
 </div>
 
-<ng-template #viewLineRoutesTemplate>
+<ng-template #viewLineDetailsTemplate>
 
-  <div *ngIf="hasRoutes; else viewNoRoutesTemplate">
+  <div *ngIf="hasRoutes || hasTrips; else viewNoDetailsTemplate">
 
-    <section class="example-section">
-      <ul>
-        <li *ngFor="let lineRoute of lineRoutes">
-          <mat-label>Route Orientation: </mat-label>
-          {{lineRoute.orientation}}
-          &nbsp; &nbsp; &nbsp; &nbsp; 
-          <mat-label>Distance: </mat-label>
-          {{lineRoute.routeId.distance}}
-          &nbsp; &nbsp; &nbsp; &nbsp; 
-          <mat-label>Duration: </mat-label>
-          {{lineRoute.routeId.duration}}
-          &nbsp; &nbsp; &nbsp; &nbsp; 
-          <mat-label>Empty? </mat-label>
-          {{lineRoute.routeId.isEmptyRoute}}
-          &nbsp; &nbsp; &nbsp; &nbsp; 
-          <mat-label>Reinforcement? </mat-label>
-          {{lineRoute.routeId.isReinforcementRoute}}
+    <div *ngIf="hasRoutes">
+      <section class="example-section">
+        <mat-label>Routes</mat-label>
+      </section>
+      <section class="example-section">
+        <ul>
+          <li *ngFor="let lineRoute of lineRoutes">
+            <mat-label>Route Orientation: </mat-label>
+            {{lineRoute.orientation}}
+            &nbsp; &nbsp; &nbsp; &nbsp; 
+            <mat-label>Distance: </mat-label>
+            {{lineRoute.routeId.distance}}
+            &nbsp; &nbsp; &nbsp; &nbsp; 
+            <mat-label>Duration: </mat-label>
+            {{lineRoute.routeId.duration}}
+            &nbsp; &nbsp; &nbsp; &nbsp; 
+            <mat-label>Empty? </mat-label>
+            {{lineRoute.routeId.isEmptyRoute}}
+            &nbsp; &nbsp; &nbsp; &nbsp; 
+            <mat-label>Reinforcement? </mat-label>
+            {{lineRoute.routeId.isReinforcementRoute}}
+  
+            <ul>
+              <li *ngFor="let routeNode of lineRoute.routeId.routeNodes">
+                <mat-label>Node Short Name: </mat-label>
+                {{routeNode.nodeId.shortName}}
+                &nbsp; &nbsp; &nbsp; &nbsp; 
+                <mat-label>Latitude: </mat-label>
+                {{routeNode.nodeId.latitude}}
+                &nbsp; &nbsp; &nbsp; &nbsp; 
+                <mat-label>Longitude: </mat-label>
+                {{routeNode.nodeId.longitude}}
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
 
-          <ul>
-            <li *ngFor="let routeNode of lineRoute.routeId.routeNodes">
-              <mat-label>Node Short Name: </mat-label>
-              {{routeNode.nodeId.shortName}}
-              &nbsp; &nbsp; &nbsp; &nbsp; 
-              <mat-label>Latitude: </mat-label>
-              {{routeNode.nodeId.latitude}}
-              &nbsp; &nbsp; &nbsp; &nbsp; 
-              <mat-label>Longitude: </mat-label>
-              {{routeNode.nodeId.longitude}}
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </section>
+    <div *ngIf="hasTrips">
+      <section class="example-section">
+        <mat-label>Trips</mat-label>
+      </section>
+      <section class="example-section">
+        <ul>
+          <li *ngFor="let lineTrip of lineTrips">
+            <mat-label>Route: </mat-label>
+            {{lineTrip.route.routeNodes[0].node.shortName}} - 
+              {{lineTrip.route.routeNodes[lineTrip.route.routeNodes.length-1].node.shortName}}
+            &nbsp; &nbsp; &nbsp; &nbsp; 
+            <mat-label>Start Time: </mat-label>
+            {{lineTrip.startTime}}
+            &nbsp; &nbsp; &nbsp; &nbsp; 
+            <mat-label>End Time: </mat-label>
+            {{lineTrip.endTime}}
+          </li>
+        </ul>
+      </section>
+    </div>
 
   </div>
 
-  <ng-template #viewLineRoutesTemplate>
-    <mat-label>No routes were found to the Selected Line.</mat-label>
+  <ng-template #viewNoDetailsTemplate>
+    <mat-label>No Routes or Trips were found to the Selected Line.</mat-label>
   </ng-template>
 
   <div>
-    <a mat-button (click)= "setViewLineRoutes()" >Close View</a>
+    <a mat-button (click)= "setViewLineDetails()" >Close View</a>
   </div>
 
 </ng-template>

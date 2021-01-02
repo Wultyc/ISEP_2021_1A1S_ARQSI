@@ -34,4 +34,7 @@ export class TripsService {
           })
         )
   }
+  getLineTrips(lineId: string): Observable<Trip[]> {
+    return this.httpClient.get<Trip[]>(this.url + "/lines/" + lineId);
+  }
 }

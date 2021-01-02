@@ -23,6 +23,9 @@ import { RoutesMapper } from '../../models/mappers/routeMapper';
 import { VehicleTypeService } from '../../services/vehicle-type.service';
 import { VehicleType } from '../../models/vehicle-type';
 import { VehicleTypeMapper } from '../../models/mappers/vehicleTypeMapper';
+import { Trip } from '../../../ViagemMasterData/models/trip';
+import { TripsService } from '../../../ViagemMasterData/services/trips.service';
+import { TripMapper } from '../../../ViagemMasterData/models/mappers/trip';
 import { Router } from '@angular/router';
 
 export interface orientation {
@@ -38,16 +41,19 @@ export interface orientation {
 export class LineComponent implements OnInit, AfterViewInit  {
   formControl = new FormControl('', [
     Validators.required,
- ]);
- errorMessage: any;
+  ]);
+  errorMessage: any;
 
- nodeList: Nodes[] = [];
- nodeMapper = new NodesMapper();
+  nodeList: Nodes[] = [];
+  nodeMapper = new NodesMapper();
 
- tripList: TripulantType[] = [];
- vehicleTypesList: VehicleType[] = [];
+  tripulantTypeList: TripulantType[] = [];
+  vehicleTypesList: VehicleType[] = [];
 
- routeList: Route[] = [];
+  routeList: Route[] = [];
+
+  lineTrips: Trip[] = [];
+  tripMapper = new TripMapper();
 
   lineForm = new FormGroup ({
     code: new FormControl(),
@@ -68,8 +74,9 @@ export class LineComponent implements OnInit, AfterViewInit  {
   dataSource = new MatTableDataSource<Line>();
 
   isAdding: boolean = false;
-  isViewingRoutes: boolean = false;
+  isViewingDetails: boolean = false;
   hasRoutes: boolean = true;
+  hasTrips: boolean = true;
 
   errorMessages: any[] = [];
 
@@ -94,8 +101,9 @@ export class LineComponent implements OnInit, AfterViewInit  {
    private linesService: LinesService,
    private routeService: RoutesService,
    private nodesService: NodesService,
-   private tripService: TripulantTypeService,
+   private tripulantTypeService: TripulantTypeService,
    private vehicleTypesService: VehicleTypeService,
+   private tripsService: TripsService,
    private dialog: MatDialog,
    private formBuilder: FormBuilder,
    private _snackBar: MatSnackBar
@@ -158,11 +166,11 @@ getRoutes() : void {
   };
 
   getTripulantTypes() : void {
-    this.tripService.getTripulantType().subscribe(
+    this.tripulantTypeService.getTripulantType().subscribe(
       (data) => {
         if (data && data.length > 0) { 
           for (let i = 0; i < data.length; i ++){  
-          this.tripList.push(data[i]);
+          this.tripulantTypeList.push(data[i]);
           }
         };
       }
@@ -189,17 +197,35 @@ getRoutes() : void {
 
   onShowDetails(row: any) {
     console.log(row);
-    this.linesService.getLineRoutes(row.id).subscribe(
+    this.getLineRoutes(row.id);
+    this.getLineTrips(row.id);
+    this.isViewingDetails = !this.isViewingDetails;
+  }
+
+  getLineRoutes(lineId: string) : void {
+    this.linesService.getLineRoutes(lineId).subscribe(
       (data) => {
         if (data && data.lineRoutes.length > 0) {
           this.hasRoutes = true;
           this.lineRoutes = data.lineRoutes;
         } else {
           this.hasRoutes = false;
-        };     
+        };  
       }  
     );
-    this.isViewingRoutes = !this.isViewingRoutes;
+  }
+
+  getLineTrips(lineId: string) : void {
+    this.tripsService.getLineTrips(lineId).subscribe(
+      (data) => {
+        if (data && data.length > 0) { 
+          this.hasTrips = true;
+          data.forEach(t => this.lineTrips.push(this.tripMapper.fromResponseToDto(new Trip(), t, this.lineList, this.routeList)));
+        } else {
+          this.hasTrips = false; 
+        }
+      }
+    ); 
   }
 
   insertRoute() {     
@@ -226,8 +252,10 @@ getRoutes() : void {
     }
   }
 
-  setViewLineRoutes() : any {
-    return this.isViewingRoutes = !this.isViewingRoutes;  
+  setViewLineDetails() : any {
+    this.lineRoutes = [];
+    this.lineTrips = [];
+    return this.isViewingDetails = !this.isViewingDetails;  
   }
 
   //will be implemented as front end validation
