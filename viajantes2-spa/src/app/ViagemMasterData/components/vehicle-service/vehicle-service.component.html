@@ -1,0 +1,32 @@
+<h1>&nbsp; VehicleService</h1>
+
+<div [formGroup]="vehicleServiceForm">
+    <section class="example-section">
+        <mat-form-field appearance="fill">
+            <mat-label>Service Date</mat-label>
+            <input matInput [matDatepicker]="picker"
+            formControlName="date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;
+          <mat-form-field class="example-full-width">
+            <mat-label>Vehicle</mat-label>
+            <mat-select class="form-control" formControlName="vehicleId">
+                <mat-option *ngFor="let vType of vehicleList" [value]="vType.id">
+                    {{ vType.vehicleType.description }}({{vType.vehicleType.fuelType}}) - {{vType.vin}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;    
+    </section>
+</div>
+<div>
+    <a mat-button (click)="submit()">Submit</a>
+</div>
+<div *ngIf="hasError">
+    <ul>
+        <div *ngFor="let errorMessage of errorMessages">
+            <mat-error-label>{{errorMessage}}</mat-error-label>
+        </div>
+    </ul>
+</div>
+

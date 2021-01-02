@@ -39,6 +39,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MomentDateModule, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { AmazingTimePickerModule } from 'amazing-time-picker';
+import { VehicleServiceComponent } from './ViagemMasterData/components/vehicle-service/vehicle-service.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { AmazingTimePickerModule } from 'amazing-time-picker';
     TripsComponent,
     TripulantComponent,
     VehiclesComponent,
+    VehicleServiceComponent,
     
   ],
   imports: [
