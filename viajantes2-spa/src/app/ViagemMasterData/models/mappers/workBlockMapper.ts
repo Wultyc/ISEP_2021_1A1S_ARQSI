@@ -10,14 +10,14 @@ export class WorkBlockMapper {
         
         var trip = new Trip();
         for (let index = 0; index < tripList.length; index++) {
-            if (tripList[index].id == response.tripId) {
+            if (tripList[index].id.toUpperCase() == response.tripId.toUpperCase()) {
                 trip = tripList[index];
             }
         }
 
         var vehicleService = new VehicleService();
         for (let index = 0; index < vehicleServiceList.length; index++) {
-            if (vehicleServiceList[index].id == response.vehicleServiceId) {
+            if (vehicleServiceList[index].id.toUpperCase() == response.vehicleServiceId.toUpperCase()) {
                 vehicleService = vehicleServiceList[index];
             }
         }

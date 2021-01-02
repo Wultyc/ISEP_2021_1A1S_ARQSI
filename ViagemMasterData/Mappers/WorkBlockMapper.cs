@@ -19,7 +19,7 @@ namespace ViagemMasterData.Mappers
 
         public Schema.WorkBlock GetWorkBlockForWorkBlockDTO(WorkBlockDTO workBlockDTO)
         {
-            return new Schema.WorkBlock(workBlockDTO.Id, workBlockDTO.TripId, workBlockDTO.VehicleServiceId, workBlockDTO.TripulantServiceId,
+            return new Schema.WorkBlock(workBlockDTO.Id, workBlockDTO.TripId, workBlockDTO.VehicleServiceId, "",
                 workBlockDTO.StartTime, workBlockDTO.EndTime);
         }
         
@@ -29,8 +29,8 @@ namespace ViagemMasterData.Mappers
 
             for (int i = 0; i < createWorkBlockDTO.NumberOfWorkBlocks; i++)
             {
-                workBlockDTOList.Add(new WorkBlockDTO(Guid.NewGuid().ToString().ToUpper(), createWorkBlockDTO.VehicleServiceId,
-                    createWorkBlockDTO.TripId, null, 
+                workBlockDTOList.Add(new WorkBlockDTO(Guid.NewGuid().ToString().ToUpper(), createWorkBlockDTO.TripId,
+                    createWorkBlockDTO.VehicleServiceId, null, 
                     createWorkBlockDTO.StartTime.Add(TimeSpan.FromMinutes(i * createWorkBlockDTO.Frequency)),
                     createWorkBlockDTO.StartTime.Add(TimeSpan.FromMinutes((i + 1) * createWorkBlockDTO.Frequency))));
             }

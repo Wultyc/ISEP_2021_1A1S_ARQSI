@@ -15,7 +15,7 @@
             <th mat-header-cell *matHeaderCellDef> Trip </th>
             <td mat-cell *matCellDef="let workBlock"> {{workBlock.trip.line.code}} 
                 ({{workBlock.trip.route.routeNodes[0].node.shortName}} - 
-                {{workBlock.trip.route.routeNodes[trip.route.routeNodes.length-1].node.shortName}}) </td>
+                {{workBlock.trip.route.routeNodes[workBlock.trip.route.routeNodes.length-1].node.shortName}}) </td>
         </ng-container>
         <ng-container matColumnDef="vehicleService">
             <th mat-header-cell *matHeaderCellDef> Vehicle Service </th>

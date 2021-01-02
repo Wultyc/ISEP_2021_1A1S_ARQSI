@@ -162,6 +162,7 @@ export class WorkBlocksComponent implements OnInit {
         if (data && data.length > 0) {
           data.forEach(vs => this.vehicleServiceList.push(this.vehicleServiceMapper.fromResponseToDto(new VehicleService(), vs, this.vehicleList)));
         };
+        this.getWorkBlocks();  
       });
   }
 
