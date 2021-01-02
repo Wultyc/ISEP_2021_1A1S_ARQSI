@@ -100,7 +100,7 @@ namespace ViagemMasterData.Service
             if (id.Length == 0)
                 throw new ArgumentException("The id can't be zero.");
 
-            Schema.Trip trip = _repository.Select(new TripId(id));
+            Schema.Trip trip = _repository.Select(id);
             if (trip == null)
             {
                 return null;

@@ -6,6 +6,7 @@ namespace ViagemMasterData.Domain.WorkBlocks
 {
     public class WorkBlock : Entity<WorkBlockId>, IAggregateRoot
     {
+        public string TripId { get; set; }
         public string VehicleServiceId { get; set; }
         public string TripulantServiceId { get; set; }
         public TimeSpan StartTime { get; set; }
@@ -15,9 +16,10 @@ namespace ViagemMasterData.Domain.WorkBlocks
         {  
         }
 
-        public WorkBlock(string id, string vehicleServiceId, string tripulantServiceId, TimeSpan startTime, TimeSpan endTime)
+        public WorkBlock(string id, string tripId, string vehicleServiceId, string tripulantServiceId, TimeSpan startTime, TimeSpan endTime)
         {
             this.Id = new WorkBlockId(id);
+            this.TripId = tripId;
             this.VehicleServiceId = vehicleServiceId;
             this.TripulantServiceId = tripulantServiceId;
             this.StartTime = startTime;

@@ -14,13 +14,15 @@ namespace ViagemMasterData.Service
     {
         private readonly WorkBlockMapper workBlockMapper = new WorkBlockMapper();
         private readonly IRepository<Schema.WorkBlock> _repository;
+        private readonly TripService _tripService;
         private readonly VehicleServiceService _vehicleServiveService;
         private readonly TripulantServiceService _tripulantServiveService;
 
-        public WorkBlockService(IRepository<Schema.WorkBlock> repository, VehicleServiceService vehicleServiveService, 
-            TripulantServiceService tripulantServiveService)
+        public WorkBlockService(IRepository<Schema.WorkBlock> repository, TripService tripService, 
+            VehicleServiceService vehicleServiveService, TripulantServiceService tripulantServiveService)
         {
             _repository = repository;
+            _tripService = tripService;
             _vehicleServiveService = vehicleServiveService;
             _tripulantServiveService = tripulantServiveService;
         }
@@ -32,6 +34,10 @@ namespace ViagemMasterData.Service
 
             if (createWorkBlockDTO.NumberOfWorkBlocks < 1)
                 throw new ArgumentException("The number of trips can't be less than 1.");
+
+            dynamic validateTrip = _tripService.Get(createWorkBlockDTO.TripId);
+            if (validateTrip == null)
+                throw new BusinessRuleValidationException("Trip not found!");
 
             dynamic validateVehicleService = _vehicleServiveService.Get(createWorkBlockDTO.VehicleServiceId);
             if (validateVehicleService == null)

@@ -12,14 +12,12 @@ namespace ViagemMasterData.DTOs.VehicleServiceDTOs
         public string Id { get; set; }
         public string VehicleId { get; set; }
         public DateTime Date { get; set; }
-        public List<WorkBlock> WorkBlocks { get; set; }
 
-        public VehicleServiceDTO(string id, string vehicleId, DateTime date, List<WorkBlock> workBlocks)
+        public VehicleServiceDTO(string id, string vehicleId, DateTime date)
         {
             this.Id = id;
             this.VehicleId = vehicleId;
             this.Date = date;
-            this.WorkBlocks = workBlocks;
         }
     }
 }

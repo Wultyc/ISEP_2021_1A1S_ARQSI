@@ -13,7 +13,7 @@ namespace ViagemMasterData.Mappers
         public VehicleServiceDTO GetDTOFromSchema(Schema.VehicleService vehicleService)
         {
             return new VehicleServiceDTO(vehicleService.Id.ToString().ToUpper(),
-                vehicleService.VehicleId, vehicleService.Date, vehicleService.WorkBlocks.ToList());
+                vehicleService.VehicleId, vehicleService.Date);
         }
 
         public Domain.VehicleServices.VehicleServices GetDomainFromTripulantDTO(VehicleServiceDTO vehicleServiceDTO)
@@ -29,14 +29,12 @@ namespace ViagemMasterData.Mappers
 
         public VehicleServiceDTO GetDTOFromCreateDTO(CreateVehicleServiceDTO createVehicleServiceDTO)
         {
-            return new VehicleServiceDTO(null,
-                createVehicleServiceDTO.VehicleId, createVehicleServiceDTO.Date, null);
+            return new VehicleServiceDTO(null, createVehicleServiceDTO.VehicleId, createVehicleServiceDTO.Date);
         }
 
         public VehicleServiceDTO GetDTOFromDomain(Domain.VehicleServices.VehicleServices vehicleServices)
         {
-            return new VehicleServiceDTO(vehicleServices.Id.Value.ToString(),
-                vehicleServices.VehicleId.Value.ToString(), vehicleServices.Date, null);
+            return new VehicleServiceDTO(vehicleServices.Id.Value.ToString(), vehicleServices.VehicleId.Value.ToString(), vehicleServices.Date);
         }
 
     }

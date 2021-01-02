@@ -19,9 +19,13 @@ namespace ViagemMasterData.Domain.WorkBlocks
                 .NotEmpty().WithMessage("Is necessary to inform the identifier.")
                 .NotNull().WithMessage("Is necessary to inform the identifier.");
 
+            RuleFor(c => c.TripId)
+                .NotEmpty().WithMessage("Is necessary to inform the trip identifier.")
+                .NotNull().WithMessage("Is necessary to inform the trip identifier.");
+
             RuleFor(c => c.VehicleServiceId)
-                .NotEmpty().WithMessage("Is necessary to inform the line identifier.")
-                .NotNull().WithMessage("Is necessary to inform the line identifier.");
+                .NotEmpty().WithMessage("Is necessary to inform the vehicle service identifier.")
+                .NotNull().WithMessage("Is necessary to inform the vehicle service identifier.");
 
             // don't validate tripuplantServiceId
 
