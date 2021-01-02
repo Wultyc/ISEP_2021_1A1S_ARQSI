@@ -10,13 +10,13 @@ using ViagemMasterData.Schema;
 
 namespace ViagemMasterData.Service
 {
-    public class TripulantServiceService
+    public class TripulantService
     {
         private readonly TripulantMapper TripulantMapper = new TripulantMapper();
         private readonly IRepository<Schema.Tripulant> _repository;
         private readonly IRepository<Schema.TripulantType> _tripTypeRepository;
 
-        public TripulantServiceService(IRepository<Schema.Tripulant> repository, IRepository<Schema.TripulantType> tripTypeRepository)
+        public TripulantService(IRepository<Schema.Tripulant> repository, IRepository<Schema.TripulantType> tripTypeRepository)
         {
             _repository = repository;
             _tripTypeRepository = tripTypeRepository;

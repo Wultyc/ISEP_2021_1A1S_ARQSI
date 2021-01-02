@@ -20,6 +20,19 @@ namespace ViagemMasterData.Controllers
             _vehicleServiceService = vehicleServiceService;
         }
 
+        [HttpGet]
+        public IActionResult GetTrips()
+        {
+            try
+            {
+                return new ObjectResult(_vehicleServiceService.Get());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> PostVehicleService([FromBody] CreateVehicleServiceDTO createVehicleService)
         {

@@ -47,5 +47,18 @@ namespace ViagemMasterData.Service
             }
             return vehicleServiceMapper.GetDTOFromSchema(vehicleService);
         }
+
+        public IList<VehicleServiceDTO> Get()
+        {
+            IList<Schema.VehicleService> vehicleServiceList = _repository.Select();
+            IList<VehicleServiceDTO> vehicleServiceDTOList = new List<VehicleServiceDTO>();
+
+            foreach (Schema.VehicleService vehicleService in vehicleServiceList)
+            {
+                vehicleServiceDTOList.Add(vehicleServiceMapper.GetDTOFromSchema(vehicleService));
+            }
+
+            return vehicleServiceDTOList;
+        }
     }
 }
