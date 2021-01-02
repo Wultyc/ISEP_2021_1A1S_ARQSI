@@ -38,5 +38,6 @@ namespace ViagemMasterData.Mappers
             return new VehicleServiceDTO(vehicleServices.Id.Value.ToString(),
                 vehicleServices.VehicleId.Value.ToString(), vehicleServices.Date, null);
         }
+
     }
 }

@@ -34,5 +34,18 @@ namespace ViagemMasterData.Service
             vehicleServiceDTO = vehicleServiceMapper.GetDTOFromDomain(vehicleServiceDomain);
             return vehicleServiceDTO;
         }
+
+        public VehicleServiceDTO Get(string id)
+        {
+            if (id.Length == 0)
+                throw new ArgumentException("The id can't be zero.");
+
+            Schema.VehicleService vehicleService = _repository.Select(id);
+            if (vehicleService == null)
+            {
+                return null;
+            }
+            return vehicleServiceMapper.GetDTOFromSchema(vehicleService);
+        }
     }
 }

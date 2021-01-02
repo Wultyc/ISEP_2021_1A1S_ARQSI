@@ -10,13 +10,13 @@ using ViagemMasterData.Schema;
 
 namespace ViagemMasterData.Service
 {
-    public class TripulantService
+    public class TripulantServiceService
     {
         private readonly TripulantMapper TripulantMapper = new TripulantMapper();
         private readonly IRepository<Schema.Tripulant> _repository;
         private readonly IRepository<Schema.TripulantType> _tripTypeRepository;
 
-        public TripulantService(IRepository<Schema.Tripulant> repository, IRepository<Schema.TripulantType> tripTypeRepository)
+        public TripulantServiceService(IRepository<Schema.Tripulant> repository, IRepository<Schema.TripulantType> tripTypeRepository)
         {
             _repository = repository;
             _tripTypeRepository = tripTypeRepository;
@@ -88,13 +88,5 @@ namespace ViagemMasterData.Service
             return TripulantMapper.GetTripulantDTOForTripulant(Tripulant);
         }
 
-        //private static void Validate(TripulantDTO TripulantDTO)
-        //{
-        //    if (TripulantDTO == null)
-        //        throw new Exception("Tripulant not detected!");
-
-        //    TripulantValidator validator = new TripulantValidator();
-        //    validator.ValidateAndThrow(TripulantDTO);
-        //}
     }
 }

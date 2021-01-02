@@ -1,34 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
+using ViagemMasterData.Domain.Shared;
+using FluentValidation;
 
-#nullable disable
-
-namespace ViagemMasterData.Schema
+namespace ViagemMasterData.Domain.WorkBlocks
 {
-    public partial class WorkBlock
+    public class WorkBlock : Entity<WorkBlockId>, IAggregateRoot
     {
-        public WorkBlock()
-        {
-            WorkBlockTrips = new HashSet<WorkBlockTrip>();
-        }
-
-        public string Id { get; set; }
         public string VehicleServiceId { get; set; }
         public string TripulantServiceId { get; set; }
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
 
-        public virtual TripulantService TripulantService { get; set; }
-        public virtual VehicleService VehicleService { get; set; }
-        public virtual ICollection<WorkBlockTrip> WorkBlockTrips { get; set; }
+        private WorkBlock()
+        {  
+        }
 
         public WorkBlock(string id, string vehicleServiceId, string tripulantServiceId, TimeSpan startTime, TimeSpan endTime)
         {
-            this.Id = id;
+            this.Id = new WorkBlockId(id);
             this.VehicleServiceId = vehicleServiceId;
             this.TripulantServiceId = tripulantServiceId;
             this.StartTime = startTime;
             this.EndTime = endTime;
         }
+
+        public void Validate()
+        {
+            WorkBlockValidator validator = new WorkBlockValidator();
+            validator.ValidateAndThrow(this);
+        }
+
     }
 }

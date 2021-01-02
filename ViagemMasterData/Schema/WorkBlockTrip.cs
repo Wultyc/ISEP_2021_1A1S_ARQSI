@@ -9,7 +9,6 @@ namespace ViagemMasterData.Schema
     {
         public string TripId { get; set; }
         public string WorkBlockId { get; set; }
-
         public virtual Trip Trip { get; set; }
         public virtual WorkBlock WorkBlock { get; set; }
     }

@@ -13,9 +13,9 @@ namespace ViagemMasterData.Controllers
     [ApiController]
     public class TripulantController : Controller
     {
-        private readonly TripulantService _tripulantService;
+        private readonly TripulantServiceService _tripulantService;
 
-        public TripulantController(TripulantService tripulantService)
+        public TripulantController(TripulantServiceService tripulantService)
         {
             _tripulantService = tripulantService;
         }

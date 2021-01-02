@@ -201,11 +201,6 @@ namespace ViagemMasterData.Infrastructure
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.TripId)
-                    .IsRequired()
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.TripulantServiceId)
                     .IsRequired()
                     .HasMaxLength(255)
@@ -215,12 +210,6 @@ namespace ViagemMasterData.Infrastructure
                     .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false);
-
-                entity.HasOne(d => d.Trip)
-                    .WithMany(p => p.WorkBlocks)
-                    .HasForeignKey(d => d.TripId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__WorkBlock__TripI__3FD07829");
 
                 entity.HasOne(d => d.TripulantService)
                     .WithMany(p => p.WorkBlocks)
