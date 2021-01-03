@@ -1,4 +1,4 @@
-import Joi from 'Joi'
+import Joi from 'joi'
 
 const vehicleTypesValidationSchema = Joi.object({
     id: Joi.string(),
