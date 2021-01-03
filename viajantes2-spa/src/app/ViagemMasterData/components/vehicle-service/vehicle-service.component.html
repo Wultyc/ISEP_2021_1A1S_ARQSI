@@ -22,6 +22,15 @@
 <div>
     <a mat-button (click)="submit()">Submit</a>
 </div>
+
+<div *ngIf="hasSubmited">
+    <ul>
+        <div *ngFor="let submitMessage of submitMessages">
+            <mat-sucess-label>{{submitMessage}}</mat-sucess-label>
+        </div>
+    </ul>
+</div>
+
 <div *ngIf="hasError">
     <ul>
         <div *ngFor="let errorMessage of errorMessages">

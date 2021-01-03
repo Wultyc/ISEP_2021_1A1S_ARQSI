@@ -39,6 +39,8 @@ export class TripulantComponent implements OnInit {
   isAdding: boolean = false;
   hasError: boolean = false;
   errorMessages: any[] = [];
+  hasSubmited: boolean = false;
+  submitMessages: any[] = [];
   constructor(
     private tripulantMapper: TripulantMapper,
     private tripulantService: TripulantService,
@@ -49,7 +51,6 @@ export class TripulantComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTripulantTypes();
-
   }
 
   applyFilter(event: Event) {
@@ -61,6 +62,7 @@ export class TripulantComponent implements OnInit {
   setAdd() : any {
     this.tripulantForm.reset();
     this.hasError = false;
+    this.hasSubmited = false;
     return this.isAdding = !this.isAdding;
   }
 
@@ -75,6 +77,7 @@ export class TripulantComponent implements OnInit {
   //     }
   //   ); 
   // }
+
   getTripulantTypes(){
     this.tripulantTypeService.getTripulantType().subscribe(
       (data) => {
@@ -86,14 +89,13 @@ export class TripulantComponent implements OnInit {
   submit() :void {
     // var postEntity = new Vehicle();
     this.errorMessages = [];
-
+    this.submitMessages = [];
 
     this.tripulantForm.value.birthDate = new Date(this.tripulantForm.value.birthDate.valueOf() - this.tripulantForm.value.birthDate.getTimezoneOffset() * 60000).toISOString().replace(/\.\d{3}Z$/, ''); 
     this.tripulantForm.value.licenseExpires = new Date(this.tripulantForm.value.licenseExpires.valueOf() - this.tripulantForm.value.licenseExpires.getTimezoneOffset() * 60000).toISOString().replace(/\.\d{3}Z$/, ''); 
     
     var postEntity = this.tripulantMapper.fromFormToCreate(this.tripulantForm.value, new TripulantPost);
   
-
     console.log(postEntity);
 
     this.tripulantService.postTripulant(postEntity)
@@ -101,14 +103,18 @@ export class TripulantComponent implements OnInit {
       (data) => {
         if (data) { 
           this.tripulantList.push(data); 
-          
           // this.showDetails.push(false);
-            this.isAdding = !this.isAdding;
+          //this.isAdding = !this.isAdding;
         }
+        this.hasSubmited = true;
+        this.submitMessages.push("Tripulant with id was submited.");
       },
       (error) => { 
         this.hasError = true;
-          console.error(error);
+        this.errorMessages.push("Error Submiting the Tripulant.");
+        if (error.error != null && error.error.title != null && error.error.message == null) {
+          this.errorMessages.push(error.error.title);
+        }
       }
     )
   }

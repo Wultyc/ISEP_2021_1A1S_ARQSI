@@ -28,6 +28,8 @@ export class VehicleServiceComponent implements OnInit {
   isAdding: boolean = false;
   hasError: boolean = false;
   errorMessages: any[] = [];
+  hasSubmited: boolean = false;
+  submitMessages: any[] = [];
 
   constructor(
     private vehicleServiceMapper: VehicleServiceMapper,
@@ -65,24 +67,29 @@ export class VehicleServiceComponent implements OnInit {
   submit() :void {
     var postEntity = new VehicleServicePost();
     this.errorMessages = [];
+    this.submitMessages = [];
 
     this.vehicleServiceForm.value.startDate = new Date(this.vehicleServiceForm.value.date.valueOf() - this.vehicleServiceForm.value.date.getTimezoneOffset() * 60000).toISOString().replace(/\.\d{3}Z$/, ''); 
     console.log(this.vehicleServiceForm.value)
     postEntity = this.vehicleServiceMapper.fromFormToCreate(this.vehicleServiceForm.value, new VehicleServicePost)
 
-    
-
     this.vehicleServiceService.postVehicle(postEntity)
     .subscribe(
       (data) => {
         if (data) { 
+          //this.vehicleServiceList.push(data);
           // this.showDetails.push(false);
-            this.isAdding = !this.isAdding;
+          this.isAdding = !this.isAdding;
         }
+        this.hasSubmited = true;
+        this.submitMessages.push("Vehicle Service was submited.");
       },
       (error) => { 
         this.hasError = true;
-        this.errorMessages.push(error.error);      
+        this.errorMessages.push("Error Submiting the Vehicle Service.");
+        if (error.error != null && error.error.title != null && error.error.message == null) {
+          this.errorMessages.push(error.error.title);
+        }   
       }
     )
   }
