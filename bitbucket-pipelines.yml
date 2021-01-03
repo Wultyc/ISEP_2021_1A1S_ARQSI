@@ -104,6 +104,6 @@ pipelines:
             - kubectl delete deployment importglx-deployment
             - kubectl apply -f ./Kubernets/importglx.yaml
             #SPA
-            - kubectl delete deployment viajantes2-deployment
+            - kubectl delete deployment viajantes2-spa-deployment
             - kubectl apply -f ./Kubernets/viajantes2-spa.yaml
 
