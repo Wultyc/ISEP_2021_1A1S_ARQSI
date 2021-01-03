@@ -29,8 +29,8 @@ namespace ViagemMasterData.Service
 
             Domain.Tripulant.Tripulant tripulantDomain = TripulantMapper.GetDomainFromTripulantDTO(tripulantDTO);
 
-            tripulantDomain.Validate(tripulantDomain);
-
+            await tripulantDomain.Validate(tripulantDomain);
+            
             _repository.Insert(TripulantMapper.GetSchemaFromDomain(tripulantDomain));
 
             foreach(string id in createTripulantDTO.TripulantTypes)
@@ -88,13 +88,5 @@ namespace ViagemMasterData.Service
             return TripulantMapper.GetTripulantDTOForTripulant(Tripulant);
         }
 
-        //private static void Validate(TripulantDTO TripulantDTO)
-        //{
-        //    if (TripulantDTO == null)
-        //        throw new Exception("Tripulant not detected!");
-
-        //    TripulantValidator validator = new TripulantValidator();
-        //    validator.ValidateAndThrow(TripulantDTO);
-        //}
     }
 }

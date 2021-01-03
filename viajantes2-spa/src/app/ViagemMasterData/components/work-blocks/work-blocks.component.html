@@ -1,0 +1,102 @@
+<h1>&nbsp; Work Blocks</h1>
+
+<div *ngIf="!isAdding">
+
+    <div>
+        <a mat-button (click)= "setAdd()" >Create Work Block</a>
+    </div>
+
+    <mat-form-field>
+        <mat-label>Search: </mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Aguiar de Sousa" #input>
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="trip">
+            <th mat-header-cell *matHeaderCellDef> Trip </th>
+            <td mat-cell *matCellDef="let workBlock"> {{workBlock.trip.line.code}} 
+                ({{workBlock.trip.route.routeNodes[0].node.shortName}} - 
+                {{workBlock.trip.route.routeNodes[workBlock.trip.route.routeNodes.length-1].node.shortName}}) </td>
+        </ng-container>
+        <ng-container matColumnDef="vehicleService">
+            <th mat-header-cell *matHeaderCellDef> Vehicle Service </th>
+            <td mat-cell *matCellDef="let workBlock"> {{workBlock.vehicleService.vehicle.licencePlate}} 
+                ({{workBlock.vehicleService.date}}) </td>
+        </ng-container>
+        <ng-container matColumnDef="startTime">
+            <th mat-header-cell *matHeaderCellDef> Start Time </th>
+            <td mat-cell *matCellDef="let workBlock"> {{workBlock.startTime}} </td>
+        </ng-container>
+        <ng-container matColumnDef="endTime">
+            <th mat-header-cell *matHeaderCellDef> End Time </th>
+            <td mat-cell *matCellDef="let workBlock"> {{workBlock.endTime}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+
+<div *ngIf="isAdding">
+
+    <div>
+        <a mat-button (click)="closeAdd()">Close create mode</a>
+    </div>
+
+    <div [formGroup]="workBlockForm">
+        
+        <section class="example-section">
+            <mat-form-field class="example-full-width">
+                <mat-label>Trip</mat-label>
+                <mat-select class="form-control"  formControlName="trip" >
+                    <mat-option *ngFor="let trip of tripList" [value]="trip.id">
+                    {{ trip.line.code }} ({{trip.route.routeNodes[0].node.shortName}} - 
+                    {{trip.route.routeNodes[trip.route.routeNodes.length-1].node.shortName}}) Start: {{ trip.startTime }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp; 
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Vehicle Service</mat-label>
+                <mat-select class="form-control"  formControlName="vehicleService">
+                    <mat-option *ngFor="let vehicleService of vehicleServiceList" [value]="vehicleService.id">
+                        {{vehicleService.vehicle.licencePlate}} ({{vehicleService.date}})
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp; 
+
+            <mat-label>Start Time: </mat-label>
+            <input atp-time-picker formControlName="startTime" />
+
+        </section>
+
+        <section class="example-section">
+            <mat-form-field class="example-full-width">
+                <mat-label>Frequency (minutes)</mat-label>
+                <input matInput class="form-control" formControlName="frequency">
+                <mat-error *ngIf="formControl.hasError('required')">
+                    Frequency is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp; 
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Number of WorkBlocks</mat-label>
+                <input matInput class="form-control" formControlName="numberOfWorkBlocks">
+                <mat-error *ngIf="formControl.hasError('required')">
+                    Number of WorkBlocks is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+        </section>
+
+    </div>
+    <div>
+        <a mat-button (click)= "submit()">Submit</a>
+    </div>
+    <div *ngIf="hasError">
+        <ul>
+            <div *ngFor="let errorMessage of errorMessages">
+                <mat-error-label>{{errorMessage}}</mat-error-label>
+            </div>
+        </ul>
+    </div>
+
+</div>

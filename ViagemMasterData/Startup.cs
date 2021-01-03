@@ -25,7 +25,6 @@ namespace ViagemMasterData
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
@@ -83,7 +82,9 @@ namespace ViagemMasterData
             services.AddTransient<VehicleService>();
             services.AddTransient<TripService>();
             services.AddTransient<TripScheduleService>();
-            services.AddTransient<TripulantService>();
+            services.AddTransient<TripulantServiceService>();
+            services.AddTransient<VehicleServiceService>();
+            services.AddTransient<WorkBlockService>();
 
             services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
 

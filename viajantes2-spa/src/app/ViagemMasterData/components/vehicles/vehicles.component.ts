@@ -6,7 +6,7 @@ import { Vehicle } from '../../models/vehicles';
 import { VehiclesService } from '../../services/vehicles.service';
 import { VehicleTypeService } from '../../../RedeMasterData/services/vehicle-type.service';
 import { VehicleMapper } from '../../models/mappers/vehicles'
-import { VehicleType } from 'src/app/RedeMasterData/models/vehicle-type';
+import { VehicleType } from '../../../RedeMasterData/models/vehicle-type';
 
 @Component({
   selector: 'app-vehicles',
@@ -66,8 +66,8 @@ export class VehiclesComponent implements OnInit {
         if (data && data.length > 0) { 
           data.forEach(v => this.vehicleList.push(this.vehicleMapper.fromResponseToDto(new Vehicle(), v)))
           this.dataSource = new MatTableDataSource(this.vehicleList);
-          this.getVehicleTypes()
         };
+        this.getVehicleTypes();
       }
     ); 
   }
@@ -83,6 +83,8 @@ export class VehiclesComponent implements OnInit {
   submit() :void {
     var postEntity = new Vehicle();
     this.errorMessages = [];
+
+    this.vehicleForm.value.startDate = new Date(this.vehicleForm.value.startDate.valueOf() - this.vehicleForm.value.startDate.getTimezoneOffset() * 60000).toISOString().replace(/\.\d{3}Z$/, ''); 
 
     postEntity = this.vehicleMapper.fromFormToDTO(this.vehicleForm.value, new Vehicle)
 
@@ -100,10 +102,9 @@ export class VehiclesComponent implements OnInit {
       },
       (error) => { 
         this.hasError = true;
-        if (error.error != null && error.error.code == null && error.error.message == null) {
-          console.error("This model does not have Business Validations.");
-        } else {
-          this.errorMessages.push("Error Submiting the Vehicle.");
+        this.errorMessages.push("Error Submiting the Vehicle.");
+        if (error.error != null && error.error.title != null && error.error.message == null) {
+          this.errorMessages.push(error.error.title);
         }
       }
     )

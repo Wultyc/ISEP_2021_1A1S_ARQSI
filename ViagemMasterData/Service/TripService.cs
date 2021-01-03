@@ -100,13 +100,36 @@ namespace ViagemMasterData.Service
             if (id.Length == 0)
                 throw new ArgumentException("The id can't be zero.");
 
-            Schema.Trip trip = _repository.Select(new TripId(id));
+            Schema.Trip trip = _repository.Select(id);
             if (trip == null)
             {
                 return null;
             }
 
             return tripMapper.GetTripDTOForTrip(trip);
+        }
+
+        public IList<TripDTO> GetLines(string lineId)
+        {
+            IList<Schema.Trip> tripList = _repository.Select();
+            IList<TripDTO> tripDTOList = new List<TripDTO>();
+
+            foreach (Schema.Trip trip in tripList)
+            {
+                tripDTOList.Add(tripMapper.GetTripDTOForTrip(trip));
+            }
+
+            IList<TripDTO> tripDTOListWithLineId = new List<TripDTO>();
+
+            foreach (TripDTO tripDTO in tripDTOList)
+            {
+                if (tripDTO.LineId.ToUpper() == lineId.ToUpper())
+                {
+                    tripDTOListWithLineId.Add(tripDTO);
+                }
+            }
+
+            return tripDTOListWithLineId;
         }
 
     }
