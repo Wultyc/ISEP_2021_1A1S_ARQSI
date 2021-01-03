@@ -97,7 +97,13 @@ pipelines:
             - export KUBECONFIG=kubeconfig.yml
             
             #Deploy to cloud
+            # RedeMasterData
+            - kubectl delete deployment redemasterdata-deployment
             - kubectl apply -f ./Kubernets/redemasterdata.yaml
+            # Import GLX
+            - kubectl delete deployment importglx-deployment
             - kubectl apply -f ./Kubernets/importglx.yaml
+            #SPA
+            - kubectl delete deployment viajantes2-deployment
             - kubectl apply -f ./Kubernets/viajantes2-spa.yaml
 
