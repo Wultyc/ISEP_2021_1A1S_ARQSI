@@ -16,7 +16,7 @@ namespace ViagemMasterData.Mappers
                 vehicleService.VehicleId, vehicleService.Date);
         }
 
-        public Domain.VehicleServices.VehicleServices GetDomainFromTripulantDTO(VehicleServiceDTO vehicleServiceDTO)
+        public Domain.VehicleServices.VehicleServices GetDomainFromVehicleServiceDTO(VehicleServiceDTO vehicleServiceDTO)
         {
             return new Domain.VehicleServices.VehicleServices(vehicleServiceDTO.Id, vehicleServiceDTO.VehicleId, vehicleServiceDTO.Date);
         }

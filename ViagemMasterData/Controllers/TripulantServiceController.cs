@@ -4,28 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ViagemMasterData.Domain.Shared;
-using ViagemMasterData.DTOs.VehicleServiceDTOs;
+using ViagemMasterData.DTOs.TripulantServiceDTOs;
 using ViagemMasterData.Service;
 
 namespace ViagemMasterData.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VehicleServiceController : Controller
+    public class TripulantServiceController : Controller
     {
-        private readonly VehicleServiceService _vehicleServiceService;
+        private readonly TripulantServiceService _tripulantServiceService;
 
-        public VehicleServiceController(VehicleServiceService vehicleServiceService)
+        public TripulantServiceController(TripulantServiceService tripulantServiceService)
         {
-            _vehicleServiceService = vehicleServiceService;
+            _tripulantServiceService = tripulantServiceService;
         }
 
         [HttpGet]
-        public IActionResult GetVehicleServices()
+        public IActionResult GetTripulantServices()
         {
             try
             {
-                return new ObjectResult(_vehicleServiceService.Get());
+                return new ObjectResult(_tripulantServiceService.Get());
             }
             catch (Exception ex)
             {
@@ -34,11 +34,11 @@ namespace ViagemMasterData.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostVehicleService([FromBody] CreateVehicleServiceDTO createVehicleService)
+        public async Task<IActionResult> PostTripulantService([FromBody] CreateTripulantServiceDTO createTripulantService)
         {
             try
             {
-                VehicleServiceDTO vehicleService= await _vehicleServiceService.PostAsync(createVehicleService);
+                TripulantServiceDTO vehicleService = await _tripulantServiceService.PostAsync(createTripulantService);
                 return Ok(new ObjectResult(vehicleService));
 
             }

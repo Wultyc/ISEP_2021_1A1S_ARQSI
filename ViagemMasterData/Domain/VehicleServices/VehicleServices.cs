@@ -32,11 +32,11 @@ namespace ViagemMasterData.Domain.VehicleServices
             this.Date = date;
         }
 
-        public async Task Validate(VehicleServices vehicleServices)
+        public async Task Validate()
         {
             var dbContext = new BaseContext();
             VehicleServiceValidator validator = new VehicleServiceValidator();
-            var validatorMessages = validator.Validate(vehicleServices);
+            var validatorMessages = validator.Validate(this);
             if (!validatorMessages.IsValid)
             { 
                 string error = "";
@@ -48,14 +48,14 @@ namespace ViagemMasterData.Domain.VehicleServices
                     throw new BusinessRuleValidationException(error);
             }
 
-            var vehicle = dbContext.Vehicles.Where(b => b.Id == vehicleServices.VehicleId.Value.ToString()).FirstOrDefault();
+            var vehicle = dbContext.Vehicles.Where(b => b.Id == this.VehicleId.Value.ToString()).FirstOrDefault();
             if (vehicle == null)
             {
-                throw new BusinessRuleValidationException("Vehicle " + vehicleServices.VehicleId.Value.ToString() + " not found!");
+                throw new BusinessRuleValidationException("Vehicle " + this.VehicleId.Value.ToString() + " not found!");
             }
-            var vehicleService = dbContext.VehicleServices.Where(b => b.VehicleId == vehicleServices.VehicleId.Value.ToString() && b.Date == vehicleServices.Date).FirstOrDefault();
+            var vehicleService = dbContext.VehicleServices.Where(b => b.VehicleId == this.VehicleId.Value.ToString() && b.Date == this.Date).FirstOrDefault();
             if (vehicleService != null) {
-                throw new BusinessRuleValidationException("Vehicle " + vehicleServices.VehicleId.Value.ToString() + " already has the day " + vehicleServices.Date + "assigned!");
+                throw new BusinessRuleValidationException("Vehicle " + this.VehicleId.Value.ToString() + " already has the day " + this.Date + "assigned!");
             }
         }
 

@@ -25,9 +25,9 @@ namespace ViagemMasterData.Service
 
             VehicleServiceDTO vehicleServiceDTO = vehicleServiceMapper.GetDTOFromCreateDTO(createVehicleServiceDTO);
 
-            Domain.VehicleServices.VehicleServices vehicleServiceDomain = vehicleServiceMapper.GetDomainFromTripulantDTO(vehicleServiceDTO);
+            Domain.VehicleServices.VehicleServices vehicleServiceDomain = vehicleServiceMapper.GetDomainFromVehicleServiceDTO(vehicleServiceDTO);
 
-            await vehicleServiceDomain.Validate(vehicleServiceDomain);
+            await vehicleServiceDomain.Validate();
 
             _repository.Insert(vehicleServiceMapper.GetSchemaFromDomain(vehicleServiceDomain));
 
