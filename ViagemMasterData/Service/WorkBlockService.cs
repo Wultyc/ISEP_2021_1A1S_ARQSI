@@ -16,10 +16,10 @@ namespace ViagemMasterData.Service
         private readonly IRepository<Schema.WorkBlock> _repository;
         private readonly TripService _tripService;
         private readonly VehicleServiceService _vehicleServiveService;
-        private readonly TripulantService _tripulantServiveService;
+        private readonly TripulantServiceService _tripulantServiveService;
 
         public WorkBlockService(IRepository<Schema.WorkBlock> repository, TripService tripService, 
-            VehicleServiceService vehicleServiveService, TripulantService tripulantServiveService)
+            VehicleServiceService vehicleServiveService, TripulantServiceService tripulantServiveService)
         {
             _repository = repository;
             _tripService = tripService;
