@@ -13,7 +13,7 @@ interface NodeProps {
     shortName: String,
     latitude: Latitute,
     longitude: Longitude,
-    tempoMaxParagem: String,
+    tempoMaxParagem?: String,
     collectionNode: boolean,
     surrenderNode: boolean
 }

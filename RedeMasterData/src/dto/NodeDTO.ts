@@ -8,5 +8,5 @@ export default class NodeDTO implements IDto{
     latitude: String
     collectionNode: boolean
     surrenderNode: boolean
-    tempoMaxParagem: String
+    tempoMaxParagem?: String
 }
