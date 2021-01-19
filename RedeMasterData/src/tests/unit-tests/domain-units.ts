@@ -68,3 +68,61 @@ describe('Domain for node', () =>
      });
   });
 });
+
+describe('Domain for node', () =>
+{
+  describe('test fail', () =>
+  {
+    it('should fail the null validation', () =>
+    {
+      let dto: VehicleTypeDTO = {
+        id: 'TipoID',
+        description: 'Tipo de veiculo',
+        autonomy: 50,
+        costPerKilometer: 50,
+        averageCost: 50,
+        averageSpeed: 50,
+        fuelType: 'Azeite'
+      }
+    const newDomainVehicleType = VehicleType.create(dto)
+    expect(newDomainVehicleType.isFailure)
+    .to
+    .be
+    .equal(true);
+    expect(newDomainVehicleType.errorValue()[0])
+    .to
+    .be
+    .equal(`Fuel type ${dto.fuelType} is not allowed`)
+    })
+  })
+  describe('test pass', () =>
+  {
+  it('should create the node', () =>
+   {
+    let dto: VehicleTypeDTO = {
+      id: 'TipoID',
+      description: 'Tipo de veiculo',
+      autonomy: 50,
+      costPerKilometer: 50,
+      averageCost: 50,
+      averageSpeed: 50,
+      fuelType: 'Gasoleo'
+    }
+  const newDomainVehicleType = VehicleType.create(dto)
+  expect(newDomainVehicleType.isSuccess)
+  .to
+  .be
+  .equal(true);
+  expect(newDomainVehicleType.getValue().props)
+    .to
+    .include({
+        description: 'Tipo de veiculo',
+        autonomy: 50,
+        costPerKilometer: 50,
+        averageCost: 50,
+        averageSpeed: 50,
+        fuelType: 'Gasoleo'
+    })
+   });
+  });
+});
