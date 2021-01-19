@@ -12,6 +12,8 @@ import TripulantTypeMapper from '../../mappers/TripulantTypeMapper'
 import { Result } from '../../core/logic/Result'
 import { domain } from 'process';
 import { domainToASCII } from 'url';
+import RouteDTO from '../../dto/RouteDTO';
+import Route from '../../domain/Routes/Route'
 
 describe('Domain for node', () =>
 {
@@ -69,7 +71,7 @@ describe('Domain for node', () =>
   });
 });
 
-describe('Domain for node', () =>
+describe('Domain for Vehicle type', () =>
 {
   describe('test fail', () =>
   {
@@ -125,4 +127,131 @@ describe('Domain for node', () =>
     })
    });
   });
+});
+
+describe('Domain for Route', () =>
+{
+  describe('test fail for 2 equal nodes', () =>
+  {
+    it('should fail the validation for 2 equal nodes', () =>
+    { 
+      let dto: RouteDTO = {
+        id: 'ID1',
+        distance: 50,
+        duration: 50,
+        isReinforcementRoute: false,
+        isEmptyRoute: false,
+        routeNodes: [
+          {
+            nodeId: 'NODE1' ,
+            distance: 25 ,
+            duration: 25
+          },
+          {
+            nodeId: 'NODE1' ,
+            distance: 25 ,
+            duration: 25
+          }
+        ]
+      }
+      const domainRoute = Route.create(dto);
+      
+      expect(domainRoute.isFailure)
+      .to
+      .be
+      .equal(true);
+      expect(domainRoute.errorValue())
+      .to
+      .be
+      .equal('When route only has 2 node, they must be different');
+    })
+  })
+  describe('test fail', () =>
+  {
+    it('should fail the validation for only 1 nodes', () =>
+    { 
+      let dto: RouteDTO = {
+        id: 'ID1',
+        distance: 50,
+        duration: 50,
+        isReinforcementRoute: false,
+        isEmptyRoute: false,
+        routeNodes: [
+          {
+            nodeId: 'NODE1' ,
+            distance: 25 ,
+            duration: 25
+          }
+        ]
+      }
+      const domainRoute = Route.create(dto);
+      expect(domainRoute.isFailure)
+      .to
+      .be
+      .equal(true);
+      expect(domainRoute.errorValue())
+      .to
+      .be
+      .equal('Route must have at least 2 nodes.');
+    })
+  })
+  describe('test pass', () =>
+  {
+    it('should pass', () =>
+    { 
+      let dto: RouteDTO = {
+        id: 'ID1',
+        distance: 50,
+        duration: 50,
+        isReinforcementRoute: false,
+        isEmptyRoute: false,
+        routeNodes: [
+          {
+            nodeId: 'NODE1' ,
+            distance: 25 ,
+            duration: 25
+          },
+          {
+            nodeId: 'NODE2' ,
+            distance: 25 ,
+            duration: 25
+          }
+        ]
+      }
+      const domainRoute = Route.create(dto);
+      
+      expect(domainRoute.isSuccess)
+      .to
+      .be
+      .equal(true);
+      expect(domainRoute.getValue().props)
+      .to
+      .deep
+      .include( {
+        distance: 50,
+        duration: 50,
+        isReinforcementRoute: false,
+        isEmptyRoute: false,
+        routeNodes: [
+          {
+            nodeId : {
+              props: {
+                value: 'NODE1'
+              }
+            },
+            distance: 25 ,
+            duration: 25
+          },
+          {
+            nodeId : {
+              props: {
+                value: 'NODE2'
+              }
+            },
+            distance: 25 ,
+            duration: 25
+          }]
+      });
+    })
+  })    
 });
