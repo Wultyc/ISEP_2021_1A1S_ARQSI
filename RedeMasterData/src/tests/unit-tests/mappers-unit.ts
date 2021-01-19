@@ -6,6 +6,9 @@ import Node from '../../domain/Nodes/Node'
 import VehicleTypeDTO from '../../dto/VehicleTypeDTO';
 import VehicleTypeMapper from '../../mappers/VehicleTypeMapper'
 import VehicleType from '../../domain/VehicleType/VehicleType'
+import TripulantTypeDTO from '../../dto/TripulantTypeDTO'
+import TripulantType from '../../domain/TripulantTypes/TripulantType'
+import TripulantTypeMapper from '../../mappers/TripulantTypeMapper'
 describe('Mapper for node', () =>
 {
   describe('test mapFromRequest(req: any, dto: NodeDTO)', () =>
@@ -183,5 +186,63 @@ describe('Mapper for vehicle type', () =>
         fuelType: dto.fuelType
       })
     });
+  });
+});
+describe('Mapper for tripulant type', () =>
+{
+  describe('test mapFromRequest(req: any, dto: TripulantTypeDTO)', () =>
+  {
+    it('should map correctly request to dto object', () =>
+    { 
+      let tripulantTypeDTO: TripulantTypeDTO = {
+        id: 'TipoID',
+        description: 'Tipo de tripulante'
+      }
+      let body: any = {
+        body: {
+          id: 'TipoID',
+          description: 'Tipo de tripulante'
+        }
+    }
+    let mapper: TripulantTypeMapper = new TripulantTypeMapper()
+    expect(mapper.mapFromRequest(body, new TripulantTypeDTO))
+    .to
+    .eql(tripulantTypeDTO);
+    });
+
+    it('should map correctly request to dto object from mongo', () =>
+    { 
+      let tripulantTypeDTO: TripulantTypeDTO = {
+        id: 'TipoID',
+        description: 'Tipo de tripulante'
+      }
+      let mongo: any  = {
+          _id: 'TipoID',
+          description: 'Tipo de tripulante'
+    }
+    let mapper: TripulantTypeMapper = new TripulantTypeMapper()
+    expect(mapper.mapFromMongo(mongo, new TripulantTypeDTO))
+    .to
+    .eql(tripulantTypeDTO);
+    });
+  });
+  describe('test mapFromDomain(req: any, dto: TripulantType)', () =>
+  {
+    it('should map correctly request to dto object from mongo', () =>
+    {
+      let tripulantTypeDTO: TripulantTypeDTO = {
+        id: 'TipoID',
+        description: 'Tipo de tripulante'
+      };
+
+      let mapper: TripulantTypeMapper = new TripulantTypeMapper();
+      const tripulantTypeDomain = TripulantType.create(tripulantTypeDTO)
+
+      expect(mapper.mapFromDomain(tripulantTypeDomain.getValue(), new VehicleTypeDTO))
+      .to
+      .include( {
+        description: tripulantTypeDTO.description
+      })
+    })
   });
 });
