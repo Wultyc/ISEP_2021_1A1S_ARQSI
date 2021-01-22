@@ -41,6 +41,7 @@ import { MomentDateModule, MomentDateAdapter } from '@angular/material-moment-ad
 import { AmazingTimePickerModule } from 'amazing-time-picker';
 import { VehicleServiceComponent } from './ViagemMasterData/components/vehicle-service/vehicle-service.component';
 import { WorkBlocksComponent } from './ViagemMasterData/components/work-blocks/work-blocks.component';
+import { TripulantServiceComponent } from './ViagemMasterData/components/tripulant-service/tripulant-service.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { WorkBlocksComponent } from './ViagemMasterData/components/work-blocks/w
     VehiclesComponent,
     VehicleServiceComponent,
     WorkBlocksComponent,
+    TripulantServiceComponent,
     
   ],
   imports: [

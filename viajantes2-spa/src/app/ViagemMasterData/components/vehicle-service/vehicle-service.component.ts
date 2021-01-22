@@ -73,7 +73,7 @@ export class VehicleServiceComponent implements OnInit {
     console.log(this.vehicleServiceForm.value)
     postEntity = this.vehicleServiceMapper.fromFormToCreate(this.vehicleServiceForm.value, new VehicleServicePost)
 
-    this.vehicleServiceService.postVehicle(postEntity)
+    this.vehicleServiceService.postVehicleService(postEntity)
     .subscribe(
       (data) => {
         if (data) { 

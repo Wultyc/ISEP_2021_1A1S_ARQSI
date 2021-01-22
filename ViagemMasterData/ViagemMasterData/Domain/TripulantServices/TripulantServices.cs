@@ -20,7 +20,14 @@ namespace ViagemMasterData.Domain.TripulantServices
 
         public TripulantServices(string id, string tripulantId, DateTime date)
         {
-            this.Id = new TripulantServiceId(id);
+            if (id != null)
+            {
+                this.Id = new TripulantServiceId(id);
+            }
+            else
+            {
+                this.Id = new TripulantServiceId(Guid.NewGuid().ToString().ToUpper());
+            }
             this.TripulantId = new TripulantId(tripulantId);
             this.Date = date;
         }

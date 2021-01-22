@@ -20,9 +20,9 @@ namespace ViagemMasterData.Controllers
             _tripulantService = tripulantService;
         }
 
-        // GET: api/vehicle
+        // GET: api/tripulant
         [HttpGet]
-        public IActionResult GetVehicles()
+        public IActionResult GetTripulants()
         {
             try
             {
@@ -34,9 +34,9 @@ namespace ViagemMasterData.Controllers
             }
         }
 
-        // GET: api/vehicle/5
+        // GET: api/tripulant/5
         [HttpGet("{Id}")]
-        public IActionResult GetVehicle([FromRoute] string id)
+        public IActionResult GetTripulant([FromRoute] string id)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace ViagemMasterData.Controllers
 
         // POST: api/tripulant
         [HttpPost]
-        public async Task<IActionResult> PostVehicle([FromBody] CreateTripulantDTO createTripulant)
+        public async Task<IActionResult> PostTripulant([FromBody] CreateTripulantDTO createTripulant)
         {
             try
             {
@@ -77,9 +77,9 @@ namespace ViagemMasterData.Controllers
             }
         }
 
-        // PUT: api/vehicle
+        // PUT: api/tripulant
         [HttpPut]
-        public async Task<IActionResult> PutVehicle([FromBody] TripulantDTO tripulant)
+        public async Task<IActionResult> PutTripulant([FromBody] TripulantDTO tripulant)
         {
             try
             {
@@ -100,9 +100,9 @@ namespace ViagemMasterData.Controllers
             }
         }
 
-        // DELETE: api/vehicle/5
+        // DELETE: api/tripulant/5
         [HttpDelete("{id}")]
-        public IActionResult DeleteVehicle([FromRoute] string id)
+        public IActionResult DeleteTripulant([FromRoute] string id)
         {
             try
             {
