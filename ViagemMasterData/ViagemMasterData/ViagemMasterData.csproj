@@ -5,6 +5,13 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel> 
     <UserSecretsId>5e626191-a13d-4286-8134-4d17f97fa19e</UserSecretsId>
   </PropertyGroup>
+
+<ItemGroup>
+  <Compile Remove="Tests\**" />
+  <Content Remove="Tests\**" />
+  <EmbeddedResource Remove="Tests\**" />
+  <None Remove="Tests\**" />
+</ItemGroup>
  
   <ItemGroup>
     
@@ -25,10 +32,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
     <PackageReference Include="System.Collections.NonGeneric" Version="4.3.0" />
-  </ItemGroup>
- 
-  <ItemGroup>
-    <Folder Include="Tests\Unit\" />
   </ItemGroup>
 
 </Project>
