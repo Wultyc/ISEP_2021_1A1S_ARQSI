@@ -82,7 +82,6 @@ export default class Node extends AggregateRoot<NodeProps>{
         }
 
         const newDomainNode = new Node(domainNode, id)
-        console.log(newDomainNode)
         return Result.ok<Node>(newDomainNode)
     }
 }
