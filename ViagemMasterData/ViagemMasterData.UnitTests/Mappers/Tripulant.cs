@@ -14,7 +14,7 @@ namespace ViagemMasterData.UnitTests.Mappers
     {
         [Theory]
         [MemberData(nameof(Data))]
-        public void TestGetTripDTOForTrip(string id, string name, DateTime bithDate, string licenceNr, DateTime licenceExpires, ArrayList TripTypes)
+        public void TestGetTripulantDTOForTripulant(string id, string name, DateTime bithDate, string licenceNr, DateTime licenceExpires, ArrayList TripTypes)
         {
             Schema.Tripulant tripulant = new Schema.Tripulant(id,name,bithDate,licenceNr,licenceExpires);
             TripulantDTO tripulantDTO = new TripulantMapper().GetTripulantDTOForTripulant(tripulant);
@@ -28,7 +28,7 @@ namespace ViagemMasterData.UnitTests.Mappers
 
         [Theory]
         [MemberData(nameof(Data))]
-        public void TestGetTripForTripDTO(string id, string name, DateTime bithDate, string licenceNr, DateTime licenceExpires, ArrayList tripTypes)
+        public void TestGetDomainFromTripulantDTO(string id, string name, DateTime bithDate, string licenceNr, DateTime licenceExpires, ArrayList tripTypes)
         {
             TripulantDTO tripulantDTO = new TripulantDTO(id, name, bithDate, licenceNr, licenceExpires, tripTypes);
             Domain.Tripulant.Tripulant tripulant = new TripulantMapper().GetDomainFromTripulantDTO(tripulantDTO);
