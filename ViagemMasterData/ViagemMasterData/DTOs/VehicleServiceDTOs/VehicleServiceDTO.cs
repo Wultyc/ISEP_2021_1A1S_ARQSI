@@ -11,12 +11,14 @@ namespace ViagemMasterData.DTOs.VehicleServiceDTOs
     {
         public string Id { get; set; }
         public string VehicleId { get; set; }
+        public Vehicle? Vehicle { get; set; }
         public DateTime Date { get; set; }
 
-        public VehicleServiceDTO(string id, string vehicleId, DateTime date)
+        public VehicleServiceDTO(string id, string vehicleId, Vehicle? vehicle, DateTime date)
         {
             this.Id = id;
             this.VehicleId = vehicleId;
+            this.Vehicle = vehicle;
             this.Date = date;
         }
     }
