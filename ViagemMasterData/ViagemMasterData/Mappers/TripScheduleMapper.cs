@@ -35,7 +35,7 @@ namespace ViagemMasterData.Mappers
                 tripScheduleDTO.NodeOrder, tripScheduleDTO.PassingTime);
         }
 
-        internal TripSchedule GetTripScheduleDomainForTripScheduleDTO(TripScheduleDTO tripScheduleDTO)
+        public TripSchedule GetTripScheduleDomainForTripScheduleDTO(TripScheduleDTO tripScheduleDTO)
         {
             return new TripSchedule(tripScheduleDTO.Id, tripScheduleDTO.TripId, tripScheduleDTO.NodeId,
                 tripScheduleDTO.NodeOrder, tripScheduleDTO.PassingTime);
