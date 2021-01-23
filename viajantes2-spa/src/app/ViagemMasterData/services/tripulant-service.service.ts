@@ -16,8 +16,8 @@ export class TripulantServiceService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
-  getTripulantServices(): Observable<TripulantServicePost[]> {
-    return this.httpClient.get<TripulantServicePost[]>(this.url);
+  getTripulantServices(): Observable<TripulantService[]> {
+    return this.httpClient.get<TripulantService[]>(this.url);
   }
   postTripulantService(vehicleService: TripulantServicePost): Observable<TripulantService> {
     return this.httpClient.post<TripulantService>(this.url, vehicleService).pipe(
