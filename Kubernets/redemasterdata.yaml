@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: redemasterdata
-        image: wultyc/arqsi-viajantes2-redemasterdata:BUILD_NR
+        image: wultyc/arqsi-viajantes2:redemasterdata-BUILD_NR
         imagePullPolicy: Always
         ports:
         - containerPort: 80
