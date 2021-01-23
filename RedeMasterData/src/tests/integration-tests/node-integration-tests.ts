@@ -3,9 +3,7 @@ import { describe } from 'mocha';
 import { app } from '../../app';
 import chaiHttp from 'chai-http';
 import 'mocha';
-import { types } from 'joi';
-import MongoClient from 'mongodb'
-import { mongo } from 'mongoose';
+import Node from '../../models/mongo/Node'
 process.env.APP_PORT = "3000"
 chai.use(chaiHttp)
 const expect = chai.expect;
@@ -13,6 +11,10 @@ import {mongooseLoader} from '../../loaders/mongoose'
 
 let result: any;
 describe('Create /nodes', () => {
+    before( () => {
+       return Node.collection.drop()
+      });
+
     it('verfiies corret create', async () => {
         result = await chai.request(app)
             .post('/api/nodes')
