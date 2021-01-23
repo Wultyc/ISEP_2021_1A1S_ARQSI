@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 import { VehiclesService } from '../../services/vehicles.service';
 import { VehicleServiceService } from '../../services/vehicle-service.service';
 import { VehicleServiceMapper } from '../../models/mappers/vehicleServiceMapper';
-import { VehicleServicePost } from '../../models/vehicleServices';
+import { VehicleServicePost, VehicleService } from '../../models/vehicleServices';
 import { Vehicle } from '../../models/vehicles';
 import { VehicleMapper } from '../../models/mappers/vehicles';
 import { MatDialog } from '@angular/material/dialog';
@@ -24,6 +25,9 @@ export class VehicleServiceComponent implements OnInit {
     vehicleId: new FormControl(),
     date: new FormControl(new Date())
   });
+  vehicleServiceList: VehicleService[] = [];
+  displayedColumns: string[] = ['date','vin'];
+  dataSource = new MatTableDataSource<VehicleService>();
   
   isAdding: boolean = false;
   hasError: boolean = false;
@@ -43,8 +47,22 @@ export class VehicleServiceComponent implements OnInit {
 
   ngOnInit(): void {
     this.getVehicles();
+    this.getVehicleService();
   }
+  getVehicleService () {
+    this.vehicleServiceService.getVehicleServices().subscribe (
+      (data) => {
+        if (data && data.length > 0) {
+          data.forEach( element => (
+            this.vehicleServiceList.push(this.vehicleServiceMapper.fromResponseToExpandedDTO(new VehicleService, element)))
+            );
+            this.dataSource = new MatTableDataSource(this.vehicleServiceList);
 
+            console.log(this.vehicleServiceList)
+        }
+      }
+    )
+  }
   getVehicles(){
     this.vehiclesService.getVehicles().subscribe(
       (data) => {
@@ -62,6 +80,12 @@ export class VehicleServiceComponent implements OnInit {
         this.vehicleList = this.vehicleMapper.addVehicleTypes(this.vehicleList, this.vehicleTypesList)
       }
     ); 
+  }
+
+  setAdd() : any {
+    this.vehicleServiceForm.reset();
+    this.hasError = false;
+    return this.isAdding = !this.isAdding;
   }
 
   submit() :void {

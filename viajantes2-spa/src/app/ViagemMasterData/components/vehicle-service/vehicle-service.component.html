@@ -1,5 +1,28 @@
 <h1>&nbsp; Vehicle Service</h1>
 
+<div>
+    <a mat-button (click)="setAdd()">{{isAdding ? 'Close create mode' : 'Create Vehicle'}}</a>
+</div>
+
+<div *ngIf="!isAdding; else createVehicleServiceTemplate">
+    <!-- <mat-form-field>
+        <mat-label>Search: </mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Aguiar de Sousa" #input>
+    </mat-form-field> -->
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="vin">
+            <th mat-header-cell *matHeaderCellDef> VIN </th>
+            <td mat-cell *matCellDef="let vehicle"> {{vehicle.vehicle.vin}} </td>
+        </ng-container>
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Date </th>
+            <td mat-cell *matCellDef="let vehicle"> {{vehicle.date | date:'mediumDate'}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+<ng-template #createVehicleServiceTemplate>
 <div [formGroup]="vehicleServiceForm">
     <section class="example-section">
         <mat-form-field appearance="fill">
@@ -38,4 +61,5 @@
         </div>
     </ul>
 </div>
+</ng-template>
 
