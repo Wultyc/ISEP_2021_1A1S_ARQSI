@@ -17,7 +17,7 @@ import LineMapper from '../mappers/LineMapper'
 import { config } from 'node-config-ts'
 import logger from '../utils/Logger'
 
-export default class StoreGLXService implements IService {
+export default class ImportRMDService implements IService {
 
     storeGlxRepository: StoreGlxRepository
     glxDto: GlxFileDto
