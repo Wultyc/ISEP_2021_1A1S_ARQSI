@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 import { TripulantService } from '../../services/tripulant.service';
+import {TripulantServices } from '../../models/tripulantServices'
 import { TripulantServiceService } from '../../services/tripulant-service.service';
 import { TripulantServiceMapper } from '../../models/mappers/tripulantServiceMapper';
 import { TripulantServicePost } from '../../models/tripulantServices';
@@ -21,6 +23,9 @@ export class TripulantServiceComponent implements OnInit {
     tripulantId: new FormControl(),
     date: new FormControl(new Date())
   });
+  tripulantServiceList: TripulantServices[] = [];
+  displayedColumns: string[] = ['date','name'];
+  dataSource = new MatTableDataSource<TripulantServices>();
   
   isAdding: boolean = false;
   hasError: boolean = false;
@@ -39,8 +44,22 @@ export class TripulantServiceComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTripulants();
+    this.getTripulantService();
   }
 
+  getTripulantService() {
+    this.tripulantServiceService.getTripulantServices().subscribe(
+      (data) => {
+        console.log(data)
+        if (data && data.length > 0)
+        data.forEach( element => (
+          this.tripulantServiceList.push(this.tripulantServiceMapper.fromResponseFullToDTO(new TripulantServices, element)))
+          );
+          console.log(this.tripulantServiceList)
+          this.dataSource = new MatTableDataSource(this.tripulantServiceList);
+      }
+    )
+  }
   getTripulants(){
     this.tripulantsService.getTripulants().subscribe(
       (data) => {
@@ -49,6 +68,13 @@ export class TripulantServiceComponent implements OnInit {
         };
       }
     ); 
+  }
+
+  
+  setAdd() : any {
+    this.tripulantServiceForm.reset();
+    this.hasError = false;
+    return this.isAdding = !this.isAdding;
   }
 
   submit() :void {
