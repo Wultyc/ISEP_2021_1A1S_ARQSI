@@ -38,8 +38,8 @@ namespace ViagemMasterData.Controllers
         {
             try
             {
-                TripulantServiceDTO vehicleService = await _tripulantServiceService.PostAsync(createTripulantService);
-                return Ok(new ObjectResult(vehicleService));
+                TripulantServiceDTO tripulantService = await _tripulantServiceService.PostAsync(createTripulantService);
+                return Ok(new ObjectResult(tripulantService));
 
             }
             catch (BusinessRuleValidationException ex)

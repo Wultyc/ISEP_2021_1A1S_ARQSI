@@ -82,6 +82,7 @@ namespace ViagemMasterData
             services.AddTransient<VehicleService>();
             services.AddTransient<TripService>();
             services.AddTransient<TripScheduleService>();
+            services.AddTransient<TripulantService>();
             services.AddTransient<TripulantServiceService>();
             services.AddTransient<VehicleServiceService>();
             services.AddTransient<WorkBlockService>();

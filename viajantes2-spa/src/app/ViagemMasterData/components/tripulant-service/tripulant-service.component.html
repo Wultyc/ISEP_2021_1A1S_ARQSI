@@ -1,0 +1,39 @@
+<h1>&nbsp; Tripulant Service</h1>
+
+<div [formGroup]="tripulantServiceForm">
+    <section class="example-section">
+        <mat-form-field appearance="fill">
+            <mat-label>Service Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;
+        <mat-form-field class="example-full-width">
+            <mat-label>Tripulant</mat-label>
+            <mat-select class="form-control" formControlName="tripulantId">
+                <mat-option *ngFor="let tripulant of tripulantList" [value]="tripulant.id">
+                    {{tripulant.name}} ({{tripulant.licenceNumber}})
+                </mat-option>
+            </mat-select>
+        </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;    
+    </section>
+</div>
+<div>
+    <a mat-button (click)="submit()">Submit</a>
+</div>
+
+<div *ngIf="hasSubmited">
+    <ul>
+        <div *ngFor="let submitMessage of submitMessages">
+            <mat-sucess-label>{{submitMessage}}</mat-sucess-label>
+        </div>
+    </ul>
+</div>
+
+<div *ngIf="hasError">
+    <ul>
+        <div *ngFor="let errorMessage of errorMessages">
+            <mat-error-label>{{errorMessage}}</mat-error-label>
+        </div>
+    </ul>
+</div>
