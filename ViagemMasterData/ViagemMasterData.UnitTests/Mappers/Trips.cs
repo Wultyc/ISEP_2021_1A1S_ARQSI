@@ -8,7 +8,7 @@ using ViagemMasterData.Domain;
 using System.Collections.Generic;
 using System.Collections;
 
-namespace ViagemMasterData.UnitTests
+namespace ViagemMasterData.UnitTests.Mappers
 {
     public class Trips
     {
