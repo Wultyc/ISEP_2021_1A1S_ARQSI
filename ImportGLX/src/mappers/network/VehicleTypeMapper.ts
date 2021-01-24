@@ -1,5 +1,5 @@
-import IGlxMapper from './interface/IGlxMapper'
-import vehicleTypeDto from '../dto/VehicleTypeDto'
+import IGlxMapper from '../interface/IGlxMapper'
+import vehicleTypeDto from '../../dto/network/VehicleTypeDto'
 
 export default class VehicleTypeMapper implements IGlxMapper {
     

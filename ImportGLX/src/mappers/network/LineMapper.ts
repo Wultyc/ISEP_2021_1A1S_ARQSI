@@ -1,6 +1,6 @@
-import IGlxMapper from './interface/IGlxMapper'
-import LineDto from '../dto/LineDto'
-import RouteDto from '../dto/RouteDto'
+import IGlxMapper from '../interface/IGlxMapper'
+import LineDto from '../../dto/network/LineDto'
+import RouteDto from '../../dto/network/RouteDto'
 
 export default class LineMapper implements IGlxMapper {
 

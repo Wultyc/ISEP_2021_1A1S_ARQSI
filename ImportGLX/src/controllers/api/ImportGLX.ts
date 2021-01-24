@@ -3,6 +3,7 @@ import GlxFileDto from '../../dto/glxFileDto'
 import GlxFileMapper from '../../mappers/glxFileMapper'
 import StoreGLXService from '../../services/StoreGLXService'
 import ImportRMDService from '../../services/ImportRMDService'
+import ImportVMDService from '../../services/ImportVMDService'
 class ImportGLX {
 
     async importfile(req: Request, res: Response, next: NextFunction = ()=>{}) {
@@ -22,24 +23,17 @@ class ImportGLX {
 
         //Call Send to RMD Service
         const importRMDService = new ImportRMDService(dto)
-        await importRMDService.runService()
+        if(await importRMDService.runService()){
+            res.status(503).send("Error importing network")
+        }
 
         //Call Send to VMD Service
-
-        /*
-        try {
-            await uploadRede.start(filename)
-            await uploadViagem.start(filename)
-        } catch (e) {
-            console.log(e);
-            return res.status(config.get('errors.import.error-on-upload.status')).json(config.get('errors.import.error-on-upload.message'))
-        } */
-    
-        res.send("Import started successfully")
-    }
-    
-    start() {
+        const importVMDService = new ImportVMDService(dto, importRMDService.exportData())
+        if(await importVMDService.runService()){
+            res.status(503).send("Error importing trips")
+        }
         
+        res.send("Import done successfully")
     }
 
 }

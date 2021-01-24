@@ -1,4 +1,4 @@
-import IGlxDto from './interface/IGlxDto'
+import IGlxDto from '../interface/IGlxDto'
 
 interface IRouteData{
     routeId: String,

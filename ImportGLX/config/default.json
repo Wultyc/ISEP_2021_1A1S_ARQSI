@@ -31,6 +31,9 @@
             "node":"http://localhost:3003/api/nodes",
             "route":"http://localhost:3003/api/routes",
             "line":"http://localhost:3003/api/lines"
+        },
+        "viagemMasterData":{
+            "trip":"http://localhost:3004/api/Trip"
         }
     }
 }

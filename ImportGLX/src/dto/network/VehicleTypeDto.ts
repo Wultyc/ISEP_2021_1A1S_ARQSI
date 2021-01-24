@@ -1,4 +1,4 @@
-import IGlxDto from './interface/IGlxDto'
+import IGlxDto from '../interface/IGlxDto'
 
 export default class VehicleTypeDTO implements IGlxDto {
     system_id: String

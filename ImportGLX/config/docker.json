@@ -31,6 +31,9 @@
             "node":"http://redemasterdata.viajantes2.tk/api/nodes",
             "route":"http://redemasterdata.viajantes2.tk/api/routes",
             "line":"http://redemasterdata.viajantes2.tk/api/lines"
+        },
+        "viagemMasterData":{
+            "trip":"http://viagemmasterdata.viajantes2.tk/api/Trip"
         }
     }
 }
