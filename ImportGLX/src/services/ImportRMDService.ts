@@ -4,20 +4,21 @@ import StoreGlxRepository from '../repository/StoreGlxRepository'
 import MasterDataRepository from '../repository/MasterDataRepository'
 
 import IGlxDto from '../dto/interface/IGlxDto'
-import vehicleTypeDTO from '../dto/VehicleTypeDto'
-import NodeDto from '../dto/NodeDto'
-import RouteDto from '../dto/RouteDto'
-import LineDto from '../dto/LineDto'
+import NetworkDTO from '../dto/network/NetworkDto'
+import vehicleTypeDTO from '../dto/network/VehicleTypeDto'
+import NodeDto from '../dto/network/NodeDto'
+import RouteDto from '../dto/network/RouteDto'
+import LineDto from '../dto/network/LineDto'
 
-import VehicleTypeMapper from '../mappers/VehicleTypeMapper'
-import NodeMapper from '../mappers/NodeMapper'
-import RouteMapper from '../mappers/RouteMapper'
-import LineMapper from '../mappers/LineMapper'
+import VehicleTypeMapper from '../mappers/network/VehicleTypeMapper'
+import NodeMapper from '../mappers/network/NodeMapper'
+import RouteMapper from '../mappers/network/RouteMapper'
+import LineMapper from '../mappers/network/LineMapper'
 
 import { config } from 'node-config-ts'
 import logger from '../utils/Logger'
 
-export default class StoreGLXService implements IService {
+export default class ImportRMDService implements IService {
 
     storeGlxRepository: StoreGlxRepository
     glxDto: GlxFileDto
@@ -32,6 +33,14 @@ export default class StoreGLXService implements IService {
         this.glxDto = glx
         this.storeGlxRepository = repo
         this.noRepositoryError = true
+    }
+    exportData(): NetworkDTO {
+        return {
+            nodes: this.nodes,
+            vehicleTypes: this.vehicleTypes,
+            routes: this.routes,
+            lines: this.lines
+        }
     }
 
     async runService(): Promise<boolean> {

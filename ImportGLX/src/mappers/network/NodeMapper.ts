@@ -1,5 +1,5 @@
-import IGlxMapper from './interface/IGlxMapper'
-import NodeDto from '../dto/NodeDto'
+import IGlxMapper from '../interface/IGlxMapper'
+import NodeDto from '../../dto/network/NodeDto'
 
 export default class NodeMapper implements IGlxMapper {
 
