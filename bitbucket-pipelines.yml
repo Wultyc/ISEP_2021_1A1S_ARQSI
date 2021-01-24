@@ -173,4 +173,4 @@ pipelines:
         - step: *Build-IGLX
         - step: *Build-SPA
       - step: *Deploy
-      - step: *SmokeTest
+    # - step: *SmokeTest
