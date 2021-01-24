@@ -6,27 +6,27 @@ metadata:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-  - host: viajantes2.tk
-    http:
-      paths:
-      - backend:
-          serviceName: viajantes2-spa
-          servicePort: 80
-  - host: importglx.viajantes2.tk
-    http:
-      paths:
-      - backend:
-          serviceName: importglx
-          servicePort: 80
-  - host: redemasterdata.viajantes2.tk
-    http:
-      paths:
-      - backend:
-          serviceName: redemasterdata
-          servicePort: 80
-  - host: viagemmasterdata.viajantes2.tk
-    http:
-      paths:
-      - backend:
-          serviceName: viagemmasterdata
-          servicePort: 80
+    - host: viajantes2.tk
+      http:
+        paths:
+        - backend:
+            serviceName: viajantes2-spa
+            servicePort: 80
+    - host: importglx.viajantes2.tk
+      http:
+        paths:
+        - backend:
+            serviceName: importglx
+            servicePort: 80
+    - host: redemasterdata.viajantes2.tk
+      http:
+        paths:
+        - backend:
+            serviceName: redemasterdata
+            servicePort: 80
+    - host: viagemmasterdata.viajantes2.tk
+      http:
+        paths:
+        - backend:
+            serviceName: viagemmasterdata
+            servicePort: 80
