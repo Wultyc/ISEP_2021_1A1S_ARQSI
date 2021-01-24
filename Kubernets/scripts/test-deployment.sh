@@ -17,13 +17,16 @@ do
     #success="$( [[ $runnings_pods == $output_lines ]]; echo $? )"
     if [[ $runnings_pods == $output_lines ]]; then
         success=0
+        echo "Ok"
     elif [[ $runnings_pods != $output_lines ]] && [ "$tries" -lt "$max_tries" ]; then
         success=1
         sleep_time=$((sleep_time*tries))
+        echo "$kubectl_output"
         echo "Sleep for $sleep $sleep_time s"
         sleep $sleep_time
     else 
         success=1
+        echo "Fail"
     fi
 
 done
