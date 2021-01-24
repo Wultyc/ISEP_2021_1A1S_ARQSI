@@ -1,0 +1,71 @@
+<h1>&nbsp; Tripulant Service</h1>
+
+<div>
+    <a mat-button (click)="setAdd()">{{isAdding ? 'Close create mode' : 'Create Vehicle'}}</a>
+</div>
+
+<div *ngIf="!isAdding; else createVehicleServiceTemplate">
+    <div [formGroup]="filterForm">
+        <section class="example-section">
+            <mat-form-field appearance="fill">
+                <mat-label>Search Date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;
+        </section>
+        <a mat-button (click)="filter()">Search</a>&nbsp; &nbsp; &nbsp;<a mat-button (click)="closeFilter()">Erase Filter</a>
+    </div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name (Licence Number) </th>
+            <td mat-cell *matCellDef="let tripulant"> {{tripulant.tripulant.name}}({{tripulant.tripulant.licenceNumber}}) </td>
+        </ng-container>
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Date </th>
+            <td mat-cell *matCellDef="let tripulant"> {{tripulant.date | date:'mediumDate'}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+
+<ng-template #createVehicleServiceTemplate>
+<div [formGroup]="tripulantServiceForm">
+    <section class="example-section">
+        <mat-form-field appearance="fill">
+            <mat-label>Service Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;
+        <mat-form-field class="example-full-width">
+            <mat-label>Tripulant</mat-label>
+            <mat-select class="form-control" formControlName="tripulantId">
+                <mat-option *ngFor="let tripulant of tripulantList" [value]="tripulant.id">
+                    {{tripulant.name}} ({{tripulant.licenceNumber}})
+                </mat-option>
+            </mat-select>
+        </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;    
+    </section>
+</div>
+<div>
+    <a mat-button (click)="submit()">Submit</a>
+</div>
+
+<div *ngIf="hasSubmited">
+    <ul>
+        <div *ngFor="let submitMessage of submitMessages">
+            <mat-sucess-label>{{submitMessage}}</mat-sucess-label>
+        </div>
+    </ul>
+</div>
+
+<div *ngIf="hasError">
+    <ul>
+        <div *ngFor="let errorMessage of errorMessages">
+            <mat-error-label>{{errorMessage}}</mat-error-label>
+        </div>
+    </ul>
+</div>
+</ng-template>

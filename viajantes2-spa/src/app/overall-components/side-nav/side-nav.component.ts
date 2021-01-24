@@ -76,11 +76,13 @@ export class SideNavComponent {
 
   goToVehicleServices(): void {
     this.router.navigate(['vmd/vehicle-service'], { relativeTo: this.route });
-
   }
   
   goToTripulants(): void {
     this.router.navigate(['vmd/tripulants'], { relativeTo: this.route });
+  }
+  goToTripulantServices(): void {
+    this.router.navigate(['vmd/tripulant-service'], { relativeTo: this.route });
   }
   
   goToTrips(): void {

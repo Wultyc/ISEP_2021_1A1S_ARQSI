@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: viajantes2-spa
-        image: wultyc/arqsi-viajantes2-spa:latest
+        image: wultyc/arqsi-viajantes2:spa-BUILD_NR
         imagePullPolicy: Always
         ports:
         - containerPort: 80

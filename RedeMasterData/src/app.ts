@@ -1,19 +1,15 @@
-import {initApp} from './loaders'
+import { initApp } from './loaders/index'
 import express from 'express'
-import {config} from 'node-config-ts'
+import { config } from 'node-config-ts'
 
-async function startServer() {
+const app: express.Application = express();
 
-  const app: express.Application = express();
+initApp(app);
 
-  await initApp(app);
+const appPort: number = process.env.APP_PORT || config.app.defaultServerPort
 
-  const appPort: number = process.env.APP_PORT || config.app.defaultServerPort
+app.listen(appPort, () => {
+  console.log(`Server is up and running on port ${appPort}`);
+});
 
-  app.listen(appPort, () => {
-    console.log(`Server is up and running on port ${appPort}`);
-  });
-
-}
-
-startServer();
+export { app }

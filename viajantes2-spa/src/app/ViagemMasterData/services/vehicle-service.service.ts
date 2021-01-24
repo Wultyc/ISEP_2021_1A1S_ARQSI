@@ -16,10 +16,10 @@ export class VehicleServiceService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
-  getVehicleServices(): Observable<VehicleServicePost[]> {
-    return this.httpClient.get<VehicleServicePost[]>(this.url);
+  getVehicleServices(): Observable<VehicleService[]> {
+    return this.httpClient.get<VehicleService[]>(this.url);
   }
-  postVehicle(vehicleService: VehicleServicePost): Observable<VehicleService> {
+  postVehicleService(vehicleService: VehicleServicePost): Observable<VehicleService> {
     return this.httpClient.post<VehicleService>(this.url, vehicleService).pipe(
           catchError((err) => {
             console.error(err);

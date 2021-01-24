@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: importglx
-        image: wultyc/arqsi-viajantes2-importglx:latest
+        image: wultyc/arqsi-viajantes2:importglx-BUILD_NR
         imagePullPolicy: Always
         ports:
         - containerPort: 80

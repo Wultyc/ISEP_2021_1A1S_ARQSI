@@ -13,6 +13,8 @@ import { TripsComponent } from './ViagemMasterData/components/trips/trips.compon
 import { WorkBlocksComponent } from './ViagemMasterData/components/work-blocks/work-blocks.component';
 import { TripulantComponent } from './ViagemMasterData/components/tripulant/tripulant.component';
 import { VehicleServiceComponent } from './ViagemMasterData/components/vehicle-service/vehicle-service.component';
+import { TripulantServiceComponent } from './ViagemMasterData/components/tripulant-service/tripulant-service.component';
+
 const routes: Routes = [
   {path: 'rmd/nodes', component: NodesComponent },
   {path: 'rmd/lines', component: LineComponent },
@@ -25,6 +27,7 @@ const routes: Routes = [
   {path: 'vmd/vehicle-service', component: VehicleServiceComponent },
 
   {path: 'vmd/tripulants', component: TripulantComponent },
+  {path: 'vmd/tripulant-service', component: TripulantServiceComponent },
 
   {path: 'vmd/trips', component: TripsComponent},
   

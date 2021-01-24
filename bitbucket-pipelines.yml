@@ -3,107 +3,176 @@
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
 image: node:10.15.0
+definitions:
+  steps:
+    - step: &Test-RMD
+        name: Run RedeMasterData tests
+        script:
+          - cd RedeMasterData/
+          - npm install
+          - npm run test
+          #- npm run integrationTest
+        # condition:
+        #   changesets:
+        #       includePaths:
+        #         - "RedeMasterData/**"
+    - step: &Test-VMD
+        name: Run ViagemMasterData tests
+        script:
+          - echo "Tests VMD ignored"
+        # condition:
+        #   changesets:
+        #       includePaths:
+        #         - "ViagemMasterData/**"
+    - step: &Test-IGLX
+        name: Run ImportGLX tests
+        script:
+          - echo "Tests ImportGLX ignored"
+        # condition:
+        #   changesets:
+        #       includePaths:
+        #         - "ImportGLXMasterData/**"
+    - step: &Test-SPA
+        name: Run SPA tests
+        script:
+          - echo "Tests SPA ignored"
+        # condition:
+        #   changesets:
+        #       includePaths:
+        #         - "viajantes2-spa/**"
+    - step: &Build-RMD
+        name: Build RedeMasterData Image and Upload on DockerHub
+        script:
+          - export IMAGE_NAME=$DOCKER_HUB_USERNAME/arqsi-viajantes2:redemasterdata-$BITBUCKET_BUILD_NUMBER
+          - cd RedeMasterData/
+          # install all dependencies
+          - npm install
+          #build application
+          - npm run build
+          # build the Docker image (this will use the Dockerfile in the root of the repo)
+          - docker build -t $IMAGE_NAME .
+          # authenticate with the Docker Hub registry
+          - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
+          # push the new Docker image to the Docker registry
+          - docker push $IMAGE_NAME
+        services:
+          - docker
+        # condition:
+        # changesets:
+        #     includePaths:
+        #       - "RedeMasterData/**"
+    - step: &Build-VMD
+        name: Run ViagemMasterData tests
+        script:
+          - export IMAGE_NAME=$DOCKER_HUB_USERNAME/arqsi-viajantes2:viagemmasterdata-$BITBUCKET_BUILD_NUMBER
+          - cd ViagemMasterData/ViagemMasterData/
+          # build the Docker image (this will use the Dockerfile in the root of the repo)
+          - docker build -t $IMAGE_NAME .
+          # authenticate with the Docker Hub registry
+          - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
+          # push the new Docker image to the Docker registry
+          - docker push $IMAGE_NAME
+        services:
+          - docker
+        # condition:
+        # changesets:
+        #     includePaths:
+        #       - "ViagemMasterData/**"
+    - step: &Build-IGLX
+        name: Build ImportGLX Image and Upload on DockerHub
+        script:
+          - export IMAGE_NAME=$DOCKER_HUB_USERNAME/arqsi-viajantes2:importglx-$BITBUCKET_BUILD_NUMBER
+          - cd ImportGLX/
+          # install all dependencies
+          - npm install
+          #build application
+          - npm run build
+          # build the Docker image (this will use the Dockerfile in the root of the repo)
+          - docker build -t $IMAGE_NAME .
+          # authenticate with the Docker Hub registry
+          - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
+          # push the new Docker image to the Docker registry
+          - docker push $IMAGE_NAME
+        services:
+          - docker
+        # condition:
+        # changesets:
+        #     includePaths:
+        #       - "ImportGLXMasterData/**"
+    - step: &Build-SPA
+        name: Build SPA Image and Upload on DockerHub
+        script:
+          - cd viajantes2-spa
+          # install angular
+          - npm install @angular/cli  @angular-devkit/build-angular @ngtools/webpack
+          # install npm
+          - npm install --only=production
+          # build app
+          - npm run build --prod
+          # set image name
+          - export IMAGE_NAME=$DOCKER_HUB_USERNAME/arqsi-viajantes2:spa-$BITBUCKET_BUILD_NUMBER
+          # build the Docker image (this will use the Dockerfile in the root of the repo)
+          - docker build -t $IMAGE_NAME .
+          # authenticate with the Docker Hub registry
+          - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
+          # push the new Docker image to the Docker registry
+          - docker push $IMAGE_NAME
+        services:
+          - docker
+        size: 2x
+        # condition:
+        #   changesets:
+        #       includePaths:
+        #         - "viajantes2-spa/**"
+    - step: &Deploy
+        name: Deploy containers to Kubernets
+        script:
+          # Download kubectl
+          - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+          - chmod +x ./kubectl
+          - mv ./kubectl /usr/local/bin/kubectl
 
+          # Set KUBECONFIG
+          - echo $KUBECONFIG | base64 -d > kubeconfig.yml
+          - export KUBECONFIG=kubeconfig.yml
+          
+          #Deploy to cloud
+          # Import GLX
+          - sed -e "s|BUILD_NR|$BITBUCKET_BUILD_NUMBER|g" ./Kubernets/importglx.yaml | kubectl apply -f -
+          # RedeMasterData
+          - sed -e "s|BUILD_NR|$BITBUCKET_BUILD_NUMBER|g" ./Kubernets/redemasterdata.yaml | kubectl apply -f -
+          # ViagemMasterData
+          - sed -e "s|BUILD_NR|$BITBUCKET_BUILD_NUMBER|g" ./Kubernets/viagemmasterdata.yaml | kubectl apply -f -
+          #SPA
+          - sed -e "s|BUILD_NR|$BITBUCKET_BUILD_NUMBER|g" ./Kubernets/viajantes2-spa.yaml | kubectl apply -f -
+          #Test deployment
+          - chmod +x ./Kubernets/scripts/test-deployment.sh
+          - ./Kubernets/scripts/test-deployment.sh
+    # - step: &SmokeTest
+    #     name: Run Smoke tests
+    #     script:
+    #       - wget http://viajantes2.tk
+    #       - wget http://redemasterdata.viajantes2.tk/api/healthcheck
+    #       - wget http://viagemmasterdata.viajantes2.tk/api/healthcheck
+    #       - wget http://importglx.viajantes2.tk/api/healthcheck
 pipelines:
   branches:
+     master:
+      - parallel:
+        - step: *Test-RMD
+        - step: *Test-VMD
+        - step: *Test-IGLX
+        - step: *Test-SPA
      release:
       - parallel:
-        - step:
-            name: 'Test RedeMasterData'
-            script:
-              - cd RedeMasterData
-              #- npm install
-              - echo "Tests ignored"
-        - step:
-            name: 'Test ImportGLX'
-            script:
-              - cd ImportGLX
-              #- npm install
-              - echo "Tests ignored"
-        - step:
-            name: 'Test SPA'
-            script:
-              - cd viajantes2-spa
-              #- npm install
-              - echo "Tests ignored"
-
+        - step: *Test-RMD
+        - step: *Test-VMD
+        - step: *Test-IGLX
+        - step: *Test-SPA
       - parallel:
-        - step:
-            name: Build RedeMasterData Image and Upload on DockerHub
-            script:
-              - export IMAGE_NAME=$DOCKER_HUB_USERNAME/arqsi-viajantes2-redemasterdata:latest
-              - cd RedeMasterData/
-              # install all dependencies
-              - npm install
-              #build application
-              - npm run build
-              # build the Docker image (this will use the Dockerfile in the root of the repo)
-              - docker build -t $IMAGE_NAME .
-              # authenticate with the Docker Hub registry
-              - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
-              # push the new Docker image to the Docker registry
-              - docker push $IMAGE_NAME
-            services:
-              - docker
-        - step:
-            name: Build ImportGLX Image and Upload on DockerHub
-            script:
-              - export IMAGE_NAME=$DOCKER_HUB_USERNAME/arqsi-viajantes2-importglx:latest
-              - cd ImportGLX/
-              # install all dependencies
-              - npm install
-              #build application
-              - npm run build
-              # build the Docker image (this will use the Dockerfile in the root of the repo)
-              - docker build -t $IMAGE_NAME .
-              # authenticate with the Docker Hub registry
-              - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
-              # push the new Docker image to the Docker registry
-              - docker push $IMAGE_NAME
-            services:
-              - docker
-        - step:
-            name: Build SPA Image and Upload on DockerHub
-            script:
-              - cd viajantes2-spa
-              # install angular
-              - npm install @angular/cli  @angular-devkit/build-angular @ngtools/webpack
-              # install npm
-              - npm install --only=production
-              # build app
-              - npm run build --prod
-              # set image name
-              - export IMAGE_NAME=$DOCKER_HUB_USERNAME/arqsi-viajantes2-spa:latest
-              # build the Docker image (this will use the Dockerfile in the root of the repo)
-              - docker build -t $IMAGE_NAME .
-              # authenticate with the Docker Hub registry
-              - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
-              # push the new Docker image to the Docker registry
-              - docker push $IMAGE_NAME
-            services:
-              - docker
-            size: 2x
-              
-      - step:
-          name: Deploy containers to Kubernets
-          script:
-            # Download kubectl
-            - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-            - chmod +x ./kubectl
-            - mv ./kubectl /usr/local/bin/kubectl
-
-            # Set KUBECONFIG
-            - echo $KUBECONFIG | base64 -d > kubeconfig.yml
-            - export KUBECONFIG=kubeconfig.yml
-            
-            #Deploy to cloud
-            # RedeMasterData
-            - kubectl delete deployment redemasterdata-deployment
-            - kubectl apply -f ./Kubernets/redemasterdata.yaml
-            # Import GLX
-            - kubectl delete deployment importglx-deployment
-            - kubectl apply -f ./Kubernets/importglx.yaml
-            #SPA
-            - kubectl delete deployment viajantes2-spa-deployment
-            - kubectl apply -f ./Kubernets/viajantes2-spa.yaml
-
+        - step: *Build-RMD
+        - step: *Build-VMD
+        - step: *Build-IGLX
+        - step: *Build-SPA
+      - step: *Deploy
+    # - step: *SmokeTest
