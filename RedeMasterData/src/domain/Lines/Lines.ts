@@ -64,8 +64,8 @@ export default class Line extends AggregateRoot<LineProps>{
             { argument: props.code, argumentName: 'name' },
             { argument: props.name, argumentName: 'name' },
             { argument: props.color, argumentName: 'shortName' },
-            { argument: props.beginNode, argumentName: 'longitude' },
-            { argument: props.finalNode, argumentName: 'latitude' }
+            { argument: props.beginNode, argumentName: 'beginNode' },
+            { argument: props.finalNode, argumentName: 'finalNode' }
         ]
 
         const tmpArray = props.lineRoutes.map(rn => [
