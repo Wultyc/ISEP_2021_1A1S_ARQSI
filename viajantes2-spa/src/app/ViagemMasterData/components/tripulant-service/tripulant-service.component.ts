@@ -26,7 +26,11 @@ export class TripulantServiceComponent implements OnInit {
   tripulantServiceList: TripulantServices[] = [];
   displayedColumns: string[] = ['date','name'];
   dataSource = new MatTableDataSource<TripulantServices>();
-  
+ 
+  filterForm = new FormGroup ({
+    date: new FormControl(new Date())
+  });
+
   isAdding: boolean = false;
   hasError: boolean = false;
   errorMessages: any[] = [];
@@ -50,12 +54,10 @@ export class TripulantServiceComponent implements OnInit {
   getTripulantService() {
     this.tripulantServiceService.getTripulantServices().subscribe(
       (data) => {
-        console.log(data)
         if (data && data.length > 0)
         data.forEach( element => (
           this.tripulantServiceList.push(this.tripulantServiceMapper.fromResponseFullToDTO(new TripulantServices, element)))
           );
-          console.log(this.tripulantServiceList)
           this.dataSource = new MatTableDataSource(this.tripulantServiceList);
       }
     )
@@ -69,7 +71,34 @@ export class TripulantServiceComponent implements OnInit {
       }
     ); 
   }
+  
+  filter() { 
+    let date =  new Date(this.filterForm.value.date.valueOf() - this.filterForm.value.date.getTimezoneOffset() * 60000).toISOString().replace(/\.\d{3}Z$/, '');
+    let filterYear = new Date(date).getFullYear();
+    let filterMonth = new Date(date).getMonth();
+    let filterDay = new Date(date).getDate();
 
+    let newTripList: TripulantServices[] = [];
+    for (var i = this.tripulantServiceList.length - 1; i >= 0; --i) {
+      let dateYear = new Date(this.tripulantServiceList[i].date).getFullYear();
+      let dateMonth = new Date(this.tripulantServiceList[i].date).getMonth();
+      let dateDay = new Date(this.tripulantServiceList[i].date).getDate();
+      
+       if (filterYear == dateYear && filterMonth == dateMonth &&  filterDay == dateDay) {
+       newTripList.push(this.tripulantServiceList[i]);
+       }
+    }
+      this.dataSource = new MatTableDataSource(newTripList);
+    
+  }
+  
+  closeFilter() {
+    this.dataSource = null;
+    this.tripulantServiceList = [];
+    this.getTripulantService();
+    this.filterForm.reset();
+  }
+ 
   
   setAdd() : any {
     this.tripulantServiceForm.reset();

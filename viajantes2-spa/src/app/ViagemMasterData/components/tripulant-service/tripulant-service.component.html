@@ -5,10 +5,17 @@
 </div>
 
 <div *ngIf="!isAdding; else createVehicleServiceTemplate">
-    <!-- <mat-form-field>
-        <mat-label>Search: </mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Aguiar de Sousa" #input>
-    </mat-form-field> -->
+    <div [formGroup]="filterForm">
+        <section class="example-section">
+            <mat-form-field appearance="fill">
+                <mat-label>Search Date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>&nbsp; &nbsp; &nbsp; &nbsp;
+        </section>
+        <a mat-button (click)="filter()">Search</a>&nbsp; &nbsp; &nbsp;<a mat-button (click)="closeFilter()">Erase Filter</a>
+    </div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Name (Licence Number) </th>
