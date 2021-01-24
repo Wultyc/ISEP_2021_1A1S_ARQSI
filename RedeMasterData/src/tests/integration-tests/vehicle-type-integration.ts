@@ -3,6 +3,9 @@ import { describe } from 'mocha';
 import { app } from '../../app';
 import chaiHttp from 'chai-http';
 import 'mocha';
+import fs from 'fs';
+import path from 'path';
+import {config} from 'node-config-ts'
 import VehicleType from '../../models/mongo/VehicleType'
 process.env.APP_PORT = "3000"
 chai.use(chaiHttp)
@@ -11,9 +14,16 @@ const expect = chai.expect;
 
 let result: any;
 describe('Get /vehicle-types', () => {
-    before( () => {
+    before(() => {
+        const data = `DB_CONNECT=${config.app.defaultMongooseConnStringTst}`
+        fs.writeFileSync(path.join(path.resolve('./'), ".env"), data);
+
         return VehicleType.collection.drop()
-       });
+    });
+    after(() => {
+        fs.unlinkSync(path.join(path.resolve('./'), ".env"));
+        return VehicleType.collection.drop()
+    })
     it('verfiies corret create', async () => {
 
         result = await chai.request(app)
