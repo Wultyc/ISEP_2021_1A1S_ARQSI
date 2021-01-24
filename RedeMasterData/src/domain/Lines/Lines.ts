@@ -10,6 +10,7 @@ import LineDTO from '../../dto/LineDTO'
 import { RouteId } from '../Routes/RouteId'
 import RouteDTO from '../../dto/RouteDTO'
 import LinePatchDTO from '../../dto/LinePatchDTO'
+import NodeDTO from '../../dto/NodeDTO'
 
 interface LineProps {
     code: String,
@@ -90,14 +91,21 @@ export default class Line extends AggregateRoot<LineProps>{
             route = routeList.getValue().find(route => route.id == lr.routeId)
 
             if (lr.orientation == "Go") {
-                startNode = route?.routeNodes[0].nodeId
-                finalNode = route?.routeNodes[route.routeNodes.length - 1].nodeId
+                startNode = (route?.routeNodes[0].nodeId as NodeDTO)._id
+                finalNode = (route?.routeNodes[route.routeNodes.length - 1].nodeId as NodeDTO)._id
             } else {
-                startNode = route?.routeNodes[route.routeNodes.length - 1].nodeId
-                finalNode = route?.routeNodes[0].nodeId
+                startNode = (route?.routeNodes[route.routeNodes.length - 1].nodeId as NodeDTO)._id
+                finalNode = (route?.routeNodes[0].nodeId as NodeDTO)._id
             }
 
-            if (startNode?.toString() != props.beginNode.toString() || finalNode?.toString() != props.finalNode.toString()) {
+            console.log({
+                startNode: startNode,
+                beginNode: props.beginNode,
+                finalNode: finalNode,
+                endNode: props.finalNode
+            })
+
+            if (startNode != props.beginNode || finalNode != props.finalNode) {
                 failedNodesValidation = true
             }
         })
@@ -137,14 +145,14 @@ export default class Line extends AggregateRoot<LineProps>{
         route = routeList.getValue().find(route => route.id == newPath.routeId)
 
         if (newPath.orientation == "Go") {
-            startNode = route?.routeNodes[0].nodeId
-            finalNode = route?.routeNodes[route.routeNodes.length - 1].nodeId
+            startNode = (route?.routeNodes[0].nodeId as NodeDTO)._id
+            finalNode = (route?.routeNodes[route.routeNodes.length - 1].nodeId as NodeDTO)._id
         } else {
-            startNode = route?.routeNodes[route.routeNodes.length - 1].nodeId
-            finalNode = route?.routeNodes[0].nodeId
+            startNode = (route?.routeNodes[route.routeNodes.length - 1].nodeId as NodeDTO)._id
+            finalNode = (route?.routeNodes[0].nodeId as NodeDTO)._id
         }
 
-        if (startNode?.toString() != props.beginNode.toString() || finalNode?.toString() != props.finalNode.toString()) {
+        if (startNode != props.beginNode || finalNode != props.finalNode) {
             return Result.fail<Line>("Route begin node or final node are not the same of line")
         }
 

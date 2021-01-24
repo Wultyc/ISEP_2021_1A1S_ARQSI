@@ -4,6 +4,7 @@ import StoreGlxRepository from '../repository/StoreGlxRepository'
 import {config} from 'node-config-ts'
 import moment from 'moment'
 import logger from '../utils/Logger'
+import IDto from '../dto/interface/IDto'
 
 export default class StoreGLXService implements IService {
     
@@ -15,6 +16,9 @@ export default class StoreGLXService implements IService {
         this.glxDto = glx
         this.filename = this.getFileName()
         this.storeGlxRepository = repo
+    }
+    exportData(): GlxFileDto {
+        return this.glxDto
     }
 
     runService():boolean{

@@ -12,6 +12,8 @@ export default class LineDTO implements IGlxDto {
         code: String
         name: String
         color: String
+        beginNode: String
+        finalNode: String
         lineRoutes: IRouteData[]
         tripulantType: []
         vehicleType: []

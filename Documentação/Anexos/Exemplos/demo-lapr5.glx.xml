@@ -49,8 +49,8 @@
                         <LinePaths>
                             <LinePath key="LinePath:7" Path="Path:13" Orientation="Go" />
                             <LinePath key="LinePath:8" Path="Path:18" Orientation="Return" />
-                            <LinePath key="LinePath:9" Path="Path:24" Orientation="Go" />
-                            <LinePath key="LinePath:10" Path="Path:26" Orientation="Return" />
+                            <!-- <LinePath key="LinePath:9" Path="Path:24" Orientation="Go" /> -->
+                            <!-- <LinePath key="LinePath:10" Path="Path:26" Orientation="Return" /> -->
                         </LinePaths>
                         <AllowedVehicles />
                         <DeniedVehicles />
