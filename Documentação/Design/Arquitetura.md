@@ -29,7 +29,7 @@ Para modelar/representar visualmente, tanto o que foi implementado como as ideia
 - [Modelo C4+1 e vistas - Nível 1](./ModeloC4_1-N1.md)
 - [Modelo C4+1 e vistas - Nível 2](./ModeloC4_1-N2.md)
 - Modelo C4+1 e vistas - Nível 3
-    - [Single Page Application](./ModeloC4_1-N3-SPA.md)
+    - [Web UI](./ModeloC4_1-N3-SPA.md)
     - [Rede Master Data](./ModeloC4_1-N3-RMD.md)
     - [Viagem Master Data](./ModeloC4_1-N3-VMD.md)
     - [Import GLX](./ModeloC4_1-N3-IGLX.md)
