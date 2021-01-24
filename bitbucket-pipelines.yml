@@ -126,11 +126,11 @@ definitions:
           
           #Deploy to cloud
           # RedeMasterData
-          - sed -e 's|BUILD_NR|$BITBUCKET_BUILD_NUMBER|g' ./Kubernets/redemasterdata.yaml | kubectl apply -f -
+          - sed -e "s|BUILD_NR|$BITBUCKET_BUILD_NUMBER|g" ./Kubernets/redemasterdata.yaml | kubectl apply -f -
           # Import GLX
-          - sed -e 's|BUILD_NR|$BITBUCKET_BUILD_NUMBER|g' ./Kubernets/importglx.yaml | kubectl apply -f -
+          - sed -e "s|BUILD_NR|$BITBUCKET_BUILD_NUMBER|g" ./Kubernets/importglx.yaml | kubectl apply -f -
           #SPA
-          - sed -e 's|BUILD_NR|$BITBUCKET_BUILD_NUMBER|g' ./Kubernets/viajantes2-spa.yaml | kubectl apply -f -
+          - sed -e "s|BUILD_NR|$BITBUCKET_BUILD_NUMBER|g" ./Kubernets/viajantes2-spa.yaml | kubectl apply -f -
           #Test deployment
           - chmod +x ./Kubernets/scripts/test-deployment.sh
           - ./Kubernets/scripts/test-deployment.sh
