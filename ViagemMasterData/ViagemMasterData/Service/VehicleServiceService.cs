@@ -6,6 +6,7 @@ using ViagemMasterData.Domain.Shared;
 using ViagemMasterData.DTOs.VehicleServiceDTOs;
 using ViagemMasterData.Infraestructure;
 using ViagemMasterData.Mappers;
+using ViagemMasterData.Schema;
 
 namespace ViagemMasterData.Service
 {
@@ -14,10 +15,12 @@ namespace ViagemMasterData.Service
         private readonly VehicleServiceMapper vehicleServiceMapper = new VehicleServiceMapper();
         
         private readonly IRepository<Schema.VehicleService> _repository;
+        private readonly IRepository<Schema.Vehicle> _repositoryV;
 
-        public VehicleServiceService(IRepository<Schema.VehicleService> repository)
+        public VehicleServiceService(IRepository<Schema.VehicleService> repository, IRepository<Schema.Vehicle> repositoryV)
         {
             _repository = repository;
+            _repositoryV = repositoryV;
         }
 
         public async Task<VehicleServiceDTO> PostAsync(CreateVehicleServiceDTO createVehicleServiceDTO)
@@ -54,7 +57,8 @@ namespace ViagemMasterData.Service
             IList<VehicleServiceDTO> vehicleServiceDTOList = new List<VehicleServiceDTO>();
 
             foreach (Schema.VehicleService vehicleService in vehicleServiceList)
-            {
+            { 
+                vehicleService.Vehicle = _repositoryV.Select(vehicleService.VehicleId);
                 vehicleServiceDTOList.Add(vehicleServiceMapper.GetDTOFromSchema(vehicleService));
             }
 

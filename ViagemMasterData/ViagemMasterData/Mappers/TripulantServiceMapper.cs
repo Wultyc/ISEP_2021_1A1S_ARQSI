@@ -13,7 +13,7 @@ namespace ViagemMasterData.Mappers
         public TripulantServiceDTO GetDTOFromSchema(Schema.TripulantService tripulantService)
         {
             return new TripulantServiceDTO(tripulantService.Id.ToString().ToUpper(),
-                tripulantService.TripulantId, tripulantService.Date);
+                tripulantService.TripulantId, tripulantService.Tripulant, tripulantService.Date);
         }
 
         public Domain.TripulantServices.TripulantServices GetDomainFromTripulantServiceDTO(TripulantServiceDTO tripulantServiceDTO)
@@ -28,12 +28,12 @@ namespace ViagemMasterData.Mappers
 
         public TripulantServiceDTO GetDTOFromCreateDTO(CreateTripulantServiceDTO createTripulantServiceDTO)
         {
-            return new TripulantServiceDTO(null, createTripulantServiceDTO.TripulantId, createTripulantServiceDTO.Date);
+            return new TripulantServiceDTO(null, createTripulantServiceDTO.TripulantId, null, createTripulantServiceDTO.Date);
         }
 
         public TripulantServiceDTO GetDTOFromDomain(Domain.TripulantServices.TripulantServices tripulantServices)
         {
-            return new TripulantServiceDTO(tripulantServices.Id.Value.ToString(), tripulantServices.TripulantId.Value.ToString(), tripulantServices.Date);
+            return new TripulantServiceDTO(tripulantServices.Id.Value.ToString(), tripulantServices.TripulantId.Value.ToString(), null, tripulantServices.Date);
         }
 
     }

@@ -22,7 +22,7 @@ namespace ViagemMasterData.Schema
 
         public virtual ICollection<TripulantService> TripulantServices { get; set; }
         public virtual ICollection<TripulantType> TripulantTypes { get; set; }
-        [JsonConstructor]
+        //[JsonConstructor]
         public Tripulant(string id, string name, DateTime birthDate, string licenceNr, DateTime licenceExpires)
         {
             this.Id = id;

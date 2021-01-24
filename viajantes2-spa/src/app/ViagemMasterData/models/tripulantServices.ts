@@ -9,3 +9,9 @@ export class TripulantService {
     tripulant: Tripulant;
     date: Date;
 }
+
+export class TripulantServices {
+    id: string;
+    tripulant: Tripulant;
+    date: Date;
+}

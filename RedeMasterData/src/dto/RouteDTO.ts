@@ -1,7 +1,8 @@
+import NodeDTO from '../dto/NodeDTO'
 import IDto from './interface/IDto'
 
 interface INodeData {​​
-    nodeId: String
+    nodeId: String | NodeDTO
     distance: number
     duration: number
 }

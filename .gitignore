@@ -153,3 +153,6 @@ UpgradeLog*.XML
 
 # file archive
 file_archive/
+
+# C# tests
+**/*.testlog
