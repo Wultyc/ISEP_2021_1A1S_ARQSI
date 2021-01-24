@@ -31,7 +31,7 @@ namespace ViagemMasterData.UnitTests.Mappers
         public void TestGetDomainFromTripulantDTO(string id, string name, DateTime bithDate, string licenceNr, DateTime licenceExpires, ArrayList tripTypes)
         {
             TripulantDTO tripulantDTO = new TripulantDTO(id, name, bithDate, licenceNr, licenceExpires, tripTypes);
-            Domain.Tripulant.Tripulant tripulant = new TripulantMapper().GetDomainFromTripulantDTO(tripulantDTO);
+            ViagemMasterData.Domain.Tripulant.Tripulant tripulant = new TripulantMapper().GetDomainFromTripulantDTO(tripulantDTO);
 
             Assert.Equal(id, tripulantDTO.Id);
             Assert.Equal(name, tripulantDTO.Name);
@@ -44,7 +44,7 @@ namespace ViagemMasterData.UnitTests.Mappers
         [MemberData(nameof(Data))]
         public void TestGetSchemaFromDomain(string id, string name, DateTime bithDate, string licenceNr, DateTime licenceExpires, ArrayList tripTypes)
         {
-            Domain.Tripulant.Tripulant domainTripulant = new Domain.Tripulant.Tripulant(id, name, bithDate, licenceNr, licenceExpires, tripTypes);
+            ViagemMasterData.Domain.Tripulant.Tripulant domainTripulant = new ViagemMasterData.Domain.Tripulant.Tripulant(id, name, bithDate, licenceNr, licenceExpires, tripTypes);
             Schema.Tripulant tripulant = new TripulantMapper().GetSchemaFromDomain(domainTripulant);
 
             Assert.Equal(name, tripulant.Name);

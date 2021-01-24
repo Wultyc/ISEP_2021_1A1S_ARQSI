@@ -29,8 +29,8 @@ namespace ViagemMasterData.UnitTests.Mappers
         [MemberData(nameof(Data))]
         public void TestGetDomainFromTripulantServiceDTO(string id, string tripulantId, DateTime date)
         {
-            TripulantServiceDTO tripulantServiceDTO = new TripulantServiceDTO(id, tripulantId, date);
-            Domain.TripulantServices.TripulantServices tripulantServices = new TripulantServiceMapper().GetDomainFromTripulantServiceDTO(tripulantServiceDTO);
+            TripulantServiceDTO tripulantServiceDTO = new TripulantServiceDTO(id, tripulantId, null, date);
+            ViagemMasterData.Domain.TripulantServices.TripulantServices tripulantServices = new TripulantServiceMapper().GetDomainFromTripulantServiceDTO(tripulantServiceDTO);
 
             Assert.Equal(id, tripulantServices.Id.AsString());
             Assert.Equal(tripulantId, tripulantServices.TripulantId.AsString());
@@ -41,7 +41,7 @@ namespace ViagemMasterData.UnitTests.Mappers
         [MemberData(nameof(Data))]
         public void TestGetSchemaFromDomain(string id, string tripulantId, DateTime date)
         {
-            Domain.TripulantServices.TripulantServices tripulantServices = new Domain.TripulantServices.TripulantServices(id, tripulantId, date);
+            ViagemMasterData.Domain.TripulantServices.TripulantServices tripulantServices = new ViagemMasterData.Domain.TripulantServices.TripulantServices(id, tripulantId, date);
             Schema.TripulantService tripulantService = new TripulantServiceMapper().GetSchemaFromDomain(tripulantServices);
 
             Assert.Equal(id, tripulantService.Id);
@@ -64,7 +64,7 @@ namespace ViagemMasterData.UnitTests.Mappers
         [MemberData(nameof(Data))]
         public void TestGetDTOFromDomain(string id, string tripulantId, DateTime date)
         {
-            Domain.TripulantServices.TripulantServices tripulantServices = new Domain.TripulantServices.TripulantServices(id, tripulantId, date);
+            ViagemMasterData.Domain.TripulantServices.TripulantServices tripulantServices = new ViagemMasterData.Domain.TripulantServices.TripulantServices(id, tripulantId, date);
             TripulantServiceDTO tripulantServiceDTO = new TripulantServiceMapper().GetDTOFromDomain(tripulantServices);
 
             Assert.Equal(tripulantId, tripulantServiceDTO.TripulantId);
