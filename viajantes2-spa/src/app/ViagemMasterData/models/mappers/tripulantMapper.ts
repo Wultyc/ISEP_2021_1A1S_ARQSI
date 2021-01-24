@@ -18,13 +18,23 @@ export class TripulantMapper {
 
     fromResponseToDto = function (model: Tripulant, response: any) {
         model.id = response.id;
-        model.name = response.Name;
-        model.birthDate = response.BirthDate;
-        model.licenceNumber = response.LicenceNr;
-        model.licenseExpires = response.LicenceExpires;
-        for (let i = 0; i < response.TripulantTypes.length; i++) {
-            model.tripulantTypes.push(response.TripulantTypes[i]);
+        model.name = response.name;
+        model.birthDate = response.birthDate;
+        model.licenceNumber = response.licenceNr;
+        model.licenseExpires = response.licenceExpires;
+        for (let i = 0; i < response.tripulantTypes.length; i++) {
+            model.tripulantTypes.push(response.tripulantTypes[i]);
         } 
         return model;
+    }
+    fromNotExpandDTO = function (model: Tripulant, response: any) {
+        model.id = response.id;
+        model.name = response.name;
+        model.birthDate = response.birthDate;
+        model.licenceNumber = response.licenceNr;
+        model.licenseExpires = response.licenceExpires;
+        model.tripulantTypes = [];
+        return model;
+
     }
 }

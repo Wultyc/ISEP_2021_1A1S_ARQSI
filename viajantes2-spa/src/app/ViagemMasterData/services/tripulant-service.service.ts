@@ -3,24 +3,24 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { VehicleService, VehicleServicePost } from '../models/vehicleServices';
+import { TripulantService, TripulantServicePost } from '../models/tripulantServices';
 
 @Injectable({
   providedIn: 'root'
 })
-export class VehicleServiceService {
+export class TripulantServiceService {
 
   constructor(private httpClient: HttpClient) { }
 
-  url = environment.apiEndpointBackendVDM + 'vehicleService';  
+  url = environment.apiEndpointBackendVDM + 'tripulantService';  
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
-  getVehicleServices(): Observable<VehicleService[]> {
-    return this.httpClient.get<VehicleService[]>(this.url);
+  getTripulantServices(): Observable<TripulantService[]> {
+    return this.httpClient.get<TripulantService[]>(this.url);
   }
-  postVehicleService(vehicleService: VehicleServicePost): Observable<VehicleService> {
-    return this.httpClient.post<VehicleService>(this.url, vehicleService).pipe(
+  postTripulantService(vehicleService: TripulantServicePost): Observable<TripulantService> {
+    return this.httpClient.post<TripulantService>(this.url, vehicleService).pipe(
           catchError((err) => {
             console.error(err);
             return throwError(err);
