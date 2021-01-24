@@ -8,7 +8,8 @@ definitions:
     - step: &Test-RMD
         name: Run RedeMasterData tests
         script:
-          - echo "Tests RMD ignored"
+          - npm run test
+          - npm run integrationTest
         # condition:
         #   changesets:
         #       includePaths:
