@@ -156,3 +156,6 @@ file_archive/
 
 # C# tests
 **/*.testlog
+
+# C# out
+ViagemMasterData/ViagemMasterData/out

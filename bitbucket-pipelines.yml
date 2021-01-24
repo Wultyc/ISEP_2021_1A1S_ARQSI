@@ -62,7 +62,16 @@ definitions:
     - step: &Build-VMD
         name: Run ViagemMasterData tests
         script:
-          - echo "Tests VMD"
+          - export IMAGE_NAME=$DOCKER_HUB_USERNAME/arqsi-viajantes2:viagemmasterdata-$BITBUCKET_BUILD_NUMBER
+          - cd ViagemMasterData/ViagemMasterData/
+          # build the Docker image (this will use the Dockerfile in the root of the repo)
+          - docker build -t $IMAGE_NAME .
+          # authenticate with the Docker Hub registry
+          - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
+          # push the new Docker image to the Docker registry
+          - docker push $IMAGE_NAME
+        services:
+          - docker
         # condition:
         # changesets:
         #     includePaths:
@@ -126,10 +135,12 @@ definitions:
           - export KUBECONFIG=kubeconfig.yml
           
           #Deploy to cloud
-          # RedeMasterData
-          - sed -e "s|BUILD_NR|$BITBUCKET_BUILD_NUMBER|g" ./Kubernets/redemasterdata.yaml | kubectl apply -f -
           # Import GLX
           - sed -e "s|BUILD_NR|$BITBUCKET_BUILD_NUMBER|g" ./Kubernets/importglx.yaml | kubectl apply -f -
+          # RedeMasterData
+          - sed -e "s|BUILD_NR|$BITBUCKET_BUILD_NUMBER|g" ./Kubernets/redemasterdata.yaml | kubectl apply -f -
+          # ViagemMasterData
+          - sed -e "s|BUILD_NR|$BITBUCKET_BUILD_NUMBER|g" ./Kubernets/viagemmasterdata.yaml | kubectl apply -f -
           #SPA
           - sed -e "s|BUILD_NR|$BITBUCKET_BUILD_NUMBER|g" ./Kubernets/viajantes2-spa.yaml | kubectl apply -f -
           #Test deployment
@@ -140,6 +151,7 @@ definitions:
     #     script:
     #       - wget http://viajantes2.tk
     #       - wget http://redemasterdata.viajantes2.tk/api/healthcheck
+    #       - wget http://viagemmasterdata.viajantes2.tk/api/healthcheck
     #       - wget http://importglx.viajantes2.tk/api/healthcheck
 pipelines:
   branches:

@@ -24,3 +24,9 @@ spec:
       - backend:
           serviceName: redemasterdata
           servicePort: 80
+  - host: viagemmasterdata.viajantes2.tk
+    http:
+      paths:
+      - backend:
+          serviceName: viagemmasterdata
+          servicePort: 80
