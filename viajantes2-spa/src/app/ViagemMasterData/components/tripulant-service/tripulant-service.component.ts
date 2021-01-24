@@ -93,7 +93,6 @@ export class TripulantServiceComponent implements OnInit {
   }
   
   closeFilter() {
-    this.dataSource = null;
     this.tripulantServiceList = [];
     this.getTripulantService();
     this.filterForm.reset();

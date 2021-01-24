@@ -101,7 +101,6 @@ export class VehicleServiceComponent implements OnInit {
   }
   
   closeFilter() {
-    this.dataSource = null;
     this.vehicleServiceList = [];
     this.getVehicleService();
     this.filterForm.reset();
