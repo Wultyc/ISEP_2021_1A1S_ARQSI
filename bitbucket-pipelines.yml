@@ -10,8 +10,8 @@ definitions:
         script:
           - cd RedeMasterData/
           - npm install
-           - npm run test
-           - npm run integrationTest
+          - npm run test
+          - npm run integrationTest
         # condition:
         #   changesets:
         #       includePaths:
