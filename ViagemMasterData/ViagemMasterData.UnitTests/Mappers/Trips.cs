@@ -60,7 +60,7 @@ namespace ViagemMasterData.UnitTests.Mappers
         public void TestGetTripDomainForTripDTO(string id, string lineId, string routeId, TimeSpan startTime, TimeSpan endTime)
         {
             TripDTO tripDTO = new TripDTO(id, lineId, routeId, startTime, endTime);
-            Domain.Trips.Trip trip = new TripMapper().GetTripDomainForTripDTO(tripDTO);
+            ViagemMasterData.Domain.Trips.Trip trip = new TripMapper().GetTripDomainForTripDTO(tripDTO);
 
             Assert.Equal(lineId, trip.LineId);
             Assert.Equal(routeId, trip.RouteId);

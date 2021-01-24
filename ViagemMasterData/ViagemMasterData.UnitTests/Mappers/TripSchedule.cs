@@ -31,7 +31,7 @@ namespace ViagemMasterData.UnitTests.Mappers
         public void TestGetTripScheduleDomainForTripScheduleDTO(string id, string tripId, string nodeId, int nodeOrder, TimeSpan passingTime)
         {
             TripScheduleDTO tripScheduleDTO = new TripScheduleDTO(id, tripId, nodeId, nodeOrder, passingTime);
-            Domain.TripSchedules.TripSchedule tripSchedule = new TripScheduleMapper().GetTripScheduleDomainForTripScheduleDTO(tripScheduleDTO);
+            ViagemMasterData.Domain.TripSchedules.TripSchedule tripSchedule = new TripScheduleMapper().GetTripScheduleDomainForTripScheduleDTO(tripScheduleDTO);
 
             Assert.Equal(tripId, tripSchedule.TripId);
             Assert.Equal(nodeId, tripSchedule.NodeId);
