@@ -29,6 +29,10 @@ export class VehicleServiceComponent implements OnInit {
   displayedColumns: string[] = ['date','vin'];
   dataSource = new MatTableDataSource<VehicleService>();
   
+  filterForm = new FormGroup ({
+    date: new FormControl(new Date())
+  });
+
   isAdding: boolean = false;
   hasError: boolean = false;
   errorMessages: any[] = [];
@@ -81,6 +85,28 @@ export class VehicleServiceComponent implements OnInit {
       }
     ); 
   }
+
+    
+  filter() { 
+    let date =  new Date(this.filterForm.value.date.valueOf() - this.filterForm.value.date.getTimezoneOffset() * 60000).toISOString().replace(/\.\d{3}Z$/, '');
+    let filterYear = new Date(date).getFullYear();
+    let filterMonth = new Date(date).getMonth();
+    let filterDay = new Date(date).getDate();
+    let newTripList: VehicleService[] = [];
+    
+    this.dataSource = new MatTableDataSource(this.vehicleServiceList.filter(vs => 
+                                                                            filterYear == new Date(vs.date).getFullYear() &&
+                                                                            filterMonth == new Date(vs.date).getMonth() &&
+                                                                            filterDay == new Date(vs.date).getDate()))
+  }
+  
+  closeFilter() {
+    this.dataSource = null;
+    this.vehicleServiceList = [];
+    this.getVehicleService();
+    this.filterForm.reset();
+  }
+ 
 
   setAdd() : any {
     this.vehicleServiceForm.reset();
