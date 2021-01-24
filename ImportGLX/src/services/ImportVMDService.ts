@@ -47,7 +47,7 @@ export default class ImportVMDService implements IService {
     private async processTrips() {
         new logger().log("Processing Vehicle Types")
         const tmap = new TripMapper()
-        this.trips = this.schedule.Trips[0].Trip.map(v => tmap.mapFromGLX(v, new TripDto))
+        this.trips = this.schedule.Trips[0].Trip.map(v => tmap.mapFromGLX(v, new TripDto, this.network.routes, this.network.lines))
         await this.callRepository(config.endpoints.viagemMasterData.trip, this.trips, new MasterDataRepository())
     }
 

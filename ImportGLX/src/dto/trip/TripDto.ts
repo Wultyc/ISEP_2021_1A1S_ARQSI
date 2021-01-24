@@ -4,8 +4,8 @@ export default class TripDTO implements IGlxDto {
     system_id: String;
     glx_id: String;
     data: {
-        LineId: String
-        RouteId: String
+        LineId: String | undefined
+        RouteId: String | undefined
         StartTime: String
     };
     status: any;
