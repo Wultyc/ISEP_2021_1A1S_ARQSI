@@ -171,6 +171,11 @@ export class TripsComponent implements OnInit {
     postEntity = this.tripMapper.fromFormToDTO(this.tripForm.value, new TripPost);
     console.log(postEntity)
 
+    this.validatePostEntity(postEntity);
+    if (this.errorMessages.length > 0) {
+      return;
+    }
+
     this.tripsService.postTrip(postEntity)
     .subscribe(
       (data) => {
@@ -212,4 +217,13 @@ export class TripsComponent implements OnInit {
       }
     )
   }
+
+  validatePostEntity(postEntity: TripPost) : void {
+    const numberMinutesInDay = 24 * 60;
+    if (postEntity.frequency * postEntity.numberOfTrips > numberMinutesInDay) {
+      this.errorMessages.push("The time of all the trips combined surpasses a day.");
+      this.hasError = true;
+    }
+  }
+
 }
