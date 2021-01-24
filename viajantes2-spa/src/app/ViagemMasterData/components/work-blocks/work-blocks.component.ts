@@ -183,6 +183,11 @@ export class WorkBlocksComponent implements OnInit {
     postEntity = this.workBlockMapper.fromFormToDTO(this.workBlockForm.value, new WorkBlockPost);
     console.log(postEntity);
 
+    this.validatePostEntity(postEntity);
+    if (this.errorMessages.length > 0) {
+      return;
+    }
+
     this.workBlockService.postWorkBlock(postEntity)
     .subscribe(
       (data) => {
@@ -199,6 +204,15 @@ export class WorkBlocksComponent implements OnInit {
         }
       }
     )
+  }
+
+  validatePostEntity(postEntity: WorkBlockPost) : void {
+
+    const numberMinutesInDay = 24 * 60;
+    if (postEntity.frequency * postEntity.numberOfWorkBlocks > numberMinutesInDay) {
+      this.errorMessages.push("The time of all the work blocks combined surpasses a day.");
+      this.hasError = true;
+    }
   }
 
 }

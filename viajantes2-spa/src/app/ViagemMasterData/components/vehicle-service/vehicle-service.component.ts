@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 import { VehiclesService } from '../../services/vehicles.service';
 import { VehicleServiceService } from '../../services/vehicle-service.service';
 import { VehicleServiceMapper } from '../../models/mappers/vehicleServiceMapper';
-import { VehicleServicePost } from '../../models/vehicleServices';
+import { VehicleServicePost, VehicleService } from '../../models/vehicleServices';
 import { Vehicle } from '../../models/vehicles';
 import { VehicleMapper } from '../../models/mappers/vehicles';
 import { MatDialog } from '@angular/material/dialog';
@@ -24,7 +25,14 @@ export class VehicleServiceComponent implements OnInit {
     vehicleId: new FormControl(),
     date: new FormControl(new Date())
   });
+  vehicleServiceList: VehicleService[] = [];
+  displayedColumns: string[] = ['date','vin'];
+  dataSource = new MatTableDataSource<VehicleService>();
   
+  filterForm = new FormGroup ({
+    date: new FormControl(new Date())
+  });
+
   isAdding: boolean = false;
   hasError: boolean = false;
   errorMessages: any[] = [];
@@ -43,8 +51,22 @@ export class VehicleServiceComponent implements OnInit {
 
   ngOnInit(): void {
     this.getVehicles();
+    this.getVehicleService();
   }
+  getVehicleService () {
+    this.vehicleServiceService.getVehicleServices().subscribe (
+      (data) => {
+        if (data && data.length > 0) {
+          data.forEach( element => (
+            this.vehicleServiceList.push(this.vehicleServiceMapper.fromResponseToExpandedDTO(new VehicleService, element)))
+            );
+            this.dataSource = new MatTableDataSource(this.vehicleServiceList);
 
+            console.log(this.vehicleServiceList)
+        }
+      }
+    )
+  }
   getVehicles(){
     this.vehiclesService.getVehicles().subscribe(
       (data) => {
@@ -62,6 +84,33 @@ export class VehicleServiceComponent implements OnInit {
         this.vehicleList = this.vehicleMapper.addVehicleTypes(this.vehicleList, this.vehicleTypesList)
       }
     ); 
+  }
+
+    
+  filter() { 
+    let date =  new Date(this.filterForm.value.date.valueOf() - this.filterForm.value.date.getTimezoneOffset() * 60000).toISOString().replace(/\.\d{3}Z$/, '');
+    let filterYear = new Date(date).getFullYear();
+    let filterMonth = new Date(date).getMonth();
+    let filterDay = new Date(date).getDate();
+    let newTripList: VehicleService[] = [];
+    
+    this.dataSource = new MatTableDataSource(this.vehicleServiceList.filter(vs => 
+                                                                            filterYear == new Date(vs.date).getFullYear() &&
+                                                                            filterMonth == new Date(vs.date).getMonth() &&
+                                                                            filterDay == new Date(vs.date).getDate()))
+  }
+  
+  closeFilter() {
+    this.vehicleServiceList = [];
+    this.getVehicleService();
+    this.filterForm.reset();
+  }
+ 
+
+  setAdd() : any {
+    this.vehicleServiceForm.reset();
+    this.hasError = false;
+    return this.isAdding = !this.isAdding;
   }
 
   submit() :void {

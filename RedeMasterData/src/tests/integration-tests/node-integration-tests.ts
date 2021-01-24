@@ -3,17 +3,27 @@ import { describe } from 'mocha';
 import { app } from '../../app';
 import chaiHttp from 'chai-http';
 import 'mocha';
+import fs from 'fs';
+import path from 'path';
+import {config} from 'node-config-ts'
 import Node from '../../models/mongo/Node'
 process.env.APP_PORT = "3000"
 chai.use(chaiHttp)
 const expect = chai.expect;
-import {mongooseLoader} from '../../loaders/mongoose'
+import { mongooseLoader } from '../../loaders/mongoose'
 
 let result: any;
 describe('Create /nodes', () => {
-    before( () => {
-       return Node.collection.drop()
-      });
+    before(() => {
+        const data = `DB_CONNECT=${config.app.defaultMongooseConnStringTst}`
+        fs.writeFileSync(path.join(path.resolve('./'), ".env"), data);
+
+        return Node.collection.drop()
+    });
+    after(() => {
+        fs.unlinkSync(path.join(path.resolve('./'), ".env"));
+        return Node.collection.drop()
+    })
 
     it('verfiies corret create', async () => {
         result = await chai.request(app)
@@ -24,7 +34,7 @@ describe('Create /nodes', () => {
                 longitude: '50',
                 latitude: '50',
                 collectionNode: false,
-                surrenderNode: false    
+                surrenderNode: false
             })
         expect(result).to.have.status(200);
         expect(result.body).to.have.property('shortName', 'GNDIntegration')
@@ -53,7 +63,7 @@ describe('Create /nodes', () => {
                 longitude: '50',
                 latitude: '50',
                 collectionNode: false,
-                surrenderNode: true    
+                surrenderNode: true
             })
         expect(result).to.have.status(400);
 

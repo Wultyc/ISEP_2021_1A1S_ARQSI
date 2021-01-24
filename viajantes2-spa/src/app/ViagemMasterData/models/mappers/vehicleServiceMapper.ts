@@ -1,5 +1,6 @@
 import { VehicleService, VehicleServicePost } from '../vehicleServices';
 import { Vehicle } from '../vehicles';
+import { VehicleMapper } from './vehicles';
 export class VehicleServiceMapper {
     constructor() { }
 
@@ -19,6 +20,13 @@ export class VehicleServiceMapper {
         return model;
     }
 
+    fromResponseToExpandedDTO = function (dto: VehicleService, response: any) {
+       let vehicleMapper = new VehicleMapper();
+        dto.id = response.id,
+        dto.vehicle = vehicleMapper.fromResponseToDto(new Vehicle(), response.vehicle);
+        dto.date = response.date;
+        return dto;
+    }
 
  fromFormToCreate = function (formBody: any, object: VehicleServicePost) {
     object.VehicleId = formBody.vehicleId;

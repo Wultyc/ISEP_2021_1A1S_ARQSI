@@ -27,4 +27,14 @@ export class TripulantMapper {
         } 
         return model;
     }
+    fromNotExpandDTO = function (model: Tripulant, response: any) {
+        model.id = response.id;
+        model.name = response.name;
+        model.birthDate = response.birthDate;
+        model.licenceNumber = response.licenceNr;
+        model.licenseExpires = response.licenceExpires;
+        model.tripulantTypes = [];
+        return model;
+
+    }
 }

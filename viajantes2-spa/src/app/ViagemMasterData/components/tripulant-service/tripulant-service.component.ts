@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 import { TripulantService } from '../../services/tripulant.service';
+import {TripulantServices } from '../../models/tripulantServices'
 import { TripulantServiceService } from '../../services/tripulant-service.service';
 import { TripulantServiceMapper } from '../../models/mappers/tripulantServiceMapper';
 import { TripulantServicePost } from '../../models/tripulantServices';
@@ -21,7 +23,14 @@ export class TripulantServiceComponent implements OnInit {
     tripulantId: new FormControl(),
     date: new FormControl(new Date())
   });
-  
+  tripulantServiceList: TripulantServices[] = [];
+  displayedColumns: string[] = ['date','name'];
+  dataSource = new MatTableDataSource<TripulantServices>();
+ 
+  filterForm = new FormGroup ({
+    date: new FormControl(new Date())
+  });
+
   isAdding: boolean = false;
   hasError: boolean = false;
   errorMessages: any[] = [];
@@ -39,8 +48,20 @@ export class TripulantServiceComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTripulants();
+    this.getTripulantService();
   }
 
+  getTripulantService() {
+    this.tripulantServiceService.getTripulantServices().subscribe(
+      (data) => {
+        if (data && data.length > 0)
+        data.forEach( element => (
+          this.tripulantServiceList.push(this.tripulantServiceMapper.fromResponseFullToDTO(new TripulantServices, element)))
+          );
+          this.dataSource = new MatTableDataSource(this.tripulantServiceList);
+      }
+    )
+  }
   getTripulants(){
     this.tripulantsService.getTripulants().subscribe(
       (data) => {
@@ -49,6 +70,39 @@ export class TripulantServiceComponent implements OnInit {
         };
       }
     ); 
+  }
+  
+  filter() { 
+    let date =  new Date(this.filterForm.value.date.valueOf() - this.filterForm.value.date.getTimezoneOffset() * 60000).toISOString().replace(/\.\d{3}Z$/, '');
+    let filterYear = new Date(date).getFullYear();
+    let filterMonth = new Date(date).getMonth();
+    let filterDay = new Date(date).getDate();
+
+    let newTripList: TripulantServices[] = [];
+    for (var i = this.tripulantServiceList.length - 1; i >= 0; --i) {
+      let dateYear = new Date(this.tripulantServiceList[i].date).getFullYear();
+      let dateMonth = new Date(this.tripulantServiceList[i].date).getMonth();
+      let dateDay = new Date(this.tripulantServiceList[i].date).getDate();
+      
+       if (filterYear == dateYear && filterMonth == dateMonth &&  filterDay == dateDay) {
+       newTripList.push(this.tripulantServiceList[i]);
+       }
+    }
+      this.dataSource = new MatTableDataSource(newTripList);
+    
+  }
+  
+  closeFilter() {
+    this.tripulantServiceList = [];
+    this.getTripulantService();
+    this.filterForm.reset();
+  }
+ 
+  
+  setAdd() : any {
+    this.tripulantServiceForm.reset();
+    this.hasError = false;
+    return this.isAdding = !this.isAdding;
   }
 
   submit() :void {

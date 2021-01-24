@@ -6,6 +6,7 @@ using ViagemMasterData.Domain.Shared;
 using ViagemMasterData.DTOs.TripulantServiceDTOs;
 using ViagemMasterData.Infraestructure;
 using ViagemMasterData.Mappers;
+using ViagemMasterData.Schema;
 
 namespace ViagemMasterData.Service
 {
@@ -15,9 +16,13 @@ namespace ViagemMasterData.Service
         
         private readonly IRepository<Schema.TripulantService> _repository;
 
-        public TripulantServiceService(IRepository<Schema.TripulantService> repository)
+        private readonly IRepository<Schema.Tripulant> _repositoryT;
+
+
+        public TripulantServiceService(IRepository<Schema.TripulantService> repository, IRepository<Schema.Tripulant> repositoryT)
         {
             _repository = repository;
+            _repositoryT = repositoryT;
         }
 
         public async Task<TripulantServiceDTO> PostAsync(CreateTripulantServiceDTO createTripulantServiceDTO)
@@ -52,9 +57,11 @@ namespace ViagemMasterData.Service
         {
             IList<Schema.TripulantService> tripulantServiceList = _repository.Select();
             IList<TripulantServiceDTO> tripulantServiceDTOList = new List<TripulantServiceDTO>();
-
+            
             foreach (Schema.TripulantService tripulantService in tripulantServiceList)
             {
+                Tripulant trip = _repositoryT.Select(tripulantService.TripulantId);
+                tripulantService.Tripulant = new Tripulant(trip.Id, trip.Name, trip.BirthDate, trip.LicenceNr, trip.LicenceExpires);
                 tripulantServiceDTOList.Add(tripulantServiceMapper.GetDTOFromSchema(tripulantService));
             }
 
